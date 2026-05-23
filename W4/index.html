@@ -420,35 +420,33 @@ body {
 }
 .timer-pill::before { content: '⌛'; font-family: sans-serif; }
 
-/* 兩兩交換對話框 (slide 11) */
+/* 兩兩交換對話框 (slide 11) — 拿掉外框，內部各 line 保留半透明 */
 .exchange-box {
-  background: rgba(13,27,42,0.78);
-  backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(0,198,255,0.4);
-  border-radius: 12px;
-  padding: 24px 30px;
+  padding: 0;
   margin-top: 18px;
 }
 .exchange-box .label {
-  font-size: calc(var(--t4) * 0.9);
-  font-weight: 700;
+  font-size: calc(var(--t4) * 0.95);
+  font-weight: 900;
   letter-spacing: 0.2em;
   color: var(--accent);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 .exchange-line {
-  padding: 10px 16px;
+  padding: 12px 20px;
   margin-bottom: 10px;
-  border-left: 3px solid var(--accent-2);
-  background: rgba(255,215,0,0.05);
-  border-radius: 4px;
-  font-size: calc(var(--t3) * 0.85);
+  border-left: 4px solid var(--accent-2);
+  background: rgba(13,27,42,0.72);
+  backdrop-filter: blur(6px);
+  border-radius: 6px;
+  font-size: calc(var(--t3) * 0.88);
   color: var(--ink);
   line-height: 1.5;
 }
 .exchange-line.reply {
   border-left-color: var(--ink-3);
-  background: rgba(122,139,184,0.08);
+  background: rgba(13,27,42,0.62);
   color: var(--ink-2);
 }
 
