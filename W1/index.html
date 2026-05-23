@@ -53,7 +53,7 @@ body {
   width: 0;
 }
 #section-tag {
-  position: fixed; top: 18px; left: 32px;
+  position: fixed; top: 18px; left: 140px;
   font-size: var(--t4);
   letter-spacing: 0.3em;
   color: var(--accent);
@@ -61,6 +61,24 @@ body {
   z-index: 50;
   text-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
+.back-home {
+  position: fixed;
+  top: 12px; left: 18px;
+  z-index: 110;
+  padding: 6px 12px;
+  background: rgba(13,27,42,0.7);
+  border: 1px solid rgba(0,198,255,0.4);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: calc(var(--t4) * 0.85);
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: all .2s;
+  backdrop-filter: blur(8px);
+}
+.back-home:hover { background: rgba(0,198,255,0.15); color: var(--ink); }
+:fullscreen .back-home, :-webkit-full-screen .back-home { display: none; }
 #pageInfo {
   position: fixed; bottom: 18px; right: 32px;
   font-size: var(--t4);
@@ -671,6 +689,7 @@ body {
 </head>
 <body>
 
+<a class="back-home" href="../" title="回 R.I.B. 首頁">← R.I.B.</a>
 <div id="progress-bg"></div>
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
@@ -1240,11 +1259,11 @@ body {
         <div class="m-label">
           <div class="m-num">②</div>
           <div class="m-name-wrap">
-            <div class="m-name">穿過術</div>
+            <div class="m-name">入魂術</div>
             <div class="m-weeks">W7</div>
           </div>
         </div>
-        <div class="m-desc">讀別人</div>
+        <div class="m-desc">召喚書裡的人</div>
         <div class="m-tasks">圖書館降靈會</div>
       </div>
       
@@ -1276,11 +1295,11 @@ body {
         <div class="m-label">
           <div class="m-num">⑤</div>
           <div class="m-name-wrap">
-            <div class="m-name">證明術</div>
+            <div class="m-name">選擇術</div>
             <div class="m-weeks">W17 — W18</div>
           </div>
         </div>
-        <div class="m-desc">自我收束</div>
+        <div class="m-desc">AI 可以做，但我選擇自己做</div>
         <div class="m-tasks">特工屬性掃描 → 人類自主選擇宣告</div>
       </div>
     </div>

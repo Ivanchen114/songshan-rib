@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>R.I.B. · 閱讀理解與表達 · 松山高中</title>
 <meta name="description" content="松山高中校訂必修《閱讀理解與表達》——18 週特務語境裡的事實核驗、立場承擔與表達訓練。">
+<link rel="icon" type="image/svg+xml" href="./assets/songshan-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -86,12 +87,39 @@ header .logo {
   letter-spacing: 0.2em;
   color: var(--accent);
   font-size: 16px;
+  text-decoration: none;
 }
 header .logo .badge {
   padding: 4px 10px;
   border: 1.5px solid var(--accent);
   border-radius: 4px;
   font-size: 13px;
+}
+.school-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+.school-badge img {
+  display: block;
+}
+.school-badge.sm { width: 36px; height: 36px; }
+.school-badge.sm img { width: 26px; height: 26px; }
+.school-badge.md { width: 56px; height: 56px; }
+.school-badge.md img { width: 42px; height: 42px; }
+header .separator {
+  width: 1px; height: 22px;
+  background: rgba(122,139,184,0.3);
+  margin: 0 2px;
+}
+@media (max-width: 600px) {
+  header .logo span { display: none; }
+  header .separator { display: none; }
 }
 header nav {
   display: flex; gap: 28px;
@@ -515,10 +543,14 @@ footer .rib-line .keywords span {
 
 <header>
   <div class="container">
-    <div class="logo">
+    <a class="logo" href="#top">
+      <div class="school-badge sm">
+        <img src="./assets/songshan-logo.svg" alt="松山高中校徽" width="26" height="26">
+      </div>
+      <div class="separator"></div>
       <div class="badge">R.I.B.</div>
       <span>SSSH · 閱讀理解與表達</span>
-    </div>
+    </a>
     <nav>
       <a href="#why">為什麼存在</a>
       <a href="#modules">5 模組</a>
@@ -602,8 +634,8 @@ footer .rib-line .keywords span {
       <a href="#m2" class="module-card gold">
         <div class="step">STEP 02</div>
         <div class="weeks">W7</div>
-        <div class="mname">穿過術</div>
-        <div class="mdesc">召喚書裡的人（讀別人）</div>
+        <div class="mname">入魂術</div>
+        <div class="mdesc">召喚書裡的人，AI 只是空容器</div>
       </a>
       <a href="#m3" class="module-card red">
         <div class="step">STEP 03</div>
@@ -620,8 +652,8 @@ footer .rib-line .keywords span {
       <a href="#m5" class="module-card cyan">
         <div class="step">STEP 05</div>
         <div class="weeks">W17 – W18</div>
-        <div class="mname">證明術</div>
-        <div class="mdesc">我選擇自己做的事（個人收束）</div>
+        <div class="mname">選擇術</div>
+        <div class="mdesc">AI 可以做，但我選擇自己做</div>
       </a>
     </div>
   </div>
@@ -693,8 +725,8 @@ footer .rib-line .keywords span {
       <div class="module-section gold" id="m2">
         <div class="section-head">
           <div class="mnum">②</div>
-          <div class="mname">穿過術</div>
-          <div class="mweeks">W7 · 召喚書裡的人</div>
+          <div class="mname">入魂術</div>
+          <div class="mweeks">W7 · 召喚書裡的人，AI 只是空容器</div>
         </div>
         <div class="weeks-grid">
           <div class="week-card pending">
@@ -796,8 +828,8 @@ footer .rib-line .keywords span {
       <div class="module-section" id="m5">
         <div class="section-head">
           <div class="mnum">⑤</div>
-          <div class="mname">證明術</div>
-          <div class="mweeks">W17 – W18 · 個人收束</div>
+          <div class="mname">選擇術</div>
+          <div class="mweeks">W17 – W18 · AI 可以做，但我選擇自己做</div>
         </div>
         <div class="weeks-grid">
           <div class="week-card pending">
@@ -865,12 +897,17 @@ footer .rib-line .keywords span {
 <footer>
   <div class="container">
     <div class="row1">
-      <div class="brand">
-        SSSH · 閱讀理解與表達 · 松山高中
-        <br>
-        <span style="font-size:11px; letter-spacing: 0.15em;">姊妹站：
-          <a href="https://research-navigator-nu.vercel.app/" target="_blank" style="color: var(--ink-3); text-decoration: underline dotted;">研究方法與專題</a>
-        </span>
+      <div class="brand" style="display: flex; align-items: center; gap: 16px;">
+        <div class="school-badge md">
+          <img src="./assets/songshan-logo.svg" alt="松山高中" width="42" height="42">
+        </div>
+        <div>
+          SSSH · 閱讀理解與表達 · 松山高中
+          <br>
+          <span style="font-size:11px; letter-spacing: 0.15em;">姊妹站：
+            <a href="https://research-navigator-nu.vercel.app/" target="_blank" style="color: var(--ink-3); text-decoration: underline dotted;">研究方法與專題</a>
+          </span>
+        </div>
       </div>
       <div class="meta">
         R.I.B. v1.0 · UPDATED 2026.05.23
