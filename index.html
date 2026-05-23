@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R.I.B. · 閱讀理解與表達 · 松山高中</title>
+<meta name="description" content="松山高中校訂必修《閱讀理解與表達》——18 週特務語境裡的事實核驗、立場承擔與表達訓練。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0D1B2A;
+  --bg-2: #11223A;
+  --bg-3: #182B47;
+  --bg-card: rgba(17, 34, 58, 0.55);
+  --ink: #EEF3FF;
+  --ink-2: #B8C5E0;
+  --ink-3: #7A8BB8;
+  --ink-4: #2A3560;
+  --accent: #00C6FF;
+  --accent-2: #FFD700;
+  --alert: #FF4466;
+  --green: #2ECC71;
+  --bg-light: #F4F6FA;
+  --ink-dark: #1A2340;
+
+  --max-w: 1240px;
+  --pad-x: clamp(20px, 4vw, 64px);
+  --r: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Dotted background */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(rgba(122,139,184,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+main, header, footer { position: relative; z-index: 1; }
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+/* Header */
+header {
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  background: rgba(13, 27, 42, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  border-bottom: 1px solid rgba(122,139,184,0.1);
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  font-size: 16px;
+}
+header .logo .badge {
+  padding: 4px 10px;
+  border: 1.5px solid var(--accent);
+  border-radius: 4px;
+  font-size: 13px;
+}
+header nav {
+  display: flex; gap: 28px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+header nav a {
+  color: var(--ink-2);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color .2s;
+}
+header nav a:hover { color: var(--accent); }
+@media (max-width: 720px) {
+  header nav { display: none; }
+}
+
+/* Hero */
+.hero {
+  padding: 80px 0 100px;
+}
+.hero .kicker {
+  font-size: 14px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.3em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero .kicker::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--ink-3);
+}
+.hero h1 {
+  font-size: clamp(40px, 5vw, 76px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+.hero h1 .accent-line {
+  color: var(--accent);
+  display: block;
+}
+.hero h2 {
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 700;
+  color: var(--ink-2);
+  margin-top: 26px;
+  margin-bottom: 36px;
+  letter-spacing: 0.02em;
+}
+.hero p.lead {
+  font-size: clamp(16px, 1.2vw, 19px);
+  color: var(--ink-2);
+  max-width: 720px;
+  line-height: 1.75;
+}
+.hero p.lead strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* RIB Stamp */
+.rib-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px;
+  border: 1.5px solid var(--accent-2);
+  background: rgba(255,215,0,0.04);
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  margin-top: 12px;
+}
+.rib-stamp .letters {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  color: var(--accent-2);
+}
+.rib-stamp .expand {
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: 0.05em;
+}
+
+/* Section title */
+section { padding: 80px 0; }
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+.section-title .kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.section-title h2 {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Why section */
+.why-block {
+  padding: 50px 56px;
+  background: var(--bg-card);
+  border-radius: var(--r);
+  border-left: 4px solid var(--accent-2);
+  margin-bottom: 30px;
+}
+.why-block .q {
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: 900;
+  line-height: 1.4;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.why-block .q .accent { color: var(--accent); }
+.why-block .q .accent-2 { color: var(--accent-2); }
+.why-block p {
+  color: var(--ink-2);
+  font-size: clamp(16px, 1.1vw, 18px);
+  line-height: 1.8;
+}
+.three-conclusions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 28px;
+}
+@media (max-width: 820px) {
+  .three-conclusions { grid-template-columns: 1fr; }
+}
+.conclusion {
+  padding: 22px 24px;
+  background: rgba(255,215,0,0.05);
+  border: 1px solid rgba(255,215,0,0.3);
+  border-radius: var(--r);
+}
+.conclusion .num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent-2);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.conclusion .text {
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+/* 5 Modules quick jump */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .modules-grid { grid-template-columns: 1fr; }
+}
+.module-card {
+  padding: 26px 22px;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,198,255,0.18);
+  border-radius: var(--r);
+  transition: transform .2s, border-color .2s, background .2s;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+.module-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  background: rgba(0,198,255,0.05);
+}
+.module-card.gold { border-left: 4px solid var(--accent-2); }
+.module-card.cyan { border-left: 4px solid var(--accent); }
+.module-card.red { border-left: 4px solid var(--alert); }
+.module-card .step {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+}
+.module-card .weeks {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.module-card.gold .weeks { color: var(--accent-2); }
+.module-card.red .weeks { color: var(--alert); }
+.module-card .mname {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.module-card .mdesc {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+/* 18 weeks roadmap */
+.roadmap { margin-top: 8px; }
+.module-section {
+  margin-bottom: 36px;
+}
+.module-section .section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(122,139,184,0.15);
+}
+.module-section .mnum {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(0,198,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.module-section.gold .mnum { color: var(--accent-2); background: rgba(255,215,0,0.12); }
+.module-section.red .mnum { color: var(--alert); background: rgba(255,68,102,0.12); }
+.module-section .mname {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+.module-section .mweeks {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-left: auto;
+  letter-spacing: 0.06em;
+}
+.weeks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.week-card {
+  padding: 18px 20px;
+  background: var(--bg-card);
+  border: 1px solid rgba(122,139,184,0.15);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all .2s;
+  position: relative;
+}
+.week-card:hover {
+  border-color: var(--accent);
+  background: rgba(0,198,255,0.05);
+  transform: translateY(-2px);
+}
+.week-card.pending { opacity: 0.5; cursor: not-allowed; }
+.week-card.pending:hover { transform: none; border-color: rgba(122,139,184,0.15); background: var(--bg-card); }
+.week-card .wn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.week-card.pending .wn { color: var(--ink-3); }
+.week-card .wcode {
+  font-size: 11px;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--ink-3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.week-card .wtitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.week-card.pending .wtitle { color: var(--ink-3); }
+.week-card .wdesc {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.week-card .status-tag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 10px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.15em;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+.status-tag.done { background: var(--green); color: var(--bg); }
+.status-tag.wait { background: rgba(122,139,184,0.15); color: var(--ink-3); }
+
+/* RIB framework */
+.rib-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+@media (max-width: 820px) {
+  .rib-grid { grid-template-columns: 1fr; }
+}
+.rib-card {
+  padding: 30px 28px;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,198,255,0.18);
+  border-radius: var(--r);
+  border-top: 4px solid var(--accent);
+}
+.rib-card:nth-child(2) { border-top-color: var(--accent-2); }
+.rib-card:nth-child(3) { border-top-color: var(--alert); }
+.rib-card .letter {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.rib-card:nth-child(2) .letter { color: var(--accent-2); }
+.rib-card:nth-child(3) .letter { color: var(--alert); }
+.rib-card .rword {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: 0.25em;
+  margin-bottom: 8px;
+}
+.rib-card .rname {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+.rib-card .rdesc {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+
+/* Footer */
+footer {
+  margin-top: 80px;
+  padding: 50px 0 40px;
+  border-top: 1px solid rgba(122,139,184,0.1);
+  background: rgba(13, 27, 42, 0.6);
+}
+footer .row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+footer .brand {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--ink-3);
+  letter-spacing: 0.2em;
+}
+footer .brand .accent { color: var(--accent); }
+footer .meta {
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.15em;
+  font-family: "JetBrains Mono", monospace;
+}
+footer .rib-line {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-4);
+  letter-spacing: 0.15em;
+  padding-top: 20px;
+  border-top: 1px solid rgba(122,139,184,0.08);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer .rib-line .keywords {
+  color: var(--ink-3);
+}
+footer .rib-line .keywords span {
+  margin: 0 4px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">
+      <div class="badge">R.I.B.</div>
+      <span>SSSH · 閱讀理解與表達</span>
+    </div>
+    <nav>
+      <a href="#why">為什麼存在</a>
+      <a href="#modules">5 模組</a>
+      <a href="#roadmap">18 週地圖</a>
+      <a href="#framework">R.I.B. 三軸</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="kicker">SSSH · 校訂必修 · 高一</div>
+    <h1>
+      松山高中
+      <span class="accent-line">閱讀理解與表達</span>
+    </h1>
+    <div class="rib-stamp">
+      <div class="letters">R . I . B .</div>
+      <div class="expand">Reading · Intelligence · Being</div>
+    </div>
+    <h2>讀懂背後有沒有人 · 寫的有沒有你</h2>
+    <p class="lead">
+      AI 已經能寫出像你的文字、能讀懂大部分文章、能整理出漂亮的論證。
+      <strong>但「文字背後有沒有人」「你寫的真的發生過嗎」「你的立場扛不扛得住」</strong>——
+      這 18 週訓練的不是文筆，是<strong>人在場、會判斷、敢承擔</strong>的能力。
+    </p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">這門課為什麼存在</span>
+      <h2>AI 寫得越好，越該問這個問題</h2>
+    </div>
+    <div class="why-block">
+      <div class="q">
+        如果 AI 已經能讀、能寫、能說——<br>
+        <span class="accent">那這堂課還要教什麼？</span>
+      </div>
+      <p>
+        這 18 週的答案，由<strong style="color: var(--ink);">學生在 W1 自己得出</strong>。
+        老師接住三個結論，當作整個學期的設計前提：
+      </p>
+    </div>
+    <div class="three-conclusions">
+      <div class="conclusion">
+        <div class="num">①</div>
+        <div class="text">這門課要教<strong>AI 做不到的事</strong></div>
+      </div>
+      <div class="conclusion">
+        <div class="num">②</div>
+        <div class="text">寫不是為了贏 AI——是為了<strong>我有自己的東西要說</strong></div>
+      </div>
+      <div class="conclusion">
+        <div class="num">③</div>
+        <div class="text">有些事的價值不在「結果」——在<strong>「我自己做」這個動作本身</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 MODULES -->
+<section id="modules" style="background: rgba(17,34,58,0.3);">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">QUICK JUMP</span>
+      <h2>5 模組任務藍圖</h2>
+    </div>
+    <div class="modules-grid">
+      <a href="#m1" class="module-card cyan">
+        <div class="step">STEP 01</div>
+        <div class="weeks">W1 – W6</div>
+        <div class="mname">拆解術</div>
+        <div class="mdesc">看見自己也在合理填空（寫自己）</div>
+      </a>
+      <a href="#m2" class="module-card gold">
+        <div class="step">STEP 02</div>
+        <div class="weeks">W7</div>
+        <div class="mname">穿過術</div>
+        <div class="mdesc">召喚書裡的人（讀別人）</div>
+      </a>
+      <a href="#m3" class="module-card red">
+        <div class="step">STEP 03</div>
+        <div class="weeks">W8 – W11</div>
+        <div class="mname">偵探術</div>
+        <div class="mdesc">流暢文字的陷阱（讀訊息）</div>
+      </a>
+      <a href="#m4" class="module-card gold">
+        <div class="step">STEP 04</div>
+        <div class="weeks">W12 – W16</div>
+        <div class="mname">對決術</div>
+        <div class="mdesc">好價值殘酷對決（說立場）</div>
+      </a>
+      <a href="#m5" class="module-card cyan">
+        <div class="step">STEP 05</div>
+        <div class="weeks">W17 – W18</div>
+        <div class="mname">證明術</div>
+        <div class="mdesc">我選擇自己做的事（個人收束）</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 18 WEEKS ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">COURSE ROADMAP · W1 – W18</span>
+      <h2>課程地圖</h2>
+    </div>
+    <div class="roadmap">
+
+      <!-- 模組 1 -->
+      <div class="module-section" id="m1">
+        <div class="section-head">
+          <div class="mnum">①</div>
+          <div class="mname">拆解術</div>
+          <div class="mweeks">W1 – W6 · 看見自己也在合理填空</div>
+        </div>
+        <div class="weeks-grid">
+          <a class="week-card" href="W1/">
+            <span class="status-tag done">DONE</span>
+            <div class="wn">W1</div>
+            <div class="wcode">任務啟動</div>
+            <div class="wtitle">課程前導</div>
+            <div class="wdesc">真假畫廊 · 三個技術 · 課程共創</div>
+          </a>
+          <a class="week-card" href="W2/">
+            <span class="status-tag done">DONE</span>
+            <div class="wn">W2</div>
+            <div class="wcode">大冰奶事實查核</div>
+            <div class="wtitle">你寫的「我」</div>
+            <div class="wdesc">三層揭穿 · 三色筆查核 · 你的選擇</div>
+          </a>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W3</div>
+            <div class="wcode">基隆港口冷案</div>
+            <div class="wtitle">30 秒打開</div>
+            <div class="wdesc">留在那一秒裡（事件層訓練）</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W4</div>
+            <div class="wcode">演算法叛逃</div>
+            <div class="wtitle">從多個 30 秒挑哪個寫</div>
+            <div class="wdesc">你的選擇判斷準則</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W5</div>
+            <div class="wcode">感受對賭</div>
+            <div class="wtitle">讓讀者進得去</div>
+            <div class="wdesc">讀者意識與厚度</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W6</div>
+            <div class="wcode">時空特工比對</div>
+            <div class="wtitle">重寫 W2</div>
+            <div class="wdesc">看見變了多少（整合驗收）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模組 2 -->
+      <div class="module-section gold" id="m2">
+        <div class="section-head">
+          <div class="mnum">②</div>
+          <div class="mname">穿過術</div>
+          <div class="mweeks">W7 · 召喚書裡的人</div>
+        </div>
+        <div class="weeks-grid">
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W7</div>
+            <div class="wcode">圖書館降靈會</div>
+            <div class="wtitle">召喚：讀別人也是事實+填空</div>
+            <div class="wdesc">圖書館實境劇本殺</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模組 3 -->
+      <div class="module-section red" id="m3">
+        <div class="section-head">
+          <div class="mnum">③</div>
+          <div class="mname">偵探術</div>
+          <div class="mweeks">W8 – W11 · 讀訊息</div>
+        </div>
+        <div class="weeks-grid">
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W8</div>
+            <div class="wcode">星際陣營光譜</div>
+            <div class="wtitle">訊息有立場</div>
+            <div class="wdesc">F/O/A 三分法 · 物理站位</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W9</div>
+            <div class="wcode">AI 惡魔代言人</div>
+            <div class="wtitle">你的立場扛得住考驗嗎</div>
+            <div class="wdesc">壓力測試道具</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W10</div>
+            <div class="wcode">Troll AI 挑戰</div>
+            <div class="wtitle">流暢文字的陷阱</div>
+            <div class="wdesc">查核三等級</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W11</div>
+            <div class="wcode">敵營情報易位</div>
+            <div class="wtitle">把反方說公平</div>
+            <div class="wdesc">換位思考訓練</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模組 4 -->
+      <div class="module-section gold" id="m4">
+        <div class="section-head">
+          <div class="mnum">④</div>
+          <div class="mname">對決術</div>
+          <div class="mweeks">W12 – W16 · 說立場</div>
+        </div>
+        <div class="weeks-grid">
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W12</div>
+            <div class="wcode">特務問題地圖</div>
+            <div class="wtitle">選你的戰場</div>
+            <div class="wdesc">A 價值 vs B 價值的衝突</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W13</div>
+            <div class="wcode">情報彈藥防彈</div>
+            <div class="wtitle">證據撐得住嗎</div>
+            <div class="wdesc">老實立場修正宣告</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W14</div>
+            <div class="wcode">弗蘭肯斯坦學術金獎</div>
+            <div class="wtitle">縫合怪實驗室</div>
+            <div class="wdesc">跨域隱喻 · 金獎發表</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W15</div>
+            <div class="wcode">5 張盾牌防眩光</div>
+            <div class="wtitle">把論點變成簡報</div>
+            <div class="wdesc">極簡降噪轉譯</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W16</div>
+            <div class="wcode">特務聽證會</div>
+            <div class="wtitle">公開質詢日</div>
+            <div class="wdesc">三發子彈 · 即興答辯</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模組 5 -->
+      <div class="module-section" id="m5">
+        <div class="section-head">
+          <div class="mnum">⑤</div>
+          <div class="mname">證明術</div>
+          <div class="mweeks">W17 – W18 · 個人收束</div>
+        </div>
+        <div class="weeks-grid">
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W17</div>
+            <div class="wcode">特工屬性掃描</div>
+            <div class="wtitle">跟 W1 的自己比一比</div>
+            <div class="wdesc">能力雷達圖實彈演練</div>
+          </div>
+          <div class="week-card pending">
+            <span class="status-tag wait">WAIT</span>
+            <div class="wn">W18</div>
+            <div class="wcode">人類自主選擇宣告</div>
+            <div class="wtitle">我選擇自己做的事</div>
+            <div class="wdesc">人類證明展 · 畢業授證</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RIB FRAMEWORK -->
+<section id="framework" style="background: rgba(17,34,58,0.3);">
+  <div class="container">
+    <div class="section-title">
+      <span class="kicker">R.I.B. FRAMEWORK</span>
+      <h2>三軸框架 · 貫穿全課程</h2>
+    </div>
+    <div class="rib-grid">
+      <div class="rib-card">
+        <div class="letter">R</div>
+        <div class="rword">READING</div>
+        <div class="rname">閱讀</div>
+        <div class="rdesc">
+          接收資訊的能力——不只是讀字，還讀影片、數字、肢體、情境。
+          訓練「讀文字 + 讀文字背後有沒有人」。
+        </div>
+      </div>
+      <div class="rib-card">
+        <div class="letter">I</div>
+        <div class="rword">INTELLIGENCE</div>
+        <div class="rname">理解</div>
+        <div class="rdesc">
+          解構資訊的能力——擷取、整合、評鑑（PIRLS 三層次）。
+          雙關 Intelligence：理解力，也是「情報」這個特務語境的字。
+        </div>
+      </div>
+      <div class="rib-card">
+        <div class="letter">B</div>
+        <div class="rword">BEING</div>
+        <div class="rname">表達</div>
+        <div class="rdesc">
+          重新建構資訊的能力——文字、口語、視覺。
+          核心不是說得好，是<strong style="color: var(--ink)">站在那裡為自己的話負責</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="row1">
+      <div class="brand">
+        SSSH · 閱讀理解與表達 · 松山高中
+        <br>
+        <span style="font-size:11px; letter-spacing: 0.15em;">姊妹站：
+          <a href="https://research-navigator-nu.vercel.app/" target="_blank" style="color: var(--ink-3); text-decoration: underline dotted;">研究方法與專題</a>
+        </span>
+      </div>
+      <div class="meta">
+        R.I.B. v1.0 · UPDATED 2026.05.23
+      </div>
+    </div>
+    <div class="rib-line">
+      <div class="keywords">
+        <span>R EADING</span> · <span>I NTELLIGENCE</span> · <span>B EING</span>
+      </div>
+      <div>
+        台北市立松山高中 · 校訂必修 · 課堂 ＋ 自學雙模式
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
