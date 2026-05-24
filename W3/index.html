@@ -86,6 +86,51 @@ body {
 .back-home:hover, .fullscreen-btn:hover { background: rgba(0,198,255,0.15); color: var(--ink); }
 :fullscreen .back-home, :-webkit-full-screen .back-home,
 :fullscreen .fullscreen-btn, :-webkit-full-screen .fullscreen-btn { display: none; }
+.rotate-hint {
+  display: none;
+  position: fixed;
+  top: 70px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  padding: 10px 18px;
+  background: rgba(13,27,42,0.94);
+  border: 1px solid rgba(0,198,255,0.5);
+  border-radius: 24px;
+  color: var(--ink);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: "Noto Sans TC", sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  animation: hint-in .35s ease-out;
+}
+.rotate-hint.visible { display: block; }
+.rotate-hint .force {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 3px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  color: var(--accent);
+  font-size: 13px;
+}
+@keyframes hint-in {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+body.force-rotate {
+  position: fixed;
+  top: 100dvh; left: 0;
+  width: 100dvh; height: 100dvw;
+  transform-origin: top left;
+  transform: rotate(-90deg);
+  overflow: hidden;
+  margin: 0;
+}
+body.force-rotate .rotate-hint { display: none; }
 #pageInfo {
   position: fixed; bottom: 18px; right: 32px;
   font-size: var(--t4);
@@ -694,6 +739,7 @@ body {
 
 <a class="back-home" href="../" title="回 R.I.B. 首頁">← R.I.B.</a>
 <button class="fullscreen-btn" onclick="toggleFullscreen()" title="切換全螢幕">⛶ 全螢幕</button>
+<div class="rotate-hint" id="rotateHint">💡 建議橫拿手機觀看<span class="force" onclick="forceRotate(event)">或 ↻ 強制橫向</span></div>
 <div id="progress-bg"></div>
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
@@ -1331,10 +1377,16 @@ document.addEventListener('keydown', e => {
 
 document.addEventListener('click', e => {
   if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
-  if (e.target.closest('input, textarea, select, a')) return;
-  const x = e.clientX;
-  if (x > window.innerWidth * 0.7) next();
-  else if (x < window.innerWidth * 0.3) prev();
+  if (e.target.closest('input, textarea, select, a, .rotate-hint')) return;
+  if (document.body.classList.contains('force-rotate')) {
+    const y = e.clientY;
+    if (y < window.innerHeight * 0.3) next();
+    else if (y > window.innerHeight * 0.7) prev();
+  } else {
+    const x = e.clientX;
+    if (x > window.innerWidth * 0.7) next();
+    else if (x < window.innerWidth * 0.3) prev();
+  }
 });
 
 // Copy prompt button
@@ -1356,6 +1408,27 @@ window.copyPrompt = function(btn) {
     setTimeout(() => btn.textContent = btn.dataset.label || '複製 prompt', 2500);
   });
 };
+
+function isPhonePortrait() {
+  return window.matchMedia('(orientation: portrait) and (max-width: 768px)').matches;
+}
+function updateRotateHint() {
+  const hint = document.getElementById('rotateHint');
+  if (!hint) return;
+  if (isPhonePortrait() && !document.body.classList.contains('force-rotate')) {
+    hint.classList.add('visible');
+  } else {
+    hint.classList.remove('visible');
+  }
+}
+window.forceRotate = function(e) {
+  if (e) { e.stopPropagation(); e.preventDefault(); }
+  document.body.classList.toggle('force-rotate');
+  updateRotateHint();
+};
+window.addEventListener('resize', updateRotateHint);
+window.addEventListener('orientationchange', () => setTimeout(updateRotateHint, 120));
+setTimeout(updateRotateHint, 150);
 
 window.toggleFullscreen = function() {
   const el = document.documentElement;
