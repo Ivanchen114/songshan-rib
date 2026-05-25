@@ -29,9 +29,9 @@
   --t3: clamp(22px, 1.9vw, 32px);
   --t4: clamp(15px, 1.1vw, 20px);
 }
-@media (min-width: 2400px) {
-  :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; }
-}
+/* 大型顯示器加碼（涵蓋 86" 4K 觸控屏，常見 viewport ~1920）*/
+@media (min-width: 1600px) { :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; } }
+@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 44px; --t4: 26px; } }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -1007,7 +1007,7 @@ body.force-rotate .rotate-hint { display: none; }
           W4 判準 → W5 讀者 → <span class="accent-2">W6 整合</span>
         </div>
       </div>
-      <div style="text-align: center; font-size: 48px; color: var(--accent-2); font-weight: 900;">→</div>
+      <div style="text-align: center; font-size: calc(var(--t2) * 0.8); color: var(--accent-2); font-weight: 900;">→</div>
       <div class="card" style="padding: 24px 28px; border-color: rgba(255,215,0,0.4); background: rgba(255,215,0,0.05);">
         <div class="kicker gold">下週 W7 · 模組 2</div>
         <div class="body-sm" style="line-height: 1.85; color: var(--ink-2); margin-top: 8px;">

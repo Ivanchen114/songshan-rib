@@ -29,9 +29,9 @@
   --t3: clamp(22px, 1.9vw, 32px);
   --t4: clamp(15px, 1.1vw, 20px);
 }
-@media (min-width: 2400px) {
-  :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; }
-}
+/* 大型顯示器加碼（涵蓋 86" 4K 觸控屏，常見 viewport ~1920）*/
+@media (min-width: 1600px) { :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; } }
+@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 44px; --t4: 26px; } }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {

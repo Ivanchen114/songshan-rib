@@ -29,9 +29,9 @@
   --t3: clamp(22px, 1.9vw, 32px);
   --t4: clamp(15px, 1.1vw, 20px);
 }
-@media (min-width: 2400px) {
-  :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; }
-}
+/* 大型顯示器加碼（涵蓋 86" 4K 觸控屏，常見 viewport ~1920）*/
+@media (min-width: 1600px) { :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; } }
+@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 44px; --t4: 26px; } }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -176,7 +176,7 @@ body.force-rotate .rotate-hint { display: none; }
 .radar-card.gold .rc-label { color: var(--accent-2); }
 .radar-card .rc-main { font-size: calc(var(--t2) * 0.85); font-weight: 900; line-height: 1.25; margin-bottom: 10px; }
 .radar-card .rc-sub { font-size: calc(var(--t3) * 0.88); color: var(--ink-2); line-height: 1.5; }
-.radar-arrow { font-size: 48px; color: var(--accent-2); font-weight: 900; text-align: center; }
+.radar-arrow { font-size: calc(var(--t2) * 0.8); color: var(--accent-2); font-weight: 900; text-align: center; }
 
 /* 章節標籤 */
 .section-marker { text-align: center; }
@@ -460,7 +460,7 @@ body.force-rotate .rotate-hint { display: none; }
         <div style="font-size: calc(var(--t2) * 0.8); font-weight: 900; line-height: 1.25; margin-bottom: 8px;">補空</div>
         <div style="font-size: calc(var(--t4) * 1.0); color: var(--ink-2); line-height: 1.5;">三色筆查 AI + 讀者腦補——<br>看見閱讀也填空。</div>
       </div>
-      <div style="font-size: 48px; color: var(--accent-2); font-weight: 900; text-align: center;">→</div>
+      <div style="font-size: calc(var(--t2) * 0.8); color: var(--accent-2); font-weight: 900; text-align: center;">→</div>
       <div style="padding: 22px 26px; border-radius: 14px; border: 1.5px solid var(--accent-2); background: rgba(255,215,0,0.08); backdrop-filter: blur(8px);">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: var(--t4); color: var(--accent-2); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 8px;">W8 · 訊息</div>
         <div style="font-size: calc(var(--t2) * 0.8); font-weight: 900; line-height: 1.25; margin-bottom: 8px;">立場</div>
