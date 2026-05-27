@@ -32,6 +32,48 @@
   --t-ui: clamp(15px, 1.1vw, 20px);
 }
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
+
+/* SOIL · 後設反思卡 (W## 走之前 · 自我觀察) */
+.meta-reflect-wrap { max-width: 1100px; margin: 0 auto; }
+.meta-reflect-tag {
+  display: inline-block; padding: 8px 22px;
+  background: rgba(196,181,253,0.12); border: 1.5px solid #C4B5FD; border-radius: 999px;
+  font-family: "JetBrains Mono", monospace; font-size: var(--t4);
+  color: #C4B5FD; letter-spacing: 0.25em; font-weight: 700; margin-bottom: 18px;
+}
+.meta-reflect-q {
+  font-size: clamp(36px, 3.4vw, 60px); font-weight: 900;
+  line-height: 1.35; margin-bottom: 28px;
+}
+.meta-reflect-grid { display: grid; gap: 16px; }
+.meta-reflect-row {
+  display: grid; grid-template-columns: 70px 1fr;
+  gap: 18px; padding: 18px 24px;
+  background: rgba(17,34,58,0.55); border-left: 4px solid #C4B5FD;
+  border-radius: 8px; align-items: baseline;
+}
+.meta-reflect-row .mr-num {
+  font-family: "JetBrains Mono", monospace; font-weight: 900;
+  color: #C4B5FD; font-size: calc(var(--t2) * 0.6); text-align: center;
+}
+.meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
+.meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
+/* SOIL · 製造覺察對比卡（顯式戳破盲點 · 你以為 → 其實） */
+.awake-contrast {
+  padding: 14px 26px;
+  background: rgba(196,181,253,0.08);
+  border-left: 4px solid #C4B5FD;
+  border-radius: 6px;
+  font-size: calc(var(--t3) * 0.9);
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin: 16px auto;
+  max-width: 1100px;
+  text-align: center;
+}
+.awake-contrast .ac-you { color: #C4B5FD; font-weight: 700; }
+.awake-contrast .ac-actual { color: var(--accent-2); font-weight: 700; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -472,6 +514,10 @@ body.force-rotate .rotate-hint { display: none; }
     <div class="title" style="font-size: clamp(46px, 4.4vw, 80px);">
       資料的<br><span class="alert">兩個「不是」</span>
     </div>
+    <div class="awake-contrast">
+      你以為 <span class="ac-you">找到資料就贏了</span> ──
+      其實 <span class="ac-actual">看到反方資料才剛開始</span>。
+    </div>
     <div class="warn-pair">
       <div class="warn-card">
         <div class="wc-bang">≠ 壯膽</div>
@@ -849,6 +895,30 @@ body.force-rotate .rotate-hint { display: none; }
     </div>
   </div>
   <div class="page-footer">W13 · 收尾與 W14 預告</div>
+</section>
+
+<section class="slide dark" data-slide="18" data-section="後設反思">
+  <div class="slide-inner">
+    <div class="meta-reflect-wrap">
+      <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
+      <div class="meta-reflect-q">找完 3 種證據——<br>我用資料修正自己，還是壯膽？</div>
+      <div class="meta-reflect-grid">
+        <div class="meta-reflect-row">
+          <div class="mr-num">①</div>
+          <div><div class="mr-q">找到反方資料時，有沒有一筆讓你的立場真的動搖了？</div><div class="mr-hint">敢動搖 = 你真的在用資料校準自己。</div></div>
+        </div>
+        <div class="meta-reflect-row">
+          <div class="mr-num">②</div>
+          <div><div class="mr-q">AI 給的「研究指出」── 你查到原文了嗎？沒查到的話，你之前憑什麼相信？</div><div class="mr-hint">「我之前相信但不知道為什麼」── 這就是 W10 流暢陷阱在你身上的證據。</div></div>
+        </div>
+        <div class="meta-reflect-row">
+          <div class="mr-num">③</div>
+          <div><div class="mr-q">今晚向某人解釋（家人 / 朋友 / 自己 / 寫下來都行）：「用資料修正自己 vs 用資料壯膽 ── 差別在 ___」</div><div class="mr-hint">說得出來 = 你會「老實面對證據」這個能力了。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">W13 · 後設反思</div>
 </section>
 
 

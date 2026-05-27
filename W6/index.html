@@ -34,6 +34,32 @@
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
+
+/* SOIL · 後設反思卡 (W## 走之前 · 自我觀察) */
+.meta-reflect-wrap { max-width: 1100px; margin: 0 auto; }
+.meta-reflect-tag {
+  display: inline-block; padding: 8px 22px;
+  background: rgba(196,181,253,0.12); border: 1.5px solid #C4B5FD; border-radius: 999px;
+  font-family: "JetBrains Mono", monospace; font-size: var(--t4);
+  color: #C4B5FD; letter-spacing: 0.25em; font-weight: 700; margin-bottom: 18px;
+}
+.meta-reflect-q {
+  font-size: clamp(36px, 3.4vw, 60px); font-weight: 900;
+  line-height: 1.35; margin-bottom: 28px;
+}
+.meta-reflect-grid { display: grid; gap: 16px; }
+.meta-reflect-row {
+  display: grid; grid-template-columns: 70px 1fr;
+  gap: 18px; padding: 18px 24px;
+  background: rgba(17,34,58,0.55); border-left: 4px solid #C4B5FD;
+  border-radius: 8px; align-items: baseline;
+}
+.meta-reflect-row .mr-num {
+  font-family: "JetBrains Mono", monospace; font-weight: 900;
+  color: #C4B5FD; font-size: calc(var(--t2) * 0.6); text-align: center;
+}
+.meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
+.meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -1068,6 +1094,30 @@ body.force-rotate .rotate-hint { display: none; }
     </div>
   </div>
   <div class="page-footer">W6 · 結語</div>
+</section>
+
+<section class="slide dark" data-slide="20" data-section="後設反思">
+  <div class="slide-inner">
+    <div class="meta-reflect-wrap">
+      <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
+      <div class="meta-reflect-q">重寫 W2 之後——<br>5 週前的我，跟現在的我，差在哪？</div>
+      <div class="meta-reflect-grid">
+        <div class="meta-reflect-row">
+          <div class="mr-num">①</div>
+          <div><div class="mr-q">用「自覺 / 錨點 / 判準 / 他者」四種新眼睛，哪一個讓你改最多？</div><div class="mr-hint">如果你選不出來，可能還沒真的把工具當工具用。</div></div>
+        </div>
+        <div class="meta-reflect-row">
+          <div class="mr-num">②</div>
+          <div><div class="mr-q">5 週前你以為「會寫」，現在發現自己以前在 ___ 卡住</div><div class="mr-hint">卡住的位置就是你成長的證據。</div></div>
+        </div>
+        <div class="meta-reflect-row">
+          <div class="mr-num">③</div>
+          <div><div class="mr-q">模組 1 結束 ── 用一句話解釋（家人 / 朋友 / 自己 / 寫下來都行）「拆解術讓我學會 ___」</div><div class="mr-hint">說不出來 ── 第二模組（入魂術）前先寫到歷程本。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">W6 · 後設反思</div>
 </section>
 
 

@@ -33,6 +33,32 @@
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
+
+/* SOIL · 後設反思卡 (W## 走之前 · 自我觀察) */
+.meta-reflect-wrap { max-width: 1100px; margin: 0 auto; }
+.meta-reflect-tag {
+  display: inline-block; padding: 8px 22px;
+  background: rgba(196,181,253,0.12); border: 1.5px solid #C4B5FD; border-radius: 999px;
+  font-family: "JetBrains Mono", monospace; font-size: var(--t4);
+  color: #C4B5FD; letter-spacing: 0.25em; font-weight: 700; margin-bottom: 18px;
+}
+.meta-reflect-q {
+  font-size: clamp(36px, 3.4vw, 60px); font-weight: 900;
+  line-height: 1.35; margin-bottom: 28px;
+}
+.meta-reflect-grid { display: grid; gap: 16px; }
+.meta-reflect-row {
+  display: grid; grid-template-columns: 70px 1fr;
+  gap: 18px; padding: 18px 24px;
+  background: rgba(17,34,58,0.55); border-left: 4px solid #C4B5FD;
+  border-radius: 8px; align-items: baseline;
+}
+.meta-reflect-row .mr-num {
+  font-family: "JetBrains Mono", monospace; font-weight: 900;
+  color: #C4B5FD; font-size: calc(var(--t2) * 0.6); text-align: center;
+}
+.meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
+.meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -1350,6 +1376,30 @@ body.force-rotate .rotate-hint { display: none; }
     </div>
   </div>
   <div class="page-footer">W2 · 結語</div>
+</section>
+
+<section class="slide dark" data-slide="28" data-section="後設反思">
+  <div class="slide-inner">
+    <div class="meta-reflect-wrap">
+      <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
+      <div class="meta-reflect-q">今天三色筆查完——<br>我以為「都是自己寫的」嗎？</div>
+      <div class="meta-reflect-grid">
+        <div class="meta-reflect-row">
+          <div class="mr-num">①</div>
+          <div><div class="mr-q">有沒有一個瞬間我發現「這細節其實是 AI 補的」？</div><div class="mr-hint">綠 / 紅 / 黃 ── 哪個顏色最讓你驚訝？</div></div>
+        </div>
+        <div class="meta-reflect-row">
+          <div class="mr-num">②</div>
+          <div><div class="mr-q">是什麼線索讓你看到自己也在合理填空？</div><div class="mr-hint">AI 寫的版本？同學讀你寫的反應？還是你自己重讀時的卡住？</div></div>
+        </div>
+        <div class="meta-reflect-row">
+          <div class="mr-num">③</div>
+          <div><div class="mr-q">今晚向某人解釋（家人 / 朋友 / 自己 / 寫下來都行）：「我發現連我自己都會 ___」</div><div class="mr-hint">解釋不清楚 = 這節課還沒進到你大腦。寫在歷程本最後一格。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">W2 · 後設反思</div>
 </section>
 
 
