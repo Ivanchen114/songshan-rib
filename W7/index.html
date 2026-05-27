@@ -24,14 +24,16 @@
   --bg-light: #F4F6FA;
   --ink-dark: #1A2340;
   --green-fact: #2ECC71;
-  --t1: clamp(56px, 5.0vw, 96px);
-  --t2: clamp(36px, 3.2vw, 60px);
-  --t3: clamp(22px, 1.9vw, 32px);
-  --t4: clamp(15px, 1.1vw, 20px);
+  /* 內容字 v2（升 50%，對齊教學簡報 44-60pt / 24-28pt）*/
+  --t1: clamp(84px, 7.0vw, 108px);
+  --t2: clamp(54px, 4.5vw, 68px);
+  --t3: clamp(33px, 2.8vw, 40px);
+  --t4: clamp(22px, 1.6vw, 26px);
+  /* UI chrome（小、固定、不放大）*/
+  --t-ui: clamp(15px, 1.1vw, 20px);
 }
-/* 大型顯示器加碼（涵蓋 86" 4K 觸控屏，常見 viewport ~1920）*/
-@media (min-width: 1600px) { :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; } }
-@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 44px; --t4: 26px; } }
+/* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
+@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -44,7 +46,7 @@ body {
 
 #progress-bg { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: rgba(122,139,184,0.2); z-index: 100; }
 #progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); z-index: 101; transition: width .4s ease; width: 0; }
-#section-tag { position: fixed; top: 18px; left: 270px; font-size: var(--t4); letter-spacing: 0.3em; color: var(--accent); font-weight: 700; z-index: 50; text-shadow: 0 0 8px rgba(0,0,0,0.5); }
+#section-tag { position: fixed; top: 18px; left: 270px; font-size: var(--t-ui); letter-spacing: 0.3em; color: var(--accent); font-weight: 700; z-index: 50; text-shadow: 0 0 8px rgba(0,0,0,0.5); }
 .back-home, .fullscreen-btn {
   position: fixed; top: 12px; z-index: 110;
   padding: 6px 12px; background: rgba(13,27,42,0.7); border: 1px solid rgba(0,198,255,0.4); border-radius: 4px;
@@ -60,21 +62,21 @@ body {
 .rotate-hint {
   display: none; position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 200;
   padding: 10px 18px; background: rgba(13,27,42,0.94); border: 1px solid rgba(0,198,255,0.5); border-radius: 24px;
-  color: var(--ink); font-size: 14px; letter-spacing: 0.05em;
+  color: var(--ink); font-size: var(--t-ui); letter-spacing: 0.05em;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   cursor: pointer; white-space: nowrap; font-family: "Noto Sans TC", sans-serif;
   box-shadow: 0 4px 20px rgba(0,0,0,0.5); animation: hint-in .35s ease-out;
 }
 .rotate-hint.visible { display: block; }
-.rotate-hint .force { display: inline-block; margin-left: 10px; padding: 3px 10px; border: 1px solid var(--accent); border-radius: 14px; color: var(--accent); font-size: 13px; }
+.rotate-hint .force { display: inline-block; margin-left: 10px; padding: 3px 10px; border: 1px solid var(--accent); border-radius: 14px; color: var(--accent); font-size: calc(var(--t-ui) * 0.88); }
 @keyframes hint-in { from { opacity: 0; transform: translate(-50%, -8px); } to { opacity: 1; transform: translate(-50%, 0); } }
 body.force-rotate {
   position: fixed; top: 100dvh; left: 0; width: 100dvh; height: 100dvw;
   transform-origin: top left; transform: rotate(-90deg); overflow: hidden; margin: 0;
 }
 body.force-rotate .rotate-hint { display: none; }
-#pageInfo { position: fixed; bottom: 18px; right: 32px; font-size: var(--t4); color: var(--ink-3); font-family: "JetBrains Mono", "Courier New", monospace; letter-spacing: 0.1em; z-index: 50; }
-#hint { position: fixed; bottom: 18px; left: 32px; font-size: calc(var(--t4) * 0.85); color: var(--ink-3); z-index: 50; opacity: 0.55; }
+#pageInfo { position: fixed; bottom: 18px; right: 32px; font-size: var(--t-ui); color: var(--ink-3); font-family: "JetBrains Mono", "Courier New", monospace; letter-spacing: 0.1em; z-index: 50; }
+#hint { position: fixed; bottom: 18px; left: 32px; font-size: var(--t-ui); color: var(--ink-3); z-index: 50; opacity: 0.55; }
 
 .slide {
   position: absolute; inset: 0;

@@ -23,14 +23,16 @@
   --bg-light: #F4F6FA;
   --ink-dark: #1A2340;
   --green-fact: #2ECC71;
-  --t1: clamp(56px, 5.0vw, 96px);
-  --t2: clamp(36px, 3.2vw, 60px);
-  --t3: clamp(22px, 1.9vw, 32px);
-  --t4: clamp(15px, 1.1vw, 20px);
+  /* 內容字 v2（升 50%，對齊教學簡報 44-60pt / 24-28pt）*/
+  --t1: clamp(84px, 7.0vw, 108px);
+  --t2: clamp(54px, 4.5vw, 68px);
+  --t3: clamp(33px, 2.8vw, 40px);
+  --t4: clamp(22px, 1.6vw, 26px);
+  /* UI chrome（小、固定、不放大）*/
+  --t-ui: clamp(15px, 1.1vw, 20px);
 }
-/* 大型顯示器加碼（涵蓋 86" 4K 觸控屏，常見 viewport ~1920）*/
-@media (min-width: 1600px) { :root { --t1: 108px; --t2: 68px; --t3: 36px; --t4: 22px; } }
-@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 44px; --t4: 26px; } }
+/* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
+@media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -55,7 +57,7 @@ body {
 }
 #section-tag {
   position: fixed; top: 18px; left: 270px;
-  font-size: var(--t4);
+  font-size: var(--t-ui);
   letter-spacing: 0.3em;
   color: var(--accent);
   font-weight: 700;
@@ -96,7 +98,7 @@ body {
   border: 1px solid rgba(0,198,255,0.5);
   border-radius: 24px;
   color: var(--ink);
-  font-size: 14px;
+  font-size: var(--t-ui);
   letter-spacing: 0.05em;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -114,7 +116,7 @@ body {
   border: 1px solid var(--accent);
   border-radius: 14px;
   color: var(--accent);
-  font-size: 13px;
+  font-size: calc(var(--t-ui) * 0.88);
 }
 @keyframes hint-in {
   from { opacity: 0; transform: translate(-50%, -8px); }
@@ -132,7 +134,7 @@ body.force-rotate {
 body.force-rotate .rotate-hint { display: none; }
 #pageInfo {
   position: fixed; bottom: 18px; right: 32px;
-  font-size: var(--t4);
+  font-size: var(--t-ui);
   color: var(--ink-3);
   font-family: "JetBrains Mono", "Courier New", monospace;
   letter-spacing: 0.1em;
@@ -140,7 +142,7 @@ body.force-rotate .rotate-hint { display: none; }
 }
 #hint {
   position: fixed; bottom: 18px; left: 32px;
-  font-size: calc(var(--t4) * 0.85);
+  font-size: var(--t-ui);
   color: var(--ink-3);
   z-index: 50;
   opacity: 0.55;
