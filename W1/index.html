@@ -642,7 +642,7 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* 18-week module grid (slide 24, RIB redesign) */
 .modules { display: grid; gap: 8px; margin-top: 4px; }
-.module-row { display: grid; grid-template-columns: 260px 150px 1fr; gap: 22px; align-items: center; padding: 9px 20px 9px 16px; background: rgba(17, 34, 58, 0.55); border-left: 4px solid var(--accent); border-radius: 8px; }
+.module-row { display: grid; grid-template-columns: 200px 260px 1fr; gap: 20px; align-items: center; padding: 9px 20px 9px 16px; background: rgba(17, 34, 58, 0.55); border-left: 4px solid var(--accent); border-radius: 8px; }
 .module-row .m-label {
   display: flex;
   align-items: center;
@@ -658,23 +658,14 @@ body.force-rotate .rotate-hint { display: none; }
   font-family: "JetBrains Mono", monospace;
 }
 .module-row .m-name-wrap { display: flex; flex-direction: column; gap: 2px; }
-.module-row .m-name {
-  font-size: calc(var(--t3) * 0.95);
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-}
+.module-row .m-name { font-size: calc(var(--t3) * 0.85); font-weight: 900; letter-spacing: 0.04em; color: var(--ink); }
 .module-row .m-weeks {
   font-family: "JetBrains Mono", monospace;
   font-size: calc(var(--t4) * 1.0);
   color: var(--ink-3);
   letter-spacing: 0.04em;
 }
-.module-row .m-desc {
-  font-size: calc(var(--t3) * 0.85);
-  font-weight: 700;
-  color: var(--ink-2);
-}
+.module-row .m-desc { font-size: calc(var(--t3) * 0.78); font-weight: 700; color: var(--ink-2); line-height: 1.35; }
 .module-row .m-tasks { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.4; letter-spacing: 0.02em; }
 .module-row.m-color-accent { border-left-color: var(--accent); }
 .module-row.m-color-accent .m-num { background: var(--accent); color: var(--bg); }
@@ -1200,15 +1191,15 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="timer-pill" data-timer="300">5:00</div>
     </div>
     <div class="grid-3" style="margin-top: 20px;">
-      <div class="card">
+      <div class="card" data-reveal="1">
         <div class="label">閱讀</div>
         <div class="body-sm">AI 能讀文本、影片、數字、肢體嗎？它讀得好嗎？</div>
       </div>
-      <div class="card">
+      <div class="card" data-reveal="2">
         <div class="label">理解</div>
         <div class="body-sm">AI 能拆解句子、段落、文章嗎？它的理解跟你一樣嗎？</div>
       </div>
-      <div class="card">
+      <div class="card" data-reveal="3">
         <div class="label">表達</div>
         <div class="body-sm">AI 能寫、說、做心智圖嗎？它表達得比你好嗎？</div>
       </div>
