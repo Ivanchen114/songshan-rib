@@ -75,15 +75,7 @@
   margin-bottom: 22px;
   color: var(--ink);
 }
-.reflect-solo .rs-action {
-  padding: 18px 26px;
-  background: rgba(196,181,253,0.08);
-  border-left: 3px solid #C4B5FD;
-  border-radius: 6px;
-  font-size: calc(var(--t3) * 0.88);
-  color: var(--ink-2);
-  line-height: 1.7;
-}
+.reflect-solo .rs-action { padding: 14px 0 0; margin-top: 8px; border-top: 1px dashed rgba(196,181,253,0.35); font-size: calc(var(--t3) * 0.88); color: var(--ink-2); line-height: 1.7; }
 .reflect-solo .rs-explain { color: var(--accent-2); font-weight: 700; }
 .reflect-solo .rs-fail { color: #C4B5FD; font-weight: 700; }
 
@@ -1025,23 +1017,23 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="kicker">AI 跟你都在做三件事</div>
     <div class="title">同樣的三步</div>
     <div class="three-things">
-      <div class="tt-card">
+      <div class="tt-card" data-reveal="1">
         <div class="ttn">①</div>
         <div class="ttt">拿事實線索</div>
         <div class="ttd">你給的、可查證的</div>
       </div>
-      <div class="tt-card">
+      <div class="tt-card" data-reveal="2">
         <div class="ttn">②</div>
         <div class="ttt">拿風格線索</div>
         <div class="ttd">讀起來像你</div>
       </div>
-      <div class="tt-card">
+      <div class="tt-card" data-reveal="3">
         <div class="ttn">③</div>
         <div class="ttt">在事實之間填空</div>
         <div class="ttd">可能合理、可能假</div>
       </div>
     </div>
-    <div class="body" style="margin-top: 36px; text-align: center; color: var(--ink-2);">
+    <div class="body" style="margin-top: 36px; text-align: center; color: var(--ink-2);" data-reveal="4">
       AI 會填空，人也會填空。
       差別是——<span class="accent-2 bold">填空是否有真實經驗支撐</span>。
     </div>
@@ -1189,10 +1181,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="body-sm muted" style="margin-bottom: 8px;">逐句標記。15 分鐘。</div>
     <div class="check-rows">
-      <div class="check-row"><div class="csent">「我下午去咖啡廳放鬆」</div><div class="ctag red">紅</div><div class="creason">我沒去</div></div>
-      <div class="check-row"><div class="csent">「我點了一杯拿鐵」</div><div class="ctag red">紅</div><div class="creason">我喝美式</div></div>
-      <div class="check-row"><div class="csent">「我跟朋友聊到 12 點」</div><div class="ctag green">綠</div><div class="creason">剛好對</div></div>
-      <div class="check-row"><div class="csent">「我心裡其實有點累」</div><div class="ctag yellow">黃</div><div class="creason">讀起來合理，但那一刻其實沒在想累不累</div></div>
+      <div class="check-row" data-reveal="1"><div class="csent">「我下午去咖啡廳放鬆」</div><div class="ctag red">紅</div><div class="creason">我沒去</div></div>
+      <div class="check-row" data-reveal="2"><div class="csent">「我點了一杯拿鐵」</div><div class="ctag red">紅</div><div class="creason">我喝美式</div></div>
+      <div class="check-row" data-reveal="3"><div class="csent">「我跟朋友聊到 12 點」</div><div class="ctag green">綠</div><div class="creason">剛好對</div></div>
+      <div class="check-row" data-reveal="4"><div class="csent">「我心裡其實有點累」</div><div class="ctag yellow">黃</div><div class="creason">讀起來合理，但那一刻其實沒在想累不累</div></div>
     </div>
     <div class="body" style="margin-top: 22px; line-height: 1.6;">
       不需要每一句都圈得清楚。寫不出來就先放著。<br>
@@ -1239,9 +1231,9 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       不用講出來，<span class="accent">自己舉手</span>就好
     </div>
     <div class="questions">
-      <div class="q-row"><span class="qn">1</span>看你自己那篇——<span class="alert bold">紅色比較多</span>的人，舉手</div>
-      <div class="q-row" style="border-left-color: var(--green-fact);"><span class="qn" style="background: var(--green-fact);">2</span><span class="green-fact bold">綠色比較多</span>的人，舉手</div>
-      <div class="q-row" style="border-left-color: var(--accent-2);"><span class="qn" style="background: var(--accent-2);">3</span><span class="accent-2 bold">沒辦法分</span>的人，舉手</div>
+      <div class="q-row" data-reveal="1"><span class="qn">1</span>看你自己那篇——<span class="alert bold">紅色比較多</span>的人，舉手</div>
+      <div class="q-row" data-reveal="2" style="border-left-color: var(--green-fact);"><span class="qn" style="background: var(--green-fact);">2</span><span class="green-fact bold">綠色比較多</span>的人，舉手</div>
+      <div class="q-row" data-reveal="3" style="border-left-color: var(--accent-2);"><span class="qn" style="background: var(--accent-2);">3</span><span class="accent-2 bold">沒辦法分</span>的人，舉手</div>
     </div>
     <div class="body" style="margin-top: 32px; text-align: center;">
       <span class="accent bold">沒關係——這不是考試，沒有對錯。</span>
@@ -1377,10 +1369,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       這四週會給你工具
     </div>
     <div class="next-grid">
-      <div class="next-card"><div class="nw">W3</div><div class="nt">捕捉</div><div class="nd">怎麼在生活中標記「會動的瞬間」</div></div>
-      <div class="next-card"><div class="nw">W4</div><div class="nt">選擇</div><div class="nd">10 個瞬間裡選哪一個寫？</div></div>
-      <div class="next-card"><div class="nw">W5</div><div class="nt">厚度</div><div class="nd">怎麼讓那一刻的細節真正進入文字</div></div>
-      <div class="next-card"><div class="nw">W6</div><div class="nt">重寫</div><div class="nd">拿 W2 那段重寫，看自己進步多少</div></div>
+      <div class="next-card" data-reveal="1"><div class="nw">W3</div><div class="nt">捕捉</div><div class="nd">怎麼在生活中標記「會動的瞬間」</div></div>
+      <div class="next-card" data-reveal="2"><div class="nw">W4</div><div class="nt">選擇</div><div class="nd">10 個瞬間裡選哪一個寫？</div></div>
+      <div class="next-card" data-reveal="3"><div class="nw">W5</div><div class="nt">厚度</div><div class="nd">怎麼讓那一刻的細節真正進入文字</div></div>
+      <div class="next-card" data-reveal="4"><div class="nw">W6</div><div class="nt">重寫</div><div class="nd">拿 W2 那段重寫，看自己進步多少</div></div>
     </div>
     <div class="body" style="margin-top: 36px; text-align: center; color: var(--ink-2);">
       18 週後 W17、W18，<span class="accent-2 bold">你會回頭看今天寫的那段</span>。
