@@ -794,6 +794,10 @@ body.force-rotate .rotate-hint { display: none; }
   justify-content: center;
 }
 
+[data-reveal]{opacity:.14;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease;}
+[data-reveal].revealed{opacity:1;transform:translateY(0);}
+body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
+@media print{[data-reveal]{opacity:1!important;transform:none!important;}}
 </style>
 </head>
 <body>
@@ -804,6 +808,7 @@ body.force-rotate .rotate-hint { display: none; }
 <div id="progress-bg"></div>
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
+<div id="revealInfo" style="position:fixed;bottom:46px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:var(--t-ui);color:var(--accent);letter-spacing:0.12em;z-index:50;"></div>
 <div id="pageInfo">1 / 28</div>
 <div id="hint">← → 切頁 · F 全螢幕 · Home/End 跳首尾</div>
 
@@ -832,7 +837,7 @@ body.force-rotate .rotate-hint { display: none; }
       AI 時代，<br>我們要學<span class="accent-2">什麼</span>？
     </div>
     <div class="body" style="margin: 34px auto 0; color: var(--ink-2); max-width: 900px;">
-      這 18 週，學<span class="accent-2" style="font-weight:900;">AI 做不到的事</span>。
+      AI 已經會讀、也會寫了 ──<br>那「<span class="accent-2" style="font-weight:900;">我</span>」還剩下什麼，是值得學的？
     </div>
   </div>
   <div class="page-footer">W1 · 中心問題</div>
@@ -1561,8 +1566,26 @@ function startTimer(el) {
   }, 1000);
 }
 
-function next() { if (current < total) show(current + 1); }
-function prev() { if (current > 1) show(current - 1); }
+let revealStep = 0;
+function revealEls() {
+  const s = document.querySelector('.slide[data-slide="' + current + '"]');
+  return s ? Array.from(s.querySelectorAll('[data-reveal]')).sort((a,b)=>(+a.dataset.reveal)-(+b.dataset.reveal)) : [];
+}
+function paintReveal() {
+  const els = revealEls();
+  els.forEach(el => el.classList.toggle('revealed', (+el.dataset.reveal) <= revealStep));
+  const info = document.getElementById('revealInfo');
+  if (info) info.textContent = (els.length && revealStep < els.length) ? ('▸ ' + revealStep + '/' + els.length) : '';
+}
+
+function next() {
+  if (revealStep < revealEls().length) { revealStep++; paintReveal(); return; }
+  if (current < total) { show(current + 1); revealStep = 0; paintReveal(); }
+}
+function prev() {
+  if (revealStep > 0) { revealStep--; paintReveal(); return; }
+  if (current > 1) { show(current - 1); revealStep = revealEls().length; paintReveal(); }
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
@@ -1571,7 +1594,8 @@ document.addEventListener('keydown', e => {
     e.preventDefault(); prev();
   } else if (e.key === 'f' || e.key === 'F') {
     toggleFullscreen();
-  } else if (e.key === 'Home') { show(1); }
+  } else if (e.key === 'p' || e.key === 'P') { document.body.classList.toggle('reveal-all'); }
+  else if (e.key === 'Home') { show(1); }
    else if (e.key === 'End') { show(total); }
 });
 
@@ -1624,6 +1648,7 @@ window.toggleFullscreen = function() {
 
 show(1);
 
+paintReveal();
 </script>
 
 </body>

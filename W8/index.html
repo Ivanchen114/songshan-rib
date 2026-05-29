@@ -454,8 +454,10 @@ body.force-rotate .rotate-hint { display: none; }
   text-align: center;
 }
 
-.frag{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease;}
-.frag.shown{opacity:1;transform:translateY(0);}
+[data-reveal]{opacity:.14;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease;}
+[data-reveal].revealed{opacity:1;transform:translateY(0);}
+body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
+@media print{[data-reveal]{opacity:1!important;transform:none!important;}}
 </style>
 </head>
 <body>
@@ -466,6 +468,7 @@ body.force-rotate .rotate-hint { display: none; }
 <div id="progress-bg"></div>
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
+<div id="revealInfo" style="position:fixed;bottom:46px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:var(--t-ui);color:var(--accent);letter-spacing:0.12em;z-index:50;"></div>
 <div id="pageInfo">1 / 19</div>
 <div id="hint">← → 切頁 · F 全螢幕 · Home/End 跳首尾</div>
 
@@ -587,26 +590,23 @@ body.force-rotate .rotate-hint { display: none; }
       不是分析的目的——是<span class="accent bold">讓你看見作者怎麼建立立場</span>的工具
     </div>
     <div class="foa-grid">
-      <div class="foa-card f frag">
+      <div class="foa-card f">
         <div class="foa-letter">F</div>
         <div class="foa-name">Fact · 事實</div>
-        <div class="foa-def">可查證、有客觀依據</div>
-        <div class="foa-ex">例：「3 列車急停 48 分鐘」← 可查</div>
+        <div data-reveal="1"><div class="foa-def">可查證、有客觀依據</div><div class="foa-ex">例：「3 列車急停 48 分鐘」← 可查</div></div>
       </div>
-      <div class="foa-card o frag">
+      <div class="foa-card o">
         <div class="foa-letter">O</div>
         <div class="foa-name">Opinion · 意見</div>
-        <div class="foa-def">主觀評價、感受</div>
-        <div class="foa-ex">例：「配備之專業堪比小型行動電台」← 評價</div>
+        <div data-reveal="2"><div class="foa-def">主觀評價、感受</div><div class="foa-ex">例：「配備之專業堪比小型行動電台」← 評價</div></div>
       </div>
-      <div class="foa-card a frag">
+      <div class="foa-card a">
         <div class="foa-letter">A</div>
         <div class="foa-name">Argument · 論點</div>
-        <div class="foa-def">推論、結論、立場</div>
-        <div class="foa-ex">例：「觸及國家安全的紅線」← 推論</div>
+        <div data-reveal="3"><div class="foa-def">推論、結論、立場</div><div class="foa-ex">例：「觸及國家安全的紅線」← 推論</div></div>
       </div>
     </div>
-    <div class="body-sm frag" style="margin-top: 20px; padding: 14px 22px; background: rgba(0,198,255,0.06); border-left: 3px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
+    <div class="body-sm" data-reveal="4" style="margin-top: 20px; padding: 14px 22px; background: rgba(0,198,255,0.06); border-left: 3px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
       <span class="accent bold">同一個事實</span>，搭配<span class="accent-2 bold">不同意見＋論點</span>包裝，會引導出<span class="alert bold">不同立場</span>。
     </div>
   </div>
@@ -990,21 +990,25 @@ function startTimer(el) {
   }, 1000);
 }
 
-function next() {
+let revealStep = 0;
+function revealEls() {
   const s = document.querySelector('.slide[data-slide="' + current + '"]');
-  const hidden = s ? s.querySelectorAll('.frag:not(.shown)') : [];
-  if (hidden.length) { hidden[0].classList.add('shown'); return; }
-  if (current < total) {
-    const nx = document.querySelector('.slide[data-slide="' + (current + 1) + '"]');
-    if (nx) nx.querySelectorAll('.frag').forEach(f => f.classList.remove('shown'));
-    show(current + 1);
-  }
+  return s ? Array.from(s.querySelectorAll('[data-reveal]')).sort((a,b)=>(+a.dataset.reveal)-(+b.dataset.reveal)) : [];
+}
+function paintReveal() {
+  const els = revealEls();
+  els.forEach(el => el.classList.toggle('revealed', (+el.dataset.reveal) <= revealStep));
+  const info = document.getElementById('revealInfo');
+  if (info) info.textContent = (els.length && revealStep < els.length) ? ('▸ ' + revealStep + '/' + els.length) : '';
+}
+
+function next() {
+  if (revealStep < revealEls().length) { revealStep++; paintReveal(); return; }
+  if (current < total) { show(current + 1); revealStep = 0; paintReveal(); }
 }
 function prev() {
-  const s = document.querySelector('.slide[data-slide="' + current + '"]');
-  const shown = s ? s.querySelectorAll('.frag.shown') : [];
-  if (shown.length) { shown[shown.length - 1].classList.remove('shown'); return; }
-  if (current > 1) show(current - 1);
+  if (revealStep > 0) { revealStep--; paintReveal(); return; }
+  if (current > 1) { show(current - 1); revealStep = revealEls().length; paintReveal(); }
 }
 
 document.addEventListener('keydown', e => {
@@ -1014,7 +1018,8 @@ document.addEventListener('keydown', e => {
     e.preventDefault(); prev();
   } else if (e.key === 'f' || e.key === 'F') {
     toggleFullscreen();
-  } else if (e.key === 'Home') { show(1); }
+  } else if (e.key === 'p' || e.key === 'P') { document.body.classList.toggle('reveal-all'); }
+  else if (e.key === 'Home') { show(1); }
    else if (e.key === 'End') { show(total); }
 });
 
@@ -1065,6 +1070,7 @@ window.toggleFullscreen = function() {
 
 show(1);
 
+paintReveal();
 </script>
 
 </body>
