@@ -60,6 +60,34 @@
 }
 .meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
 .meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
+/* SOIL · 後設反思 1 題版（少而準 · 壓縮覺察+解釋） */
+.reflect-solo {
+  padding: 30px 38px;
+  background: rgba(17,34,58,0.55);
+  border-left: 4px solid #C4B5FD;
+  border-radius: 10px;
+  margin: 28px auto 0;
+  max-width: 1100px;
+}
+.reflect-solo .rs-q {
+  font-size: clamp(34px, 3.0vw, 54px);
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.reflect-solo .rs-action {
+  padding: 18px 26px;
+  background: rgba(196,181,253,0.08);
+  border-left: 3px solid #C4B5FD;
+  border-radius: 6px;
+  font-size: calc(var(--t3) * 0.88);
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.reflect-solo .rs-explain { color: var(--accent-2); font-weight: 700; }
+.reflect-solo .rs-fail { color: #C4B5FD; font-weight: 700; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -831,19 +859,10 @@ body.force-rotate .rotate-hint { display: none; }
   <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
-      <div class="meta-reflect-q">AI 攻擊你的立場後——<br>你選了修正版還是重申版？</div>
-      <div class="meta-reflect-grid">
-        <div class="meta-reflect-row">
-          <div class="mr-num">①</div>
-          <div><div class="mr-q">AI 攻擊裡，哪一發子彈打到你原本沒看到的弱點？</div><div class="mr-hint">「沒被打到」也合法 ── 但要寫得出「為什麼沒被打到」。</div></div>
-        </div>
-        <div class="meta-reflect-row">
-          <div class="mr-num">②</div>
-          <div><div class="mr-q">你選修正還是重申？這個選擇本身告訴你「自己是怎樣的人」？</div><div class="mr-hint">敢修正 = 不怕承認自己錯；敢重申 = 對證據有信心。</div></div>
-        </div>
-        <div class="meta-reflect-row">
-          <div class="mr-num">③</div>
-          <div><div class="mr-q">今晚向某人解釋（家人 / 朋友 / 自己 / 寫下來都行）：「我發現我原本的立場卡在 ___」</div><div class="mr-hint">卡住的位置 = 下次思考要先檢查的地方。</div></div>
+      <div class="reflect-solo">
+        <div class="rs-q">AI 攻擊裡哪一發子彈打到你原本沒看到的弱點？你選修正版還是重申版？</div>
+        <div class="rs-action">
+          <span class="rs-explain">把這個發現解釋給某人聽（家人 / 朋友 / 自己 / 寫下來都行）</span> ── <span class="rs-fail">解釋不出來 = 還沒看見「自己立場原本卡在哪」</span>。
         </div>
       </div>
     </div>

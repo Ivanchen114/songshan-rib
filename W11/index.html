@@ -59,6 +59,34 @@
 }
 .meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
 .meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
+/* SOIL · 後設反思 1 題版（少而準 · 壓縮覺察+解釋） */
+.reflect-solo {
+  padding: 30px 38px;
+  background: rgba(17,34,58,0.55);
+  border-left: 4px solid #C4B5FD;
+  border-radius: 10px;
+  margin: 28px auto 0;
+  max-width: 1100px;
+}
+.reflect-solo .rs-q {
+  font-size: clamp(34px, 3.0vw, 54px);
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.reflect-solo .rs-action {
+  padding: 18px 26px;
+  background: rgba(196,181,253,0.08);
+  border-left: 3px solid #C4B5FD;
+  border-radius: 6px;
+  font-size: calc(var(--t3) * 0.88);
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.reflect-solo .rs-explain { color: var(--accent-2); font-weight: 700; }
+.reflect-solo .rs-fail { color: #C4B5FD; font-weight: 700; }
+
 /* SOIL · 製造覺察對比卡（顯式戳破盲點 · 你以為 → 其實） */
 .awake-contrast {
   padding: 14px 26px;
@@ -937,19 +965,10 @@ body.force-rotate .rotate-hint { display: none; }
   <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
-      <div class="meta-reflect-q">為反方辯護完——<br>有沒有一個瞬間「不舒服」？</div>
-      <div class="meta-reflect-grid">
-        <div class="meta-reflect-row">
-          <div class="mr-num">①</div>
-          <div><div class="mr-q">為反方辯護時最不舒服的理由是哪一個？為什麼那個讓你不舒服？</div><div class="mr-hint">不舒服 = 反方真的講到你不想承認的點。</div></div>
-        </div>
-        <div class="meta-reflect-row">
-          <div class="mr-num">②</div>
-          <div><div class="mr-q">同學幫你那邊辯護 ── 他講的有什麼是你自己沒看見的？</div><div class="mr-hint">別人比你更會講你的立場 = 你還沒真的看清自己站在哪。</div></div>
-        </div>
-        <div class="meta-reflect-row">
-          <div class="mr-num">③</div>
-          <div><div class="mr-q">今晚向某人解釋（家人 / 朋友 / 自己 / 寫下來都行）：「為反對我的人說話，我發現他們真的在乎 ___」</div><div class="mr-hint">說得出來 = 你會「公平理解」這個能力了。</div></div>
+      <div class="reflect-solo">
+        <div class="rs-q">為反方辯護時最不舒服的理由是哪一個？為什麼那個讓你不舒服？</div>
+        <div class="rs-action">
+          <span class="rs-explain">把這個發現解釋給某人聽（家人 / 朋友 / 自己 / 寫下來都行）</span> ── <span class="rs-fail">解釋不出來 = 還沒學會「公平理解」</span>。
         </div>
       </div>
     </div>

@@ -60,6 +60,34 @@
 }
 .meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
 .meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
+/* SOIL · 後設反思 1 題版（少而準 · 壓縮覺察+解釋） */
+.reflect-solo {
+  padding: 30px 38px;
+  background: rgba(17,34,58,0.55);
+  border-left: 4px solid #C4B5FD;
+  border-radius: 10px;
+  margin: 28px auto 0;
+  max-width: 1100px;
+}
+.reflect-solo .rs-q {
+  font-size: clamp(34px, 3.0vw, 54px);
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.reflect-solo .rs-action {
+  padding: 18px 26px;
+  background: rgba(196,181,253,0.08);
+  border-left: 3px solid #C4B5FD;
+  border-radius: 6px;
+  font-size: calc(var(--t3) * 0.88);
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.reflect-solo .rs-explain { color: var(--accent-2); font-weight: 700; }
+.reflect-solo .rs-fail { color: #C4B5FD; font-weight: 700; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -894,19 +922,10 @@ body.force-rotate .rotate-hint { display: none; }
   <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
-      <div class="meta-reflect-q">立場光譜站完——<br>我以為「我獨立判斷」，真的嗎？</div>
-      <div class="meta-reflect-grid">
-        <div class="meta-reflect-row">
-          <div class="mr-num">①</div>
-          <div><div class="mr-q">讀完 A/B 兩篇後站位 ── 是哪個 F/O/A 元素把你推到那個位置？</div><div class="mr-hint">事實 / 意見 / 論點 ── 你發現自己被哪一種帶著走？</div></div>
-        </div>
-        <div class="meta-reflect-row">
-          <div class="mr-num">②</div>
-          <div><div class="mr-q">如果沒讀過 B 篇，你會站在哪？讀過後又改了什麼？</div><div class="mr-hint">立場可以動 ── 但你知道「為什麼動」嗎？</div></div>
-        </div>
-        <div class="meta-reflect-row">
-          <div class="mr-num">③</div>
-          <div><div class="mr-q">今晚向某人解釋（家人 / 朋友 / 自己 / 寫下來都行）：「同一件事可以講成 ___ 和 ___，差別在 ___」</div><div class="mr-hint">說得出來 = 你掌握「立場是被設計出來」這個能力。</div></div>
+      <div class="reflect-solo">
+        <div class="rs-q">讀完 A/B 兩篇後站位 ── 你發現自己被哪個 F/O/A 元素推到那個位置？</div>
+        <div class="rs-action">
+          <span class="rs-explain">把這個發現解釋給某人聽（家人 / 朋友 / 自己 / 寫下來都行）</span> ── <span class="rs-fail">解釋不出來 = 還沒看見「立場是被設計出來」</span>。
         </div>
       </div>
     </div>
