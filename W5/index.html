@@ -328,14 +328,7 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 220px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-time {
   font-family: "JetBrains Mono", monospace;
@@ -344,15 +337,8 @@ body.force-rotate .rotate-hint { display: none; }
   font-weight: 700;
   letter-spacing: 0.06em;
 }
-.tl-title {
-  font-size: calc(var(--t3) * 0.9);
-  font-weight: 700;
-}
-.tl-desc {
-  font-size: calc(var(--t4) * 1.0);
-  color: var(--ink-2);
-  line-height: 1.45;
-}
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* W4→W5 命題接續 */
 .theme-shift {
@@ -803,9 +789,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       · 你進得去版本 1 還是版本 2？<br>
       · 為什麼？具體是哪些字讓你進得去？
     </div>
-    <div class="body-sm muted" style="margin-top: 28px;">
-      （老師不講「應該怎麼寫」——讓你自己看出差別在哪）
-    </div>
   </div>
   <div class="page-footer">W5 · 你進去哪個？</div>
 </section>
@@ -827,19 +810,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       不是技巧，是工具
     </div>
     <div class="three-things">
-      <div class="tt-card">
+      <div class="tt-card" data-reveal="1">
         <div class="ttn">①</div>
         <div class="ttt">場景</div>
         <div class="ttq">人在什麼地方？</div>
         <div class="ttd">地點、物件、氛圍——讓畫面浮現</div>
       </div>
-      <div class="tt-card" style="border-color: var(--accent-2);">
+      <div class="tt-card" data-reveal="2" style="border-color: var(--accent-2);">
         <div class="ttn" style="color: var(--accent-2);">②</div>
         <div class="ttt">動作</div>
         <div class="ttq" style="color: var(--accent-2);">誰做了什麼？</div>
         <div class="ttd">身體動作、聲音、視覺變化——讓那一秒真的在動</div>
       </div>
-      <div class="tt-card" style="border-color: var(--alert);">
+      <div class="tt-card" data-reveal="3" style="border-color: var(--alert);">
         <div class="ttn" style="color: var(--alert);">③</div>
         <div class="ttt">轉折</div>
         <div class="ttq" style="color: var(--alert);">那一刻跟前一刻哪裡不同？</div>
@@ -889,9 +872,9 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       你不是評論——你是「<span class="accent bold">測試讀者</span>」，告訴對方你「進到哪」
     </div>
     <div class="reader-lines" style="max-width: 1000px;">
-      <div class="reader-line">「我看到 ______」<span class="muted body-sm" style="margin-left: 16px;">（視覺進去多少）</span></div>
-      <div class="reader-line">「我聽到 ______」<span class="muted body-sm" style="margin-left: 16px;">（聽覺進去多少；沒進到就寫「沒聽到聲音」）</span></div>
-      <div class="reader-line">「我感覺到 ______」<span class="muted body-sm" style="margin-left: 16px;">（情緒／氛圍進去多少）</span></div>
+      <div class="reader-line" data-reveal="1">「我看到 ______」<span class="muted body-sm" style="margin-left: 16px;">（視覺進去多少）</span></div>
+      <div class="reader-line" data-reveal="2">「我聽到 ______」<span class="muted body-sm" style="margin-left: 16px;">（聽覺進去多少；沒進到就寫「沒聽到聲音」）</span></div>
+      <div class="reader-line" data-reveal="3">「我感覺到 ______」<span class="muted body-sm" style="margin-left: 16px;">（情緒／氛圍進去多少）</span></div>
     </div>
     <div class="body-sm" style="margin-top: 22px; color: var(--accent);">
       <span class="accent-2 bold">⚠️ 沒進去就誠實寫「沒看到」</span>——不要安慰對方。<br>
@@ -947,10 +930,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="body" style="margin-top: 30px; text-align: center;">
       <span class="accent bold">有人願意分享嗎？</span>
-    </div>
-    <div class="body-sm muted" style="margin-top: 14px; text-align: center;">
-      （老師接話只說一句：「對，這就是讀者進不去的地方。」<br>
-      不評論誰寫得好。）
     </div>
   </div>
   <div class="page-footer">W5 · 全班分享 ★</div>
