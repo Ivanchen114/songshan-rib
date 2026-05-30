@@ -92,15 +92,7 @@
   margin-bottom: 22px;
   color: var(--ink);
 }
-.reflect-solo .rs-action {
-  padding: 18px 26px;
-  background: rgba(196,181,253,0.08);
-  border-left: 3px solid #C4B5FD;
-  border-radius: 6px;
-  font-size: calc(var(--t3) * 0.88);
-  color: var(--ink-2);
-  line-height: 1.7;
-}
+.reflect-solo .rs-action { padding: 14px 0 0; margin-top: 8px; border-top: 1px dashed rgba(196,181,253,0.35); font-size: calc(var(--t3) * 0.88); color: var(--ink-2); line-height: 1.7; }
 .reflect-solo .rs-explain { color: var(--accent-2); font-weight: 700; }
 .reflect-solo .rs-fail { color: #C4B5FD; font-weight: 700; }
 
@@ -333,14 +325,7 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 220px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-time {
   font-family: "JetBrains Mono", monospace;
@@ -349,15 +334,8 @@ body.force-rotate .rotate-hint { display: none; }
   font-weight: 700;
   letter-spacing: 0.06em;
 }
-.tl-title {
-  font-size: calc(var(--t3) * 0.9);
-  font-weight: 700;
-}
-.tl-desc {
-  font-size: calc(var(--t4) * 1.0);
-  color: var(--ink-2);
-  line-height: 1.45;
-}
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* W3→W4 命題接續 */
 .theme-shift {
@@ -825,21 +803,21 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       用紅筆現場圈
     </div>
     <div class="pick3-list">
-      <div class="pick-item">
+      <div class="pick-item" data-reveal="1">
         <div class="ps">★</div>
         <div>
           <div class="pt">1. 紙團球安打</div>
           <div class="pr">擊中的感覺很快樂、興奮</div>
         </div>
       </div>
-      <div class="pick-item">
+      <div class="pick-item" data-reveal="2">
         <div class="ps">★</div>
         <div>
           <div class="pt">7. 五歲那個跌倒，他自己站起來，連哎都沒哎一聲</div>
           <div class="pr">我那一秒愣住了</div>
         </div>
       </div>
-      <div class="pick-item">
+      <div class="pick-item" data-reveal="3">
         <div class="ps">★</div>
         <div>
           <div class="pt">8. 球場打排球，膝蓋越練越壯</div>
@@ -847,7 +825,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
         </div>
       </div>
     </div>
-    <div class="body" style="margin-top: 24px; text-align: center;">
+    <div class="body" style="margin-top: 24px; text-align: center;" data-reveal="4">
       這 3 個的共同點是——<span class="accent-2 bold">我心裡都還記得那一秒的感覺</span>。<br>
       <span class="body-sm muted">這就是我選的判斷準則。有些值得寫的瞬間，不一定很大。</span>
     </div>
@@ -875,32 +853,32 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       列得不滿不是失敗——是你這禮拜真實的狀態。試試這 4 個方向：
     </div>
     <div class="icebreak-tips">
-      <div class="icebreak-tip">
+      <div class="icebreak-tip" data-reveal="1">
         <div class="tn">①</div>
         <div>
           <div class="tt">回想「卡住的瞬間」</div>
-          <div class="td">不是要找有意義的——是「讓你停 1 秒的」。等紅燈、被搶話、看著手機卻不想滑。</div>
+          <div class="td">讓你停 1 秒的那種，不必有意義。</div>
         </div>
       </div>
-      <div class="icebreak-tip">
+      <div class="icebreak-tip" data-reveal="2">
         <div class="tn">②</div>
         <div>
           <div class="tt">找「身體的記憶」</div>
-          <div class="td">手摸到的、腳走過的、嘴吃到的——身體比腦袋更誠實。今天吃早餐第一口的味道？</div>
+          <div class="td">手摸到、腳走過、嘴吃到的——身體比腦袋誠實。</div>
         </div>
       </div>
-      <div class="icebreak-tip">
+      <div class="icebreak-tip" data-reveal="3">
         <div class="tn">③</div>
         <div>
           <div class="tt">找「不想公開的瞬間」</div>
-          <div class="td">你心裡記得但沒跟人說的——不用拿來給人看，列出來給自己。<span class="accent-2">這是最有重量的素材。</span></div>
+          <div class="td">心裡記得、沒跟人說的。<span class="accent-2">最有重量。</span></div>
         </div>
       </div>
-      <div class="icebreak-tip">
+      <div class="icebreak-tip" data-reveal="4">
         <div class="tn">④</div>
         <div>
           <div class="tt">列不到還是繼續</div>
-          <div class="td">「我這禮拜過得很平」這件事——本身就是發現。下週試著留意一個瞬間就好。</div>
+          <div class="td">「過得很平」本身就是發現。下週留意一個就好。</div>
         </div>
       </div>
     </div>
