@@ -337,14 +337,7 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 240px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-row.star { background: rgba(255,215,0,0.05); }
 .tl-time {
@@ -354,15 +347,8 @@ body.force-rotate .rotate-hint { display: none; }
   font-weight: 700;
   letter-spacing: 0.06em;
 }
-.tl-title {
-  font-size: calc(var(--t3) * 0.9);
-  font-weight: 700;
-}
-.tl-desc {
-  font-size: calc(var(--t3) * 0.85);
-  color: var(--ink-2);
-  line-height: 1.45;
-}
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* 4 種眼睛卡片 (slide 3) */
 .eyes-grid {
@@ -715,29 +701,29 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       其實 <span class="ac-actual">重寫 = 用 5 週新眼睛重看那 30 秒</span>。
     </div>
     <div class="eyes-grid">
-      <div class="eye-card">
+      <div class="eye-card" data-reveal="1">
         <div class="ec-week">W2</div>
         <div class="ec-eye">自覺</div>
         <div class="ec-desc">看見自己跟 AI 一樣<br>會合理填空</div>
       </div>
-      <div class="eye-card">
+      <div class="eye-card" data-reveal="2">
         <div class="ec-week">W3</div>
         <div class="ec-eye">錨點</div>
         <div class="ec-desc">看見一個 30 秒裡<br>哪些細節有重量</div>
       </div>
-      <div class="eye-card">
+      <div class="eye-card" data-reveal="3">
         <div class="ec-week">W4</div>
         <div class="ec-eye">判準</div>
         <div class="ec-desc">看見自己怎麼從<br>多個 30 秒挑一個</div>
       </div>
-      <div class="eye-card">
+      <div class="eye-card" data-reveal="4">
         <div class="ec-week">W5</div>
         <div class="ec-eye">他者</div>
         <div class="ec-desc">看見讀者<br>進不進得去</div>
       </div>
     </div>
     <div class="eyes-arrow">↓</div>
-    <div class="eyes-w6">
+    <div class="eyes-w6" data-reveal="5">
       <span class="accent-2">W6：</span>用這 4 種眼睛，<span class="accent-2 bold">回頭看自己 5 週前寫的東西</span>
     </div>
   </div>
@@ -816,11 +802,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
         　　我跟兒子在海山運動場玩棒球。<br>
         　　兒子拿出他自己做的紙團球——<br>
         　　是紙包成一團，不是真球。<br>
-        　　我手上是他的兒童棒球。<br>
+        　　我手上是他的兒童球棒。<br>
         　　他丟。我揮。<br>
         　　哐。<br>
         　　紙團球飛得很遠，是顆深遠的安打。<br>
-        　　我那一秒真的很舒爽。
+        　　我那一秒真的很爽。
       </div>
     </div>
     <div class="body-sm" style="margin-top: 18px; color: var(--ink-dark); font-weight: 700; line-height: 1.6;">
@@ -841,9 +827,9 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <span class="dlabel">對比說明範例</span>
       <div class="dsub">200 字 · 我的對比說明</div>
       <div class="dbody" style="font-size: calc(var(--t3) * 0.78);">
-        <span style="background: rgba(0,198,255,0.15); padding: 2px 4px;">① W2 我寫的版本是 Gemini 寫的合成散文</span>——它寫了我給的事實 + 它編的細節。讀起來像我，但那一刻我沒去那些細節。<br><br>
-        <span style="background: rgba(184,134,11,0.15); padding: 2px 4px;">② W6 我重寫成 80 字，只寫了一個 30 秒——紙團球安打。</span>我從整個下午挑了「兒子做的紙團球」「我用兒童棒球」「真的很舒爽」這 3 個我還記得的細節。用「他丟。我揮。哐。」讓讀者聽得到聲音。<br><br>
-        <span style="background: rgba(255,68,102,0.15); padding: 2px 4px;">③ 最大的變化——W2 寫了 200 字，但很多是合理補上的。W6 寫了 80 字，但每個細節都有那一刻的經驗支撐。</span>不是寫得比較好——是寫得真的有人在那裡。
+        <div data-reveal="1" style="margin-bottom: 14px;"><span style="background: rgba(0,198,255,0.15); padding: 2px 4px;">① W2 我寫的版本是 Gemini 寫的合成散文</span>——它寫了我給的事實 + 它編的細節。讀起來像我，但那一刻我沒去那些細節。</div>
+        <div data-reveal="2" style="margin-bottom: 14px;"><span style="background: rgba(184,134,11,0.15); padding: 2px 4px;">② W6 我重寫成 80 字，只寫了一個 30 秒——紙團球安打。</span>我從整個下午挑了「兒子做的紙團球」「我用兒童球棒」「真的很爽」這 3 個我還記得的細節。用「他丟。我揮。哐。」讓讀者聽得到聲音。</div>
+        <div data-reveal="3"><span style="background: rgba(255,68,102,0.15); padding: 2px 4px;">③ 最大的變化——W2 寫了 200 字，但很多是合理補上的。W6 寫了 80 字，但每個細節都有那一刻的經驗支撐。</span>不是寫得比較好——是寫得真的有人在那裡。</div>
       </div>
     </div>
   </div>
