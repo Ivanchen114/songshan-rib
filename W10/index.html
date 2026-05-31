@@ -432,7 +432,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="timeline" style="margin-top: 18px;">
       <div class="tl-row"><div class="tl-time">00 — 10</div><div class="tl-title">W9 回扣 + W10 命題</div><div class="tl-desc">流暢 ≠ 可信</div></div>
       <div class="tl-row star"><div class="tl-time">10 — 25</div><div class="tl-title accent-2">★ 老師示範三色筆查核</div><div class="tl-desc">投影一段流暢 AI 段落 + 標前 3 句</div></div>
-      <div class="tl-row"><div class="tl-time">25 — 55</div><div class="tl-title">學生獨立查核 30 分</div><div class="tl-desc">手機翻面 · 全段標綠/黃/紅</div></div>
+      <div class="tl-row"><div class="tl-time">25 — 55</div><div class="tl-title">學生獨立查核 30 分</div><div class="tl-desc">前 10 分翻面標黃 → 後 20 分查證改色</div></div>
       <div class="tl-row dstar"><div class="tl-time">55 — 75</div><div class="tl-title accent">★★ 寫「最危險的一句」</div><div class="tl-desc">100 字聲明</div></div>
       <div class="tl-row"><div class="tl-time">75 — 90</div><div class="tl-title">兩兩交換</div><div class="tl-desc">聽對方挑的最危險</div></div>
       <div class="tl-row"><div class="tl-time">90 — 100</div><div class="tl-title">收尾 + 預告 W11</div><div class="tl-desc">⚠️ W10 不收作業（W12 才下次大收件）</div></div>
@@ -603,14 +603,14 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 一句話版</div>
 </section>
 
-<section class="slide dark" data-slide="12" data-section="學生獨立">
+<section class="slide dark" data-slide="12" data-section="獨立查核 · 階段一">
   <div class="slide-inner">
-    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 18px;">
       <div>
-        <div class="kicker alert">⚠️ 30 分鐘 · 手機翻面</div>
-        <div class="title" style="font-size: clamp(36px, 3.2vw, 58px);">學生獨立查核</div>
+        <div class="kicker alert">⚠️ 階段一 · 10 分鐘 · 手機翻面</div>
+        <div class="title" style="font-size: clamp(38px, 3.4vw, 60px);">只憑文本，先標黃</div>
       </div>
-      <div class="timer-pill" data-timer="1800">30:00</div>
+      <div class="timer-pill" data-timer="600">10:00</div>
     </div>
     <div class="steps-5">
       <div class="step-item">
@@ -620,33 +620,55 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="step-item">
         <div class="step-num">②</div>
         <div class="step-content">
-          <div class="s-main">逐句標 🟢 / 🟡 / 🔴（用查核三等級）</div>
+          <div class="s-main">逐句先標：有給來源／數據 → <span class="bold">暫綠候選</span>；<span class="accent-2 bold">沒給依據 → 🟡 黃</span>（讀起來順，但沒根據）</div>
+          <div class="s-sub">先不查網路——第一眼很順的，先當可疑</div>
+        </div>
+      </div>
+    </div>
+    <div class="body-sm" style="margin-top: 24px; text-align: center; color: var(--ink-2);">
+      流暢的話，先<span class="accent-2 bold">扣留判斷</span>——標黃，等查證。
+    </div>
+  </div>
+  <div class="page-footer">W10 · 獨立查核 階段一</div>
+</section>
+
+<section class="slide dark" data-slide="13" data-section="獨立查核 · 階段二">
+  <div class="slide-inner">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 18px;">
+      <div>
+        <div class="kicker">階段二 · 20 分鐘 · 開放查證</div>
+        <div class="title" style="font-size: clamp(38px, 3.4vw, 60px);">查證，才有資格改色</div>
+      </div>
+      <div class="timer-pill" data-timer="1200">20:00</div>
+    </div>
+    <div class="steps-5">
+      <div class="step-item">
+        <div class="step-num">③</div>
+        <div class="step-content">
+          <div class="s-main">手機／Chromebook 專查「黃」的那幾句（查核三等級 L2／L3）</div>
+          <div class="s-sub">查到可信來源 → 改 🟢　|　查到反證 → 改 🔴　|　查不到 → 留 🟡</div>
         </div>
       </div>
       <div class="step-item">
-        <div class="step-num">③</div>
+        <div class="step-num">④</div>
         <div class="step-content"><div class="s-main">算比例：綠 ___% / 黃 ___% / 紅 ___%</div></div>
       </div>
       <div class="step-item">
-        <div class="step-num gold">④</div>
+        <div class="step-num gold">⑤</div>
         <div class="step-content">
           <div class="s-main accent-2">⭐ 圈出「最危險的一句」</div>
-          <div class="s-sub">通常是黃色裡最「像真的」的那句</div>
+          <div class="s-sub">查完還是黃、卻最「像真的」的那句</div>
         </div>
       </div>
-      <div class="step-item">
-        <div class="step-num">⑤</div>
-        <div class="step-content"><div class="s-main">準備等下寫 100 字聲明</div></div>
-      </div>
     </div>
-    <div class="body-sm" style="margin-top: 16px; text-align: center; color: var(--ink-2);">
-      不急著回答「對錯」——<span class="accent bold">練查核能力</span>。
+    <div class="body-sm" style="margin-top: 18px; text-align: center; color: var(--ink-2);">
+      第一眼很順 → 先標黃；<span class="accent bold">查完，才有資格改色</span>。
     </div>
   </div>
-  <div class="page-footer">W10 · 獨立查核</div>
+  <div class="page-footer">W10 · 獨立查核 階段二</div>
 </section>
 
-<section class="slide dark" data-slide="13" data-section="最危險 ★★">
+<section class="slide dark" data-slide="14" data-section="最危險 ★★">
   <div class="slide-inner section-marker">
     <div class="sm-step">— 20 分鐘 · 個人寫 100 字 —</div>
     <div class="sm-title">
@@ -660,7 +682,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 最危險的一句轉場</div>
 </section>
 
-<section class="slide dark" data-slide="14" data-section="最危險 ★★">
+<section class="slide dark" data-slide="15" data-section="最危險 ★★">
   <div class="slide-inner">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
       <div>
@@ -694,7 +716,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 100 字結構</div>
 </section>
 
-<section class="slide dark" data-slide="15" data-section="兩兩交換">
+<section class="slide dark" data-slide="16" data-section="兩兩交換">
   <div class="slide-inner">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
       <div>
@@ -720,7 +742,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 兩兩交換</div>
 </section>
 
-<section class="slide dark" data-slide="16" data-section="收尾">
+<section class="slide dark" data-slide="17" data-section="收尾">
   <div class="slide-inner center">
     <div class="epilogue">
       <div class="ep-line ep-fade">流暢的文字，</div>
@@ -731,7 +753,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 收尾頓點</div>
 </section>
 
-<section class="slide dark" data-slide="17" data-section="預告 W11">
+<section class="slide dark" data-slide="18" data-section="預告 W11">
   <div class="slide-inner">
     <div class="kicker">下週 W11 · 模組 3 偵探術最後一週</div>
     <div class="title" style="font-size: clamp(40px, 3.6vw, 68px); margin-bottom: 14px;">
@@ -757,7 +779,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 預告 W11</div>
 </section>
 
-<section class="slide dark" data-slide="18" data-section="入場作業">
+<section class="slide dark" data-slide="19" data-section="入場作業">
   <div class="slide-inner">
     <div class="kicker">下週 W11 入場作業</div>
     <div class="title" style="font-size: clamp(42px, 3.8vw, 70px); line-height: 1.2; margin-bottom: 14px;">
@@ -780,7 +802,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 入場作業 + 不收作業</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="後設反思">
+<section class="slide dark" data-slide="20" data-section="後設反思">
   <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
