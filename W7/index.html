@@ -616,19 +616,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="title" style="font-size: clamp(36px, 3.0vw, 54px); color: var(--ink-dark); margin-bottom: 18px;">
       朱自清〈背影〉
     </div>
-    <div class="text-card" style="margin-bottom: 16px;">
+    <div class="text-card" style="margin-bottom: 10px;">
       <span class="tc-label">節錄</span>
       <div class="tc-source">父親爬月台買橘子那一段</div>
-      <div class="tc-body" style="font-size: calc(var(--t3) * 0.85);">
+      <div class="tc-body" style="font-size: calc(var(--t3) * 0.78); line-height: 1.5;">
         　　我看見他戴著黑布小帽，穿著黑布大馬褂，深青布棉袍，蹣跚地走到鐵道邊，慢慢探身下去，尚不大難。可是他穿過鐵道，要爬上那邊月台，就不容易了。他用兩手攀著上面，兩腳再向上縮；他肥胖的身子向左微傾，顯出努力的樣子。
       </div>
     </div>
     <div class="body-sm" style="color: var(--ink-dark); font-weight: 900; margin-bottom: 8px;">我問你 4 個問題——</div>
     <div class="questions-list">
-      <div class="q-item"><div class="q-num">①</div><div class="q-text">父親那天的鬍子是什麼樣？</div></div>
-      <div class="q-item"><div class="q-num">②</div><div class="q-text">月台是水泥的還是石頭的？</div></div>
-      <div class="q-item"><div class="q-num">③</div><div class="q-text">那天天氣冷不冷？</div></div>
-      <div class="q-item"><div class="q-num">④</div><div class="q-text">父親爬上去之後，有沒有回頭看？</div></div>
+      <div class="q-item" data-reveal="1"><div class="q-num">①</div><div class="q-text">父親那天的鬍子是什麼樣？</div></div>
+      <div class="q-item" data-reveal="2"><div class="q-num">②</div><div class="q-text">月台是水泥的還是石頭的？</div></div>
+      <div class="q-item" data-reveal="3"><div class="q-num">③</div><div class="q-text">那天天氣冷不冷？</div></div>
+      <div class="q-item" data-reveal="4"><div class="q-num">④</div><div class="q-text">父親爬上去之後，有沒有回頭看？</div></div>
     </div>
   </div>
   <div class="page-footer">W7 · 概念示範 1/2</div>
@@ -775,7 +775,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       </div>
       <div class="timer-pill" data-timer="1500">25:00</div>
     </div>
-    <div class="body-sm muted" style="margin-bottom: 12px;">各組到圖書館不同書區，各自獨立找場景。</div>
     <div class="steps-4">
       <div class="step-item">
         <div class="step-num">①</div>
@@ -794,7 +793,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
         <div class="step-num">③</div>
         <div class="step-content">
           <div class="s-main">小組討論挑場景，但<span class="accent-2 bold">每人選自己要召喚的場景</span></div>
-          <div class="s-sub">可以同場景，也可以不同場景</div>
+          <div class="s-sub">可同可不同；同角色不同組記得錯開場景（炭治郎 A初遇／B打架／C吃飯）</div>
         </div>
       </div>
       <div class="step-item">
@@ -803,10 +802,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
           <div class="s-main">抄下來：書名、作者、頁碼、場景一句話描述</div>
         </div>
       </div>
-    </div>
-    <div class="body-sm" style="margin-top: 16px; padding: 14px 22px; background: rgba(255,215,0,0.1); border-left: 4px solid var(--accent-2); border-radius: 4px; color: var(--ink);">
-      <span class="accent-2 bold">⭐ 同角色的多個小組——記得彼此挑不同的出場場景</span><br>
-      <span class="muted body-sm">同樣是炭治郎：A 組「初遇禰豆子」/ B 組「跟伊之助打架」/ C 組「跟善逸吃飯」——降靈大會才有差異性。同角色組可以互相討論「你們挑哪段？那我挑別段」。</span>
     </div>
   </div>
   <div class="page-footer">W7 · 圖書館找書</div>
@@ -833,17 +828,13 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="title" style="font-size: clamp(36px, 3.2vw, 56px); margin-bottom: 6px;">
       Persona Prompting
     </div>
-    <div class="body-sm" style="margin-bottom: 4px; color: var(--accent-2);">叫 AI 變成「某個人」來講話</div>
-    <div class="body-sm muted" style="margin-bottom: 8px;">複製改填，丟給 AI</div>
+    <div class="body-sm" style="margin-bottom: 8px; color: var(--accent-2);">叫 AI 變成「某個人」講話 · 複製改填丟給 AI</div>
     <div class="spell-block">
 「請假裝你是 <span class="field">[角色名]</span>（出自 <span class="field">[書名]</span>，作者 <span class="field">[姓名]</span>）。<br>
 請描述 <span class="field">[場景一句話]</span> 的那 30 秒——<br>
 要有具體細節：物件、動作、聲音、感覺。<br>
-寫 200 字左右。<br><br>
-<span class="rule">⚠️ 規則：</span><br>
-<span class="rule">- 不要加金句結尾</span><br>
-<span class="rule">- 不要寫『我感受到⋯』『我體會⋯』（W3 規則）</span><br>
-<span class="rule">- 寫那 30 秒「<span class="danger">發生什麼</span>」，不要寫「<span class="danger">代表什麼</span>」」</span>
+寫 200 字左右。<br>
+<span class="rule">⚠️ 規則：不加金句結尾、不寫『我感受／體會』（W3）、只寫「<span class="danger">發生什麼</span>」不寫「<span class="danger">代表什麼</span>」」</span>
     </div>
     <div class="body-sm" style="margin-top: 16px; text-align: center; color: var(--ink-2);">
       拿到 AI 給的 200 字 → <span class="accent-2 bold">抄到紙上 / 印出</span> → 等下用三色筆標
@@ -945,7 +936,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="17" data-section="漫畫組微調">
   <div class="slide-inner">
-    <div class="kicker">⚠️ 漫畫組學生請看</div>
+    <div class="kicker">⚠️ 漫畫組學生請看（1/2）</div>
     <div class="title" style="font-size: clamp(36px, 3.2vw, 56px);">漫畫作品的三色筆微調</div>
     <div class="body-sm muted" style="margin-bottom: 14px;">
       漫畫的「事實」一半在<span class="accent-2 bold">圖像</span>裡——<span class="alert bold">AI 看不到圖</span>
@@ -969,23 +960,29 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       </div>
     </div>
     <div class="body-sm" style="margin-top: 18px; padding: 14px 22px; background: rgba(255,68,102,0.08); border-left: 4px solid var(--alert); border-radius: 4px; color: var(--ink-2);">
-      <span class="alert bold">⚠️ 視覺細節是重災區</span>——對白通常 AI 會準（讀過劇本／wiki），但「角色穿什麼／什麼表情／什麼姿勢」<br>
-      <span class="muted">→ 學生要把書翻開：<span class="accent bold">對白看一次、圖也看一次</span>，雙重比對。</span>
-    </div>
-    <div class="body-sm" style="margin-top: 12px; padding: 14px 22px; background: rgba(0,198,255,0.08); border-left: 4px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
-      <span class="accent bold">📖 漫畫線上資源規則</span><br>
-      <span class="body-sm" style="line-height: 1.7;">
-        ✓ 學校合法 ebook（HyRead/雲端書庫）→ 找書時段（25-47 分）可用<br>
-        ✗ <span class="alert bold">線上盜版漫畫站不接受</span>——教學倫理 + W5 物理鎖<br>
-        ⚠️ 查核時段（65-80 分）一律只能用<span class="accent-2 bold">實體書 / 印出來的紙</span>，手機翻面<br>
-        ⚪ 圖書館真的找不到該角色的書 → 從<span class="accent bold">「安全角色池」</span>改選（紅樓夢 / 哈利波特 / 老師現場確認的漫畫）
-      </span>
+      <span class="alert bold">⚠️ 視覺細節是重災區</span>——對白 AI 通常會準（讀過劇本／wiki），但「角色穿什麼／表情／姿勢」常編。<br>
+      <span class="muted">→ 把書翻開：<span class="accent bold">對白看一次、圖也看一次</span>，雙重比對。</span>
     </div>
   </div>
-  <div class="page-footer">W7 · 漫畫組微調</div>
+  <div class="page-footer">W7 · 漫畫組微調 1/2</div>
 </section>
 
-<section class="slide dark" data-slide="18" data-section="對比說明">
+<section class="slide dark" data-slide="18" data-section="漫畫資源規則">
+  <div class="slide-inner">
+    <div class="kicker">⚠️ 漫畫組學生請看（2/2）</div>
+    <div class="title" style="font-size: clamp(36px, 3.2vw, 56px);">漫畫去哪找、怎麼查</div>
+    <div class="body-sm muted" style="margin-bottom: 22px;">合法、可查、找不到有備案</div>
+    <div style="display:flex; flex-direction:column; gap:20px; font-size: calc(var(--t3) * 0.92); line-height:1.5;">
+      <div><span style="color: var(--green-fact); font-weight:900;">✓</span> 學校合法 ebook（HyRead／雲端書庫）→ 找書時段（25–47 分）可用</div>
+      <div><span class="alert bold">✗ 線上盜版漫畫站不接受</span>——教學倫理 + W5 物理鎖</div>
+      <div>⚠️ 查核時段（65–80 分）只能用<span class="accent-2 bold">實體書／印出來的紙</span>，手機翻面</div>
+      <div>⚪ 圖書館找不到該角色的書 → 從<span class="accent bold">「安全角色池」</span>改選（紅樓夢／哈利波特／老師確認的漫畫）</div>
+    </div>
+  </div>
+  <div class="page-footer">W7 · 漫畫資源規則 2/2</div>
+</section>
+
+<section class="slide dark" data-slide="19" data-section="對比說明">
   <div class="slide-inner">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 12px;">
       <div>
@@ -1007,7 +1004,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 對比說明</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="組內降靈 ★">
+<section class="slide dark" data-slide="20" data-section="組內降靈 ★">
   <div class="slide-inner section-marker">
     <div class="sm-step">— 任務 5 · 8 分鐘 —</div>
     <div class="sm-title">
@@ -1021,7 +1018,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 組內降靈轉場</div>
 </section>
 
-<section class="slide dark" data-slide="20" data-section="組內降靈 ★">
+<section class="slide dark" data-slide="21" data-section="組內降靈 ★">
   <div class="slide-inner">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 12px;">
       <div>
@@ -1051,7 +1048,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 組內降靈規則</div>
 </section>
 
-<section class="slide dark" data-slide="21" data-section="全班降靈 ★★">
+<section class="slide dark" data-slide="22" data-section="全班降靈 ★★">
   <div class="slide-inner">
     <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 12px;">
       <div>
@@ -1063,8 +1060,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="card" style="padding: 16px 24px; margin-bottom: 14px;">
       <div class="body-sm" style="line-height: 1.7; color: var(--ink-2);">
         代表上台：<br>
-        <span class="accent-2 bold">「我們組是 ___ 角色組。我們選的是『最 ___』的那句，是『______』，因為 ___。」</span><br>
-        <span class="muted">（前後 3-4 句的上下文也要讀，讓全班聽得到）</span>
+        <span class="accent-2 bold">「我們組是 ___ 角色組。我們選的是『最 ___』的那句，是『______』，因為 ___。」</span>
       </div>
     </div>
     <div class="body-sm" style="color: var(--accent); font-weight: 700; margin-bottom: 8px;">⭐ 「因為 ___」要錨在文本證據</div>
@@ -1072,8 +1068,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="ev-row ok"><div class="ev-mark">✓</div><div class="ev-text">「原文寫了 ___，但 AI 把它改成 ___」（<span class="accent bold">細節反證</span>）</div></div>
       <div class="ev-row ok"><div class="ev-mark">✓</div><div class="ev-text">「原文沒寫 ___，但 AI 補的這句剛好讓我覺得書應該寫過」（<span class="accent-2 bold">合理填空</span>）</div></div>
       <div class="ev-row ok"><div class="ev-mark">✓</div><div class="ev-text">「這句書沒寫，但符合角色性格」（<span class="accent bold">合理推測</span>）</div></div>
-      <div class="ev-row no"><div class="ev-mark">✗</div><div class="ev-text">「因為這句很有趣」（情緒理由，不算）</div></div>
-      <div class="ev-row no"><div class="ev-mark">✗</div><div class="ev-text">「因為大家都覺得像」（從眾理由，不算）</div></div>
+      <div class="ev-row no"><div class="ev-mark">✗</div><div class="ev-text">「很有趣」（情緒）／「大家都覺得像」（從眾）——都不算</div></div>
     </div>
     <div class="body-sm" style="margin-top: 16px; text-align: center; color: var(--ink-2); font-weight: 700;">
       7-8 組的不同切面 + 文本依據 —— <span class="accent bold">差異本身就是教材</span>。
@@ -1082,7 +1077,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 全班降靈規則 ★★</div>
 </section>
 
-<section class="slide dark" data-slide="22" data-section="收尾">
+<section class="slide dark" data-slide="23" data-section="收尾">
   <div class="slide-inner center">
     <div class="epilogue">
       <div class="ep-line">你以為你讀到的——</div>
@@ -1094,7 +1089,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 收尾頓點</div>
 </section>
 
-<section class="slide dark" data-slide="23" data-section="預告 W8">
+<section class="slide dark" data-slide="24" data-section="預告 W8">
   <div class="slide-inner">
     <div class="kicker">模組 2 結束 → 模組 3 開始</div>
     <div class="title" style="font-size: clamp(38px, 3.4vw, 60px); margin-bottom: 24px;">
@@ -1126,7 +1121,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 預告 W8</div>
 </section>
 
-<section class="slide dark" data-slide="24" data-section="入場作業">
+<section class="slide dark" data-slide="25" data-section="入場作業">
   <div class="slide-inner">
     <div class="kicker">下週 W8 入場作業</div>
     <div class="title" style="font-size: clamp(38px, 3.4vw, 60px); line-height: 1.2; margin-bottom: 8px;">
@@ -1151,7 +1146,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 入場作業 + 不收作業聲明</div>
 </section>
 
-<section class="slide dark" data-slide="25" data-section="後設反思">
+<section class="slide dark" data-slide="26" data-section="後設反思">
   <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 走之前 · 自我觀察</div>
