@@ -194,20 +194,13 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline (8 段) */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 220px 1fr;
-  align-items: center;
-  gap: 24px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-row.star { background: rgba(255,215,0,0.05); }
 .tl-row.dstar { background: rgba(0,198,255,0.05); }
 .tl-time { font-family: "JetBrains Mono", monospace; font-size: var(--t4); color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
-.tl-title { font-size: calc(var(--t3) * 0.85); font-weight: 700; }
-.tl-desc { font-size: calc(var(--t3) * 0.85); color: var(--ink-2); line-height: 1.45; }
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* 〈背影〉文本卡 (light bg) */
 .text-card {
@@ -713,7 +706,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
         <div class="step-num">①</div>
         <div class="step-content">
           <div class="s-main">每人想一個「想召喚的書中角色」</div>
-          <div class="s-sub">有名字、有性格、<span class="accent-2 bold">圖書館找得到那本書</span></div>
+          <div class="s-sub">有名字、有性格、<span class="accent-2 bold">圖書館找得到那本書</span>（漫畫／小說／傳記都行）</div>
         </div>
       </div>
       <div class="step-item">
@@ -737,14 +730,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
           <div class="s-sub">3 個熱門角色 → 每角色 2-3 個 4 人小組；孤鳥加入最有興趣的組</div>
         </div>
       </div>
-    </div>
-    <div class="body-sm" style="margin-top: 16px; padding: 14px 22px; background: rgba(255,215,0,0.1); border-left: 4px solid var(--accent-2); border-radius: 4px; color: var(--ink);">
-      <span class="accent-2 bold">⭐ 同個角色多組 OK——每組挑「不同的出場場景」就行</span><br>
-      <span class="muted body-sm">例如 3 組都召喚五條悟：A 組「跟夏油吃飯」/ B 組「對戰宿儺」/ C 組「跟學生上課」——AI 給的 200 字會完全不同，降靈大會就有 3 種切面。</span>
-    </div>
-    <div class="body-sm" style="margin-top: 12px; padding: 14px 22px; background: rgba(0,198,255,0.08); border-left: 4px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
-      <span class="accent bold">漫畫、輕小說、傳記、經典文學——都接受。</span>
-      重點不是文學品味——是「圖書館找得到、你願意翻書查」。
     </div>
   </div>
   <div class="page-footer">W7 · 共鳴檢定規則 ★</div>
