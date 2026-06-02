@@ -701,31 +701,29 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       你以為 <span class="ac-you">重寫 = 把文章改得更華麗</span> ──
       其實 <span class="ac-actual">重寫 = 用 5 週新眼睛重看那 30 秒</span>。
     </div>
-    <div class="eyes-grid">
-      <div class="eye-card" data-reveal="1">
-        <div class="ec-week">W2</div>
-        <div class="ec-eye">自覺</div>
-        <div class="ec-desc">看見自己跟 AI 一樣<br>會合理填空</div>
-      </div>
-      <div class="eye-card" data-reveal="2">
-        <div class="ec-week">W3</div>
-        <div class="ec-eye">錨點</div>
-        <div class="ec-desc">看見一個 30 秒裡<br>哪些細節有重量</div>
-      </div>
-      <div class="eye-card" data-reveal="3">
-        <div class="ec-week">W4</div>
-        <div class="ec-eye">判準</div>
-        <div class="ec-desc">看見自己怎麼從<br>多個 30 秒挑一個</div>
-      </div>
-      <div class="eye-card" data-reveal="4">
-        <div class="ec-week">W5</div>
-        <div class="ec-eye">他者</div>
-        <div class="ec-desc">看見讀者<br>進不進得去</div>
-      </div>
+    <style>
+    /* W6 s4 鏡片層疊（圖優：4 種眼睛疊起來，W6 透過整疊回看） */
+    .lens-stack{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:0;}
+    .lens{width:100%;max-width:1080px;display:flex;align-items:center;gap:20px;
+      padding:11px 26px;border:1.5px solid var(--accent);border-radius:60px;
+      background:rgba(0,198,255,.06);margin-top:-6px;box-shadow:0 -4px 14px rgba(13,27,42,.5);}
+    .lens:first-child{margin-top:0;}
+    .lens .lz-wk{flex:0 0 auto;font-family:"JetBrains Mono",monospace;font-size:calc(var(--t3)*0.78);color:var(--accent);font-weight:700;}
+    .lens .lz-eye{flex:0 0 140px;font-size:calc(var(--t3)*0.92);font-weight:900;}
+    .lens .lz-desc{flex:1;font-size:calc(var(--t4)*0.95);color:var(--ink-2);text-align:left;line-height:1.4;}
+    .lens-arrow{font-size:calc(var(--t2)*0.6);color:var(--accent-2);margin:8px 0 6px;}
+    .lens-w6{width:100%;max-width:880px;text-align:center;background:rgba(255,215,0,.08);
+      border:2px solid var(--accent-2);border-radius:14px;padding:14px 26px;font-size:calc(var(--t3)*0.86);}
+    </style>
+    <div class="lens-stack">
+      <div class="lens" data-reveal="1"><div class="lz-wk">W2</div><div class="lz-eye">自覺</div><div class="lz-desc">看見自己跟 AI 一樣會合理填空</div></div>
+      <div class="lens" data-reveal="2"><div class="lz-wk">W3</div><div class="lz-eye">錨點</div><div class="lz-desc">看見一個 30 秒裡哪些細節有重量</div></div>
+      <div class="lens" data-reveal="3"><div class="lz-wk">W4</div><div class="lz-eye">判準</div><div class="lz-desc">看見自己怎麼從多個 30 秒挑一個</div></div>
+      <div class="lens" data-reveal="4"><div class="lz-wk">W5</div><div class="lz-eye">他者</div><div class="lz-desc">看見讀者進不進得去</div></div>
     </div>
-    <div class="eyes-arrow">↓</div>
-    <div class="eyes-w6" data-reveal="5">
-      <span class="accent-2">W6：</span>用這 4 種眼睛，<span class="accent-2 bold">回頭看自己 5 週前寫的東西</span>
+    <div class="lens-arrow" data-reveal="5">▼ 四片疊起來 ▼</div>
+    <div class="lens-w6" data-reveal="5">
+      <span class="accent-2 bold">W6：</span>用這疊起來的 4 種眼睛，<span class="accent-2 bold">回頭看自己 5 週前寫的東西</span>
     </div>
   </div>
   <div class="page-footer">W6 · 命題接續</div>

@@ -555,27 +555,43 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="slide-inner">
     <div class="kicker gold">⭐ 標每一句之前先問三問</div>
     <div class="title" style="font-size: clamp(36px, 3.2vw, 56px);">Level 1 · 2 · 3</div>
-    <div class="levels-list">
-      <div class="level-item l1">
-        <div class="level-num">L1</div>
-        <div>
-          <div class="level-q accent">句子自己有沒有給證據？</div>
-          <div class="level-detail">有沒有作者、年份、機構、數據、研究名稱？<br>沒有 → <span class="alert bold">不能直接標綠</span></div>
+    <style>
+    /* W10 s10 決策樹（圖優：三問各自分流到 綠/黃/紅） */
+    .dtree{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:0;max-width:1300px;margin-left:auto;margin-right:auto;}
+    .dlevel{width:100%;display:flex;align-items:center;gap:22px;background:var(--bg-2);border-radius:12px;padding:14px 24px;border-left:5px solid var(--accent);}
+    .dlevel.l2{border-left-color:var(--accent-2);} .dlevel.l3{border-left-color:var(--alert);}
+    .dq{flex:0 0 auto;max-width:46%;}
+    .dq .dl{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:var(--t3);margin-right:10px;}
+    .l1 .dl{color:var(--accent);} .l2 .dl{color:var(--accent-2);} .l3 .dl{color:var(--alert);}
+    .dq .dqt{font-size:calc(var(--t3)*0.84);font-weight:700;display:inline;}
+    .dq .dqs{display:block;font-size:calc(var(--t4)*0.82);color:var(--ink-3);margin-top:3px;}
+    .dbr{flex:1;display:flex;flex-direction:column;gap:7px;}
+    .dbr-row{display:flex;align-items:center;gap:10px;justify-content:flex-end;font-size:calc(var(--t4)*0.92);}
+    .dcond{font-family:"JetBrains Mono",monospace;color:var(--ink-3);}
+    .dpill{padding:5px 14px;border-radius:20px;font-weight:700;font-size:calc(var(--t4)*0.95);white-space:nowrap;}
+    .dpill.green{background:rgba(46,204,113,.16);color:#5BD394;border:1px solid #2ECC71;}
+    .dpill.yellow{background:rgba(255,215,0,.14);color:var(--accent-2);border:1px solid var(--accent-2);}
+    .dpill.red{background:rgba(255,68,102,.14);color:#FF8585;border:1px solid var(--alert);}
+    .dpill.warn{background:transparent;color:var(--alert);border:1px dashed var(--alert);}
+    .dconn{font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.85);color:var(--ink-3);margin:6px 0;}
+    </style>
+    <div class="dtree">
+      <div class="dlevel l1" data-reveal="1">
+        <div class="dq"><span class="dl">L1</span><span class="dqt">句子自己有給證據嗎？</span><span class="dqs">作者 / 年份 / 機構 / 數據 / 研究名稱</span></div>
+        <div class="dbr"><div class="dbr-row"><span class="dcond">沒有 ▶</span><span class="dpill warn">不能直接標綠，先去查</span></div></div>
+      </div>
+      <div class="dconn" data-reveal="2">▼ 有，再問 ▼</div>
+      <div class="dlevel l2" data-reveal="2">
+        <div class="dq"><span class="dl">L2</span><span class="dqt">查得到可信來源嗎？</span><span class="dqs">用關鍵字查一次</span></div>
+        <div class="dbr">
+          <div class="dbr-row"><span class="dcond">查到 ▶</span><span class="dpill green">🟢 綠（可貼原文）</span></div>
+          <div class="dbr-row"><span class="dcond">查不到 ▶</span><span class="dpill yellow">🟡 黃（沒檢驗依據）</span></div>
         </div>
       </div>
-      <div class="level-item l2">
-        <div class="level-num">L2</div>
-        <div>
-          <div class="level-q accent-2">我能不能查到它？</div>
-          <div class="level-detail">用關鍵字查一次，看有沒有可信來源支持<br>查到 → 綠（有原文出處可貼）<br>查不到 → <span class="accent-2 bold">黃</span>（沒給檢驗依據）</div>
-        </div>
-      </div>
-      <div class="level-item l3">
-        <div class="level-num">L3</div>
-        <div>
-          <div class="level-q alert">有沒有反證？</div>
-          <div class="level-detail">有沒有資料明確說它被誤解、過度簡化、事實相反？<br>有 → <span class="alert bold">紅</span></div>
-        </div>
+      <div class="dconn" data-reveal="3">▼ 最後再問 ▼</div>
+      <div class="dlevel l3" data-reveal="3">
+        <div class="dq"><span class="dl">L3</span><span class="dqt">有反證嗎？</span><span class="dqs">被誤解 / 過度簡化 / 事實相反</span></div>
+        <div class="dbr"><div class="dbr-row"><span class="dcond">有 ▶</span><span class="dpill red">🔴 紅</span></div></div>
       </div>
     </div>
   </div>

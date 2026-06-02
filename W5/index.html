@@ -832,28 +832,52 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="title" style="font-size: clamp(38px, 3.3vw, 58px);">
       不是技巧，是工具
     </div>
-    <div class="three-things">
-      <div class="tt-card" data-reveal="1">
-        <div class="ttn">①</div>
-        <div class="ttt">場景</div>
-        <div class="ttq">人在什麼地方？</div>
-        <div class="ttd">地點、物件、氛圍——讓畫面浮現</div>
+    <style>
+    /* W5 s11 合成門（圖優：三塊拼成一道讀者走得進來的門） */
+    .synth{margin-top:18px;}
+    .synth-row{display:flex;align-items:stretch;justify-content:center;gap:8px;}
+    .synth-card{flex:1;max-width:360px;background:var(--bg-2);border-radius:12px;padding:16px 16px 18px;border-top:4px solid var(--accent);text-align:center;}
+    .synth-card.c2{border-top-color:var(--accent-2);} .synth-card.c3{border-top-color:var(--alert);}
+    .synth-n{font-family:"JetBrains Mono",monospace;font-size:var(--t3);font-weight:700;color:var(--accent);line-height:1;}
+    .c2 .synth-n{color:var(--accent-2);} .c3 .synth-n{color:var(--alert);}
+    .synth-t{font-size:calc(var(--t3)*0.92);font-weight:900;margin-top:4px;}
+    .synth-q{font-size:calc(var(--t4)*0.98);color:var(--accent);font-weight:700;margin-top:6px;}
+    .c2 .synth-q{color:var(--accent-2);} .c3 .synth-q{color:var(--alert);}
+    .synth-d{font-size:calc(var(--t4)*0.86);color:var(--ink-2);margin-top:5px;line-height:1.4;}
+    .synth-plus{display:flex;align-items:center;font-size:var(--t2);color:var(--ink-3);font-family:"JetBrains Mono",monospace;}
+    .synth-door{margin:16px auto 0;max-width:760px;text-align:center;
+      border:2px solid var(--accent);border-radius:80px 80px 16px 16px;
+      background:linear-gradient(180deg,rgba(0,198,255,.14),rgba(0,198,255,.03));
+      padding:20px 30px 22px;box-shadow:0 0 30px rgba(0,198,255,.14);}
+    .synth-door .sd-main{font-size:calc(var(--t3)*0.98);font-weight:900;color:var(--accent);}
+    .synth-door .sd-sub{font-size:calc(var(--t4)*0.92);color:var(--ink-2);margin-top:4px;}
+    .synth-eq{text-align:center;font-size:calc(var(--t4)*0.9);color:var(--ink-3);font-family:"JetBrains Mono",monospace;margin:12px 0 2px;}
+    </style>
+    <div class="synth">
+      <div class="synth-row">
+        <div class="synth-card" data-reveal="1">
+          <div class="synth-n">①</div><div class="synth-t">場景</div>
+          <div class="synth-q">人在什麼地方？</div>
+          <div class="synth-d">地點、物件、氛圍——讓畫面浮現</div>
+        </div>
+        <div class="synth-plus" data-reveal="2">＋</div>
+        <div class="synth-card c2" data-reveal="2">
+          <div class="synth-n">②</div><div class="synth-t">動作</div>
+          <div class="synth-q">誰做了什麼？</div>
+          <div class="synth-d">身體動作、聲音、變化——讓那一秒真的在動</div>
+        </div>
+        <div class="synth-plus" data-reveal="3">＋</div>
+        <div class="synth-card c3" data-reveal="3">
+          <div class="synth-n">③</div><div class="synth-t">轉折</div>
+          <div class="synth-q">這一刻哪裡不同？</div>
+          <div class="synth-d">對比、變化、決定點——讓讀者知道為什麼重要</div>
+        </div>
       </div>
-      <div class="tt-card" data-reveal="2" style="border-color: var(--accent-2);">
-        <div class="ttn" style="color: var(--accent-2);">②</div>
-        <div class="ttt">動作</div>
-        <div class="ttq" style="color: var(--accent-2);">誰做了什麼？</div>
-        <div class="ttd">身體動作、聲音、視覺變化——讓那一秒真的在動</div>
+      <div class="synth-eq" data-reveal="4">▼ 三塊合起來 ▼</div>
+      <div class="synth-door" data-reveal="4">
+        <div class="sd-main">一道讀者「走得進來」的門</div>
+        <div class="sd-sub">少一塊，門就關上——讀者卡在外面看不進去。</div>
       </div>
-      <div class="tt-card" data-reveal="3" style="border-color: var(--alert);">
-        <div class="ttn" style="color: var(--alert);">③</div>
-        <div class="ttt">轉折</div>
-        <div class="ttq" style="color: var(--alert);">那一刻跟前一刻哪裡不同？</div>
-        <div class="ttd">對比、變化、決定點——讓讀者知道這一秒為什麼重要</div>
-      </div>
-    </div>
-    <div class="body" style="margin-top: 28px; text-align: center; color: var(--ink-2);">
-      <span class="accent bold">場景 + 動作 + 轉折 = 讀者可以進得去</span>
     </div>
   </div>
   <div class="page-footer">W5 · 三件事</div>

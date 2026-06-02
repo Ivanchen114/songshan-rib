@@ -624,28 +624,45 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="title" style="font-size: clamp(40px, 3.8vw, 68px);">
       3 種證據 · 缺<span class="enemy-red">反方</span>就不算完成
     </div>
-    <div class="evi-3">
-      <div class="evi-card fact">
-        <div class="ev-num">01</div>
-        <div class="ev-name">🟢 事實資料</div>
-        <div class="ev-def">客觀數據、統計、可查證的歷史事件</div>
-        <div class="ev-eg">例：PISA 報告 / 政府統計 / 學術研究數據</div>
+    <style>
+    /* W13 s7 三柱撐平台（圖優：三種證據是三根柱，缺反方就塌） */
+    .tripod{max-width:1240px;margin:16px auto 0;}
+    .tri-top{text-align:center;background:linear-gradient(180deg,rgba(0,198,255,.16),rgba(0,198,255,.04));
+      border:2px solid var(--accent);border-radius:12px;padding:11px 20px;
+      font-size:calc(var(--t3)*0.9);font-weight:900;color:var(--accent);}
+    .tri-legs{display:flex;justify-content:center;gap:14px;}
+    .pillar{flex:1;background:var(--bg-2);border:1.5px solid var(--ink-4);border-top:none;
+      border-radius:0 0 12px 12px;padding:15px 16px 17px;text-align:center;}
+    .pillar.enemy{border-color:var(--accent-2);background:rgba(255,215,0,.06);box-shadow:0 8px 26px rgba(255,215,0,.10);}
+    .p-num{font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.85);color:var(--ink-3);}
+    .p-name{font-size:calc(var(--t3)*0.84);font-weight:900;margin-top:4px;}
+    .pillar.enemy .p-name{color:var(--accent-2);}
+    .p-def{font-size:calc(var(--t4)*0.86);color:var(--ink-2);margin-top:5px;line-height:1.35;}
+    .p-eg{font-size:calc(var(--t4)*0.8);color:var(--ink-3);margin-top:5px;line-height:1.35;}
+    .tri-cap{margin-top:18px;text-align:center;font-size:calc(var(--t3)*0.8);color:var(--ink-2);}
+    </style>
+    <div class="tripod">
+      <div class="tri-top">你的主張，靠這三根柱撐住</div>
+      <div class="tri-legs">
+        <div class="pillar fact" data-reveal="1">
+          <div class="p-num">柱 01</div><div class="p-name">🟢 事實資料</div>
+          <div class="p-def">客觀數據、統計、可查證事件</div>
+          <div class="p-eg">例：PISA 報告 / 政府統計 / 研究數據</div>
+        </div>
+        <div class="pillar expert" data-reveal="2">
+          <div class="p-num">柱 02</div><div class="p-name">🔵 專家/制度</div>
+          <div class="p-def">專業論證、國際/制度脈絡</div>
+          <div class="p-eg">例：芬蘭禁手機 / 心理學家 / 教育法規</div>
+        </div>
+        <div class="pillar enemy" data-reveal="3">
+          <div class="p-num">柱 03</div><div class="p-name">⭐ 反方資料</div>
+          <div class="p-def">對方最強的根據（不是來打，是來校準）</div>
+          <div class="p-eg">例：美國研究 ── 過度限制導致失控</div>
+        </div>
       </div>
-      <div class="evi-card expert">
-        <div class="ev-num">02</div>
-        <div class="ev-name">🔵 專家/制度</div>
-        <div class="ev-def">專業領域論證、國際/制度脈絡</div>
-        <div class="ev-eg">例：芬蘭禁手機制度 / 心理學家觀點 / 教育法規</div>
+      <div class="tri-cap" data-reveal="4">
+        ⚠️ 三柱抽掉任一根都會塌——最常缺的是 <span class="enemy-red bold">⭐ 反方</span>：<span class="enemy-red bold">沒找到反方＝還沒真的在討論</span>。
       </div>
-      <div class="evi-card enemy">
-        <div class="ev-num">03</div>
-        <div class="ev-name">⭐ 反方資料</div>
-        <div class="ev-def">對方陣營最強的根據（不是來打的，是來校準）</div>
-        <div class="ev-eg">例：美國研究 ── 過度限制導致大學失控</div>
-      </div>
-    </div>
-    <div class="body-sm" style="margin-top: 24px; text-align: center; color: var(--ink-2);">
-      ⚠️ <span class="enemy-red bold">沒找到反方資料 = 還沒真的在討論</span>。
     </div>
   </div>
   <div class="page-footer">W13 · 3 種證據</div>
