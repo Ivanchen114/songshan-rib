@@ -194,20 +194,13 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline (6 段) */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 240px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-row.star { background: rgba(255,215,0,0.05); }
 .tl-row.dstar { background: rgba(0,198,255,0.05); }
 .tl-time { font-family: "JetBrains Mono", monospace; font-size: var(--t4); color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
-.tl-title { font-size: calc(var(--t3) * 0.9); font-weight: 700; }
-.tl-desc { font-size: calc(var(--t3) * 0.85); color: var(--ink-2); line-height: 1.45; }
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* 命題接續：W7 → W8 雷達翻面 */
 .radar-flip {
@@ -497,8 +490,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="3" data-section="啟動">
   <div class="slide-inner">
     <div class="kicker">今日任務序列</div>
-    <div class="title" style="font-size: clamp(44px, 4.2vw, 80px); white-space: nowrap;">100 分鐘 · 6 段任務</div>
-    <div class="timeline" style="margin-top: 18px;">
+    <div class="title" style="font-size: clamp(30px, 2.6vw, 50px); white-space: nowrap;">100 分鐘 · 6 段任務</div>
+    <div class="timeline" style="margin-top: 8px;">
       <div class="tl-row"><div class="tl-time">00 — 10</div><div class="tl-title">W7 回扣 + W8 命題</div><div class="tl-desc">從讀文學 → 讀訊息（有目的的填空）</div></div>
       <div class="tl-row star"><div class="tl-time">10 — 25</div><div class="tl-title accent-2">★ 老師示範</div><div class="tl-desc">同事件兩種寫法 + F/O/A 三分法</div></div>
       <div class="tl-row"><div class="tl-time">25 — 50</div><div class="tl-title">學生獨立讀兩篇</div><div class="tl-desc">手機翻面 · 標 F/O/A + 寫各篇立場</div></div>
@@ -548,6 +541,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       2026 年 4 月高鐵無線電破解事件 · 老師改寫的兩個版本<br>
       <span class="muted">A 個人責任版　vs　B 系統責任版</span>
     </div>
+    <div class="body-sm" style="margin-top: 22px; max-width: 1000px; margin-left:auto; margin-right:auto; padding: 14px 24px; background: rgba(0,198,255,0.06); border-left: 3px solid var(--accent); border-radius: 4px; color: var(--ink-2); text-align: left;">
+      <span class="accent bold">底稿事實</span>來自新聞（3 列車急停、延誤——可查證）。<span class="accent-2 bold">A／B 是老師為教學改寫</span>的包裝。<br>
+      你的任務<span class="alert bold">不是</span>判斷哪篇是真新聞——是判斷<span class="accent-2 bold">每篇怎麼引導你的立場</span>。
+    </div>
   </div>
   <div class="page-footer">W8 · 老師示範轉場</div>
 </section>
@@ -579,7 +576,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       F/O/A 三分法
     </div>
     <div class="body-sm muted" style="margin-bottom: 8px;">
-      不是分析的目的——是<span class="accent bold">讓你看見作者怎麼建立立場</span>的工具
+      不是叫你分顏色——是問：這篇用哪些<span class="accent bold">事實</span>，配哪些<span class="accent bold">評價</span>，把我推向哪個<span class="accent-2 bold">位置</span>？
     </div>
     <div class="foa-grid">
       <div class="foa-card f">
@@ -635,26 +632,26 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="timer-pill" data-timer="1500">25:00</div>
     </div>
     <div class="steps-4">
-      <div class="step-item">
+      <div class="step-item" data-reveal="1">
         <div class="step-num">①</div>
         <div class="step-content">
           <div class="s-main">讀 A 篇（個人責任版）+ 標 F/O/A</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="2">
         <div class="step-num">②</div>
         <div class="step-content">
           <div class="s-main">讀 B 篇（系統責任版）+ 標 F/O/A</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="3">
         <div class="step-num gold">③</div>
         <div class="step-content">
           <div class="s-main">在歷程本寫 <span class="accent-2 bold">50 字</span>：</div>
           <div class="s-sub">「A 篇想讓我相信 ___；B 篇想讓我相信 ___」</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="4">
         <div class="step-num alert">⚠️</div>
         <div class="step-content">
           <div class="s-main alert">還不要決定站位</div>
@@ -692,27 +689,27 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="spectrum-line">
       <div class="spectrum-track"></div>
       <div class="spectrum-positions">
-        <div class="spec-pos a-strong">
+        <div class="spec-pos a-strong" data-reveal="1">
           <div class="sp-label">暫站 強 A</div>
           <div class="sp-desc">林男犯罪行為嚴重，系統責任次要</div>
         </div>
-        <div class="spec-pos a-lean">
+        <div class="spec-pos a-lean" data-reveal="2">
           <div class="sp-label">偏 A</div>
           <div class="sp-desc">主因是個人，但系統也該檢討</div>
         </div>
-        <div class="spec-pos mid">
+        <div class="spec-pos mid" data-reveal="3">
           <div class="sp-label">中間</div>
           <div class="sp-desc">個人跟系統責任都有，難分大小</div>
         </div>
-        <div class="spec-pos b-lean">
+        <div class="spec-pos b-lean" data-reveal="4">
           <div class="sp-label">偏 B</div>
           <div class="sp-desc">系統 19 年未更新是主因，個人是症狀</div>
         </div>
-        <div class="spec-pos b-strong">
+        <div class="spec-pos b-strong" data-reveal="5">
           <div class="sp-label">暫站 強 B</div>
           <div class="sp-desc">高鐵公司應負主要責任</div>
         </div>
-        <div class="spec-pos thinking">
+        <div class="spec-pos thinking" data-reveal="6">
           <div class="sp-label">還在思考</div>
           <div class="sp-desc">目前證據還不足以站任何一邊 ⭐</div>
         </div>
@@ -730,26 +727,26 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="kicker gold">⭐ 閉眼選位 · 防從眾</div>
     <div class="title" style="font-size: clamp(36px, 3.2vw, 56px);">用身體確認「我選這邊」</div>
     <div class="steps-4">
-      <div class="step-item">
+      <div class="step-item" data-reveal="1">
         <div class="step-num">①</div>
         <div class="step-content"><div class="s-main">全班<span class="accent bold">閉眼</span></div></div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="2">
         <div class="step-num">②</div>
         <div class="step-content"><div class="s-main">老師念 6 個位置，你<span class="accent bold">心裡選一個</span></div></div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="3">
         <div class="step-num">③</div>
         <div class="step-content"><div class="s-main">老師喊「<span class="accent-2 bold">睜眼</span>」</div></div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="4">
         <div class="step-num gold">④</div>
         <div class="step-content">
           <div class="s-main accent-2">⭐ 同時睜眼移動到你選的位置</div>
           <div class="s-sub"><span class="alert bold">不可以反悔，不可以看別人站哪裡</span></div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="5">
         <div class="step-num">⑤</div>
         <div class="step-content"><div class="s-main">站定後：不要說話，等下個指令</div></div>
       </div>
@@ -766,21 +763,21 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="kicker">站定之後</div>
     <div class="title" style="font-size: clamp(36px, 3.2vw, 56px);">在原位站著做，不回座</div>
     <div class="steps-4">
-      <div class="step-item">
+      <div class="step-item" data-reveal="1">
         <div class="step-num">①</div>
         <div class="step-content">
           <div class="s-main">個人寫 50 字「我為什麼站這裡」<span class="muted body-sm" style="margin-left: 12px;">5 分鐘</span></div>
           <div class="s-sub">站在原位寫，站著寫</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="2">
         <div class="step-num gold">②</div>
         <div class="step-content">
           <div class="s-main"><span class="accent-2">同位置小組討論</span>「你為什麼站這裡？」<span class="muted body-sm" style="margin-left: 12px;">10 分鐘</span></div>
           <div class="s-sub">⚠️ 不必說服 · 不必達成共識 · 只要聽到「跟我同邊的人理由是什麼」</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="3">
         <div class="step-num">③</div>
         <div class="step-content">
           <div class="s-main"><span class="accent">跨位置流動（自願）</span><span class="muted body-sm" style="margin-left: 12px;">5 分鐘</span></div>
@@ -830,19 +827,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="timer-pill" data-timer="900">15:00</div>
     </div>
     <div class="declare-list">
-      <div class="dec-item">
+      <div class="dec-item" data-reveal="1">
         <div class="dec-num">①</div>
         <div class="dec-text">根據目前的證據，我<span class="accent bold">暫時站在</span>：______<br><span class="body-sm muted">（強 A / 偏 A / 中間 / 偏 B / 強 B / 還在思考）</span></div>
       </div>
-      <div class="dec-item">
+      <div class="dec-item" data-reveal="2">
         <div class="dec-num">②</div>
         <div class="dec-text">讓我暫時站這裡的<span class="accent bold">關鍵事實 / 論點</span>是：______</div>
       </div>
-      <div class="dec-item highlight">
+      <div class="dec-item highlight" data-reveal="3">
         <div class="dec-num">③</div>
         <div class="dec-text"><span class="accent-2 bold">⭐ 我還不確定的地方是</span>：______<br><span class="body-sm muted">「不確定」不是偷懶，是誠實——寫清楚：我需要什麼資訊才能更確定？</span></div>
       </div>
-      <div class="dec-item">
+      <div class="dec-item" data-reveal="4">
         <div class="dec-num">④</div>
         <div class="dec-text">如果有什麼新資訊會讓我<span class="accent bold">改變站位</span>？______</div>
       </div>

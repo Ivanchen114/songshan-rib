@@ -199,20 +199,13 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 260px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-row.star { background: rgba(255,215,0,0.05); }
 .tl-row.dstar { background: rgba(0,198,255,0.05); }
 .tl-time { font-family: "JetBrains Mono", monospace; font-size: var(--t4); color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
-.tl-title { font-size: calc(var(--t3) * 0.9); font-weight: 700; }
-.tl-desc { font-size: calc(var(--t3) * 0.85); color: var(--ink-2); line-height: 1.45; }
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* 雙警戒卡（≠ 壯膽 / ≠ 打反方）*/
 .warn-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
@@ -561,8 +554,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="4" data-section="啟動">
   <div class="slide-inner">
     <div class="kicker">今日任務序列</div>
-    <div class="title" style="font-size: clamp(44px, 4.2vw, 80px); white-space: nowrap;">100 分鐘 · 6 段任務</div>
-    <div class="timeline" style="margin-top: 18px;">
+    <div class="title" style="font-size: clamp(30px, 2.6vw, 50px); white-space: nowrap;">100 分鐘 · 6 段任務</div>
+    <div class="timeline" style="margin-top: 8px;">
       <div class="tl-row"><div class="tl-time">00 — 10</div><div class="tl-title">W12 回扣 + W13 命題</div><div class="tl-desc">資料修正 ≠ 壯膽</div></div>
       <div class="tl-row star"><div class="tl-time">10 — 25</div><div class="tl-title accent-2">★ 老師示範 · 互動白板</div><div class="tl-desc">3 種證據 + 老實宣告（手機案例）</div></div>
       <div class="tl-row"><div class="tl-time">25 — 55</div><div class="tl-title">各組找 3 種證據 30 分</div><div class="tl-desc">事實 / 專家 / ⭐ 反方</div></div>
@@ -700,16 +693,16 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="10" data-section="各組找證據">
   <div class="slide-inner">
     <div class="kicker">25 — 55 分鐘 · 各組找證據</div>
-    <div class="title" style="font-size: clamp(40px, 3.8vw, 68px);">
+    <div class="title" style="font-size: clamp(30px, 2.8vw, 48px);">
       任務結構 · <span class="accent-2">5 步驟</span>
     </div>
     <div class="timer-pill" data-timer="1800" style="margin-bottom: 14px;">30:00</div>
     <div class="steps-5">
-      <div class="step-item"><div class="step-num">01</div><div class="step-content"><div class="s-main">打開 AI 或上網 · 找資料</div><div class="s-sub">議題從 W12 提交單拿</div></div></div>
-      <div class="step-item"><div class="step-num">02</div><div class="step-content"><div class="s-main">🟢 事實資料 1 個</div><div class="s-sub">寫來源 + 50 字摘要</div></div></div>
-      <div class="step-item"><div class="step-num">03</div><div class="step-content"><div class="s-main">🔵 專家/制度資料 1 個</div><div class="s-sub">寫來源 + 50 字摘要</div></div></div>
-      <div class="step-item star"><div class="step-num">04</div><div class="step-content"><div class="s-main">⭐ 反方資料 1 個</div><div class="s-sub">沒找到 = 還沒真的在討論。一定要找。</div></div></div>
-      <div class="step-item"><div class="step-num">05</div><div class="step-content"><div class="s-main">⚠️ AI 給的「研究指出」必須查原文</div><div class="s-sub">對齊 W10 ── 沒原文 = 黃色，不算綠</div></div></div>
+      <div class="step-item" data-reveal="1"><div class="step-num">01</div><div class="step-content"><div class="s-main">打開 AI 或上網 · 找資料</div><div class="s-sub">議題從 W12 提交單拿</div></div></div>
+      <div class="step-item" data-reveal="2"><div class="step-num">02</div><div class="step-content"><div class="s-main">🟢 事實資料 1 個</div><div class="s-sub">寫來源 + 50 字摘要</div></div></div>
+      <div class="step-item" data-reveal="3"><div class="step-num">03</div><div class="step-content"><div class="s-main">🔵 專家/制度資料 1 個</div><div class="s-sub">寫來源 + 50 字摘要</div></div></div>
+      <div class="step-item star" data-reveal="4"><div class="step-num">04</div><div class="step-content"><div class="s-main">⭐ 反方資料 1 個</div><div class="s-sub">沒找到 = 還沒真的在討論。一定要找。</div></div></div>
+      <div class="step-item" data-reveal="5"><div class="step-num">05</div><div class="step-content"><div class="s-main">⚠️ AI 給的「研究指出」必須查原文</div><div class="s-sub">對齊 W10 ── 沒原文 = 黃色，不算綠</div></div></div>
     </div>
   </div>
   <div class="page-footer">W13 · 找證據 5 步</div>

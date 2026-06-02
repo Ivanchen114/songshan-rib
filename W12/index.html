@@ -213,21 +213,14 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline (W12 七段) */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 260px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-row.star { background: rgba(255,215,0,0.05); }
 .tl-row.dstar { background: rgba(0,198,255,0.05); }
 .tl-row.alert { background: rgba(255,68,102,0.06); }
 .tl-time { font-family: "JetBrains Mono", monospace; font-size: var(--t4); color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
-.tl-title { font-size: calc(var(--t3) * 0.9); font-weight: 700; }
-.tl-desc { font-size: calc(var(--t3) * 0.85); color: var(--ink-2); line-height: 1.45; }
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* 議題 vs 立場 vs 價值衝突 三段對比 (slide 3) */
 .vs3 {
@@ -620,8 +613,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="4" data-section="啟動">
   <div class="slide-inner">
     <div class="kicker">今日任務序列</div>
-    <div class="title" style="font-size: clamp(42px, 4.0vw, 72px); white-space: nowrap;">100 分鐘 · 7 段任務</div>
-    <div class="timeline" style="margin-top: 14px;">
+    <div class="title" style="font-size: clamp(30px, 2.6vw, 50px); white-space: nowrap;">100 分鐘 · 7 段任務</div>
+    <div class="timeline" style="margin-top: 8px;">
       <div class="tl-row"><div class="tl-time">00 — 10</div><div class="tl-title">W11 回扣 + 命題</div><div class="tl-desc">議題 ≠ 立場 = 價值衝突</div></div>
       <div class="tl-row star"><div class="tl-time">10 — 25</div><div class="tl-title accent-2">★ 老師示範 · 互動白板</div><div class="tl-desc">爛議題 → 問題化（手機案例）</div></div>
       <div class="tl-row"><div class="tl-time">25 — 40</div><div class="tl-title">分組 + 提名議題</div><div class="tl-desc">3-4 人組 · 議題全組同意才能選</div></div>
@@ -794,17 +787,17 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="11" data-section="議題問題化">
   <div class="slide-inner">
     <div class="kicker">40 — 70 分鐘 · 小組獨立寫</div>
-    <div class="title" style="font-size: clamp(40px, 3.8vw, 68px);">
+    <div class="title" style="font-size: clamp(30px, 2.8vw, 48px);">
       議題問題化 · <span class="accent-2">5 步驟</span>
     </div>
     <div class="body-sm muted" style="margin-top: -10px; margin-bottom: 6px;">把「該不該 X」改寫成「應該優先 A 還是 B」</div>
     <div class="timer-pill" data-timer="1800" style="margin-bottom: 14px;">30:00</div>
     <div class="steps-5">
-      <div class="step-item"><div class="step-num">01</div><div class="step-content"><div class="s-main">我們的議題（初步）</div></div></div>
-      <div class="step-item star"><div class="step-num">02</div><div class="step-content"><div class="s-main">⭐ 兩個衝突的價值</div><div class="s-sub"><span class="val-a">A 價值</span>（這邊的人在乎什麼）／ <span class="val-b">B 價值</span>（那邊的人在乎什麼）</div></div></div>
-      <div class="step-item star"><div class="step-num">03</div><div class="step-content"><div class="s-main">⭐ 寫成可被討論的問題</div><div class="s-sub">「如果 ___（情境），應該優先 ___（A），還是 ___（B）？」</div></div></div>
-      <div class="step-item"><div class="step-num">04</div><div class="step-content"><div class="s-main">我們暫時站在 ___</div><div class="s-sub">可以選 A、B、中間、或還在思考</div></div></div>
-      <div class="step-item"><div class="step-num">05</div><div class="step-content"><div class="s-main">不確定的地方</div><div class="s-sub">具體說出 ── 不是「不知道」，是「我不確定 ___」</div></div></div>
+      <div class="step-item" data-reveal="1"><div class="step-num">01</div><div class="step-content"><div class="s-main">我們的議題（初步）</div></div></div>
+      <div class="step-item star" data-reveal="2"><div class="step-num">02</div><div class="step-content"><div class="s-main">⭐ 兩個衝突的價值</div><div class="s-sub"><span class="val-a">A 價值</span>（這邊的人在乎什麼）／ <span class="val-b">B 價值</span>（那邊的人在乎什麼）</div></div></div>
+      <div class="step-item star" data-reveal="3"><div class="step-num">03</div><div class="step-content"><div class="s-main">⭐ 寫成可被討論的問題</div><div class="s-sub">「如果 ___（情境），應該優先 ___（A），還是 ___（B）？」</div></div></div>
+      <div class="step-item" data-reveal="4"><div class="step-num">04</div><div class="step-content"><div class="s-main">我們暫時站在 ___</div><div class="s-sub">可以選 A、B、中間、或還在思考</div></div></div>
+      <div class="step-item" data-reveal="5"><div class="step-num">05</div><div class="step-content"><div class="s-main">不確定的地方</div><div class="s-sub">具體說出 ── 不是「不知道」，是「我不確定 ___」</div></div></div>
     </div>
   </div>
   <div class="page-footer">W12 · 5 步驟</div>
@@ -899,15 +892,15 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="15" data-section="修正 + 提交">
   <div class="slide-inner">
     <div class="kicker">85 — 95 分鐘 · 各組修正</div>
-    <div class="title" style="font-size: clamp(40px, 3.8vw, 68px);">
+    <div class="title" style="font-size: clamp(30px, 2.8vw, 48px);">
       W12 提交單 · <span class="accent">5 格</span>
     </div>
     <div class="submit-5">
-      <div class="sub-row"><div class="sub-num">①</div><div class="sub-key">議題最終版</div><div class="sub-detail">讀完別組回饋後的版本</div></div>
-      <div class="sub-row star"><div class="sub-num">②</div><div class="sub-key">⭐ 價值衝突</div><div class="sub-detail"><span class="val-a">A 價值</span> ___ ／ <span class="val-b">B 價值</span> ___</div></div>
-      <div class="sub-row star"><div class="sub-num">③</div><div class="sub-key">⭐ 可被討論的問題</div><div class="sub-detail">「如果 ___，應該優先 ___，還是 ___？」</div></div>
-      <div class="sub-row"><div class="sub-num">④</div><div class="sub-key">暫時站位 + 不確定處</div><div class="sub-detail">A / B / 中間 / 還在想 + 具體不確定什麼</div></div>
-      <div class="sub-row"><div class="sub-num">⑤</div><div class="sub-key">讀完別組回饋後，修正了什麼</div><div class="sub-detail">具體寫出修正的內容</div></div>
+      <div class="sub-row" data-reveal="1"><div class="sub-num">①</div><div class="sub-key">議題最終版</div><div class="sub-detail">讀完別組回饋後的版本</div></div>
+      <div class="sub-row star" data-reveal="2"><div class="sub-num">②</div><div class="sub-key">⭐ 價值衝突</div><div class="sub-detail"><span class="val-a">A 價值</span> ___ ／ <span class="val-b">B 價值</span> ___</div></div>
+      <div class="sub-row star" data-reveal="3"><div class="sub-num">③</div><div class="sub-key">⭐ 可被討論的問題</div><div class="sub-detail">「如果 ___，應該優先 ___，還是 ___？」</div></div>
+      <div class="sub-row" data-reveal="4"><div class="sub-num">④</div><div class="sub-key">暫時站位 + 不確定處</div><div class="sub-detail">A / B / 中間 / 還在想 + 具體不確定什麼</div></div>
+      <div class="sub-row" data-reveal="5"><div class="sub-num">⑤</div><div class="sub-key">讀完別組回饋後，修正了什麼</div><div class="sub-detail">具體寫出修正的內容</div></div>
     </div>
     <div class="body-sm" style="margin-top: 22px; color: var(--ink-2); text-align: center;">
       ⚠️ 提交單<span class="accent-2 bold">全組各 1 份</span>，組長代交。

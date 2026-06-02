@@ -702,28 +702,28 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="timer-pill" data-timer="720">12:00</div>
     </div>
     <div class="steps-4">
-      <div class="step-item">
+      <div class="step-item" data-reveal="1">
         <div class="step-num">①</div>
         <div class="step-content">
           <div class="s-main">每人想一個「想召喚的書中角色」</div>
           <div class="s-sub">有名字、有性格、<span class="accent-2 bold">圖書館找得到那本書</span>（漫畫／小說／傳記都行）</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="2">
         <div class="step-num gold">②</div>
         <div class="step-content">
           <div class="s-main">輪流提名，老師寫白板</div>
           <div class="s-sub">允許重複提名表示呼應——<span class="accent">重複次數越多越熱門</span></div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="3">
         <div class="step-num">③</div>
         <div class="step-content">
           <div class="s-main">全班 30 秒看白板，投票選 3 個最熱門角色</div>
           <div class="s-sub">舉手或便利貼，每人 1 票</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="4">
         <div class="step-num gold">④</div>
         <div class="step-content">
           <div class="s-main">按角色分組（每組固定 <span class="accent-2 bold">4 人</span>）</div>
@@ -776,27 +776,27 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="timer-pill" data-timer="1500">25:00</div>
     </div>
     <div class="steps-4">
-      <div class="step-item">
+      <div class="step-item" data-reveal="1">
         <div class="step-num">①</div>
         <div class="step-content">
           <div class="s-main">找到該角色出場的書（那一本／那一系列任一本）</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="2">
         <div class="step-num">②</div>
         <div class="step-content">
           <div class="s-main">挑一個「<span class="accent">角色出場、但細節稀少</span>」的場景</div>
           <div class="s-sub">書真的寫了這場景，但沒寫：天氣 / 環境細節 / 表情姿勢聲音 / 物件具體質感</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="3">
         <div class="step-num">③</div>
         <div class="step-content">
           <div class="s-main">小組討論挑場景，但<span class="accent-2 bold">每人選自己要召喚的場景</span></div>
           <div class="s-sub">可同可不同；同角色不同組記得錯開場景（炭治郎 A初遇／B打架／C吃飯）</div>
         </div>
       </div>
-      <div class="step-item">
+      <div class="step-item" data-reveal="4">
         <div class="step-num">④</div>
         <div class="step-content">
           <div class="s-main">抄下來：書名、作者、頁碼、場景一句話描述</div>
@@ -851,17 +851,17 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       寫錯整節課查不出東西——給 AI「<span class="accent bold">骨架</span>」，讓它補「<span class="accent-2 bold">肉</span>」
     </div>
     <div class="scene-compare">
-      <div class="scene-col bad">
+      <div class="scene-col bad" data-reveal="1">
         <div class="sc-label">✗ 太簡</div>
         <div class="sc-ex">「秦鐘入塾」</div>
         <div class="sc-why">AI 會完全瞎編，紅色 90%——沒「以為書真的寫過」的錯覺。</div>
       </div>
-      <div class="scene-col good">
+      <div class="scene-col good" data-reveal="2">
         <div class="sc-label">✓ 剛好（骨架）</div>
         <div class="sc-ex">「秦鐘第一次入家塾、與寶玉相鄰而坐」</div>
         <div class="sc-why">地點 + 人物 + 在做什麼。AI 有空間補肉，才查得到「合理填空」。</div>
       </div>
-      <div class="scene-col bad-2">
+      <div class="scene-col bad-2" data-reveal="3">
         <div class="sc-label">✗ 太細</div>
         <div class="sc-ex">「秦鐘眉清目秀粉面朱唇坐在寶玉旁邊看書」</div>
         <div class="sc-why">AI 沒空間補——順著事實寫，看不到填空。</div>
@@ -909,17 +909,17 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="timer-pill" data-timer="600">10:00</div>
     </div>
     <div class="tricolor-grid">
-      <div class="tc-color green">
+      <div class="tc-color green" data-reveal="1">
         <div class="tc-dot" style="color: var(--green-fact);">🟢</div>
         <div class="tc-name">綠：原文有證據</div>
         <div class="tc-def">可以指出頁碼、句子或分鏡。</div>
       </div>
-      <div class="tc-color red">
+      <div class="tc-color red" data-reveal="2">
         <div class="tc-dot" style="color: var(--alert);">🔴</div>
         <div class="tc-name">紅：原文有反證</div>
         <div class="tc-def">跟書中設定、人物、時間、場景明顯不合。</div>
       </div>
-      <div class="tc-color yellow">
+      <div class="tc-color yellow" data-reveal="3">
         <div class="tc-dot" style="color: var(--accent-2);">🟡</div>
         <div class="tc-name">黃：原文沒證據，但合理 ⭐</div>
         <div class="tc-def">書沒寫，卻讓人覺得可能是真的。</div>
@@ -942,7 +942,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       漫畫的「事實」一半在<span class="accent-2 bold">圖像</span>裡——<span class="alert bold">AI 看不到圖</span>
     </div>
     <div class="manga-compare">
-      <div class="manga-col book">
+      <div class="manga-col book" data-reveal="1">
         <div class="mc-label">📖 小說版（標準）</div>
         <div class="mc-body">
           🟢 對白或敘述有證據<br>
@@ -950,7 +950,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
           🟡 書沒寫但合理 ⭐
         </div>
       </div>
-      <div class="manga-col manga">
+      <div class="manga-col manga" data-reveal="2">
         <div class="mc-label">📚 漫畫版（微調）</div>
         <div class="mc-body">
           🟢 對白<span style="color: var(--accent-2);">或</span>圖像有證據（指哪一格 / 哪段對白）<br>
@@ -959,7 +959,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
         </div>
       </div>
     </div>
-    <div class="body-sm" style="margin-top: 18px; padding: 14px 22px; background: rgba(255,68,102,0.08); border-left: 4px solid var(--alert); border-radius: 4px; color: var(--ink-2);">
+    <div class="body-sm" data-reveal="3" style="margin-top: 18px; padding: 14px 22px; background: rgba(255,68,102,0.08); border-left: 4px solid var(--alert); border-radius: 4px; color: var(--ink-2);">
       <span class="alert bold">⚠️ 視覺細節是重災區</span>——對白 AI 通常會準（讀過劇本／wiki），但「角色穿什麼／表情／姿勢」常編。<br>
       <span class="muted">→ 把書翻開：<span class="accent bold">對白看一次、圖也看一次</span>，雙重比對。</span>
     </div>
@@ -973,10 +973,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="title" style="font-size: clamp(36px, 3.2vw, 56px);">漫畫去哪找、怎麼查</div>
     <div class="body-sm muted" style="margin-bottom: 22px;">合法、可查、找不到有備案</div>
     <div style="display:flex; flex-direction:column; gap:20px; font-size: calc(var(--t3) * 0.92); line-height:1.5;">
-      <div><span style="color: var(--green-fact); font-weight:900;">✓</span> 學校合法 ebook（HyRead／雲端書庫）→ 找書時段（25–47 分）可用</div>
-      <div><span class="alert bold">✗ 線上盜版漫畫站不接受</span>——教學倫理 + W5 物理鎖</div>
-      <div>⚠️ 查核時段（65–80 分）只能用<span class="accent-2 bold">實體書／印出來的紙</span>，手機翻面</div>
-      <div>⚪ 圖書館找不到該角色的書 → 從<span class="accent bold">「安全角色池」</span>改選（紅樓夢／哈利波特／老師確認的漫畫）</div>
+      <div data-reveal="1"><span style="color: var(--green-fact); font-weight:900;">✓</span> 學校合法 ebook（HyRead／雲端書庫）→ 找書時段（25–47 分）可用</div>
+      <div data-reveal="2"><span class="alert bold">✗ 線上盜版漫畫站不接受</span>——教學倫理 + W5 物理鎖</div>
+      <div data-reveal="3">⚠️ 查核時段（65–80 分）只能用<span class="accent-2 bold">實體書／印出來的紙</span>，手機翻面</div>
+      <div data-reveal="4">⚪ 圖書館找不到該角色的書 → 從<span class="accent bold">「安全角色池」</span>改選（紅樓夢／哈利波特／老師確認的漫畫）</div>
     </div>
   </div>
   <div class="page-footer">W7 · 漫畫資源規則 2/2</div>
@@ -1035,11 +1035,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="body-sm" style="margin-bottom: 8px; color: var(--accent-2); font-weight: 700;">⭐ 4 人都讀完後，組內投票選一類：</div>
     <div class="five-options">
-      <div class="fo-item"><div class="fo-num">①</div><div class="fo-text">最像書真的<br>寫過</div></div>
-      <div class="fo-item"><div class="fo-num">②</div><div class="fo-text">最不像書<br>(完全瞎掰)</div></div>
-      <div class="fo-item"><div class="fo-num">③</div><div class="fo-text">最有趣</div></div>
-      <div class="fo-item"><div class="fo-num">④</div><div class="fo-text">最讓我們<br>想翻書查看</div></div>
-      <div class="fo-item"><div class="fo-num">⑤</div><div class="fo-text">最值得<br>討論（自由）</div></div>
+      <div class="fo-item" data-reveal="1"><div class="fo-num">①</div><div class="fo-text">最像書真的<br>寫過</div></div>
+      <div class="fo-item" data-reveal="2"><div class="fo-num">②</div><div class="fo-text">最不像書<br>(完全瞎掰)</div></div>
+      <div class="fo-item" data-reveal="3"><div class="fo-num">③</div><div class="fo-text">最有趣</div></div>
+      <div class="fo-item" data-reveal="4"><div class="fo-num">④</div><div class="fo-text">最讓我們<br>想翻書查看</div></div>
+      <div class="fo-item" data-reveal="5"><div class="fo-num">⑤</div><div class="fo-text">最值得<br>討論（自由）</div></div>
     </div>
     <div class="body-sm" style="margin-top: 16px; text-align: center; color: var(--ink-2);">
       然後組內討論「<span class="accent-2 bold">為什麼選這句</span>」——推派 1 人準備全班報告。
@@ -1065,10 +1065,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="body-sm" style="color: var(--accent); font-weight: 700; margin-bottom: 8px;">⭐ 「因為 ___」要錨在文本證據</div>
     <div class="evidence-rules">
-      <div class="ev-row ok"><div class="ev-mark">✓</div><div class="ev-text">「原文寫了 ___，但 AI 把它改成 ___」（<span class="accent bold">細節反證</span>）</div></div>
-      <div class="ev-row ok"><div class="ev-mark">✓</div><div class="ev-text">「原文沒寫 ___，但 AI 補的這句剛好讓我覺得書應該寫過」（<span class="accent-2 bold">合理填空</span>）</div></div>
-      <div class="ev-row ok"><div class="ev-mark">✓</div><div class="ev-text">「這句書沒寫，但符合角色性格」（<span class="accent bold">合理推測</span>）</div></div>
-      <div class="ev-row no"><div class="ev-mark">✗</div><div class="ev-text">「很有趣」（情緒）／「大家都覺得像」（從眾）——都不算</div></div>
+      <div class="ev-row ok" data-reveal="1"><div class="ev-mark">✓</div><div class="ev-text">「原文寫了 ___，但 AI 把它改成 ___」（<span class="accent bold">細節反證</span>）</div></div>
+      <div class="ev-row ok" data-reveal="2"><div class="ev-mark">✓</div><div class="ev-text">「原文沒寫 ___，但 AI 補的這句剛好讓我覺得書應該寫過」（<span class="accent-2 bold">合理填空</span>）</div></div>
+      <div class="ev-row ok" data-reveal="3"><div class="ev-mark">✓</div><div class="ev-text">「這句書沒寫，但符合角色性格」（<span class="accent bold">合理推測</span>）</div></div>
+      <div class="ev-row no" data-reveal="4"><div class="ev-mark">✗</div><div class="ev-text">「很有趣」（情緒）／「大家都覺得像」（從眾）——都不算</div></div>
     </div>
     <div class="body-sm" style="margin-top: 16px; text-align: center; color: var(--ink-2); font-weight: 700;">
       7-8 組的不同切面 + 文本依據 —— <span class="accent bold">差異本身就是教材</span>。
