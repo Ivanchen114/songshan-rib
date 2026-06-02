@@ -194,20 +194,13 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* Timeline (6 段) */
 .timeline { display: flex; flex-direction: column; gap: 0; }
-.tl-row {
-  display: grid;
-  grid-template-columns: 110px 240px 1fr;
-  align-items: center;
-  gap: 28px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(122, 139, 184, 0.18);
-}
+.tl-row { display: grid; grid-template-columns: 120px 290px 1fr; align-items: center; gap: 16px; padding: 5px 0; border-bottom: 1px solid rgba(122, 139, 184, 0.18); }
 .tl-row:last-child { border-bottom: none; }
 .tl-row.star { background: rgba(255,215,0,0.05); }
 .tl-row.dstar { background: rgba(0,198,255,0.05); }
 .tl-time { font-family: "JetBrains Mono", monospace; font-size: var(--t4); color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
-.tl-title { font-size: calc(var(--t3) * 0.9); font-weight: 700; }
-.tl-desc { font-size: calc(var(--t3) * 0.85); color: var(--ink-2); line-height: 1.45; }
+.tl-title { font-size: calc(var(--t3) * 0.72); font-weight: 700; line-height: 1.25; }
+.tl-desc { font-size: calc(var(--t4) * 0.95); color: var(--ink-2); line-height: 1.35; }
 
 /* 章節標籤 */
 .section-marker { text-align: center; }
@@ -491,8 +484,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="3" data-section="啟動">
   <div class="slide-inner">
     <div class="kicker">今日任務序列</div>
-    <div class="title" style="font-size: clamp(44px, 4.2vw, 80px); white-space: nowrap;">100 分鐘 · 6 段任務</div>
-    <div class="timeline" style="margin-top: 18px;">
+    <div class="title" style="font-size: clamp(36px, 3.0vw, 56px); white-space: nowrap;">100 分鐘 · 6 段任務</div>
+    <div class="timeline" style="margin-top: 10px;">
       <div class="tl-row"><div class="tl-time">00 — 10</div><div class="tl-title">W8 回扣 + W9 命題</div><div class="tl-desc">立場不等於有依據</div></div>
       <div class="tl-row star"><div class="tl-time">10 — 25</div><div class="tl-title accent-2">★ 老師示範</div><div class="tl-desc">AI 攻擊老師立場 + 老師修正/重申</div></div>
       <div class="tl-row"><div class="tl-time">25 — 50</div><div class="tl-title">找支持證據 + 找弱點</div><div class="tl-desc">⚠️ 不可用 AI · 自己想</div></div>
@@ -569,16 +562,9 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 「以下是我對某事件的立場：<br>
 <span class="field">[貼入立場聲明 200 字]</span><br><br>
 我自己想到的弱點是：<span class="field">[貼入弱點 3 個]</span><br><br>
-請你扮演<span class="star">最犀利的批評者</span>，從 3 個不同角度攻擊：<br>
-①  邏輯漏洞（我可能沒看到的）<br>
-②  反例 / 反證（我可能忽略的）<br>
-③  我可能的偏見或盲點<br><br>
-<span class="star">⭐ 重要規則（防 AI 幻覺）：</span><br>
-<span class="rule">- 請優先攻擊我的「推論方式」</span><br>
-<span class="rule">- 如果提到外部事實，請標記「<span class="danger">這需要查證</span>」</span><br>
-<span class="rule">- 不要把未查證資訊說成確定事實</span><br>
-<span class="rule">- 不要重複我自己已經想到的弱點</span><br><br>
-<span class="anti">不要給我新立場</span> ── 只要給我攻擊素材。」
+請你扮演<span class="star">最犀利的批評者</span>，從 3 個角度攻擊：①  邏輯漏洞　②  反例/反證　③  偏見/盲點<br><br>
+<span class="star">⭐ 重要規則（防幻覺）：</span><br>
+<span class="rule">優先攻我的「推論」；提外部事實要標「<span class="danger">需查證</span>」、別當定論；別重複我已想到的弱點；<span class="anti">別給新立場</span>，只給攻擊素材。」</span>
     </div>
   </div>
   <div class="page-footer">W9 · 挖坑公式</div>
@@ -680,11 +666,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 我自己想到的弱點是：<span class="field">[貼入你 25-50 分寫的 3 個弱點]</span><br><br>
 請你扮演<span class="star">最犀利的批評者</span>，從 3 個不同角度攻擊：<br>
 ①  邏輯漏洞　②  反例/反證　③  偏見/盲點<br><br>
-<span class="star">⭐ 重要規則（防 AI 幻覺）：</span><br>
-<span class="rule">- 請優先攻擊我的「推論方式」</span><br>
-<span class="rule">- 如果要提到外部事實，請標記「<span class="danger">這需要查證</span>」</span><br>
-<span class="rule">- 不要把未查證資訊說成確定事實</span><br><br>
-<span class="anti">不要給我新立場</span> ── 只要給我攻擊素材。」
+<span class="star">⭐ 重要規則（防幻覺）：</span><br>
+<span class="rule">優先攻我的「推論」；提外部事實要標「<span class="danger">需查證</span>」、別當定論；<span class="anti">別給我新立場</span>，只給攻擊素材。」</span>
     </div>
     <div class="body-sm" style="margin-top: 14px; text-align: center; color: var(--alert); font-weight: 700;">
       ⚠️ AI 提的「新事實」如果沒標『需查證』——你要自己警覺
@@ -698,28 +681,28 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="kicker">挖坑後的動作</div>
     <div class="title" style="font-size: clamp(34px, 3.0vw, 54px);">讀完 AI 攻擊 → 截圖 → 分享</div>
     <div class="action-list">
-      <div class="action-item">
+      <div class="action-item" data-reveal="1">
         <div class="action-num">①</div>
         <div class="action-main">複製 prompt 改填，貼自己的 W8 立場 + 3 個弱點給 AI</div>
       </div>
-      <div class="action-item">
+      <div class="action-item" data-reveal="2">
         <div class="action-num">②</div>
         <div class="action-main"><span class="accent bold">讀完 AI 的攻擊</span>（不可以略過）<br><span class="body-sm muted">先分兩類：攻你的<span class="bold">推論</span> → 直接想；提<span class="bold">新事實</span> → 查證後才算。攻擊是壓力測試，不是答案。</span></div>
       </div>
-      <div class="action-item">
+      <div class="action-item" data-reveal="3">
         <div class="action-num gold">③</div>
         <div class="action-main"><span class="accent-2 bold">截圖 / 抄寫</span> AI 的攻擊到歷程本</div>
       </div>
-      <div class="action-item">
+      <div class="action-item" data-reveal="4">
         <div class="action-num gold">④</div>
         <div class="action-main">標記：<span class="accent-2 bold">「讓我動搖的攻擊是哪一個？」</span>（可能 1 個、可能 3 個、可能 0 個——0 個也合法）</div>
       </div>
-      <div class="action-item">
+      <div class="action-item" data-reveal="5">
         <div class="action-num">⑤</div>
         <div class="action-main"><span class="accent">4 人組分享</span>「AI 攻擊我的點裡，最讓我動搖的是 ___」<span class="muted body-sm" style="margin-left: 8px;">每人 1 分鐘 · 8 分鐘</span></div>
       </div>
     </div>
-    <div class="body-sm" style="margin-top: 18px; padding: 14px 22px; background: rgba(0,198,255,0.06); border-left: 3px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
+    <div class="body-sm" data-reveal="6" style="margin-top: 18px; padding: 14px 22px; background: rgba(0,198,255,0.06); border-left: 3px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
       <span class="accent bold">規則</span>：不必說服別人，只要聽。<span class="alert bold">不能笑別人的弱點</span>——這是學習場，不是比賽。
     </div>
   </div>
@@ -746,7 +729,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div>
         <div class="kicker gold">⭐ 寫一個版本（2 選 1）</div>
         <div class="title" style="font-size: clamp(32px, 2.8vw, 50px);">修正版　vs　重申版</div>
-        <div class="body-sm muted" style="margin-top: 4px;">修正版＝立場有改 · 重申版＝沒改但更扎實</div>
       </div>
       <div class="timer-pill" data-timer="900">15:00</div>
     </div>
@@ -769,8 +751,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       </div>
     </div>
     <div class="body-sm" style="margin-top: 16px; padding: 14px 22px; background: rgba(255,68,102,0.06); border-left: 3px solid var(--alert); border-radius: 4px; color: var(--ink-2);">
-      <span class="alert bold">⚠️ 不能寫「AI 都沒打到我」+ 沒理由</span>——那不算答案。<br>
-      <span class="muted">如果覺得 AI 沒打到你 → 請寫「重申版」+ 具體理由（AI 最強攻擊、為什麼沒打到、立場哪一點更清楚）</span>
+<span class="alert bold">⚠️ 不能寫「AI 都沒打到我」+ 沒理由</span>——覺得沒打到你，就寫【重申版】+ 具體理由（最強攻擊／為何沒打到／哪點更清楚）。
     </div>
   </div>
   <div class="page-footer">W9 · 修正 vs 重申 對照</div>
