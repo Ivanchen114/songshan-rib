@@ -577,33 +577,47 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="3" data-section="命題">
   <div class="slide-inner">
     <div class="kicker">W12 命題</div>
-    <div class="title" style="font-size: clamp(44px, 4.2vw, 76px); text-align: center;">
+    <div class="title" style="font-size: clamp(40px, 3.6vw, 62px); text-align: center; margin-bottom: 4px;">
       議題 <span class="alert">≠</span> 立場 <span class="accent-2">=</span> <span class="accent-2">價值衝突</span>
     </div>
     <div class="awake-contrast">
       你以為 <span class="ac-you">議題在「誰對誰錯」</span> ──
       其實 <span class="ac-actual">議題在「誰在乎什麼」</span>。
     </div>
-    <div class="vs3">
-      <div class="vs3-cell bad">
-        <div class="vs-tag">議題</div>
-        <div class="vs-main">「該不該 ___ ?」</div>
-        <div class="vs-sub">太籠統 ── 怎麼討論？</div>
+    <style>
+    /* W12 s3 收斂漏斗（圖優：從太大的議題，收斂到剛好的價值衝突） */
+    .vfunnel{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:10px;}
+    .vf-band{border-radius:12px;padding:11px 26px;text-align:center;transition:opacity .4s;}
+    .vf-band .vf-tag{font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.82);letter-spacing:.05em;}
+    .vf-band .vf-main{font-size:calc(var(--t3)*0.92);font-weight:700;margin-top:3px;}
+    .vf-band .vf-sub{font-size:calc(var(--t4)*0.88);color:var(--ink-3);margin-top:3px;}
+    .vf-band.bad{width:100%;max-width:1180px;background:rgba(255,133,133,.08);border:1.5px solid var(--alert);}
+    .vf-band.bad2{width:74%;max-width:880px;background:rgba(255,133,133,.08);border:1.5px solid var(--alert);}
+    .vf-band.good{width:54%;max-width:680px;background:rgba(91,211,148,.13);border:2px solid var(--green-fact);box-shadow:0 0 28px rgba(91,211,148,.16);}
+    .vf-band.bad .vf-tag,.vf-band.bad2 .vf-tag{color:var(--alert);}
+    .vf-band.good .vf-tag,.vf-band.good .vf-main{color:var(--green-fact);}
+    .vf-arrow{font-size:calc(var(--t2)*0.55);color:var(--ink-3);line-height:1;margin:3px 0;}
+    </style>
+    <div class="vfunnel">
+      <div class="vf-band bad" data-reveal="1">
+        <div class="vf-tag">✗ 議題</div>
+        <div class="vf-main">「該不該 ___ ?」</div>
+        <div class="vf-sub">太籠統 ── 怎麼討論？</div>
       </div>
-      <div class="vs3-arrow">→</div>
-      <div class="vs3-cell bad2">
-        <div class="vs-tag">立場</div>
-        <div class="vs-main">「我支持 ___」</div>
-        <div class="vs-sub">這是答案 ── 不是問題</div>
+      <div class="vf-arrow" data-reveal="2">▼</div>
+      <div class="vf-band bad2" data-reveal="2">
+        <div class="vf-tag">✗ 立場</div>
+        <div class="vf-main">「我支持 ___」</div>
+        <div class="vf-sub">這是答案 ── 不是問題</div>
       </div>
-      <div class="vs3-arrow">→</div>
-      <div class="vs3-cell good">
-        <div class="vs-tag">⭐ 價值衝突</div>
-        <div class="vs-main">「優先 A <span class="alert">vs</span> B？」</div>
-        <div class="vs-sub">兩邊都有道理 ── 才有戰場</div>
+      <div class="vf-arrow" data-reveal="3">▼</div>
+      <div class="vf-band good" data-reveal="3">
+        <div class="vf-tag">✓ ⭐ 價值衝突</div>
+        <div class="vf-main">「優先 A <span class="alert">vs</span> B？」</div>
+        <div class="vf-sub">兩邊都有道理 ── 才有戰場</div>
       </div>
     </div>
-    <div class="body-sm" style="margin-top: 32px; text-align: center; color: var(--ink-2);">
+    <div class="body-sm" data-reveal="4" style="margin-top: 20px; text-align: center; color: var(--ink-2);">
       <span class="accent-2 bold">沒有人是錯的</span>，只是站在不同價值。
     </div>
   </div>

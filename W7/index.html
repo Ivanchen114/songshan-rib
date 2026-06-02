@@ -851,24 +851,44 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="body-sm muted" style="margin-bottom: 6px;">
       寫錯整節課查不出東西——給 AI「<span class="accent bold">骨架</span>」，讓它補「<span class="accent-2 bold">肉</span>」
     </div>
-    <div class="scene-compare">
-      <div class="scene-col bad" data-reveal="1">
-        <div class="sc-label">✗ 太簡</div>
-        <div class="sc-ex">「秦鐘入塾」</div>
-        <div class="sc-why">AI 會完全瞎編，紅色 90%——沒「以為書真的寫過」的錯覺。</div>
-      </div>
-      <div class="scene-col good" data-reveal="2">
-        <div class="sc-label">✓ 剛好（骨架）</div>
-        <div class="sc-ex">「秦鐘第一次入家塾、與寶玉相鄰而坐」</div>
-        <div class="sc-why">地點 + 人物 + 在做什麼。AI 有空間補肉，才查得到「合理填空」。</div>
-      </div>
-      <div class="scene-col bad-2" data-reveal="3">
-        <div class="sc-label">✗ 太細</div>
-        <div class="sc-ex">「秦鐘眉清目秀粉面朱唇坐在寶玉旁邊看書」</div>
-        <div class="sc-why">AI 沒空間補——順著事實寫，看不到填空。</div>
+    <style>
+    /* W7 s13 甜蜜點光譜（圖優：資訊量是一條軸，剛好在中間） */
+    .spectrum{margin-top:18px;max-width:1380px;margin-left:auto;margin-right:auto;}
+    .spec-axis{display:flex;justify-content:space-between;align-items:center;
+      font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.85);color:var(--ink-3);margin-bottom:10px;padding:0 8px;}
+    .spec-axis .ax-mid{color:var(--ink-2);}
+    .spec-bar{display:flex;align-items:stretch;gap:0;}
+    .spec-zone{padding:18px 18px;text-align:center;}
+    .spec-zone.too-little{flex:1;background:rgba(255,133,133,.09);border:1.5px solid var(--alert);border-right:none;border-radius:12px 0 0 12px;}
+    .spec-zone.just-right{flex:1.3;background:rgba(91,211,148,.13);border:2px solid var(--green-fact);border-radius:12px;box-shadow:0 0 26px rgba(91,211,148,.16);z-index:1;}
+    .spec-zone.too-much{flex:1;background:rgba(255,133,133,.09);border:1.5px solid var(--alert);border-left:none;border-radius:0 12px 12px 0;}
+    .spec-mark{font-size:calc(var(--t3)*0.92);font-weight:700;}
+    .too-little .spec-mark,.too-much .spec-mark{color:var(--alert);}
+    .just-right .spec-mark{color:var(--green-fact);}
+    .spec-ex{font-size:calc(var(--t3)*0.78);color:var(--ink);margin-top:8px;line-height:1.35;}
+    .spec-why{font-size:calc(var(--t4)*0.86);color:var(--ink-3);margin-top:7px;line-height:1.4;}
+    </style>
+    <div class="spectrum">
+      <div class="spec-axis"><span>← 資訊太少</span><span class="ax-mid">給 AI 的資訊量</span><span>資訊太多 →</span></div>
+      <div class="spec-bar">
+        <div class="spec-zone too-little" data-reveal="1">
+          <div class="spec-mark">✗ 太簡</div>
+          <div class="spec-ex">「秦鐘入塾」</div>
+          <div class="spec-why">AI 完全瞎編，紅色 90%——沒「以為書真的寫過」的錯覺。</div>
+        </div>
+        <div class="spec-zone just-right" data-reveal="2">
+          <div class="spec-mark">✓ 剛好 · 骨架</div>
+          <div class="spec-ex">「秦鐘第一次入家塾、與寶玉相鄰而坐」</div>
+          <div class="spec-why">地點＋人物＋在做什麼。AI 有空間補肉，才查得到「合理填空」。</div>
+        </div>
+        <div class="spec-zone too-much" data-reveal="3">
+          <div class="spec-mark">✗ 太細</div>
+          <div class="spec-ex">「秦鐘眉清目秀粉面朱唇坐在寶玉旁看書」</div>
+          <div class="spec-why">AI 沒空間補——順著事實寫，看不到填空。</div>
+        </div>
       </div>
     </div>
-    <div class="body-sm" style="margin-top: 18px; text-align: center; color: var(--ink-2);">
+    <div class="body-sm" data-reveal="4" style="margin-top: 16px; text-align: center; color: var(--ink-2);">
       公式：<span class="accent bold">地點 + 人物 + 正在做什麼</span>（動作骨架）<br>
       <span class="muted">範例：「父親爬月台買橘子」「五條悟跟夏油傑在屋頂吃飯」「孔乙己進咸亨酒店點酒」</span>
     </div>

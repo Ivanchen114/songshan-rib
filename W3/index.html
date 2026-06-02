@@ -923,37 +923,60 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W3 · 老師示範 4/5</div>
 </section>
 
+<style>
+/* W3 s9 巢狀集合圖（圖優：有重量的事實是「事實」裡的小圈） */
+.nest{position:relative;margin-top:26px;max-width:1260px;margin-left:auto;margin-right:auto;
+  border:1.5px dashed var(--ink-3);border-radius:18px;padding:30px 32px 28px;}
+.nest-label{position:absolute;top:-16px;left:34px;background:var(--bg);padding:0 14px;
+  font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.9);color:var(--ink-3);}
+.nest-outer{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:22px;}
+.nest-chip{font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.88);
+  padding:6px 13px;border-radius:8px;background:var(--bg-3);color:var(--ink-3);border:1px solid rgba(122,139,184,.25);}
+.nest-inner{position:relative;border:2px solid var(--accent-2);border-radius:14px;
+  background:rgba(255,215,0,.07);padding:26px 28px 20px;box-shadow:0 0 30px rgba(255,215,0,.10);}
+.nest-inner-label{position:absolute;top:-15px;left:26px;background:var(--bg);padding:0 12px;
+  font-family:"JetBrains Mono",monospace;font-size:calc(var(--t4)*0.92);color:var(--accent-2);font-weight:700;}
+.nest-items{display:flex;flex-direction:column;gap:13px;}
+.nest-item{display:flex;gap:16px;align-items:flex-start;text-align:left;}
+.nest-item .ni-n{color:var(--accent-2);font-weight:700;font-size:var(--t3);font-family:"JetBrains Mono",monospace;flex:0 0 auto;line-height:1.2;}
+.nest-item .ni-q{font-size:calc(var(--t3)*0.84);color:var(--ink);font-weight:700;}
+.nest-item .ni-c{font-size:calc(var(--t4)*0.9);color:var(--ink-2);margin-top:2px;line-height:1.4;}
+</style>
 <section class="slide dark" data-slide="9" data-section="老師示範">
   <div class="slide-inner">
     <div class="kicker gold">★ AI 漏掉的三個東西</div>
-    <div class="title" style="font-size: clamp(36px, 3.2vw, 56px); margin-bottom: 6px;">
-      這三個，是讓那 30 秒被我記住的關鍵
+    <div class="title" style="font-size: clamp(34px, 3.0vw, 54px); margin-bottom: 2px;">
+      它們也是事實——但藏在事實的「小圈」裡
     </div>
-    <div class="miss-list">
-      <div class="miss-item" data-reveal="1">
-        <div class="mn">①</div>
-        <div>
-          <div class="mq">「兒子自己做的紙團球」</div>
-          <div class="mc">AI 知道紙團球大小，但不知道<span class="accent-2 bold">是兒子親手做的</span>——為什麼那個球重要，因為這個。</div>
-        </div>
+    <div class="nest">
+      <div class="nest-label">所有事實（AI 也抓得到）</div>
+      <div class="nest-outer">
+        <span class="nest-chip">紙團球的大小</span>
+        <span class="nest-chip">下午在海山公園</span>
+        <span class="nest-chip">在玩棒球</span>
+        <span class="nest-chip">天氣晴</span>
+        <span class="nest-chip">爸爸跟兒子</span>
       </div>
-      <div class="miss-item" data-reveal="2">
-        <div class="mn">②</div>
-        <div>
-          <div class="mq">「我手裡是他的兒童球棒」</div>
-          <div class="mc">AI 完全沒問。但這是<span class="accent-2 bold">畫面違和的關鍵</span>——大人用兒童球棒，打小孩做的紙團球。</div>
-        </div>
-      </div>
-      <div class="miss-item" data-reveal="3">
-        <div class="mn">③</div>
-        <div>
-          <div class="mq">「我那一秒真的很爽」</div>
-          <div class="mc">AI 沒寫情感（規則禁止）。但這是<span class="accent-2 bold">整段文字的情感錨點</span>——少了這句，整段變成物理報告。</div>
+      <div class="nest-inner">
+        <div class="nest-inner-label">★ 讓那一秒變重要的事實（AI 漏掉）</div>
+        <div class="nest-items">
+          <div class="nest-item" data-reveal="1">
+            <div class="ni-n">①</div>
+            <div><div class="ni-q">「兒子自己做的紙團球」</div><div class="ni-c">AI 知道球的大小，但不知道<span class="accent-2 bold">是兒子親手做的</span>——它為什麼重要，因為這個。</div></div>
+          </div>
+          <div class="nest-item" data-reveal="2">
+            <div class="ni-n">②</div>
+            <div><div class="ni-q">「我手裡是他的兒童球棒」</div><div class="ni-c">AI 完全沒問。但這是<span class="accent-2 bold">畫面違和的關鍵</span>——大人用兒童球棒，打小孩做的紙團球。</div></div>
+          </div>
+          <div class="nest-item" data-reveal="3">
+            <div class="ni-n">③</div>
+            <div><div class="ni-q">「我那一秒真的很爽」</div><div class="ni-c">AI 沒寫情感（規則禁止）。但這是<span class="accent-2 bold">整段的情感錨點</span>——少了它，整段變成物理報告。</div></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="body-sm muted" style="margin-top: 20px; text-align: center;">
-      這些細節也是事實——但是<span class="accent bold">「讓那一秒變重要的事實」</span>。
+    <div class="body-sm muted" data-reveal="4" style="margin-top: 18px; text-align: center;">
+      外圈 AI 抓得到；<span class="accent bold">內圈只有你知道</span>——錨點，就是內圈那幾個。
     </div>
   </div>
   <div class="page-footer">W3 · 老師示範 5/5</div>

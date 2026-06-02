@@ -578,25 +578,43 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="body-sm muted" style="margin-bottom: 8px;">
       不是叫你分顏色——是問：這篇用哪些<span class="accent bold">事實</span>，配哪些<span class="accent bold">評價</span>，把我推向哪個<span class="accent-2 bold">位置</span>？
     </div>
-    <div class="foa-grid">
-      <div class="foa-card f">
-        <div class="foa-letter">F</div>
-        <div class="foa-name">Fact · 事實</div>
-        <div data-reveal="1"><div class="foa-def">可查證、有客觀依據</div><div class="foa-ex">例：「3 列車急停 48 分鐘」← 可查</div></div>
+    <style>
+    /* W8 s7 合流＋分岔圖（圖優：F+O+A 合成立場；同 F 不同包裝→不同立場） */
+    .foa-flow{display:flex;align-items:stretch;justify-content:center;gap:10px;margin-top:16px;}
+    .foa-node{flex:1;background:var(--bg-2);border-radius:12px;padding:14px 14px 16px;text-align:center;border-top:4px solid var(--accent);}
+    .foa-node.n-o{border-top-color:#C4B5FD;}
+    .foa-node.n-a{border-top-color:var(--accent-2);}
+    .foa-l{font-size:calc(var(--t2)*0.72);font-weight:900;font-family:"JetBrains Mono",monospace;line-height:1;}
+    .n-f .foa-l{color:var(--accent);} .n-o .foa-l{color:#C4B5FD;} .n-a .foa-l{color:var(--accent-2);}
+    .foa-nm{font-size:calc(var(--t4)*0.95);font-weight:700;margin-top:5px;}
+    .foa-d{font-size:calc(var(--t4)*0.84);color:var(--ink-2);margin-top:4px;line-height:1.35;}
+    .foa-op{display:flex;align-items:center;font-size:var(--t2);color:var(--ink-3);font-family:"JetBrains Mono",monospace;}
+    .foa-eq{text-align:center;font-size:calc(var(--t4)*0.9);color:var(--ink-3);font-family:"JetBrains Mono",monospace;margin:12px 0 10px;}
+    .foa-pos{text-align:center;background:rgba(255,133,133,.09);border:2px solid var(--alert);border-radius:12px;padding:12px 22px;max-width:560px;margin:0 auto;}
+    .foa-pos .pp{font-size:calc(var(--t3)*0.9);font-weight:700;color:var(--alert);}
+    .foa-fork{margin-top:16px;text-align:center;font-size:calc(var(--t3)*0.82);color:var(--ink-2);line-height:1.5;}
+    </style>
+    <div class="foa-flow">
+      <div class="foa-node n-f" data-reveal="1">
+        <div class="foa-l">F</div><div class="foa-nm">Fact 事實</div>
+        <div class="foa-d">可查證<br>「3 列車急停 48 分鐘」</div>
       </div>
-      <div class="foa-card o">
-        <div class="foa-letter">O</div>
-        <div class="foa-name">Opinion · 意見</div>
-        <div data-reveal="2"><div class="foa-def">主觀評價、感受</div><div class="foa-ex">例：「配備之專業堪比小型行動電台」← 評價</div></div>
+      <div class="foa-op" data-reveal="2">＋</div>
+      <div class="foa-node n-o" data-reveal="2">
+        <div class="foa-l">O</div><div class="foa-nm">Opinion 意見</div>
+        <div class="foa-d">主觀評價<br>「專業堪比行動電台」</div>
       </div>
-      <div class="foa-card a">
-        <div class="foa-letter">A</div>
-        <div class="foa-name">Argument · 論點</div>
-        <div data-reveal="3"><div class="foa-def">推論、結論、立場</div><div class="foa-ex">例：「觸及國家安全的紅線」← 推論</div></div>
+      <div class="foa-op" data-reveal="3">＋</div>
+      <div class="foa-node n-a" data-reveal="3">
+        <div class="foa-l">A</div><div class="foa-nm">Argument 論點</div>
+        <div class="foa-d">推論、結論<br>「觸及國安紅線」</div>
       </div>
     </div>
-    <div class="body-sm" data-reveal="4" style="margin-top: 20px; padding: 14px 22px; background: rgba(0,198,255,0.06); border-left: 3px solid var(--accent); border-radius: 4px; color: var(--ink-2);">
-      <span class="accent bold">同一個事實</span>，搭配<span class="accent-2 bold">不同意見＋論點</span>包裝，會引導出<span class="alert bold">不同立場</span>。
+    <div class="foa-eq" data-reveal="4">▼ 合成 ▼</div>
+    <div class="foa-pos" data-reveal="4"><div class="pp">把我推向某個「立場」</div></div>
+    <div class="foa-fork" data-reveal="5">
+      <span class="accent bold">同一個 F</span>，換掉 <span style="color:#C4B5FD;font-weight:700;">O</span>＋<span class="accent-2 bold">A</span> 的包裝 ──
+      就能岔出 <span class="alert bold">相反的立場</span>。
     </div>
   </div>
   <div class="page-footer">W8 · F/O/A 三分法</div>

@@ -935,22 +935,44 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W2 · 老師示範 4/8</div>
 </section>
 
+<style>
+/* W2 s9-s11 三層地層堆疊圖（圖優＋漸進揭露：同一圖、每頁疊一層） */
+.strata{display:flex;flex-direction:column;gap:13px;margin-top:20px;max-width:1320px;margin-left:auto;margin-right:auto;}
+.band{display:flex;align-items:center;gap:24px;border-radius:14px;padding:16px 28px;border:1.5px solid transparent;transition:opacity .4s ease;}
+.band .b-tag{flex:0 0 132px;text-align:center;font-family:"JetBrains Mono",monospace;}
+.band .b-tag .b-layer{font-size:calc(var(--t4)*0.82);color:var(--ink-3);letter-spacing:.05em;}
+.band .b-tag .b-dot{font-size:calc(var(--t2)*0.62);line-height:1.1;}
+.band .b-body{flex:1;text-align:left;}
+.band .b-def{font-size:calc(var(--t3)*0.84);font-weight:700;line-height:1.35;}
+.band .b-ex{font-size:calc(var(--t4)*0.96);color:var(--ink-2);margin-top:7px;font-family:"JetBrains Mono",monospace;letter-spacing:.02em;}
+.band .b-punch{font-size:calc(var(--t4)*0.92);color:var(--ink-3);margin-top:8px;}
+.band.green{background:rgba(91,211,148,.10);border-color:var(--green-fact);}
+.band.green .b-def,.band.green .b-dot{color:var(--green-fact);}
+.band.red{background:rgba(255,133,133,.10);border-color:var(--alert);}
+.band.red .b-def,.band.red .b-dot{color:var(--alert);}
+.band.yellow{background:rgba(255,215,0,.10);border-color:var(--accent-2);}
+.band.yellow .b-def,.band.yellow .b-dot{color:var(--accent-2);}
+.band.dim{opacity:.28;border-style:dashed;border-color:var(--ink-3);background:transparent;}
+.band.dim .b-body{font-size:calc(var(--t3)*0.82);color:var(--ink-3);font-family:"JetBrains Mono",monospace;}
+.strata-q{text-align:center;font-size:calc(var(--t3)*0.78);color:var(--ink-3);margin-top:14px;}
+</style>
 <section class="slide dark" data-slide="9" data-section="三層揭穿">
   <div class="slide-inner">
-    <div class="kicker green">第一層</div>
-    <div class="title" style="font-size: clamp(36px, 3.2vw, 56px); color: var(--green-fact);">
-      🟢 綠色：這些是我給 Gemini 的事實
+    <div class="kicker green">拆穿 · 第一層／共三層</div>
+    <div class="title" style="font-size: clamp(34px, 3.0vw, 54px); margin-bottom: 4px;">
+      同一段文字，藏著三個不同的「層」
     </div>
-    <div class="layer-list">
-      <div class="layer-item green"><div class="lq">「海山公園的午後」</div><div class="lc">我給的——下午帶小孩去海山公園</div></div>
-      <div class="layer-item green"><div class="lq">「五歲與八歲的兩個小麻煩」</div><div class="lc">我給的——5+8 歲兩個小孩</div></div>
-      <div class="layer-item green"><div class="lq">「Q Burger 的⋯」</div><div class="lc">我給的——早上吃 Q Burger</div></div>
-      <div class="layer-item green"><div class="lq">「資媒組報表搏鬥」</div><div class="lc">資媒組我給的；報表是它加的</div></div>
-      <div class="layer-item green"><div class="lq">「中和板橋交界的車潮」</div><div class="lc">我給的——住地資訊</div></div>
-      <div class="layer-item green"><div class="lq">「兩隻貓」</div><div class="lc">我給的——家裡資訊</div></div>
-    </div>
-    <div class="body" style="margin-top: 18px; text-align: center;">
-      Gemini 不是神——<span class="green-fact bold">它有資訊才寫得出</span>。
+    <div class="strata">
+      <div class="band green">
+        <div class="b-tag"><div class="b-layer">第一層</div><div class="b-dot">🟢</div></div>
+        <div class="b-body">
+          <div class="b-def">事實：這些是「我給」Gemini 的</div>
+          <div class="b-ex">海山公園 · Q Burger · 兩隻貓 · 資媒組報表</div>
+          <div class="b-punch">Gemini 不是神——<span class="green-fact bold">它有資訊才寫得出</span>。</div>
+        </div>
+      </div>
+      <div class="band dim"><div class="b-tag"><div class="b-layer">第二層</div><div class="b-dot">🔴</div></div><div class="b-body">？ 還沒揭開</div></div>
+      <div class="band dim"><div class="b-tag"><div class="b-layer">第三層</div><div class="b-dot">🟡</div></div><div class="b-body">？ 還沒揭開</div></div>
     </div>
   </div>
   <div class="page-footer">W2 · 老師示範 5/8</div>
@@ -958,19 +980,27 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="10" data-section="三層揭穿">
   <div class="slide-inner">
-    <div class="kicker red">第二層</div>
-    <div class="title" style="font-size: clamp(36px, 3.2vw, 56px); color: var(--alert);">
-      🔴 紅色：這些是 Gemini 自己編的
+    <div class="kicker red">拆穿 · 第二層／共三層</div>
+    <div class="title" style="font-size: clamp(34px, 3.0vw, 54px); margin-bottom: 4px;">
+      同一段文字，藏著三個不同的「層」
     </div>
-    <div class="layer-list">
-      <div class="layer-item red"><div class="lq">「磨石子溜滑梯」</div><div class="lc">海山公園真的有嗎？也許有，但我沒給</div></div>
-      <div class="layer-item red"><div class="lq">「攀爬網」</div><div class="lc">我沒給，Gemini 自己加</div></div>
-      <div class="layer-item red"><div class="lq">「Q Burger 的<span class="alert bold">大冰奶</span>」</div><div class="lc">Q Burger 我給了，但<span class="alert bold">我喝冰美式，我不喝大冰奶</span></div></div>
-      <div class="layer-item red"><div class="lq">「兩隻貓等著審視這群晚歸的人類」</div><div class="lc">我家貓根本不會迎接我，牠們在睡覺</div></div>
-      <div class="layer-item red"><div class="lq">「孩子跌倒後拍拍膝蓋繼續衝的韌性」</div><div class="lc">沒發生。但寫得很合理</div></div>
-    </div>
-    <div class="body" style="margin-top: 18px; text-align: center;">
-      有些剛好對，有些根本錯——<span class="alert bold">但讀的人沒辦法分</span>。
+    <div class="strata">
+      <div class="band green">
+        <div class="b-tag"><div class="b-layer">第一層</div><div class="b-dot">🟢</div></div>
+        <div class="b-body">
+          <div class="b-def">事實：我給的</div>
+          <div class="b-ex">海山公園 · Q Burger · 兩隻貓 · 資媒組報表</div>
+        </div>
+      </div>
+      <div class="band red">
+        <div class="b-tag"><div class="b-layer">第二層</div><div class="b-dot">🔴</div></div>
+        <div class="b-body">
+          <div class="b-def">編造：它自己加的</div>
+          <div class="b-ex">大冰奶（我喝冰美式）· 磨石子溜滑梯 · 攀爬網 · 跌倒後的韌性</div>
+          <div class="b-punch">有些剛好對、有些根本錯——<span class="alert bold">讀的人沒辦法分</span>。</div>
+        </div>
+      </div>
+      <div class="band dim"><div class="b-tag"><div class="b-layer">第三層</div><div class="b-dot">🟡</div></div><div class="b-body">？ 還沒揭開</div></div>
     </div>
   </div>
   <div class="page-footer">W2 · 老師示範 6/8</div>
@@ -978,22 +1008,29 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="11" data-section="三層揭穿">
   <div class="slide-inner">
-    <div class="kicker gold">第三層 ★ 最關鍵</div>
-    <div class="title" style="font-size: clamp(36px, 3.2vw, 56px); color: var(--accent-2);">
-      🟡 黃色：讀起來合理，但沒有確定發生過
+    <div class="kicker gold">拆穿 · 第三層／共三層 ★ 最關鍵</div>
+    <div class="title" style="font-size: clamp(34px, 3.0vw, 54px); margin-bottom: 4px;">
+      同一段文字，藏著三個不同的「層」
     </div>
-    <div class="body-sm muted" style="margin-bottom: 18px;">
-      <span class="accent-2 bold">黃色不是錯</span>——是「可能合理，但我還不能替它負責，不能說這就是那一刻的我」。
+    <div class="strata">
+      <div class="band green">
+        <div class="b-tag"><div class="b-layer">第一層</div><div class="b-dot">🟢</div></div>
+        <div class="b-body"><div class="b-def">事實：我給的</div><div class="b-ex">海山公園 · Q Burger · 兩隻貓</div></div>
+      </div>
+      <div class="band red">
+        <div class="b-tag"><div class="b-layer">第二層</div><div class="b-dot">🔴</div></div>
+        <div class="b-body"><div class="b-def">編造：它自己加的</div><div class="b-ex">大冰奶 · 攀爬網 · 跌倒後的韌性</div></div>
+      </div>
+      <div class="band yellow">
+        <div class="b-tag"><div class="b-layer">第三層</div><div class="b-dot">🟡</div></div>
+        <div class="b-body">
+          <div class="b-def">合理未證：像我，但我沒說過 / 沒這樣想</div>
+          <div class="b-ex">熵增過程 · 人類教師的護城河 · 對仗收尾</div>
+          <div class="b-punch"><span class="accent-2 bold">黃色不是錯</span>——是「讀起來像我 ≠ 那一秒我真的這樣想」。</div>
+        </div>
+      </div>
     </div>
-    <div class="layer-list">
-      <div class="layer-item yellow"><div class="lq">「我不打算說雞湯」</div><div class="lc">「不喜歡空話」我給了——但我自己寫文章不會這樣<span class="accent-2 bold">宣告</span>，我會用結構展現</div></div>
-      <div class="layer-item yellow"><div class="lq">「混亂卻又和諧的<span class="accent-2 bold">熵增過程</span>」</div><div class="lc">「注重邏輯」我給了——但我看小孩跑步那一刻，腦袋裡真的有閃過熵增嗎？沒有</div></div>
-      <div class="layer-item yellow"><div class="lq">「人類教師最後的<span class="accent-2 bold">護城河</span>」</div><div class="lc">「AI 教育研究」我給了——但我在公園那個下午，腦袋裡沒在想護城河</div></div>
-      <div class="layer-item yellow"><div class="lq">結尾「沒有完美的演算法，只有最紮實的日常」</div><div class="lc">Gemini 知道我「注重邏輯」就用對仗收尾——但<span class="accent-2 bold">我自己不會這樣寫</span></div></div>
-    </div>
-    <div class="body" style="margin-top: 18px; text-align: center;">
-      <span class="accent-2 bold">讀起來像我 ≠ 那一秒我真的這樣想。</span>
-    </div>
+    <div class="strata-q">三層讀起來一樣順——但只有第一層，你能替它負責。</div>
   </div>
   <div class="page-footer">W2 · 老師示範 7/8</div>
 </section>
