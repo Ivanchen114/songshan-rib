@@ -384,7 +384,7 @@ body.force-rotate .rotate-hint { display: none; }
 .goldline { font-size: clamp(48px, 5.0vw, 84px); font-weight: 900; line-height: 1.35; text-align: center; }
 .goldline .small { display: block; font-size: calc(var(--t3) * 0.85); font-weight: 700; color: var(--ink-3); letter-spacing: 0.1em; margin-top: 36px; }
 
-/* 收尾頓點 3 行對照 */
+/* 收尾收尾問題 3 行對照 */
 .epilogue {
   text-align: center;
   font-weight: 900;
@@ -443,6 +443,20 @@ body.force-rotate .rotate-hint { display: none; }
 [data-reveal].revealed{opacity:1;transform:translateY(0);}
 body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 @media print{[data-reveal]{opacity:1!important;transform:none!important;}}
+
+/* W5-W17 共通：本週三分（2026-07-23） */
+.weekly-score-wrap{width:min(1260px,100%);margin:auto;}
+.weekly-score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px;}
+.weekly-score-card{padding:24px 22px;border-radius:12px;background:rgba(255,255,255,.055);border-top:4px solid var(--accent);}
+.weekly-score-card:nth-child(2){border-top-color:var(--accent-2);}
+.weekly-score-card:nth-child(3){border-top-color:var(--success,#5ce1a1);}
+.weekly-score-n{font-size:clamp(40px,4vw,68px);font-weight:900;color:var(--accent);line-height:1;}
+.weekly-score-card:nth-child(2) .weekly-score-n{color:var(--accent-2);}
+.weekly-score-card:nth-child(3) .weekly-score-n{color:var(--success,#5ce1a1);}
+.weekly-score-t{font-size:clamp(23px,2vw,34px);font-weight:900;margin:8px 0;}
+.weekly-score-d{font-size:clamp(15px,1.25vw,22px);line-height:1.5;color:var(--ink-2);}
+.weekly-score-note{text-align:center;margin-top:26px;font-size:clamp(15px,1.3vw,22px);line-height:1.5;color:var(--ink-2);}
+
 </style>
 </head>
 <body>
@@ -454,7 +468,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
 <div id="revealInfo" style="position:fixed;bottom:46px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:var(--t-ui);color:var(--accent);letter-spacing:0.12em;z-index:50;"></div>
-<div id="pageInfo">1 / 19</div>
+<div id="pageInfo">1 / 11</div>
 <div id="hint">← → 切頁 · F 全螢幕 · Home/End 跳首尾</div>
 
 
@@ -487,13 +501,40 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="tl-row"><div class="tl-time">45 — 60</div><div class="tl-title">概念定義</div><div class="tl-desc">吵架前先對詞</div></div>
       <div class="tl-row dstar"><div class="tl-time">60 — 80</div><div class="tl-title accent">★★ 改寫可討論版</div><div class="tl-desc">留主張、拆操作</div></div>
       <div class="tl-row"><div class="tl-time">80 — 92</div><div class="tl-title">演算法一頁 + 收束</div><div class="tl-desc">它挑你會停下來的</div></div>
-      <div class="tl-row"><div class="tl-time">92 —100</div><div class="tl-title">頓點</div><div class="tl-desc">私密欄 + W8 入場券</div></div>
+      <div class="tl-row"><div class="tl-time">92 —100</div><div class="tl-title">收尾問題</div><div class="tl-desc">私密欄 + W8 入場券</div></div>
     </div>
   </div>
   <div class="page-footer">W7 · 流程預告</div>
 </section>
 
-<section class="slide dark" data-slide="4" data-section="開場鉤">
+
+<section class="slide dark" data-slide="4" data-section="本週 3 分">
+  <div class="slide-inner weekly-score-wrap">
+    <div class="kicker">本週任務 · 共 3 分</div>
+    <h2>不看漂亮答案，確認三件事</h2>
+    <div class="weekly-score-grid">
+      <div class="weekly-score-card">
+        <div class="weekly-score-n">1 分</div>
+        <div class="weekly-score-t">完成</div>
+        <div class="weekly-score-d">完成兩則訊息標記與一版中性改寫。</div>
+      </div>
+      <div class="weekly-score-card">
+        <div class="weekly-score-n">1 分</div>
+        <div class="weekly-score-t">證據</div>
+        <div class="weekly-score-d">圈出至少兩個會推動情緒或行動的字詞。</div>
+      </div>
+      <div class="weekly-score-card">
+        <div class="weekly-score-n">1 分</div>
+        <div class="weekly-score-t">判斷</div>
+        <div class="weekly-score-d">說明原文用了哪種手法，以及改寫時拿掉或保留什麼。</div>
+      </div>
+    </div>
+    <div class="weekly-score-note">不以是否分享、素材是否私人或 AI 用得多不多計分。自留札記老師不讀、不計分。</div>
+  </div>
+  <div class="page-footer">W7 · 本週 3 分</div>
+</section>
+
+<section class="slide dark" data-slide="5" data-section="開場鉤">
   <div class="slide-inner center">
     <div class="kicker">開場 · 2 分鐘（微踩坑）</div>
     <div class="title" style="font-size:clamp(36px,3.4vw,62px);">哪一則你會停下來看？</div>
@@ -506,7 +547,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 開場鉤</div>
 </section>
 
-<section class="slide dark" data-slide="5" data-section="誘餌拆解三招 ★">
+<section class="slide dark" data-slide="6" data-section="誘餌拆解三招 ★">
   <div class="slide-inner">
     <div class="kicker gold">★ 老師示範 · 誘餌拆解三招</div>
     <div class="title" style="font-size:clamp(34px,3.2vw,56px);">圈出訊息在對你用的招</div>
@@ -520,7 +561,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 三招示範</div>
 </section>
 
-<section class="slide dark" data-slide="6" data-section="學生操作">
+<section class="slide dark" data-slide="7" data-section="學生操作">
   <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
       <div><div class="kicker">學生操作 · 手機翻面</div><div class="title" style="font-size:clamp(34px,3.2vw,56px);">兩則素材，標 E/L/B</div></div>
@@ -536,7 +577,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 學生操作</div>
 </section>
 
-<section class="slide dark" data-slide="7" data-section="概念定義">
+<section class="slide dark" data-slide="8" data-section="概念定義">
   <div class="slide-inner center">
     <div class="kicker">概念定義 · 15 分鐘</div>
     <div class="title" style="font-size:clamp(38px,3.6vw,66px);">吵架前，先對詞</div>
@@ -546,7 +587,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 概念定義</div>
 </section>
 
-<section class="slide dark" data-slide="8" data-section="改寫可討論版 ★★">
+<section class="slide dark" data-slide="9" data-section="改寫可討論版 ★★">
   <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
       <div><div class="kicker gold">★★ 訓練核 · 20 分鐘</div><div class="title" style="font-size:clamp(34px,3.2vw,56px);">改成「可討論版」</div></div>
@@ -562,7 +603,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 改寫可討論版</div>
 </section>
 
-<section class="slide dark" data-slide="9" data-section="演算法">
+<section class="slide dark" data-slide="10" data-section="演算法">
   <div class="slide-inner center">
     <div class="kicker">演算法一頁</div>
     <div style="font-size:clamp(40px,4vw,76px);font-weight:900;color:#EEF3FF;line-height:1.3;margin:14px 0;">它不挑真的，<br>挑你會<span style="color:#00C6FF;">停下來</span>的。</div>
@@ -572,11 +613,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W7 · 演算法</div>
 </section>
 
-<section class="slide dark" data-slide="10" data-section="收束">
+<section class="slide dark" data-slide="11" data-section="收束">
   <div class="slide-inner center">
     <div class="title" style="font-size:clamp(36px,3.4vw,60px);">今天拆的招，<br>任何議題都長一樣</div>
     <div class="body" style="margin-top:20px;color:#EEF3FF;max-width:1000px;margin-left:auto;margin-right:auto;">W8 開始，你會在新聞報導裡再看到它們——<span class="accent-2 bold">只是穿了西裝</span>。</div>
-    <div class="body-sm" style="margin-top:28px;color:#7A8BB8;">頓點（自留札記，不交、不評分）：「我被綁架過的一次」　·　發 W8 兩篇報導入場券</div>
+    <div class="body-sm" style="margin-top:28px;color:#7A8BB8;">收尾問題（自留札記，不交、不評分）：「我被綁架過的一次」　·　發 W8 兩篇報導入場券</div>
   </div>
   <div class="page-footer">W7 · 收束 + 預告 W8</div>
 </section>
