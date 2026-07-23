@@ -11,7 +11,8 @@
 ```
 songshan-rib/
 ├── index.html              # 首頁
-├── W1/index.html           # 第 1 週簡報
+├── W1/index.html           # 第 1 週入口（導向高一白話修訂版）
+├── W1/index_高一白話修訂版.html # 第 1 週現行簡報
 ├── W2/index.html           # 第 2 週簡報
 ├── W3/index.html           # 第 3 週（2026-07 合併版：捕捉與選材）
 ├── W7/index.html           # 第 7 週（2026-07 新增：情報生態圈）
