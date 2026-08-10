@@ -611,7 +611,30 @@ function show(n) {
   document.getElementById('pageInfo').textContent = n + ' / ' + total;
   document.getElementById('progress').style.width = ((n/total)*100) + '%';
   current = n;
+  const timerEl = target.querySelector('[data-timer]');
+  if (timerEl) startTimer(timerEl);
   if (n === 7) hydrateBoard();
+}
+function startTimer(el) {
+  const totalSec = parseInt(el.dataset.timer, 10);
+  if (!totalSec) return;
+  let remain = totalSec;
+  const render = () => {
+    const m = Math.floor(remain / 60);
+    const s = remain % 60;
+    el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  };
+  render();
+  timerInterval = setInterval(() => {
+    remain -= 1;
+    render();
+    if (remain <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      el.style.color = 'var(--alert)';
+      el.style.borderColor = 'var(--alert)';
+    }
+  }, 1000);
 }
 let revealStep = 0;
 function revealEls() {
