@@ -88,6 +88,7 @@ try {
   await cdp("Emulation.setDeviceMetricsOverride", {
     width: 1600, height: 900, deviceScaleFactor: 1, mobile: false,
   });
+  await cdp("Page.navigate", { url: targetUrl });
   for (let attempt = 0; attempt < 100; attempt += 1) {
     if (await evaluate("document.readyState") === "complete") break;
     await new Promise((resolve) => setTimeout(resolve, 50));
