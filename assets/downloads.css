@@ -1,0 +1,67 @@
+.download-tools {
+  position: fixed;
+  top: 18px;
+  left: 250px;
+  z-index: 220;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif;
+}
+
+.download-tools a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid rgba(111, 136, 183, 0.34);
+  border-radius: 8px;
+  background: rgba(8, 16, 34, 0.84);
+  color: #e8f1ff;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.download-tools a:first-child {
+  border-color: rgba(0, 198, 255, 0.52);
+  color: #7de3ff;
+}
+
+.download-tools a:hover,
+.download-tools a:focus-visible {
+  background: rgba(21, 43, 75, 0.96);
+  color: #fff;
+  outline: 2px solid rgba(0, 198, 255, 0.55);
+  outline-offset: 2px;
+}
+
+:fullscreen .download-tools,
+:-webkit-full-screen .download-tools {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .download-tools {
+    top: 58px;
+    left: 12px;
+    gap: 6px;
+  }
+
+  .download-tools a {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media print {
+  .download-tools {
+    display: none !important;
+  }
+}
