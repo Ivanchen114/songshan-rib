@@ -452,10 +452,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .weekly-score-note{text-align:center;margin-top:26px;font-size:clamp(15px,1.3vw,22px);line-height:1.5;color:var(--ink-2);}
 
 </style>
-<link rel="stylesheet" href="../assets/downloads.css">
 </head>
 <body>
-<nav class="download-tools" aria-label="W9 學習單下載" onclick="event.stopPropagation()"><a href="../worksheets/W9.pdf" download>學習單 PDF</a><a href="../worksheets/W9.docx" download>DOCX</a></nav>
 
 <a class="back-home" href="../" title="回 R.I.B. 首頁">← R.I.B.</a>
 <button class="fullscreen-btn" onclick="toggleFullscreen()" title="切換全螢幕">⛶ 全螢幕</button>
@@ -528,7 +526,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="timeline" style="margin-top:12px;">
       <div class="tl-row star"><div class="tl-time">38 — 48</div><div class="tl-title accent-2">★ 教師示範</div><div class="tl-desc">追問碰到證據、前提、範圍或對象？</div></div>
       <div class="tl-row"><div class="tl-time">48 — 58</div><div class="tl-title">取回 W8</div><div class="tl-desc">只補最強根據與最危險弱點</div></div>
-      <div class="tl-row dstar"><div class="tl-time">58 — 75</div><div class="tl-title accent">★★ 壓力測試</div><div class="tl-desc">AI／紙本卡／自己提問，三條路徑等值</div></div>
+      <div class="tl-row"><div class="tl-time">58 — 66</div><div class="tl-title">雙問法示範</div><div class="tl-desc">AI 給的是你點的菜</div></div><div class="tl-row dstar"><div class="tl-time">66 — 75</div><div class="tl-title accent">★★ 壓力測試</div><div class="tl-desc">中性問法追問，只留最有力一問</div></div>
       <div class="tl-row star"><div class="tl-time">75 — 90</div><div class="tl-title accent-2">★ 修正或重申</div><div class="tl-desc">寫觀察項目與停止／改變條件</div></div>
       <div class="tl-row"><div class="tl-time">90 — 100</div><div class="tl-title">交棒 W10</div><div class="tl-desc">留一個答不出、也還沒查過的問題</div></div>
     </div>
@@ -636,10 +634,56 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   </div>
   <div class="page-footer">W9 · 壓力測試</div>
 </section>
-
-<section class="slide dark" data-slide="13" data-section="等值路徑">
+<section class="slide dark" data-slide="13" data-section="雙問法示範">
 <div class="slide-inner">
-    <div class="kicker">三條等值路徑</div>
+    <div class="kicker gold">58–66 分 · 雙問法示範</div>
+    <div class="title" style="font-size:clamp(36px,3.2vw,56px);">同一個立場，問了 AI 兩次</div>
+    <div class="grid-2" style="margin-top:26px;">
+      <div class="card" data-reveal="1" style="border-color:var(--alert);"><div class="label" style="color:var(--alert);">問法 A</div><div class="body-sm">「請<span style="color:var(--alert);font-weight:900;">攻擊</span>這個立場，列出它站不住的理由。」</div></div>
+      <div class="card" data-reveal="2" style="border-color:var(--green-fact);"><div class="label" style="color:var(--green-fact);">問法 B</div><div class="body-sm">「請<span style="color:var(--green-fact);font-weight:900;">支持</span>這個立場，列出它最有力的理由。」</div></div>
+    </div>
+    <div class="body-sm" data-reveal="3" style="margin-top:24px;text-align:center;color:var(--ink-2);">老師出示兩份預跑回應（列印版，斷網照放）：<span class="accent-2 bold">都流暢、都有條理、方向相反</span>。</div>
+  </div>
+  <div class="page-footer">W9 · 雙問法示範</div>
+</section>
+
+<section class="slide dark" data-slide="14" data-section="雙問法示範">
+<div class="slide-inner center">
+    <div class="kicker">兩份對照 · 同一個立場</div>
+    <div class="title" style="font-size:clamp(48px,4.2vw,78px);">哪份是真的？</div>
+    <div data-reveal="1" style="font-size:clamp(48px,4.2vw,78px);font-weight:900;color:var(--alert);margin-top:30px;">都不是。</div>
+  </div>
+  <div class="page-footer">W9 · 雙問法示範</div>
+</section>
+
+<section class="slide dark" data-slide="15" data-section="你點的菜">
+<div class="slide-inner center">
+    <div class="epilogue">
+      <div class="ep-line ep-fade">你點什麼，它就出什麼。</div>
+      <div class="ep-line ep-punch">AI 給的是你點的菜</div>
+      <div class="ep-line ep-mid">——不是廚房裡全部的菜。</div>
+    </div>
+  </div>
+  <div class="page-footer">W9 · 你點的菜</div>
+</section>
+
+<section class="slide dark" data-slide="16" data-section="判準升級">
+<div class="slide-inner">
+    <div class="kicker gold">判準升級</div>
+    <div class="title" style="font-size:clamp(34px,3vw,54px);">「最有力的一問」不是最兇的</div>
+    <div class="grid-2" style="margin-top:26px;">
+      <div class="card" data-reveal="1" style="border-color:var(--alert);"><div class="label" style="color:var(--alert);">✗ 最兇</div><div class="body-sm">你點了「攻擊」，它就出「攻擊」——<span style="color:var(--alert);font-weight:700;">兇是點菜點出來的</span>。</div></div>
+      <div class="card" data-reveal="2" style="border-color:var(--accent-2);"><div class="label" style="color:var(--accent-2);">✓ 最有力</div><div class="body-sm"><span class="accent-2 bold">有根據</span>，而且<span class="accent-2 bold">咬到你的承重處</span>。</div></div>
+    </div>
+    <div class="body-sm" data-reveal="3" style="margin-top:24px;text-align:center;color:var(--ink-2);">歷程本一行：「我原本的問法是＿＿，它讓＿＿<span class="accent-2 bold">不會出現</span>。」</div>
+  </div>
+  <div class="page-footer">W9 · 判準升級</div>
+</section>
+
+
+<section class="slide dark" data-slide="17" data-section="等值路徑">
+<div class="slide-inner">
+    <div class="kicker">66–75 分 · 三條等值路徑</div>
     <div class="title" style="font-size:clamp(36px,3.2vw,56px);">選一條，不必解釋原因</div>
     <div class="grid-2" style="margin-top:18px;grid-template-columns:repeat(3,1fr);">
       <div class="card"><div class="label">A｜AI</div><div class="body-sm">先有自己版本；AI 只提問，不代寫。</div></div>
@@ -651,11 +695,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 等值路徑</div>
 </section>
 
-<section class="slide dark" data-slide="14" data-section="AI 提問">
+<section class="slide dark" data-slide="18" data-section="AI 提問">
 <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
       <div><div class="kicker gold">選用 AI 的提問方式</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">只問，不替我寫答案</div></div>
-      <div class="timer-pill" data-timer="1020">17:00</div>
+      <div class="timer-pill" data-timer="540">9:00</div>
     </div>
     <div class="prompt-block" style="max-height:470px;">
 「以下是教師自編公共案例中的立場：<br><span class="field">[貼入我的 W8 立場、最強根據與最危險弱點]</span><br><br>
@@ -667,7 +711,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · AI 提問規則</div>
 </section>
 
-<section class="slide dark" data-slide="15" data-section="保存最強追問">
+<section class="slide dark" data-slide="19" data-section="保存最強追問">
 <div class="slide-inner">
     <div class="kicker">讀完所有問題，只做三件事</div>
     <div class="title" style="font-size:clamp(38px,3.4vw,60px);">保存一問，標出它碰到哪裡</div>
@@ -681,7 +725,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 保存最強追問</div>
 </section>
 
-<section class="slide dark" data-slide="16" data-section="修正或重申">
+<section class="slide dark" data-slide="20" data-section="修正或重申">
 <div class="slide-inner">
     <div class="kicker gold">75–90 分 · 修正或重申</div>
     <div class="title" style="font-size:clamp(36px,3.2vw,56px);">五種決定都合法</div>
@@ -697,7 +741,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 五種決定</div>
 </section>
 
-<section class="slide dark" data-slide="17" data-section="觀察與停止條件">
+<section class="slide dark" data-slide="21" data-section="觀察與停止條件">
 <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
       <div><div class="kicker gold">⭐ 判斷句 · 三層界線</div><div class="title" style="font-size:clamp(34px,3vw,54px);">不要只寫「再觀察」</div></div>
@@ -713,7 +757,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 觀察與停止條件</div>
 </section>
 
-<section class="slide dark" data-slide="18" data-section="核心句">
+<section class="slide dark" data-slide="22" data-section="核心句">
 <div class="slide-inner center">
     <div class="epilogue">
       <div class="ep-line ep-fade">修正不是輸。</div>
@@ -724,7 +768,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 核心句</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="交棒 W10">
+<section class="slide dark" data-slide="23" data-section="交棒 W10">
 <div class="slide-inner">
     <div class="kicker">90–96 分 · 交棒 W10</div>
     <div class="title" style="font-size:clamp(38px,3.4vw,60px);">把答不出的地方，改成待查問題</div>
@@ -737,7 +781,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · W10 待查問題</div>
 </section>
 
-<section class="slide dark" data-slide="20" data-section="收件界線">
+<section class="slide dark" data-slide="24" data-section="收件界線">
 <div class="slide-inner">
     <div class="kicker">今天收什麼、留什麼</div>
     <div class="title" style="font-size:clamp(36px,3.2vw,56px);">一份計分作品，一份方法補強</div>
@@ -750,7 +794,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 收件界線</div>
 </section>
 
-<section class="slide dark" data-slide="21" data-section="結語">
+<section class="slide dark" data-slide="25" data-section="結語">
 <div class="slide-inner center">
     <div class="goldline">
       <span style="display:block;">有依據，不是永遠不改。</span>
@@ -761,7 +805,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W9 · 結語</div>
 </section>
 
-<section class="slide dark" data-slide="22" data-section="自留札記">
+<section class="slide dark" data-slide="26" data-section="自留札記">
 <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 自留札記 · 第 4 頁不交</div>
