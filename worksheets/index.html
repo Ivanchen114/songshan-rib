@@ -26,6 +26,14 @@
     .actions a { flex:1; padding:10px 9px; border:1px solid var(--line); border-radius:9px; text-align:center; font-weight:800; text-decoration:none; }
     .actions a:first-child { border-color:rgba(73,216,255,.55); color:var(--cyan); }
     .actions a:hover,.actions a:focus-visible { background:#1b3152; color:white; outline:2px solid rgba(73,216,255,.45); outline-offset:2px; }
+    .section-head { margin:46px 0 6px; }
+    .section-head h2 { margin:0 0 8px; font-size:clamp(22px,3.4vw,30px); }
+    .section-head p { max-width:760px; margin:0; color:var(--muted); line-height:1.75; }
+    .tools { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:18px; }
+    .tools .week h2 { color:var(--gold); font-size:20px; }
+    .tools .week { min-height:0; }
+    .tools .actions a:first-child { border-color:rgba(255,200,90,.55); color:var(--gold); }
+    @media (max-width:560px) { .tools { grid-template-columns:1fr; } }
     footer { margin-top:34px; color:#7f93b0; font-size:13px; }
     @media (max-width:860px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:560px) { .wrap { width:min(100% - 22px,1120px); } header { padding-top:38px; } .grid { grid-template-columns:1fr; } .week { min-height:0; } }
@@ -59,6 +67,14 @@
       <article class="week"><h2>W16</h2><p>公開答辯與即時回應</p><div class="actions"><a href="W16.pdf" download>PDF</a><a href="W16.docx" download>DOCX</a></div></article>
       <article class="week"><h2>W17</h2><p>陌生文本三色查核與修正</p><div class="actions"><a href="W17.pdf" download>PDF</a><a href="W17.docx" download>DOCX</a></div></article>
       <article class="week"><h2>W18</h2><p>拿回歷程本，選三件作品</p><div class="actions"><a href="W18.pdf" download>PDF</a><a href="W18.docx" download>DOCX</a></div></article>
+    </section>
+    <div class="section-head">
+      <h2>課堂工具卡</h2>
+      <p>這兩張不是每週學習單，是<strong>跨週帶著走</strong>的隨身工具：課堂上老師會發實體卡，夾在歷程本裡一路用到後面幾週。這裡放檔案是給<strong>弄丟或缺席那天沒拿到</strong>的人自己補印，A4 印出後可對折成 A5。</p>
+    </div>
+    <section class="tools" aria-label="課堂工具卡">
+      <article class="week"><h2>數字成立卡</h2><p>有人給你一個數字或一個發現時，先問這三件事。W8 發，用到 W13。</p><div class="actions"><a href="數字成立卡_學生用.pdf" download>PDF</a><a href="數字成立卡_學生用.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>L1／L2／L3 查核工具卡</h2><p>查主張，不猜作者：三層查核與 G／Y／R 上色判準。W10 發，W13 再用。</p><div class="actions"><a href="L1-L2-L3查核工具卡_學生用.pdf" download>PDF</a><a href="L1-L2-L3查核工具卡_學生用.docx" download>DOCX</a></div></article>
     </section>
     <footer>臺北市立松山高中 · 閱讀理解與表達</footer>
   </main>
