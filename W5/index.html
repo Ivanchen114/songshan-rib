@@ -16,6 +16,8 @@ body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;ba
 #section{position:fixed;top:18px;left:24px;color:var(--cyan);font-weight:800;letter-spacing:.14em;font-size:15px;z-index:20}
 #page{position:fixed;right:24px;bottom:18px;color:#7890aa;font:700 15px ui-monospace,monospace;z-index:20}
 #help{position:fixed;left:24px;bottom:18px;color:#7890aa;font-size:13px;z-index:20}
+#rotateHint{position:fixed;inset:0;z-index:99;display:none;align-items:center;justify-content:center;text-align:center;padding:32px;background:#071827;color:#f3f7ff;font-size:28px;font-weight:800;line-height:1.5}
+#rotateHint.visible{display:flex}
 .slide{position:absolute;inset:0;display:none;padding:6.5vh 6.5vw 7vh;background:
   radial-gradient(circle at 85% 12%,rgba(57,208,232,.10),transparent 28%),var(--bg)}
 .slide.active{display:flex}.inner{width:100%;max-width:1500px;margin:auto}.center{text-align:center}
@@ -48,38 +50,37 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 @media(max-width:900px){.slide{padding:8vh 5vw}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}#help{display:none}.card{padding:18px}.timeline{grid-template-columns:95px 1fr}}
 @media(max-height:650px){:root{--t1:52px;--t2:38px;--t3:25px;--t4:18px}.slide{padding-top:6vh}.card{padding:16px 20px}.grid2,.grid3,.grid4{margin-top:18px;gap:14px}.timeline{margin-top:12px}.time,.event{padding:7px 12px}}
 </style>
-<link rel="stylesheet" href="../assets/downloads.css">
 </head>
 <body>
-<nav class="download-tools" aria-label="W5 學習單下載" onclick="event.stopPropagation()"><a href="../worksheets/W5.pdf" download>學習單 PDF</a><a href="../worksheets/W5.docx" download>DOCX</a></nav>
-<div id="progress"></div><div id="section"></div><div id="page"></div><div id="help">← → 換頁　F 全螢幕　P 顯示全部</div>
+<div id="progress"></div><div id="section"></div><div id="page"></div><div id="help">← → 換頁　F 全螢幕　P 顯示全部</div><div id="rotateHint">請將手機轉為橫向，取得完整投影畫面。</div>
 
-<section class="slide active" data-section="W5｜節點啟動"><div class="inner center">
-  <div class="tag">W5 · 個人重寫 · 學期 15%</div>
+<section class="slide active" data-slide="1" data-section="W5｜節點啟動"><div class="inner center">
+  <div class="tag">W5 · Gate 1 5 分 ＋ 個人真實讀者表現 10 分</div>
   <h1 style="margin-top:28px">重寫，<br><span class="gold">看見自己變了多少</span></h1>
   <p class="lead">不是把舊作變漂亮，是留下你怎麼判斷的證據。</p>
 </div></section>
 
-<section class="slide" data-section="中心問題"><div class="inner center">
+<section class="slide" data-slide="2" data-section="中心問題"><div class="inner center">
   <div class="eyebrow">先問問題</div>
   <div class="question">W2 的我，<br>跟現在的我，<span class="gold">差在哪裡</span>？</div>
 </div></section>
 
-<section class="slide" data-section="W5 節點評量"><div class="inner">
-  <div class="eyebrow">8 分換算學期 15%</div><h2>今天看四件事</h2>
+<section class="slide" data-slide="3" data-section="W5 節點評量"><div class="inner">
+  <div class="eyebrow">兩套證據，分開記錄</div><h2>Gate 1 看歷程；W5 看個人表現</h2>
+  <p class="small"><span class="gold strong">Gate 1｜5 分：</span>W2–W4 原作、具體回饋／查核、回應／修訂；只判通過／需修正，期限內補正仍滿分。</p>
   <div class="grid4">
     <div class="card"><div class="score">0–2</div><h3>閱讀證據</h3><p>同一件事的舊句／V1 新句＋確切字詞。</p></div>
     <div class="card"><div class="score">0–2</div><h3>形成判斷</h3><p>最大變化、最重要保留與理由。</p></div>
     <div class="card"><div class="score">0–2</div><h3>回應讀者</h3><p>具體回報＋修改或合理保留。</p></div>
     <div class="card"><div class="score">0–2</div><h3>修正能力</h3><p>V1 留存；V2／保留理由可核對。</p></div>
   </div>
-  <p class="small" style="margin-top:18px">不評文筆華麗、故事精彩、公開分享或 AI 使用；本週不另算一般週 3 點。</p>
+  <p class="small" style="margin-top:18px"><span class="gold strong">以下四項原始 8 分換算 W5 個人表現 10 分。</span>不評文筆華麗、故事精彩、公開分享或 AI 使用量。</p>
 </div></section>
 
-<section class="slide" data-section="100 分鐘"><div class="inner">
+<section class="slide" data-slide="4" data-section="100 分鐘"><div class="inner">
   <div class="eyebrow">今天的版本路徑</div><h2>先寫，先鎖，再讓別人看</h2>
   <div class="timeline">
-    <div class="time">00–10</div><div class="event"><b>取回 W4</b>｜三個想修處＋一則讀者回報</div>
+    <div class="time">00–10</div><div class="event"><b>關閉 Gate 1、取回 W4</b>｜批次看 W2–W4 三類證據</div>
     <div class="time">10–18</div><div class="event"><b>教師示範</b>｜同一件事＋確切字詞</div>
     <div class="time">18–45</div><div class="event"><b>寫 V1</b>｜重寫 W2</div>
     <div class="time">45–54</div><div class="event"><b>證據封存</b>｜舊句、新句、最大差異</div>
@@ -91,22 +92,23 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   </div>
 </div></section>
 
-<section class="slide" data-section="取回 W4"><div class="inner center">
-  <div class="eyebrow">00–10</div><h2>W4 留下的東西，<br><span class="gold">今天真的要用</span></h2>
-  <div class="grid2" style="max-width:1050px;margin-left:auto;margin-right:auto">
-    <div class="card"><div class="score">①</div><h3>三個「下次想修」</h3></div>
-    <div class="card"><div class="score">②</div><h3>至少一則具體讀者回報</h3></div>
+<section class="slide" data-slide="5" data-section="取回 W4"><div class="inner center">
+  <div class="eyebrow">00–10｜Gate 1 批次檢核</div><h2>先攤開 W2–W4</h2>
+  <div class="grid3">
+    <div class="card"><div class="score">①</div><h3>自己的原作</h3><p>第一次作答留著。</p></div>
+    <div class="card"><div class="score">②</div><h3>具體回饋／查核</h3><p>至少一則可核對痕跡。</p></div>
+    <div class="card"><div class="score">③</div><h3>回應／修訂</h3><p>或留下保留理由。</p></div>
   </div>
-  <p class="lead">先選今天 V1 要處理哪一項，並寫下理由。</p>
+  <p class="lead">通過＝5／5；需修正者期限內補正仍是 5／5。勾完再取回 W4 修訂目標與讀者回報。</p>
 </div></section>
 
-<section class="slide" data-section="Plan B"><div class="inner center">
+<section class="slide" data-slide="6" data-section="Plan B"><div class="inner center">
   <div class="eyebrow">未帶 W2 怎麼辦？</div><h2>憑記憶重建 3–5 句</h2>
   <div class="quote"><span class="red strong">頁首標示：</span>「記憶重建版」</div>
-  <p class="lead">教師範例只能示範，不能拿來當你的評量材料。</p>
+  <p class="lead">先繼續學習；它不能取代 Gate 1 原作，也不能冒充可比較基準。補回原件或可驗證副本後再更新。</p>
 </div></section>
 
-<section class="slide" data-section="教師示範"><div class="inner">
+<section class="slide" data-slide="7" data-section="教師示範"><div class="inner">
   <div class="eyebrow">10–18｜比較要談同一件事</div><h2>「比較生動」不是證據</h2>
   <div class="compare">
     <div class="card"><div class="label">W2 舊句</div><div class="sample">我<span class="red">等了一下</span>就上車。</div></div>
@@ -116,19 +118,19 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   <p class="lead">證據＝可以圈出哪個字詞造成差異。</p>
 </div></section>
 
-<section class="slide" data-section="重寫原則"><div class="inner center">
+<section class="slide" data-slide="8" data-section="重寫原則"><div class="inner center">
   <div class="eyebrow">不要追求篇幅</div><div class="question">重寫不是<span class="red">寫更多</span><br>而是<span class="gold">做更清楚的選擇</span></div>
   <div class="rule"></div><p class="lead">變短、變長或幾乎不改，都可能成立。</p>
 </div></section>
 
-<section class="slide" data-section="寫 V1"><div class="inner center">
+<section class="slide" data-slide="9" data-section="寫 V1"><div class="inner center">
   <div class="eyebrow">18–45</div><h2>完成 W5 重寫 <span class="gold">V1</span></h2>
   <p class="lead">選一個 W4 修訂目標：地方、動作、變化，或讀者沒收到的重點。</p>
   <div class="timer" data-timer="1620">27:00</div>
-  <p class="small" style="margin-top:20px"><span class="red strong">本週預設不用 AI。</span>AI 不能代替 V1、真人讀者或你的最後判斷。</p>
+  <p class="small" style="margin-top:20px">本週以既有歷程、本人 V1 與真人讀者為指定條件。AI 可以提建議，但不能代替三者與你的最後判斷；若查詢，須理解、選擇、查核並負責。</p>
 </div></section>
 
-<section class="slide" data-section="卡住時"><div class="inner">
+<section class="slide" data-slide="10" data-section="卡住時"><div class="inner">
   <div class="eyebrow">只回答這三問</div><h2>先把問題縮小</h2>
   <div class="checklist">
     <div class="check" data-reveal="1"><div class="n">1</div><div class="txt">W2 裡你最確定的是哪一小段？</div></div>
@@ -137,28 +139,28 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   </div>
 </div></section>
 
-<section class="slide" data-section="回饋前封存"><div class="inner center">
+<section class="slide" data-slide="11" data-section="回饋前封存"><div class="inner center">
   <div class="eyebrow">45–54｜先停筆</div><h2>先把 V1 鎖起來</h2>
   <div class="locked"><div class="lock">🔒</div><h3 class="red">V1 不准擦掉、覆寫</h3><p class="lead" style="margin-top:10px">若要修改，另寫 V2；若不改，留下保留理由。</p></div>
 </div></section>
 
-<section class="slide" data-section="證據封存"><div class="inner">
+<section class="slide" data-slide="12" data-section="證據封存"><div class="inner">
   <div class="eyebrow">回饋前先寫完</div><h2>鎖住三項證據</h2>
   <div class="grid3">
     <div class="card" data-reveal="1"><div class="score">①</div><h3>W2 舊句</h3><p>只抄一個要比較的句子。</p></div>
     <div class="card" data-reveal="2"><div class="score">②</div><h3>W5 V1 新句</h3><p>必須談同一件事。</p></div>
     <div class="card" data-reveal="3"><div class="score">③</div><h3>最大差異</h3><p>圈出確切字詞，不寫「比較好」。</p></div>
   </div>
-  <div class="timer" data-timer="540">9:00</div>
+  <div class="timer" data-timer="480">8:00</div>
 </div></section>
 
-<section class="slide" data-section="真人測讀"><div class="inner center">
+<section class="slide" data-slide="13" data-section="真人測讀"><div class="inner center">
   <div class="eyebrow">54–64</div><h2>讀者只做一件事</h2>
   <div class="quote">回報文字讓你<span class="gold strong">實際看到、聽到、感覺到或誤讀什麼</span>。</div>
   <p class="lead">至少指出一個原詞或句子；不評作者，不追問私人背景。</p>
 </div></section>
 
-<section class="slide" data-section="回報語言"><div class="inner">
+<section class="slide" data-slide="14" data-section="回報語言"><div class="inner">
   <div class="eyebrow">沿用 W4 的測讀語言</div><h2>哪一種回報能用？</h2>
   <div class="grid2">
     <div class="card" style="border-color:var(--green)"><div class="label green">可以用</div><div class="sample">我讀成傘碰到後面的人，因為「鞋底聲忽然停住」。</div></div>
@@ -166,25 +168,25 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   </div>
 </div></section>
 
-<section class="slide" data-section="真人測讀"><div class="inner center">
+<section class="slide" data-slide="15" data-section="真人測讀"><div class="inner center">
   <div class="eyebrow">交換 V1</div><h2>不替作者改，<br>只留下你的閱讀結果</h2>
-  <div class="timer" data-timer="600">10:00</div>
+  <div class="timer" data-timer="360">6:00</div>
   <p class="small" style="margin-top:22px">看完歸還；不拍照、不轉傳。</p>
 </div></section>
 
-<section class="slide" data-section="作者決定"><div class="inner center">
+<section class="slide" data-slide="16" data-section="作者決定"><div class="inner center">
   <div class="eyebrow">64–74</div><h2>回饋不是命令</h2>
   <div class="choice"><span>採用</span><span>部分採用</span><span>不採用</span></div>
   <p class="lead">三種都可以；請完成一句：<br><span class="gold strong">「我這樣決定，因為＿＿。」</span></p>
 </div></section>
 
-<section class="slide" data-section="V2／合理保留"><div class="inner center">
+<section class="slide" data-slide="17" data-section="V2／合理保留"><div class="inner center">
   <div class="eyebrow">留下版本差異</div><h2>有改，寫 <span class="gold">V2</span><br>不改，寫<span class="accent">保留理由</span></h2>
   <div class="quote">修正能力 ≠ 一定改字<br><span class="small">修正能力＝看見回饋後，做出可說明的決定。</span></div>
-  <div class="timer" data-timer="600">10:00</div>
+  <div class="timer" data-timer="480">8:00</div>
 </div></section>
 
-<section class="slide" data-section="最終對比"><div class="inner">
+<section class="slide" data-slide="18" data-section="最終對比"><div class="inner">
   <div class="eyebrow">74–86｜不用湊 200 字</div><h2>四項內容都說清楚</h2>
   <div class="checklist">
     <div class="check" data-reveal="1"><div class="n">1</div><div><div class="txt">談同一件事的 W2 舊句與 V1 新句</div></div></div>
@@ -194,18 +196,18 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   </div>
 </div></section>
 
-<section class="slide" data-section="評分自查"><div class="inner">
-  <div class="eyebrow">交件前自己看一次</div><h2>我的 8 分證據在哪裡？</h2>
+<section class="slide" data-slide="19" data-section="評分自查"><div class="inner">
+  <div class="eyebrow">交件前自己看一次</div><h2>我的 W5 10 分證據在哪裡？</h2>
   <div class="grid4">
     <div class="card"><h3>閱讀證據</h3><p>舊／新句＋確切字詞</p></div>
     <div class="card"><h3>形成判斷</h3><p>最大變化＋理由</p></div>
     <div class="card"><h3>回應讀者</h3><p>具體回報＋決定</p></div>
     <div class="card"><h3>修正能力</h3><p>V1＋V2／保留理由</p></div>
   </div>
-  <p class="lead center">缺哪一項，只補哪一項；不是整份歸零。</p>
+  <p class="lead center">四項原始 8 分換算 10 分；Gate 1 狀態另欄記錄。</p>
 </div></section>
 
-<section class="slide" data-section="W6 前置"><div class="inner">
+<section class="slide" data-slide="20" data-section="W6 前置"><div class="inner">
   <div class="eyebrow">86–92｜選書登記卡</div><h2>下週的書，今天先確認</h2>
   <div class="grid3">
     <div class="card"><div class="score">①</div><h3>取得得到</h3><p>自有／圖書館確認／需要協助</p></div>
@@ -215,14 +217,14 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   <p class="lead">教師只回：「可以」或「這欄補一下」。</p>
 </div></section>
 
-<section class="slide" data-section="自留札記"><div class="inner center">
+<section class="slide" data-slide="21" data-section="自留札記"><div class="inner center">
   <div class="eyebrow">92–100｜先保護隱私，再收件</div><h2>第 4 頁由你保管</h2>
   <div class="tear">✂ 沿虛線撕下，帶走</div>
   <p class="lead">教師不讀、不計分；不需要自己猜哪些內容要遮。</p>
 </div></section>
 
-<section class="slide" data-section="收件"><div class="inner">
-  <div class="eyebrow">教師只收第 1–3 頁</div><h2>交件前確認五項</h2>
+<section class="slide" data-slide="22" data-section="收件"><div class="inner">
+  <div class="eyebrow">教師只收第 1–3 頁</div><h2>兩套證據分欄確認</h2>
   <div class="checklist">
     <div class="check"><div class="n">□</div><div class="txt">V1 留著</div></div>
     <div class="check"><div class="n">□</div><div class="txt">有讀者原句</div></div>
@@ -230,14 +232,15 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
     <div class="check"><div class="n">□</div><div class="txt">有 V2 或保留理由</div></div>
     <div class="check"><div class="n">□</div><div class="txt">有四項最終對比</div></div>
   </div>
+  <p class="lead center"><span class="gold strong">Gate 1：</span>通過／需修正＋缺項期限　｜　<span class="gold strong">W5：</span>四項原始分→10 分</p>
 </div></section>
 
-<section class="slide" data-section="下一週"><div class="inner center">
+<section class="slide" data-slide="23" data-section="下一週"><div class="inner center">
   <div class="eyebrow">W5 → W6</div><h2>從自己的記憶，<br>走向<span class="gold">別人的文本</span></h2>
   <p class="lead">下週：書裡真的寫了什麼？讀者與 AI 又補了什麼？</p>
 </div></section>
 
-<section class="slide" data-section="帶走一句話"><div class="inner center">
+<section class="slide" data-slide="24" data-section="帶走一句話"><div class="inner center">
   <div class="question">重寫不是證明<br>我<span class="red">變厲害</span>了</div>
   <div class="rule"></div>
   <div class="question" style="font-size:var(--t2)">是證明我現在<br><span class="gold">看得見自己怎麼做決定</span></div>
@@ -247,14 +250,16 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 const slides=[...document.querySelectorAll('.slide')];let current=0,timer=null,reveal=0;
 function revealEls(){return [...slides[current].querySelectorAll('[data-reveal]')].sort((a,b)=>+a.dataset.reveal-+b.dataset.reveal)}
 function paint(){revealEls().forEach(x=>x.classList.toggle('revealed',+x.dataset.reveal<=reveal))}
-function show(n){if(n<0||n>=slides.length)return;if(timer){clearInterval(timer);timer=null}slides.forEach(s=>s.classList.remove('active'));current=n;reveal=0;slides[n].classList.add('active');document.querySelector('#section').textContent=slides[n].dataset.section||'';document.querySelector('#page').textContent=`${n+1} / ${slides.length}`;document.querySelector('#progress').style.width=`${(n+1)/slides.length*100}%`;paint();const el=slides[n].querySelector('[data-timer]');if(el)startTimer(el)}
+function show(number){const n=number-1;if(n<0||n>=slides.length)return;if(timer){clearInterval(timer);timer=null}slides.forEach(s=>s.classList.remove('active'));current=n;reveal=0;slides[n].classList.add('active');document.querySelector('#section').textContent=slides[n].dataset.section||'';document.querySelector('#page').textContent=`${number} / ${slides.length}`;document.querySelector('#progress').style.width=`${number/slides.length*100}%`;paint();const el=slides[n].querySelector('[data-timer]');if(el)startTimer(el)}
 function startTimer(el){let left=+el.dataset.timer;const draw=()=>{const m=Math.floor(left/60),s=left%60;el.textContent=`${m}:${String(s).padStart(2,'0')}`};draw();timer=setInterval(()=>{left--;draw();if(left<=0){clearInterval(timer);timer=null;el.style.color='var(--red)';el.style.borderColor='var(--red)'}},1000)}
-function next(){const r=revealEls();if(reveal<r.length){reveal++;paint()}else show(current+1)}
-function prev(){if(reveal>0){reveal--;paint()}else show(current-1)}
+function next(){const r=revealEls();if(reveal<r.length){reveal++;paint()}else show(current+2)}
+function prev(){if(reveal>0){reveal--;paint()}else show(current)}
 function fs(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.()}
-document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}else if(e.key.toLowerCase()==='f')fs();else if(e.key.toLowerCase()==='p')document.body.classList.toggle('reveal-all');else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1)});
+document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}else if(e.key.toLowerCase()==='f')fs();else if(e.key.toLowerCase()==='p')document.body.classList.toggle('reveal-all');else if(e.key==='Home')show(1);else if(e.key==='End')show(slides.length)});
 document.addEventListener('click',e=>{if(e.clientX>innerWidth*.72)next();else if(e.clientX<innerWidth*.28)prev()});
-show(0);
+function updateRotateHint(){const hint=document.getElementById('rotateHint');if(!hint)return;hint.classList.toggle('visible',innerWidth<600&&innerHeight>innerWidth)}
+addEventListener('resize',updateRotateHint);addEventListener('orientationchange',updateRotateHint);
+show(1);updateRotateHint();
 </script>
 </body>
 </html>

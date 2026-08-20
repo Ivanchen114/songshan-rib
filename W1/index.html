@@ -176,6 +176,41 @@ body.force-rotate .rotate-hint { display: none; }
 .slide[data-slide="4"] ol.body { line-height: 1.7 !important; }
 .slide[data-slide="4"] .body-sm { margin-top: 12px !important; }
 
+.checkpoint-slide { padding-top: 58px; padding-bottom: 54px; }
+.checkpoint-slide .slide-inner > .kicker {
+  font-size: calc(var(--t4) * 0.9);
+  margin-bottom: 8px;
+}
+.checkpoint-slide .slide-inner > .title {
+  font-size: clamp(38px, 3vw, 48px) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 0;
+}
+.checkpoint-slide .slide-inner > div:nth-child(3) {
+  gap: 10px !important;
+  margin-top: 14px !important;
+}
+.checkpoint-slide .slide-inner > div:nth-child(3) > div {
+  padding: 10px 16px !important;
+}
+.checkpoint-slide .slide-inner > div:nth-child(3) > div > div:nth-child(1) {
+  font-size: calc(var(--t3) * 0.58) !important;
+}
+.checkpoint-slide .slide-inner > div:nth-child(3) > div > div:nth-child(2) {
+  font-size: calc(var(--t3) * 0.8) !important;
+  margin: 3px 0 4px !important;
+}
+.checkpoint-slide .slide-inner > div:nth-child(3) > div > div:nth-child(3) {
+  font-size: calc(var(--t3) * 0.72) !important;
+  line-height: 1.4 !important;
+}
+.checkpoint-slide .slide-inner > div:nth-child(4) {
+  margin-top: 12px !important;
+  padding: 10px 20px !important;
+  font-size: calc(var(--t3) * 0.72) !important;
+  line-height: 1.4 !important;
+}
+
 .slide[data-slide="12"] .title {
   font-size: clamp(54px, 4.3vw, 78px);
   margin-bottom: 12px;
@@ -959,10 +994,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W1 · 起點檢核</div>
 </section>
 
-<section class="slide dark" data-slide="6" data-section="起點檢核">
+<section class="slide dark checkpoint-slide" data-slide="6" data-section="起點檢核">
 <div class="slide-inner">
     <div class="kicker gold">起點檢核 · 題本四關 · 20 分鐘</div>
-    <div class="title" style="font-size:clamp(34px,3vw,54px);line-height:1.3;">題本上有四關<br>寫不完可以<span class="accent">留白</span></div>
+    <div class="title" style="font-size:clamp(34px,3vw,54px);line-height:1.3;">題本四關｜寫不完可以<span class="accent">留白</span></div>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px;">
 <div style="padding:18px 20px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t3)*0.72);font-weight:900;color:var(--accent);letter-spacing:.06em;">A</div><div style="font-size:calc(var(--t3)*0.95);font-weight:800;color:var(--ink-1);margin:6px 0 8px;">讀一段新材料</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);line-height:1.55;">圈 <b>2 個</b>文本內可以確認的內容；圈 <b>1 個</b>說得太滿或還無法確認的主張，旁邊寫理由；再寫 <b>1 個</b>最想查的問題。</div></div><div style="padding:18px 20px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t3)*0.72);font-weight:900;color:var(--accent);letter-spacing:.06em;">B</div><div style="font-size:calc(var(--t3)*0.95);font-weight:800;color:var(--ink-1);margin:6px 0 8px;">我的暫時判斷</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);line-height:1.55;">約 60–100 字：現在的主張 ＋ 至少 <b>1 個文本細節</b> ＋ <b>1 個仍不確定</b>的地方。</div></div><div style="padding:18px 20px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t3)*0.72);font-weight:900;color:var(--accent);letter-spacing:.06em;">C</div><div style="font-size:calc(var(--t3)*0.95);font-weight:800;color:var(--ink-1);margin:6px 0 8px;">回應一則追問</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);line-height:1.55;">題本上有一則追問。先指出它碰到你哪個前提，再決定：修正／加條件／縮小／暫停／用更強理由重申。</div></div><div style="padding:18px 20px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t3)*0.72);font-weight:900;color:var(--accent-2);letter-spacing:.06em;">D</div><div style="font-size:calc(var(--t3)*0.95);font-weight:800;color:var(--ink-1);margin:6px 0 8px;">先評自己，不看答案</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);line-height:1.55;">閱讀證據・形成判斷・回應回饋・修正能力，各圈 <b>0／1／2</b>。0＝還不知道第一步。</div></div>
     </div>
@@ -976,7 +1011,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <div class="slide-inner">
     <div class="kicker gold">投票前 10 秒 · 賭注格</div>
     <div class="title" style="font-size:clamp(34px,3vw,54px);line-height:1.3;">四篇文章：人寫？AI 寫？<br>每投一篇，順手押一注</div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px;"><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">50%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">丟銅板</div></div><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">70%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">敢跟同學小賭</div></div><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--accent-2);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--accent-2);">90%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--accent-2);margin-top:6px;line-height:1.4;">敢賭一塊雞排</div></div><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">99%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">敢賭一個月零用錢</div></div></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px;"><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">50%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">像丟硬幣</div></div><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">70%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">有些把握</div></div><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--accent-2);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--accent-2);">90%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--accent-2);margin-top:6px;line-height:1.4;">高度確定</div></div><div style="padding:20px 12px;background:rgba(17,34,58,0.55);border:1.5px solid var(--ink-4);border-radius:10px;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">99%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">幾乎確定</div></div></div>
     <div style="margin-top:26px;padding:16px 26px;background:rgba(0,198,255,0.07);border-left:4px solid var(--accent);border-radius:8px;font-size:calc(var(--t3)*0.85);line-height:1.6;">每篇判完，在歷程本〈01 真假畫廊〉的<span style="font-weight:700;color:var(--accent);">賭注表</span>填：<span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);">把握 ＿＿％</span>——四篇都要。揭曉後回填 ✓／✗。</div>
     <div style="margin-top:14px;font-size:var(--t4);color:var(--ink-3);text-align:center;">只當儀式，不評分。W17 那天，你會回來看這些數字。</div>
   </div>
@@ -1422,7 +1457,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="conclusion-card" data-reveal="1">
         <div style="display: grid; grid-template-columns: 80px 1fr; gap: 24px; align-items: center;">
           <div class="cn-num">①</div>
-          <div class="cn-body">AI 可以幫你，但不能替你<span class="accent-2">判斷、替你負責</span></div>
+          <div class="cn-body">AI 可以提出判斷與理由；你要<span class="accent-2">理解、選擇、查核並負責</span></div>
         </div>
       </div>
       <div class="conclusion-card" data-reveal="2">
@@ -1477,10 +1512,10 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="30" data-section="評分規準">
   <div class="slide-inner">
-    <div class="kicker">先理解評分在保護什麼</div>
-    <div class="title" style="font-size: clamp(52px, 4.6vw, 82px);">不是作文比賽</div>
+    <div class="kicker">W1 全部不計分</div>
+    <div class="title" style="font-size: clamp(52px, 4.6vw, 82px);">先練三個學習動作</div>
     <div class="big-quote medium accent" style="margin: 18px 0 0; font-weight: 700;">
-      評分不是猜老師喜歡哪一種答案，<br>而是看三個能被看見的學習動作。
+      今天可以不成熟、可以犯錯；<br>重點是留下之後能回看的學習痕跡。
     </div>
     <div class="grade-actions">
       <div class="grade-action"><span class="g-num">1</span><h3>完成任務</h3><p>回應這週真正要你做的事。</p></div>
@@ -1488,7 +1523,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="grade-action"><span class="g-num">3</span><h3>說明判斷</h3><p>說清楚保留或修改的理由。</p></div>
     </div>
   </div>
-  <div class="page-footer">W1 · 評分目的</div>
+  <div class="page-footer">W1 · 形成性練習</div>
 </section>
 
 <section class="slide dark" data-slide="31" data-section="評分規準">
@@ -1511,8 +1546,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     <div class="title" style="font-size: clamp(52px, 4.6vw, 82px);">兩種欄位</div>
     <div class="grid-2" style="margin-top: 30px;">
       <div class="card" style="border-top: 4px solid var(--accent);">
-        <div class="label">課堂任務｜要交</div>
-        <div class="body" style="font-weight: 900; margin: 8px 0;">老師會讀、會回饋或評分</div>
+        <div class="label">課堂任務｜要留下</div>
+        <div class="body" style="font-weight: 900; margin: 8px 0;">老師會讀、會回饋；W1 不計分</div>
         <div class="body-sm muted">可以匿名化人物與地點，但要留下可判讀的學習動作。</div>
       </div>
       <div class="card" style="border-top: 4px solid var(--accent-2);">
@@ -1527,12 +1562,12 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="33" data-section="評分規準">
   <div class="slide-inner">
-    <div class="kicker">配分透明，但今天不塞滿</div>
-    <div class="title" style="font-size: clamp(48px, 4.4vw, 78px);">完整規準在歷程本</div>
-    <div class="big-quote medium accent" style="margin: 28px 0 0; font-weight: 700;">W1 先記三個動作：<br>完成、證據、判斷。</div>
-    <div class="grade-note"><span class="accent-2 bold">W5 第一次正式收件前，</span>我們會拿真作品再讀一次配分與四項能力規準。</div>
+    <div class="kicker">作業用來變會，評量用來取證</div>
+    <div class="title" style="font-size: clamp(48px, 4.4vw, 78px);">W1 全部 0 分</div>
+    <div class="big-quote medium accent" style="margin: 28px 0 0; font-weight: 700;">完成、證據、判斷，<br>今天是練習與回饋語言。</div>
+    <div class="grade-note"><span class="accent-2 bold">W2–W4 累積第一個歷程 Gate；</span>W5 前我們會拿真作品讀一次正式規準。</div>
   </div>
-  <div class="page-footer">W1 · 評分透明</div>
+  <div class="page-footer">W1 · 評量身分</div>
 </section>
 
 <section class="slide dark" data-slide="34" data-section="評分規準">
