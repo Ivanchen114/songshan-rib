@@ -572,6 +572,27 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .slide[data-slide="18"] > .slide-inner{zoom:0.88;}
 .slide[data-slide="24"] > .slide-inner{zoom:0.78;}
 </style>
+<style id="deck-chrome-layout">
+/* UI chrome uses its own compact scale and reserves a collision-free top row. */
+#section-tag {
+  top: 18px;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+.back-home,
+.fullscreen-btn {
+  font-size: var(--t-ui);
+  letter-spacing: 0.08em;
+}
+.fullscreen-btn { left: 158px; }
+.download-tools { top: 12px; left: 292px; }
+@media (max-width: 900px) {
+  #section-tag { display: none; }
+}
+</style>
 </head>
 <body>
 
