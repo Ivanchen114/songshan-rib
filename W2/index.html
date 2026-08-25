@@ -6,7 +6,7 @@
 <title>W2 · 大冰奶事實查核 · 閱讀理解與表達</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 
 :root {
@@ -30,6 +30,9 @@
   --t4: clamp(22px, 1.6vw, 26px);
   /* UI chrome（小、固定、不放大）*/
   --t-ui: clamp(15px, 1.1vw, 20px);
+  --font-teaching: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  --font-reading: "Noto Serif TC", "PMingLiU", serif;
+  --font-ui: "JetBrains Mono", ui-monospace, monospace;
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
@@ -443,8 +446,9 @@ body.compact-deck .slide[data-slide="16"] .prompt-quote {
   letter-spacing: 0.05em;
 }
 .gemini-card .gbody {
-  font-size: calc(var(--t3) * 0.78);
-  line-height: 1.85;
+  font-family: var(--font-reading);
+  font-size: calc(var(--t3) * 0.84);
+  line-height: 1.75;
   color: var(--ink-dark);
 }
 .gemini-card .gstamp {
@@ -810,6 +814,33 @@ body.compact-deck .slide[data-slide="16"] .prompt-quote {
 [data-reveal].revealed{opacity:1;transform:translateY(0);}
 body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 @media print{[data-reveal]{opacity:1!important;transform:none!important;}}
+</style>
+<style id="projection-safety">
+/* Native-scale writing pages: compact spacing keeps all instructions inside the 1600×900 safe zone. */
+.slide[data-slide="14"] .slide-inner > div:first-child { margin-bottom:10px!important; }
+.slide[data-slide="14"] .kicker { margin-bottom:8px; }
+.slide[data-slide="14"] .title { font-size:var(--t2)!important; line-height:1.08; margin-bottom:8px; }
+.slide[data-slide="14"] .card { padding:18px 28px!important; }
+.slide[data-slide="14"] .rules-list { gap:6px; margin-top:10px; }
+.slide[data-slide="14"] .rule { padding:4px 0; }
+.slide[data-slide="14"] .rule-text { font-size:calc(var(--t3)*.82); line-height:1.4; }
+.slide[data-slide="15"] .kicker { margin-bottom:8px; }
+.slide[data-slide="15"] .title { margin-bottom:8px; }
+.slide[data-slide="15"] .grid-2 { margin-top:12px!important; gap:22px!important; }
+.slide[data-slide="15"] .tisha-card { padding:11px 22px; font-size:var(--t4); line-height:1.55; }
+.slide[data-slide="15"] .card { padding:11px 22px!important; }
+.slide[data-slide="15"] .rules-list { gap:6px; margin-top:10px; }
+.slide[data-slide="15"] .rule { padding:4px 0; }
+.slide[data-slide="15"] .rule-text { font-size:calc(var(--t3)*.82); line-height:1.4; }
+.slide[data-slide="26"] .slide-inner > div:first-child { margin-bottom:10px!important; }
+.slide[data-slide="26"] .kicker { margin-bottom:8px; }
+.slide[data-slide="26"] .title { font-size:var(--t2)!important; line-height:1.08; margin-bottom:0; }
+.slide[data-slide="26"] .card-light { padding:18px 26px; }
+.slide[data-slide="26"] .rules-list { gap:6px; margin-top:10px; }
+.slide[data-slide="26"] .rule { padding:4px 0; }
+.slide[data-slide="26"] .rule-text { font-size:calc(var(--t3)*.84); line-height:1.42; }
+.slide[data-slide="26"] .card-light > .body-sm { margin-top:10px!important; }
+.slide[data-slide="26"] .slide-inner > .body-sm { margin-top:12px!important; }
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */

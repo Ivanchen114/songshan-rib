@@ -6,7 +6,7 @@
 <title>W11 · 敵營情報易位 · 把反方說公平</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0D1B2A;
@@ -30,6 +30,9 @@
   --t4: clamp(22px, 1.6vw, 26px);
   /* UI chrome（小、固定、不放大）*/
   --t-ui: clamp(15px, 1.1vw, 20px);
+  --font-teaching: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  --font-reading: "Noto Serif TC", "PMingLiU", serif;
+  --font-ui: "JetBrains Mono", ui-monospace, monospace;
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
@@ -170,6 +173,7 @@ body.force-rotate .rotate-hint { display: none; }
 .subtitle { font-size: var(--t2); font-weight: 700; line-height: 1.3; margin-bottom: 20px; }
 .body { font-size: var(--t3); line-height: 1.65; }
 .body-sm { font-size: calc(var(--t3) * 0.85); line-height: 1.6; }
+.reading-artifact { font-family: var(--font-reading); font-size: calc(var(--t3) * 0.9); line-height: 1.72; }
 .accent { color: var(--accent); }
 .accent-2 { color: var(--accent-2); }
 .alert { color: var(--alert); }
@@ -571,7 +575,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 
 <style id="projection-safety">
-.slide[data-slide="18"] > .slide-inner{zoom:0.92;}
+/* Native-scale projection; page-specific spacing is verified at 1600×900. */
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
@@ -704,7 +708,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="card" style="margin-top:14px;">
       <div class="label">乙報導原文</div>
-      <div class="body-sm">「96 份有效回覆，其中 <span class="accent-2 bold">48 人表示擔心漏接家人訊息</span>。」</div>
+      <div class="body-sm reading-artifact">「96 份有效回覆，其中 <span class="accent-2 bold">48 人表示擔心漏接家人訊息</span>。」</div>
     </div>
     <div class="body-sm" style="margin-top:20px;text-align:center;color:var(--ink-2);">價值可以解讀，但要讓人看得見：你從哪一句讀出來。</div>
   </div>

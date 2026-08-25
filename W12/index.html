@@ -207,6 +207,11 @@ body.force-rotate .rotate-hint { display: none; }
   padding: 24px 28px;
   backdrop-filter: blur(8px);
 }
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
 
 .cover-overlay { position: absolute; left: 90px; bottom: 90px; max-width: 65%; z-index: 3; }
 .battle-overlay { position: absolute; bottom: 90px; left: 90px; right: 90px; z-index: 3; }
@@ -546,9 +551,14 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 
 <style id="projection-safety">
-.slide[data-slide="9"] > .slide-inner{zoom:0.9;}
-.slide[data-slide="12"] > .slide-inner{zoom:0.87;}
-.slide[data-slide="16"] > .slide-inner{zoom:0.88;}
+/* Native-scale projection; compact spacing replaces whole-page zoom. */
+.slide[data-slide="6"] .title { margin-bottom:10px; }
+.slide[data-slide="6"] .grid-2 { gap:16px!important; margin-top:14px!important; }
+.slide[data-slide="6"] .card { padding:20px 24px; }
+.slide[data-slide="6"] .slide-inner > .body-sm { margin-top:16px!important; }
+.slide[data-slide="14"] .title { margin-bottom:10px; }
+.slide[data-slide="14"] .grid-2 { gap:14px!important; margin-top:14px!important; }
+.slide[data-slide="14"] .card { padding:18px 22px; }
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */

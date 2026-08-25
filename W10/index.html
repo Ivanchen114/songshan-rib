@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="../assets/songshan-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 
 :root {
@@ -31,6 +31,9 @@
   --t4: clamp(22px, 1.6vw, 26px);
   /* UI chrome（小、固定、不放大）*/
   --t-ui: clamp(15px, 1.1vw, 20px);
+  --font-teaching: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  --font-reading: "Noto Serif TC", "PMingLiU", serif;
+  --font-ui: "JetBrains Mono", ui-monospace, monospace;
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
@@ -295,15 +298,16 @@ body.force-rotate .rotate-hint { display: none; }
 
 /* AI 段落示範卡 */
 .ai-passage {
+  font-family: var(--font-reading);
   background: rgba(17,34,58,0.55);
   border-left: 4px solid var(--accent-2);
   border-radius: 6px;
   padding: 22px 28px;
   margin-top: 14px;
-  font-size: calc(var(--t3) * 0.82);
-  line-height: 1.8;
+  font-size: calc(var(--t3) * 0.88);
+  line-height: 1.7;
   color: var(--ink-2);
-  font-style: italic;
+  font-style: normal;
 }
 .ai-passage .hl-green { background: rgba(46,204,113,0.15); padding: 2px 4px; border-radius: 2px; }
 .ai-passage .hl-yellow { background: rgba(255,215,0,0.18); padding: 2px 4px; border-radius: 2px; font-weight: 700; }

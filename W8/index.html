@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="../assets/songshan-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 
 :root {
@@ -31,6 +31,9 @@
   --t4: clamp(22px, 1.6vw, 26px);
   /* UI chrome（小、固定、不放大）*/
   --t-ui: clamp(15px, 1.1vw, 20px);
+  --font-teaching: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  --font-reading: "Noto Serif TC", "PMingLiU", serif;
+  --font-ui: "JetBrains Mono", ui-monospace, monospace;
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
@@ -262,8 +265,9 @@ body.force-rotate .rotate-hint { display: none; }
   font-style: italic;
 }
 .article-card .ac-body {
-  font-size: calc(var(--t3) * 0.75);
-  line-height: 1.85;
+  font-family: var(--font-reading);
+  font-size: calc(var(--t3) * 0.84);
+  line-height: 1.72;
   color: var(--ink-dark);
   text-align: justify;
 }
@@ -463,8 +467,25 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 
 <style id="projection-safety">
-.slide[data-slide="7"] > .slide-inner{zoom:0.94;}
-.slide[data-slide="13"] > .slide-inner{zoom:0.92;}
+.slide[data-slide="7"] .article-card,
+.slide[data-slide="9"] .article-card { padding:20px 30px; }
+.slide[data-slide="7"] .ac-label,
+.slide[data-slide="9"] .ac-label { margin-bottom:8px; }
+.slide[data-slide="7"] .ac-headline,
+.slide[data-slide="9"] .ac-headline { line-height:1.25; margin-bottom:4px; }
+.slide[data-slide="7"] .ac-sub,
+.slide[data-slide="9"] .ac-sub { margin-bottom:10px; }
+.slide[data-slide="7"] .ac-q,
+.slide[data-slide="9"] .ac-q { margin-top:10px; padding:8px 14px; }
+.slide[data-slide="8"] .title { margin-bottom:8px; }
+.slide[data-slide="8"] .grid-2 { gap:14px!important; margin-top:12px!important; }
+.slide[data-slide="8"] .card { padding:18px 24px; }
+.slide[data-slide="8"] .slide-inner > div:last-child { margin-top:12px!important; padding:9px 18px!important; }
+.slide[data-slide="10"] .steps-4 { gap:9px; margin-top:12px; }
+.slide[data-slide="10"] .step-item { padding:11px 20px; }
+.slide[data-slide="14"] .grid-2 { margin-top:14px!important; }
+.slide[data-slide="14"] .steps-4 { gap:9px; margin-top:14px!important; }
+.slide[data-slide="14"] .step-item { padding:12px 20px; }
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */

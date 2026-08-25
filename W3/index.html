@@ -822,6 +822,34 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 }
 
 </style>
+<style id="projection-safety">
+/* Native-scale activity pages use compact rhythm instead of whole-slide zoom. */
+.slide[data-slide="17"] .slide-inner > div:first-child { margin-bottom:12px!important; }
+.slide[data-slide="17"] .title { margin-bottom:0; }
+.slide[data-slide="17"] .three-lines { gap:10px; margin-top:14px; }
+.slide[data-slide="17"] .line-row { padding:12px 20px; }
+.slide[data-slide="17"] .slide-inner > .body-sm:last-child { margin-top:14px!important; }
+.slide[data-slide="19"] .slide-inner > div:first-child { margin-bottom:10px!important; }
+.slide[data-slide="19"] .title { margin-bottom:0; }
+.slide[data-slide="19"] .slide-inner > .body-sm { margin-bottom:10px!important; }
+.slide[data-slide="19"] .card { padding:14px 24px!important; }
+.slide[data-slide="19"] .rules-list { gap:6px; margin-top:8px; }
+.slide[data-slide="19"] .rule { padding:3px 0; }
+.slide[data-slide="19"] .slide-inner > .body { margin-top:10px!important; }
+.slide[data-slide="19"] .slide-inner > .body-sm:last-child { margin-top:4px!important; }
+.slide[data-slide="22"] .kicker { margin-bottom:12px; }
+.slide[data-slide="22"] .title { margin-bottom:12px!important; }
+.slide[data-slide="22"] .card { padding:20px 26px; }
+.slide[data-slide="22"] .card > .body { line-height:1.7!important; }
+.slide[data-slide="22"] .card > .body-sm { margin-top:12px!important; }
+.slide[data-slide="22"] .slide-inner > .body { margin-top:18px!important; }
+.slide[data-slide="23"] .slide-inner > div:first-child { margin-bottom:10px!important; }
+.slide[data-slide="23"] .title { margin-bottom:0; }
+.slide[data-slide="23"] .card-light { padding:20px 24px; }
+.slide[data-slide="23"] .rules-list { gap:6px; margin-top:10px; }
+.slide[data-slide="23"] .card-light > .body-sm { margin-top:10px!important; }
+.slide[data-slide="23"] .slide-inner > .body-sm { margin-top:12px!important; }
+</style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
 #section-tag {

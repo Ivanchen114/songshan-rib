@@ -4,23 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>W5｜重寫，看見自己變了多少</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0b1726;--panel:#13263b;--panel2:#193149;--ink:#f3f7ff;--muted:#b8c6d8;
   --cyan:#39d0e8;--gold:#ffd36a;--red:#ff7082;--green:#70d6a4;--line:#35506b;
-  --t1:clamp(54px,6vw,94px);--t2:clamp(38px,4vw,66px);--t3:clamp(25px,2.35vw,38px);--t4:clamp(19px,1.55vw,26px);
+  --t1:clamp(84px,7vw,108px);--t2:clamp(54px,4.5vw,68px);--t3:clamp(33px,2.8vw,40px);--t4:clamp(22px,1.6vw,26px);--t-ui:clamp(15px,1.1vw,20px);
+  --font-teaching:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --font-reading:"Noto Serif TC","PMingLiU",serif;
+  --font-ui:"JetBrains Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden}
-body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink)}
+body{font-family:var(--font-teaching);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+#progress-bg{position:fixed;left:0;right:0;top:0;height:4px;background:rgba(120,144,170,.22);z-index:19}
 #progress{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--gold));z-index:20;transition:width .2s}
-#section{position:fixed;top:18px;left:24px;color:var(--cyan);font-weight:800;letter-spacing:.14em;font-size:15px;z-index:20}
-#page{position:fixed;right:24px;bottom:18px;color:#7890aa;font:700 15px ui-monospace,monospace;z-index:20}
-#help{position:fixed;left:24px;bottom:18px;color:#7890aa;font-size:13px;z-index:20}
+#section{position:fixed;top:18px;left:50%;transform:translateX(-50%);color:var(--cyan);font-family:var(--font-ui);font-weight:800;letter-spacing:.12em;font-size:var(--t-ui);z-index:20;white-space:nowrap}
+.back-home,.fullscreen-btn{position:fixed;top:14px;z-index:30;color:var(--cyan);font-family:var(--font-ui);font-size:var(--t-ui);font-weight:800;letter-spacing:.08em;text-decoration:none;background:rgba(11,23,38,.9);border:1px solid rgba(57,208,232,.35);border-radius:9px;padding:9px 14px;line-height:1.2}
+.back-home{left:24px}.fullscreen-btn{left:158px;cursor:pointer}
+#page{position:fixed;right:24px;bottom:18px;color:#7890aa;font:700 var(--t-ui) var(--font-ui);z-index:20}
+#help{position:fixed;left:24px;bottom:18px;color:#7890aa;font:700 13px var(--font-ui);z-index:20}
 #rotateHint{position:fixed;inset:0;z-index:99;display:none;align-items:center;justify-content:center;text-align:center;padding:32px;background:#071827;color:#f3f7ff;font-size:28px;font-weight:800;line-height:1.5}
 #rotateHint.visible{display:flex}
-.slide{position:absolute;inset:0;display:none;padding:6.5vh 6.5vw 7vh;background:
+.slide{position:absolute;inset:0;display:none;padding:70px 90px;background:
   radial-gradient(circle at 85% 12%,rgba(57,208,232,.10),transparent 28%),var(--bg)}
-.slide.active{display:flex}.inner{width:100%;max-width:1500px;margin:auto}.center{text-align:center}
+.slide.active{display:flex}.inner{width:100%;max-width:1420px;margin:auto}.center{text-align:center}
 .eyebrow{color:var(--cyan);font-weight:900;letter-spacing:.18em;font-size:var(--t4);margin-bottom:18px}
 h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03em}h2{font-size:var(--t2);line-height:1.22;letter-spacing:-.02em}h3{font-size:var(--t3);line-height:1.35}
 .lead{font-size:var(--t3);line-height:1.55;color:var(--muted);margin-top:22px}.small{font-size:var(--t4);line-height:1.55;color:var(--muted)}
@@ -34,12 +43,12 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 .score{font-size:clamp(46px,4vw,70px);font-weight:900;color:var(--gold);margin-bottom:10px}
 .timeline{display:grid;grid-template-columns:135px 1fr;gap:0;margin-top:22px;border-top:1px solid var(--line)}
 .time,.event{border-bottom:1px solid var(--line);padding:10px 14px;font-size:clamp(17px,1.35vw,23px);line-height:1.35}
-.time{font-family:ui-monospace,monospace;color:var(--cyan);font-weight:900}.event{color:var(--muted)}.event b{color:var(--ink)}
+.time{font-family:var(--font-ui);color:var(--cyan);font-weight:900}.event{color:var(--muted)}.event b{color:var(--ink)}
 .quote{font-size:var(--t3);line-height:1.6;padding:28px 34px;background:var(--panel);border-left:6px solid var(--gold);border-radius:10px;margin-top:26px}
 .compare{display:grid;grid-template-columns:1fr 80px 1fr;gap:18px;align-items:stretch;margin-top:28px}
 .arrow{align-self:center;text-align:center;color:var(--gold);font-size:52px;font-weight:900}.label{font-size:var(--t4);color:var(--cyan);font-weight:900;margin-bottom:12px}
-.sample{font-size:clamp(22px,1.9vw,31px);line-height:1.6;color:var(--ink)}
-.timer{display:inline-block;margin-top:26px;border:2px solid var(--cyan);border-radius:999px;padding:10px 22px;color:var(--cyan);font:900 clamp(25px,2.4vw,40px) ui-monospace,monospace}
+.sample{font-family:var(--font-reading);font-size:calc(var(--t3)*.88);line-height:1.7;color:var(--ink)}
+.timer{display:inline-block;margin-top:26px;border:2px solid var(--cyan);border-radius:999px;padding:10px 22px;color:var(--cyan);font:900 var(--t3) var(--font-ui)}
 .checklist{display:grid;gap:14px;margin-top:26px}.check{display:grid;grid-template-columns:54px 1fr;gap:16px;align-items:start;background:var(--panel);border-left:4px solid var(--cyan);padding:16px 22px;border-radius:8px}
 .check .n{font-size:var(--t3);font-weight:900;color:var(--gold)}.check .txt{font-size:var(--t3);line-height:1.42}.hint{font-size:var(--t4);color:var(--muted);margin-top:5px}
 .locked{border:2px solid var(--red);background:rgba(255,112,130,.08);padding:26px;border-radius:16px;margin-top:24px;text-align:center}
@@ -47,12 +56,14 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 .choice{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:26px}.choice span{padding:14px 20px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:var(--t3);font-weight:800}
 .tear{border-top:3px dashed var(--red);margin:35px 0 26px;padding-top:24px;color:var(--red);font-size:var(--t3);font-weight:900;text-align:center}
 [data-reveal]{opacity:0;transform:translateY(12px);transition:.2s}.reveal-all [data-reveal],[data-reveal].revealed{opacity:1;transform:none}
-@media(max-width:900px){.slide{padding:8vh 5vw}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}#help{display:none}.card{padding:18px}.timeline{grid-template-columns:95px 1fr}}
+.slide[data-slide="22"] .checklist{gap:12px;margin-top:20px}
+@media(max-width:900px){.slide{padding:80px 5vw 64px}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}#help{display:none}.card{padding:18px}.timeline{grid-template-columns:95px 1fr}#section{display:none}.fullscreen-btn{left:auto;right:18px}.back-home{left:18px}}
 @media(max-height:650px){:root{--t1:52px;--t2:38px;--t3:25px;--t4:18px}.slide{padding-top:6vh}.card{padding:16px 20px}.grid2,.grid3,.grid4{margin-top:18px;gap:14px}.timeline{margin-top:12px}.time,.event{padding:7px 12px}}
+@media print{html,body{overflow:visible;height:auto}.back-home,.fullscreen-btn,#section,#page,#help,#progress,#progress-bg{display:none!important}.slide{position:relative;display:flex!important;width:1600px;height:900px;page-break-after:always}[data-reveal]{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
-<div id="progress"></div><div id="section"></div><div id="page"></div><div id="help">← → 換頁　F 全螢幕　P 顯示全部</div><div id="rotateHint">請將手機轉為橫向，取得完整投影畫面。</div>
+<div id="progress-bg"></div><div id="progress"></div><a class="back-home" href="../">← R.I.B.</a><button class="fullscreen-btn" type="button" aria-label="切換全螢幕">⛶ 全螢幕</button><div id="section"></div><div id="page"></div><div id="help">← → 換頁　F 全螢幕　P 顯示全部</div><div id="rotateHint">請將手機轉為橫向，取得完整投影畫面。</div>
 
 <section class="slide active" data-slide="1" data-section="W5｜節點啟動"><div class="inner center">
   <div class="tag">W5 · Gate 1 0 分里程碑 ＋ 真人讀者經驗改寫 15 分</div>
@@ -257,6 +268,7 @@ function prev(){if(reveal>0){reveal--;paint()}else show(current)}
 function fs(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.()}
 document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}else if(e.key.toLowerCase()==='f')fs();else if(e.key.toLowerCase()==='p')document.body.classList.toggle('reveal-all');else if(e.key==='Home')show(1);else if(e.key==='End')show(slides.length)});
 document.addEventListener('click',e=>{if(e.clientX>innerWidth*.72)next();else if(e.clientX<innerWidth*.28)prev()});
+document.querySelector('.fullscreen-btn')?.addEventListener('click',e=>{e.stopPropagation();fs()});
 function updateRotateHint(){const hint=document.getElementById('rotateHint');if(!hint)return;hint.classList.toggle('visible',innerWidth<600&&innerHeight>innerWidth)}
 addEventListener('resize',updateRotateHint);addEventListener('orientationchange',updateRotateHint);
 show(1);updateRotateHint();

@@ -6,7 +6,7 @@
 <title>W1 · 課程前導 · 閱讀理解與表達</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&amp;family=Noto+Serif+TC:wght@400;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
 <style>
 
 :root {
@@ -29,6 +29,9 @@
   --t4: clamp(22px, 1.6vw, 26px);
   /* UI chrome（小、固定、不放大）*/
   --t-ui: clamp(15px, 1.1vw, 20px);
+  --font-teaching: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+  --font-reading: "Noto Serif TC", "PMingLiU", serif;
+  --font-ui: "JetBrains Mono", ui-monospace, monospace;
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
@@ -412,11 +415,13 @@ body.force-rotate .rotate-hint { display: none; }
   padding: 22px 26px;
   border: 2px solid rgba(26,35,64,0.08);
   position: relative;
-  font-size: calc(var(--t3) * 0.78);
-  line-height: 1.75;
+  font-family: var(--font-reading);
+  font-size: calc(var(--t3) * 0.8);
+  line-height: 1.52;
   color: var(--ink-dark);
 }
 .vote-tag {
+  font-family: var(--font-teaching);
   position: absolute;
   top: -16px; left: 22px;
   width: 40px; height: 40px;
@@ -451,6 +456,19 @@ body.force-rotate .rotate-hint { display: none; }
   font-weight: 700;
   color: var(--ink-dark);
 }
+.slide[data-slide="8"] .slide-inner > div:first-child,
+.slide[data-slide="9"] .slide-inner > div:first-child,
+.slide[data-slide="10"] .slide-inner > div:first-child,
+.slide[data-slide="11"] .slide-inner > div:first-child { margin-bottom:12px!important; }
+.slide[data-slide="8"] .vote-question,
+.slide[data-slide="9"] .vote-question,
+.slide[data-slide="10"] .vote-question,
+.slide[data-slide="11"] .vote-question { margin-bottom:14px; }
+.slide[data-slide="8"] .vote-options,
+.slide[data-slide="9"] .vote-options,
+.slide[data-slide="10"] .vote-options,
+.slide[data-slide="11"] .vote-options { margin-top:12px; }
+.slide[data-slide="11"] .vote-options { margin-top:8px; }
 
 /* Reveal table (slide 9) */
 .reveal-grid {
@@ -893,6 +911,22 @@ body.force-rotate .rotate-hint { display: none; }
 body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 @media print{[data-reveal]{opacity:1!important;transform:none!important;}}
 </style>
+<style id="projection-safety">
+/* Dense teaching pages stay readable at native scale and clear the 70 px footer safe zone. */
+.slide[data-slide="11"] .vote-options span { padding:8px 18px; }
+.slide[data-slide="16"] .kicker { margin-bottom:12px; }
+.slide[data-slide="16"] .title { line-height:1.05; margin-bottom:12px; }
+.slide[data-slide="16"] .compare-pair { gap:28px; margin-top:14px; }
+.slide[data-slide="16"] .compare-card { padding:24px 30px; }
+.slide[data-slide="16"] .compare-card .ctitle { margin-bottom:8px; }
+.slide[data-slide="16"] .slide-inner > .body-sm { margin-top:16px!important; line-height:1.45; }
+.slide[data-slide="21"] .kicker { margin-bottom:12px; }
+.slide[data-slide="21"] .title { margin-bottom:12px; }
+.slide[data-slide="21"] .flat-list { gap:8px; margin-top:12px!important; }
+.slide[data-slide="21"] .flat-row { padding:10px 22px; }
+.slide[data-slide="21"] .card-light { margin-top:16px!important; padding:18px!important; }
+.slide[data-slide="21"] .slide-inner > .body-sm { margin-top:12px!important; line-height:1.45; }
+</style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
 #section-tag {
@@ -1049,11 +1083,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="vote-question">猜猜誰是真人？</div>
     <div class="vote-pair">
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag">A</span>
         母親年輕的時候，一把青絲梳一條又粗又長的辮子，白天盤成了一個螺絲似的尖髻兒，高高地翹起在後腦，晚上就放下來掛在背後。我睡覺時挨著母親的肩膀，手指頭繞著她的長髮梢玩兒，雙妹牌生髮油的香氣混和著油垢味直薰我的鼻子。有點兒難聞，卻有一份母親陪伴著我的安全感。
       </div>
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag b">B</span>
         午後的穿堂風總會撩起母親腦後的髮絲，那黑亮的長度直抵腰際，厚實得像是能承載歲月的重量。我蹲坐在她身後的小竹凳上，看她細心地梳理那些糾結。木梳齒尖輕輕划過頭皮的沙沙聲，在靜謐的午間顯得格外清晰，伴隨著一股清淡的苦茶油芬芳，那是家裡灶腳與身體最熟悉的連結。
       </div>
@@ -1076,11 +1110,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="vote-question">猜猜誰是真人？</div>
     <div class="vote-pair">
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag">A</span>
         柳樹不與松柏爭高下，也不像花卉那般炫耀色彩。它像是一位溫柔的隱士，隨意垂下長髮，在風中輕輕擺動。別的樹木挺拔而僵硬，它卻能以柔軟化解狂風，在溪水邊展現一種安靜的力量。
       </div>
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag b">B</span>
         所有的樹都是用「點」畫成的，只有柳，是用「線」畫成的。別的樹總有花、或者果實，只有柳，茫然地散出些沒有用處的白絮。
       </div>
@@ -1103,11 +1137,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="vote-question">猜猜誰是真人？</div>
     <div class="vote-pair">
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag">A</span>
         學習的定位正在改變。世界如此動盪，學習還有意義嗎？教育曾經是一張前人繪製的地圖，我們可以按圖索驥，如今它是一個開放式的羅盤，學習者必須利用自己的知識，自主探索這個新世界。
       </div>
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag b">B</span>
         在數位浪潮席捲的今日，AI 已不僅是課堂外的科技點綴，而是重新定義知識邊界的變革者。過去教育如同築牆，強調記憶與鞏固；然而，當資訊觸手可得，教育的意義不再是填充容器，而是點燃火種。
       </div>
@@ -1130,11 +1164,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
     </div>
     <div class="vote-question">猜猜誰是真人？</div>
     <div class="vote-pair">
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag">A</span>
         那年九月，南台灣的陽光依舊燙人。老舊的貨車停在校門口，引擎熄火時發出疲憊的喘息。父親下車，幫我把沉重的行李箱扛下，他拍拍掌心的灰塵，望著校門石碑上燙金的校名，眼神裡有一種我當時讀不懂的、近乎敬畏的沈默。「進去吧，別耽誤了。」他只說了這句。我轉身走向校園，行李箱輪子在柏油路上拖出刺耳聲響。
       </div>
-      <div class="vote-col" style="font-size: calc(var(--t3)*0.8); line-height:1.5;">
+      <div class="vote-col">
         <span class="vote-tag b">B</span>
         博士學位讀完之後，我回臺灣教書。到大學報到第一天，父親用他那輛運送飼料的廉價小貨車長途送我。到了我才發覺，他沒開到大學正門口，而是停在側門的窄巷邊。卸下行李之後，他爬回車內，準備回去，明明啟動了引擎，卻又搖下車窗，頭伸出來說：「女兒，爸爸覺得很對不起你，這種車子實在不是送大學教授的車子。」我看著他的小貨車小心地倒車，然後噗噗駛出巷口，留下一團黑煙。
       </div>
