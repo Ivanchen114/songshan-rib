@@ -576,6 +576,18 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <style id="projection-safety">
 /* Native-scale projection; page-specific spacing is verified at 1600×900. */
+.slide[data-slide="9"] .s-main,
+.slide[data-slide="9"] .s-sub,
+.slide[data-slide="11"] .s-main,
+.slide[data-slide="11"] .s-sub,
+.slide[data-slide="13"] .s-main,
+.slide[data-slide="13"] .s-sub,
+.slide[data-slide="16"] .s-main,
+.slide[data-slide="16"] .s-sub { font-size:clamp(30px,2.1vw,34px); line-height:1.34; }
+.slide[data-slide="9"] .step-item,
+.slide[data-slide="11"] .step-item,
+.slide[data-slide="13"] .step-item,
+.slide[data-slide="16"] .step-item { padding:12px 20px; }
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */

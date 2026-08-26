@@ -275,6 +275,14 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <style id="projection-safety">
 /* Native-scale projection; compact spacing replaces whole-page zoom. */
+.slide[data-slide="4"] .grid-2,
+.slide[data-slide="16"] .grid-2 { display:grid!important; grid-template-columns:repeat(2,1fr)!important; gap:14px!important; }
+.slide[data-slide="4"] .card,
+.slide[data-slide="16"] .card { padding:14px 20px; }
+.slide[data-slide="4"] .body-sm,
+.slide[data-slide="16"] .body-sm { font-size:clamp(30px,2.1vw,34px); line-height:1.32; }
+.slide[data-slide="4"] .label,
+.slide[data-slide="16"] .label { font-size:clamp(24px,1.7vw,28px); }
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
@@ -311,7 +319,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 </section><section class="slide dark" data-slide="2" data-section="中心問題">
 <div class="slide-inner center"><div class="kicker gold">本週中心問題</div><div class="title" style="font-size:clamp(44px,4.4vw,80px);">換成沒看過的材料，<br>我能否<span class="accent-2">獨立完成</span>判斷？</div><div class="body" style="margin-top:30px;color:var(--ink-2);">答案在今天的 A 查核、B 形成立場、C 回應挑戰；W1 稍後只用來自我回看。</div></div><div class="page-footer">W17 · 中心問題</div>
 </section><section class="slide dark" data-slide="3" data-section="驗收條件">
-<div class="slide-inner"><div class="kicker alert">受控不等於反 AI</div><div class="title" style="font-size:clamp(38px,3.4vw,62px);">固定條件，是為了將證據<br><span class="accent-2">歸因給你本人</span></div><div class="card" style="margin-top:24px;"><div class="body-sm">10–85 分：材料在任務開始前未看過；個人完成；不用 AI、不上網、不討論，教師不給內容提示。</div></div><div class="body-sm" style="margin-top:22px;color:var(--ink-2);text-align:center;">輔具與核定合理調整照常使用，不改變要取得的能力證據。</div></div><div class="page-footer">W17 · 受控與歸因</div>
+<div class="slide-inner"><div class="kicker alert">🔒 不使用 AI · 個人陌生遷移</div><div class="title" style="font-size:clamp(38px,3.4vw,62px);">固定條件，是為了將證據<br><span class="accent-2">歸因給你本人</span></div><div class="card" style="margin-top:24px;"><div class="body-sm">10–85 分：材料事前未看；禁止 AI、網路、討論與內容提示。教師只核程序與原作完整性；授課教師依 A／B／C 原卷與規準核准 25 分。</div></div><div class="body-sm" style="margin-top:22px;color:var(--ink-2);text-align:center;">輔具與核定合理調整照常使用，不改變要取得的能力證據。</div></div><div class="page-footer">W17 · 受控與歸因</div>
 </section>
 <section class="slide dark" data-slide="4" data-section="四項規準">
 <div class="slide-inner"><div class="kicker gold">個人陌生遷移 · 原始 8 分換算 25 分</div><div class="grid-2" style="grid-template-columns:repeat(4,1fr);margin-top:18px;"><div class="card"><div class="label">閱讀證據</div><div class="body-sm">A 三色＋來源比較</div></div><div class="card"><div class="label">形成判斷</div><div class="body-sm">B 兩細節＋不確定</div></div><div class="card"><div class="label">回應挑戰</div><div class="body-sm">C 指出挑戰位置</div></div><div class="card"><div class="label">修正／重申</div><div class="body-sm">C 前後判斷與理由</div></div></div><div class="body" style="margin-top:32px;text-align:center;color:var(--ink-2);">四項各 0–2；W1 對照、文筆、篇幅與立場不另加隱藏分。</div></div><div class="page-footer">W17 · 正式 25 分規準</div>

@@ -452,6 +452,17 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .weekly-score-note{text-align:center;margin-top:26px;font-size:clamp(15px,1.3vw,22px);line-height:1.5;color:var(--ink-2);}
 
 </style>
+<style id="soil-projection-fixes">
+/* Essential action text must remain readable from the back of a large room. */
+.slide[data-slide="8"] .s-main,
+.slide[data-slide="8"] .s-sub,
+.slide[data-slide="11"] .s-main,
+.slide[data-slide="11"] .s-sub,
+.slide[data-slide="19"] .s-main,
+.slide[data-slide="19"] .s-sub,
+.slide[data-slide="21"] .s-main,
+.slide[data-slide="21"] .s-sub { font-size:clamp(30px,2.1vw,34px); line-height:1.34; }
+</style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
 #section-tag {
@@ -503,14 +514,14 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="2" data-section="冷文本施測">
 <div class="slide-inner center">
-    <div class="kicker gold" style="margin-bottom:28px;">00–30 分 · 期中冷文本能力考</div>
+    <div class="kicker gold" style="margin-bottom:28px;">🔒 不使用 AI · 00–30 分期中冷文本能力考</div>
     <div class="title" style="font-size:clamp(48px,4.2vw,78px);line-height:1.2;">現在只做題本</div>
     <div class="trio-lines" style="margin-top:34px;">
-      <div class="trio-line ok">不用 AI　不上網　不討論</div>
+      <div class="trio-line ok">禁止：AI、網路、討論與代答</div>
       <div class="trio-line ok2">看不懂題意，也先留下你能做的痕跡</div>
       <div class="trio-line bad">教師只回答程序問題，不提示答案</div>
     </div>
-    <div class="body-sm" style="margin-top:24px;color:var(--ink-2);">這份題本是個人內化證據：四能力原始 8 分換算 10 分；與 Gate2 里程碑分開登錄。</div>
+    <div class="body-sm" style="margin-top:24px;color:var(--ink-2);">原因：保留個人內化證據。教師只檢查程序與原作完整性，不提示內容；正式分數由授課教師依原卷與評分規準核准。</div>
   </div>
   <div class="page-footer">W9 · 冷文本施測規則</div>
 </section>
@@ -718,7 +729,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="18" data-section="AI 查核">
 <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-      <div><div class="kicker gold">選用 AI 的查核方式</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">可以判讀；不能替我負責</div></div>
+      <div><div class="kicker gold">🧭 可選用 AI · 收卷後壓力測試</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">可以判讀；不能替我負責</div></div>
       <div class="timer-pill" data-timer="540">9:00</div>
     </div>
     <div class="prompt-block" style="max-height:470px;">
@@ -726,7 +737,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 請先提出一個<span class="star">可回原材料查核的暫時判讀</span>，再提出 3 個問題，分別檢查：<br>① 證據或前提　② 適用範圍　③ 未處理的對象。<br><br>
 <span class="star">規則：</span>每個判讀標出材料根據；不要補外部事實。若必須引用新事實，請標<span class="danger">『待查』</span>。」
     </div>
-    <div class="body-sm" style="margin-top:12px;text-align:center;color:var(--ink-2);">只使用教師自編案例或已去識別的公共材料；不輸入任何人的姓名、班級、帳號、照片或私人處境。</div>
+    <div class="body-sm" style="margin-top:12px;text-align:center;color:var(--ink-2);">允許：請 AI 提一個反方判讀或追問；不得貼私人資料。學生回原材料標「支持／不支持／待查」並決定採不採；最後版本由學生本人核准，教師只核歷程。</div>
   </div>
   <div class="page-footer">W9 · AI 提問規則</div>
 </section>

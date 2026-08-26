@@ -280,6 +280,28 @@ body.force-rotate .rotate-hint { display: none; }
   color: var(--ink-dark);
   font-weight: 700;
 }
+.article-card .ac-focus {
+  display:grid;
+  gap:12px;
+  font-family:var(--font-reading);
+  font-size:calc(var(--t3) * .92);
+  line-height:1.52;
+  color:var(--ink-dark);
+}
+.article-card .ac-focus > div {
+  padding:10px 16px;
+  border-left:4px solid rgba(26,77,143,.65);
+  background:rgba(26,77,143,.05);
+}
+.article-card.side-b .ac-focus > div { border-left-color:rgba(184,134,11,.72); }
+.article-card .ac-paper-cue {
+  margin-top:12px;
+  font-size:calc(var(--t3) * .82);
+  line-height:1.45;
+  font-weight:800;
+  color:var(--ink-3);
+  text-align:center;
+}
 
 /* 四類閱讀標記 */
 .foa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
@@ -467,6 +489,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 
 <style id="projection-safety">
+.slide[data-slide="4"] .weekly-score-d { font-size:clamp(26px,1.75vw,30px); line-height:1.35; }
+.slide[data-slide="4"] .weekly-score-note { font-size:clamp(26px,1.75vw,30px); line-height:1.35; margin-top:22px; }
 .slide[data-slide="7"] .article-card,
 .slide[data-slide="9"] .article-card { padding:20px 30px; }
 .slide[data-slide="7"] .ac-label,
@@ -590,7 +614,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
         <div class="weekly-score-d">目前站位＋不確定＋改變或擴大條件。</div>
       </div>
     </div>
-    <div class="weekly-score-note">Gate2 看 W6–W8 的累積痕跡；今天是 0 分練習。走動、公開分享與私人原因都不是通過條件。核心任務不使用 AI。</div>
+    <div class="weekly-score-note"><strong>🔒 不使用 AI｜核心原作</strong>：先取得每個人的閱讀、標記與私人立場；AI、網路與代寫均不使用。教師只核對是否留下原文證據；最後判斷與公開選擇由學生本人核准。</div>
   </div>
   <div class="page-footer">W8 · 0 分練習 · 累積 Gate2</div>
 </section>
@@ -642,11 +666,12 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <span class="ac-tag">教師虛構教材</span>
       <div class="ac-headline">《試辦六週，多數填答者自評上課較少分心》</div>
       <div class="ac-sub">北城高中手機保管試辦｜全案與數據皆為虛構</div>
-      <div class="ac-body">
-       　　北城高中在四個高一班、共 128 名學生中，試辦六週「上課集中保管手機」。學生上課前把手機放入編號袋，午餐與放學取回；緊急聯絡改由校務處轉達。<br>
-       　　期末匿名問卷收到 96 份有效回覆，其中 61 人表示「上課比較少被通知打斷」，48 人表示「擔心漏接家人訊息」，六週內共有 17 次透過校務處完成緊急聯絡。<br>
-       　　校方認為，多數填答者已感受到專注改善，且緊急聯絡仍有替代管道，因此主張下學期延長試辦。支持教師表示，集中保管終於讓學生不必一直和通知聲搏鬥。
+      <div class="ac-focus">
+        <div><strong>共同資料：</strong>四班 128 人；96 份有效回覆；61 人較少被通知打斷；48 人擔心漏接；六週 17 次緊急聯絡。</div>
+        <div><strong>本篇焦點：</strong>「多數填答者較少被打斷」＋仍有替代聯絡，因此主張延長試辦。</div>
+        <div><strong>此刻只找：</strong>哪些字把 61／96 推向「值得延長」？它最多能支持到哪裡？</div>
       </div>
+      <div class="ac-paper-cue">完整閱讀與初步標記在《同事件雙報導》學生預讀版甲篇；投影只同步這三個證據位置。</div>
       <div class="ac-q">
         讀完問自己：<span style="color: #1a4d8f;">文章把焦點放在哪？作者希望讀者怎麼判斷？——它想讓你相信什麼？</span>
       </div>
@@ -681,11 +706,12 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <span class="ac-tag">教師虛構教材</span>
       <div class="ac-headline">《半數填答者仍擔心漏接訊息，學生會要求退出機制》</div>
       <div class="ac-sub">北城高中手機保管試辦｜全案與數據皆為虛構</div>
-      <div class="ac-body">
-       　　北城高中在四個高一班、共 128 名學生中，試辦六週「上課集中保管手機」。學生上課前把手機放入編號袋，午餐與放學取回；緊急聯絡改由校務處轉達。<br>
-       　　期末匿名問卷收到 96 份有效回覆，其中 61 人表示「上課比較少被通知打斷」，48 人表示「擔心漏接家人訊息」，六週內共有 17 次透過校務處完成緊急聯絡。<br>
-       　　學生會認為，近半數填答者的焦慮不能被「多數較專注」蓋過，且替代聯絡增加家長與校方的轉接成本，因此主張下學期改成學生自願參加。反對學生表示，專注應靠練習，不該用一刀切的方式換來。
+      <div class="ac-focus">
+        <div><strong>共同資料：</strong>四班 128 人；96 份有效回覆；61 人較少被通知打斷；48 人擔心漏接；六週 17 次緊急聯絡。</div>
+        <div><strong>本篇焦點：</strong>「近半數填答者擔心漏接」＋轉接成本，因此主張改成自願參加。</div>
+        <div><strong>此刻只找：</strong>哪些字把 48／96 推向「需要退出機制」？它最多能支持到哪裡？</div>
       </div>
+      <div class="ac-paper-cue">完整閱讀與初步標記在《同事件雙報導》學生預讀版乙篇；投影只同步這三個證據位置。</div>
       <div class="ac-q">
         讀完問自己：<span style="color: #B8860B;">文章把焦點放在哪？想讓你相信什麼？——跟甲版本不一樣的是什麼？</span>
       </div>
