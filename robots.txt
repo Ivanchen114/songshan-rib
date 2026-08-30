@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://songshan-rib.vercel.app/sitemap.xml

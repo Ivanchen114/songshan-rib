@@ -69,6 +69,31 @@ python3 -m http.server 8000
 
 ---
 
+## Google 搜尋與索引
+
+網站的正式網址是 `https://songshan-rib.vercel.app/`；首頁 `canonical`、`robots.txt`、`sitemap.xml`
+與 WebSite JSON-LD 都必須統一使用這個網域。
+
+本地驗證：
+
+```bash
+node scripts/qa_seo.mjs
+```
+
+發布後的線上驗收：
+
+```bash
+curl -I https://songshan-rib.vercel.app/
+curl -I https://songshan-rib.vercel.app/robots.txt
+curl -I https://songshan-rib.vercel.app/sitemap.xml
+```
+
+三個網址都回傳 HTTP 200 後，到 Google Search Console 新增「網址前綴」資源：
+`https://songshan-rib.vercel.app/`，完成擁有權驗證，送出 `sitemap.xml`，再用「網址審查」對首頁執行
+「測試線上網址」與「要求建立索引」。Google 是否納入索引與排名仍由 Google 決定。
+
+---
+
 ## 姊妹站
 
 - [研究方法與專題](https://research-navigator-nu.vercel.app/)（高一研究方法）
