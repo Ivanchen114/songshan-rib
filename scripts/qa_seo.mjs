@@ -19,6 +19,7 @@ requireMatch(homepage, /<html\s+lang="zh-TW">/i, '首頁缺少 lang="zh-TW"');
 requireMatch(homepage, /<title>閱讀理解與表達｜松山高中校訂必修 R\.I\.B\.<\/title>/, '首頁 title 未使用正式課程名稱');
 requireMatch(homepage, /<meta\s+name="description"\s+content="[^"]+">/i, '首頁缺少 meta description');
 requireMatch(homepage, /<meta\s+name="robots"\s+content="[^"]*index[^"]*follow[^"]*">/i, '首頁未明確允許索引與追蹤連結');
+requireMatch(homepage, /<meta\s+name="google-site-verification"\s+content="[^"]+">/i, '首頁缺少 Google Search Console 驗證標記');
 requireMatch(homepage, new RegExp(`<link\\s+rel="canonical"\\s+href="${SITE_ORIGIN.replaceAll('.', '\\.')}/">`, 'i'), '首頁 canonical 網址不正確');
 
 for (const property of ['og:type', 'og:locale', 'og:site_name', 'og:title', 'og:description', 'og:url', 'og:image']) {
