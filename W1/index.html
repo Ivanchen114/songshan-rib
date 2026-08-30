@@ -179,6 +179,87 @@ body.force-rotate .rotate-hint { display: none; }
 .slide[data-slide="4"] ol.body { line-height: 1.7 !important; }
 .slide[data-slide="4"] .body-sm { margin-top: 12px !important; }
 
+/* 課堂規則：四個可立即辨識、可執行的課堂提示 */
+.slide[data-slide="5"] .slide-inner { max-width: 1420px; }
+.slide[data-slide="5"] .kicker { margin-bottom: 10px; }
+.slide[data-slide="5"] .title {
+  font-size: clamp(54px, 4.8vw, 76px);
+  line-height: 1.08;
+  margin-bottom: 8px;
+}
+.rules-purpose {
+  color: var(--ink-2);
+  font-size: clamp(26px, 2vw, 32px);
+  line-height: 1.35;
+}
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+.rule-card {
+  min-height: 190px;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  padding: 24px 28px;
+  background: rgba(17,34,58,0.68);
+  border: 1px solid rgba(0,198,255,0.22);
+  border-radius: 14px;
+}
+.rule-card:last-child {
+  border-color: rgba(255,215,0,0.45);
+  background: linear-gradient(135deg, rgba(17,34,58,0.72), rgba(255,215,0,0.07));
+}
+.rule-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--accent);
+  background: rgba(0,198,255,0.10);
+  border: 1px solid rgba(0,198,255,0.28);
+}
+.rule-card:last-child .rule-icon {
+  color: var(--accent-2);
+  background: rgba(255,215,0,0.10);
+  border-color: rgba(255,215,0,0.35);
+}
+.rule-icon svg {
+  width: 42px;
+  height: 42px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.rule-label {
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: clamp(18px, 1.3vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin-bottom: 3px;
+}
+.rule-action {
+  color: var(--ink);
+  font-size: clamp(32px, 2.35vw, 40px);
+  font-weight: 900;
+  line-height: 1.22;
+}
+.rule-card:last-child .rule-action { color: var(--accent-2); }
+.rule-detail {
+  color: var(--ink-2);
+  font-size: clamp(22px, 1.55vw, 26px);
+  line-height: 1.35;
+  margin-top: 7px;
+}
+
 .checkpoint-slide { padding-top: 58px; padding-bottom: 54px; }
 .checkpoint-slide .slide-inner > .kicker {
   font-size: calc(var(--t4) * 0.9);
@@ -818,6 +899,163 @@ body.force-rotate .rotate-hint { display: none; }
   line-height: 1.55;
 }
 
+/* Semester score map: seven evidence items grouped by evidence condition. */
+.score-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+.score-track {
+  padding: 20px 22px;
+  background: rgba(17,34,58,0.66);
+  border: 1px solid rgba(0,198,255,0.24);
+  border-radius: 14px;
+}
+.score-track.controlled { border-color: rgba(255,215,0,0.38); }
+.score-track-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(122,139,184,0.24);
+}
+.score-track-title span {
+  color: var(--ink);
+  font-size: clamp(25px, 1.85vw, 31px);
+  font-weight: 900;
+}
+.score-track-title strong {
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: clamp(32px, 2.5vw, 42px);
+}
+.score-track.controlled .score-track-title strong { color: var(--accent-2); }
+.score-items { display: grid; gap: 7px; margin-top: 12px; }
+.score-item {
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr) 62px;
+  gap: 12px;
+  align-items: center;
+  padding: 7px 10px;
+  background: rgba(13,27,42,0.48);
+  border-radius: 8px;
+}
+.score-week {
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: clamp(20px, 1.35vw, 23px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.score-track.controlled .score-week { color: var(--accent-2); }
+.score-name {
+  color: var(--ink-2);
+  font-size: clamp(22px, 1.5vw, 26px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+.score-points {
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: clamp(26px, 1.85vw, 32px);
+  font-weight: 900;
+  text-align: right;
+}
+.score-total {
+  margin-top: 16px;
+  color: var(--ink-2);
+  font-size: clamp(26px, 1.9vw, 32px);
+  font-weight: 700;
+  text-align: center;
+}
+.score-total strong { color: var(--accent-2); font-size: 1.18em; }
+
+/* Worked score conversion plus three deliberately separate decisions. */
+.score-calc-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+.calc-card,
+.status-card {
+  background: rgba(17,34,58,0.66);
+  border: 1px solid rgba(0,198,255,0.24);
+  border-radius: 14px;
+}
+.calc-card { padding: 24px 28px; }
+.calc-label {
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: clamp(19px, 1.25vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.calc-formula {
+  margin-top: 13px;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: clamp(31px, 2.35vw, 40px);
+  font-weight: 900;
+  line-height: 1.35;
+}
+.calc-formula .result { color: var(--accent-2); }
+.calc-explain {
+  margin-top: 13px;
+  color: var(--ink-2);
+  font-size: clamp(22px, 1.5vw, 26px);
+  line-height: 1.4;
+}
+.status-card { overflow: hidden; }
+.status-row {
+  display: grid;
+  grid-template-columns: 146px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(122,139,184,0.20);
+}
+.status-row:last-child { border-bottom: none; }
+.status-value {
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: clamp(24px, 1.7vw, 29px);
+  font-weight: 900;
+  white-space: nowrap;
+}
+.status-row:nth-child(2) .status-value,
+.status-row:nth-child(3) .status-value { color: var(--accent-2); }
+.status-copy strong {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(24px, 1.7vw, 29px);
+  line-height: 1.2;
+}
+.status-copy span {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink-2);
+  font-size: clamp(19px, 1.25vw, 22px);
+  line-height: 1.3;
+}
+.score-check {
+  margin-top: 18px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: rgba(0,198,255,0.08);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  font-size: clamp(23px, 1.6vw, 27px);
+  line-height: 1.35;
+}
+.score-check .answer { color: var(--accent-2); font-weight: 900; }
+
 /* Codesign fill-in blanks (slide 25) */
 .action-blanks {
   display: grid; gap: 12px;
@@ -958,7 +1196,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
 <div id="revealInfo" style="position:fixed;bottom:46px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:var(--t-ui);color:var(--accent);letter-spacing:0.12em;z-index:50;"></div>
-<div id="pageInfo">1 / 37</div>
+<div id="pageInfo">1 / 39</div>
 <div id="hint">← → 切頁 · F 全螢幕 · Home/End 跳首尾</div>
 
 
@@ -1003,8 +1241,8 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="tl-row"><div class="tl-time">31 — 46</div><div class="tl-title">真假畫廊</div><div class="tl-desc">投票、揭曉、來源與責任分析</div></div>
       <div class="tl-row"><div class="tl-time">46 — 59</div><div class="tl-title">三個技術</div><div class="tl-desc">閱讀／理解／表達＋課程使命</div></div>
       <div class="tl-row"><div class="tl-time">59 — 73</div><div class="tl-title accent-2">課程共創</div><div class="tl-desc">活動、能力與可見產物</div></div>
-      <div class="tl-row"><div class="tl-time">73 — 87</div><div class="tl-title">隱私與評分</div><div class="tl-desc">選擇權、兩種欄位、三個動作</div></div>
-      <div class="tl-row"><div class="tl-time">87 — 97</div><div class="tl-title">Q3 出口條</div><div class="tl-desc">個人獨寫，保留原始答案</div></div>
+      <div class="tl-row"><div class="tl-time">73 — 89</div><div class="tl-title">隱私與評分</div><div class="tl-desc">安全邊界、總分結構、換算一次</div></div>
+      <div class="tl-row"><div class="tl-time">89 — 97</div><div class="tl-title">Q3 出口條</div><div class="tl-desc">個人獨寫，保留原始答案</div></div>
       <div class="tl-row"><div class="tl-time">97 — 100</div><div class="tl-title">收尾</div><div class="tl-desc">保存歷程本＋預告 W2</div></div>
     </div>
   </div>
@@ -1038,27 +1276,48 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="5" data-section="課堂規則">
   <div class="slide-inner">
     <div class="kicker">開始任務前 · 1 分鐘</div>
-    <div class="title">上課規則 · 只守四件事</div>
-    <div class="timeline" style="margin-top: 24px;">
-      <div class="tl-row">
-        <div class="tl-time">桌面</div>
-        <div class="tl-title">只留本課材料</div>
-        <div class="tl-desc">學習單／歷程本、文具與老師指定材料；其他科書本、講義、考卷收進書包</div>
+    <div class="title">只守四件事</div>
+    <div class="rules-purpose">讓每個人都能專心思考，也放心開口。</div>
+    <div class="rules-grid">
+      <div class="rule-card">
+        <div class="rule-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V4Z"/><path d="M8 8h7M8 12h5M18 8h2v12h-2"/></svg>
+        </div>
+        <div>
+          <div class="rule-label">桌面</div>
+          <div class="rule-action">只留本課材料</div>
+          <div class="rule-detail">學習單／歷程本・文具・指定材料</div>
+        </div>
       </div>
-      <div class="tl-row">
-        <div class="tl-time">手機</div>
-        <div class="tl-title accent">跟著老師指令</div>
-        <div class="tl-desc">預設收好；收到指令才拿出，只做指定任務；老師說「收起」就復位</div>
+      <div class="rule-card">
+        <div class="rule-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+        </div>
+        <div>
+          <div class="rule-label">手機</div>
+          <div class="rule-action">預設收好</div>
+          <div class="rule-detail">老師指示才拿出，只做指定任務</div>
+        </div>
       </div>
-      <div class="tl-row">
-        <div class="tl-time">討論</div>
-        <div class="tl-title">對事不對人</div>
-        <div class="tl-desc">可以不同意觀點；不嘲笑，也不追問或轉述他人的私人內容</div>
+      <div class="rule-card">
+        <div class="rule-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 15H5l-3 3V6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v2"/><path d="M8 9h10a2 2 0 0 1 2 2v9l-3-3H8a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2Z"/></svg>
+        </div>
+        <div>
+          <div class="rule-label">討論</div>
+          <div class="rule-action">對事，不對人</div>
+          <div class="rule-detail">不嘲笑・不追問・不轉述私事</div>
+        </div>
       </div>
-      <div class="tl-row">
-        <div class="tl-time">收束</div>
-        <div class="tl-title accent-2">30 秒內復位</div>
-        <div class="tl-desc">停筆、收手機、回座、看投影，準備下一段任務</div>
+      <div class="rule-card">
+        <div class="rule-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/></svg>
+        </div>
+        <div>
+          <div class="rule-label">收束</div>
+          <div class="rule-action">30 秒內復位</div>
+          <div class="rule-detail">停筆・收手機・回座・看投影</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1647,15 +1906,55 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="34" data-section="評分規準">
   <div class="slide-inner">
-    <div class="kicker">作業用來變會，評量用來取證</div>
-    <div class="title" style="font-size: clamp(48px, 4.4vw, 78px);">W1 全部 0 分</div>
-    <div class="big-quote medium accent" style="margin: 28px 0 0; font-weight: 700;">完成、證據、判斷，<br>今天是練習與回饋語言。</div>
-    <div class="grade-note"><span class="accent-2 bold">W2–W4 累積第一個歷程 Gate；</span>W5 前我們會拿真作品讀一次正式規準。</div>
+    <div class="kicker">七項正式取證 · 合計 100 分</div>
+    <div class="title" style="font-size: clamp(48px, 4.15vw, 72px); margin-bottom: 8px;">學期成績，只算七項證據</div>
+    <div class="body-sm muted">不是每週作業，也不是上課態度、出席或公開意願加減分。</div>
+    <div class="score-overview">
+      <div class="score-track">
+        <div class="score-track-title"><span>真實／工具／團隊表現</span><strong>50</strong></div>
+        <div class="score-items">
+          <div class="score-item"><span class="score-week">W5</span><span class="score-name">真人讀者改寫</span><strong class="score-points">15</strong></div>
+          <div class="score-item"><span class="score-week">W10</span><span class="score-name">工具與來源查核</span><strong class="score-points">15</strong></div>
+          <div class="score-item"><span class="score-week">W11–12</span><span class="score-name">公平反方與問題化</span><strong class="score-points">10</strong></div>
+          <div class="score-item"><span class="score-week">W16 團隊</span><span class="score-name">公共說明</span><strong class="score-points">10</strong></div>
+        </div>
+      </div>
+      <div class="score-track controlled">
+        <div class="score-track-title"><span>個人受控表現</span><strong>50</strong></div>
+        <div class="score-items">
+          <div class="score-item"><span class="score-week">W9</span><span class="score-name">冷文本能力考</span><strong class="score-points">10</strong></div>
+          <div class="score-item"><span class="score-week">W16 個人</span><span class="score-name">事前未知答辯</span><strong class="score-points">15</strong></div>
+          <div class="score-item"><span class="score-week">W17</span><span class="score-name">陌生材料綜合遷移</span><strong class="score-points">25</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="score-total">七項實得分相加：<strong>50 ＋ 50 ＝ 100</strong></div>
   </div>
-  <div class="page-footer">W1 · 評量身分</div>
+  <div class="page-footer">W1 · 學期配分</div>
 </section>
 
 <section class="slide dark" data-slide="35" data-section="評分規準">
+  <div class="slide-inner">
+    <div class="kicker">先算一題，再分清楚</div>
+    <div class="title" style="font-size: clamp(46px, 4vw, 68px); margin-bottom: 6px;">任務分數怎麼進學期總分？</div>
+    <div class="score-calc-layout">
+      <div class="calc-card">
+        <div class="calc-label">例｜W5 權重 15 分，四項規準得到 6／8</div>
+        <div class="calc-formula">6 ÷ 8 × 15 ＝ <span class="result">11.3 分</span></div>
+        <div class="calc-explain">每項正式任務都先取得四個 0–2 分，再依任務權重換算到小數一位。</div>
+      </div>
+      <div class="status-card">
+        <div class="status-row"><div class="status-value">Gate 0 分</div><div class="status-copy"><strong>進度里程碑</strong><span>需修正就補證據，不直接扣分</span></div></div>
+        <div class="status-row"><div class="status-value">60／100</div><div class="status-copy"><strong>課程及格</strong><span>七項實得總分的唯一門檻</span></div></div>
+        <div class="status-row"><div class="status-value">25／50</div><div class="status-copy"><strong>核心認證</strong><span>W9＋W16 個人＋W17，分開呈現</span></div></div>
+      </div>
+    </div>
+    <div class="score-check"><span>快問：Gate 顯示「需修正」，會先扣學期分數嗎？</span><span class="answer" data-reveal>不會，先補證據。</span></div>
+  </div>
+  <div class="page-footer">W1 · 成績換算</div>
+</section>
+
+<section class="slide dark" data-slide="36" data-section="評分規準">
   <div class="slide-inner">
     <div class="kicker">Q3 的保存規則</div>
     <div class="title" style="font-size: clamp(48px, 4.4vw, 78px);">答案留在你手上</div>
@@ -1675,7 +1974,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W1 · Q3 保存</div>
 </section>
 
-<section class="slide dark" data-slide="36" data-section="預告">
+<section class="slide dark" data-slide="37" data-section="預告">
   <div class="slide-inner">
     <div class="kicker">Q3 · 個人獨寫 5 分鐘</div>
     <div class="big-quote" style="margin-top: 20px;">
@@ -1688,7 +1987,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W1 · Q3 出口條</div>
 </section>
 
-<section class="slide dark" data-slide="37" data-section="後設反思">
+<section class="slide dark" data-slide="38" data-section="後設反思">
   <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 走之前 · 留給未來</div>
@@ -1701,7 +2000,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W1 · 今日收束</div>
 </section>
 
-<section class="slide dark" data-slide="38" data-section="畢業金句">
+<section class="slide dark" data-slide="39" data-section="畢業金句">
   <div class="slide-inner center">
     <div class="kicker">下週 W2</div>
     <div class="goldline">
