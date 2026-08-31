@@ -25,6 +25,8 @@
     .actions { display:flex; gap:8px; }
     .actions a { flex:1; padding:10px 9px; border:1px solid var(--line); border-radius:9px; text-align:center; font-weight:800; text-decoration:none; }
     .actions a:first-child { border-color:rgba(73,216,255,.55); color:var(--cyan); }
+    .actions.w1-actions { flex-wrap:wrap; }
+    .actions.w1-actions a:first-child { flex-basis:100%; border-color:rgba(255,200,90,.55); color:var(--gold); }
     .actions a:hover,.actions a:focus-visible { background:#1b3152; color:white; outline:2px solid rgba(73,216,255,.45); outline-offset:2px; }
     .section-head { margin:46px 0 6px; }
     .section-head h2 { margin:0 0 8px; font-size:clamp(22px,3.4vw,30px); }
@@ -36,7 +38,7 @@
     @media (max-width:560px) { .tools { grid-template-columns:1fr; } }
     footer { margin-top:34px; color:#7f93b0; font-size:13px; }
     @media (max-width:860px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:560px) { .wrap { width:min(100% - 22px,1120px); } header { padding-top:38px; } .grid { grid-template-columns:1fr; } .week { min-height:0; } }
+    @media (max-width:560px) { .wrap { width:min(calc(100% - 22px),1120px); } header { padding-top:38px; } .grid { grid-template-columns:1fr; } .week { min-height:0; } .actions.w1-actions { display:grid; grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -49,7 +51,7 @@
     </header>
     <div class="notice">建議學生使用 PDF；需要改題目或增加書寫空間時，再下載 DOCX。請保留每週原檔，方便 W17、W18 回看學習證據。</div>
     <section class="grid" aria-label="18 週學習單">
-      <article class="week"><h2>W1</h2><p>AI 時代，我們要學什麼？</p><div class="actions"><a href="W1.pdf" download>PDF</a><a href="W1.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W1</h2><p>AI 時代，我們要學什麼？</p><div class="actions w1-actions"><a href="W1-start.pdf" download>起點檢核 PDF</a><a href="W1.pdf" download>歷程本 PDF</a><a href="W1.docx" download>歷程本 DOCX</a></div></article>
       <article class="week"><h2>W2</h2><p>這個下午，真的發生過嗎？</p><div class="actions"><a href="W2.pdf" download>PDF</a><a href="W2.docx" download>DOCX</a></div></article>
       <article class="week"><h2>W3</h2><p>這一週，哪個 30 秒你還記得？</p><div class="actions"><a href="W3.pdf" download>PDF</a><a href="W3.docx" download>DOCX</a></div></article>
       <article class="week"><h2>W4</h2><p>讓別人看見那一刻</p><div class="actions"><a href="W4.pdf" download>PDF</a><a href="W4.docx" download>DOCX</a></div></article>
