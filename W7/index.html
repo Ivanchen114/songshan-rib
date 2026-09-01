@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>W7 · 看懂訊息怎麼抓住你 · 閱讀理解與表達</title>
+<title>W7 · 先看見自己看見了什麼 · 閱讀理解與表達</title>
 <link rel="icon" type="image/svg+xml" href="../assets/songshan-logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,51 +34,6 @@
 }
 /* 4K 真實 viewport 極端加碼（≥ 2400px 才觸發）*/
 @media (min-width: 2400px) { :root { --t1: 128px; --t2: 80px; --t3: 48px; --t4: 30px; } }
-
-/* SOIL · 後設反思卡 (W## 走之前 · 自我觀察) */
-.meta-reflect-wrap { max-width: 1100px; margin: 0 auto; }
-.meta-reflect-tag {
-  display: inline-block; padding: 8px 22px;
-  background: rgba(196,181,253,0.12); border: 1.5px solid #C4B5FD; border-radius: 999px;
-  font-family: "JetBrains Mono", monospace; font-size: var(--t4);
-  color: #C4B5FD; letter-spacing: 0.25em; font-weight: 700; margin-bottom: 18px;
-}
-.meta-reflect-q {
-  font-size: clamp(36px, 3.4vw, 60px); font-weight: 900;
-  line-height: 1.35; margin-bottom: 28px;
-}
-.meta-reflect-grid { display: grid; gap: 16px; }
-.meta-reflect-row {
-  display: grid; grid-template-columns: 70px 1fr;
-  gap: 18px; padding: 18px 24px;
-  background: rgba(17,34,58,0.55); border-left: 4px solid #C4B5FD;
-  border-radius: 8px; align-items: baseline;
-}
-.meta-reflect-row .mr-num {
-  font-family: "JetBrains Mono", monospace; font-weight: 900;
-  color: #C4B5FD; font-size: calc(var(--t2) * 0.6); text-align: center;
-}
-.meta-reflect-row .mr-q { font-size: calc(var(--t3) * 0.95); font-weight: 700; margin-bottom: 4px; }
-.meta-reflect-row .mr-hint { font-size: calc(var(--t3) * 0.82); color: var(--ink-2); line-height: 1.5; }
-/* SOIL · 後設反思 1 題版（少而準 · 壓縮覺察+解釋） */
-.reflect-solo {
-  padding: 30px 38px;
-  background: rgba(17,34,58,0.55);
-  border-left: 4px solid #C4B5FD;
-  border-radius: 10px;
-  margin: 28px auto 0;
-  max-width: 1100px;
-}
-.reflect-solo .rs-q {
-  font-size: clamp(34px, 3.0vw, 54px);
-  font-weight: 900;
-  line-height: 1.4;
-  margin-bottom: 22px;
-  color: var(--ink);
-}
-.reflect-solo .rs-action { padding: 14px 0 0; margin-top: 8px; border-top: 1px dashed rgba(196,181,253,0.35); font-size: calc(var(--t3) * 0.88); color: var(--ink-2); line-height: 1.7; }
-.reflect-solo .rs-explain { color: var(--accent-2); font-weight: 700; }
-.reflect-solo .rs-fail { color: #C4B5FD; font-weight: 700; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; }
@@ -275,32 +230,6 @@ body.force-rotate .rotate-hint { display: none; }
   font-size: calc(var(--t3) * 0.88);
   color: var(--ink-dark);
   font-weight: 700;
-}
-
-/* F/O/A 三分法 */
-.foa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
-.foa-card { padding: 22px 24px; border-radius: 12px; border: 1.5px solid; }
-.foa-card.f { border-color: var(--green-fact); background: rgba(46,204,113,0.06); }
-.foa-card.o { border-color: var(--accent); background: rgba(0,198,255,0.06); }
-.foa-card.a { border-color: var(--accent-2); background: rgba(255,215,0,0.06); }
-.foa-card .foa-letter {
-  font-family: "JetBrains Mono", monospace;
-  font-weight: 900; font-size: calc(var(--t1) * 0.55);
-  line-height: 1; margin-bottom: 6px;
-}
-.foa-card.f .foa-letter { color: var(--green-fact); }
-.foa-card.o .foa-letter { color: var(--accent); }
-.foa-card.a .foa-letter { color: var(--accent-2); }
-.foa-card .foa-name { font-size: calc(var(--t3) * 0.92); font-weight: 900; margin-bottom: 8px; color: var(--ink); }
-.foa-card .foa-def { font-size: calc(var(--t3) * 0.85); color: var(--ink-2); margin-bottom: 10px; line-height: 1.5; }
-.foa-card .foa-ex {
-  font-size: calc(var(--t3) * 0.78);
-  color: var(--ink-3);
-  font-style: italic;
-  padding: 8px 12px;
-  background: rgba(13,27,42,0.45);
-  border-radius: 4px;
-  line-height: 1.5;
 }
 
 /* 獨立作業 4 步驟 */
@@ -530,7 +459,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <div id="progress"></div>
 <div id="section-tag">— 啟動 —</div>
 <div id="revealInfo" style="position:fixed;bottom:46px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:var(--t-ui);color:var(--accent);letter-spacing:0.12em;z-index:50;"></div>
-<div id="pageInfo">1 / 11</div>
+<div id="pageInfo">1 / 20</div>
 <div id="hint">← → 切頁 · F 全螢幕 · Home/End 跳首尾</div>
 
 
@@ -540,313 +469,225 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark active" data-slide="1" data-section="啟動">
   <div class="rib-badge">R.I.B.</div>
   <div class="slide-inner center">
-    <div class="kicker gold">W7 · 公共訊息</div>
-    <div class="title">看懂訊息<br><span class="accent">怎麼抓住你</span></div>
-    <div class="subtitle muted">不是先判真假；先看它怎麼推你。</div>
+    <div class="kicker gold">W7 · 模擬資訊畫面</div>
+    <div class="title">先看見<br><span class="accent">自己看見了什麼</span></div>
+    <div class="subtitle muted">同一件事，先看到的內容不同，下一步可能也不同。</div>
   </div>
   <div class="page-footer">閱讀理解與表達 · W7</div>
 </section>
 
-<section class="slide dark" data-slide="2" data-section="中心問題">
+<section class="slide dark" data-slide="2" data-section="今天的界線">
+  <div class="slide-inner">
+    <div class="kicker gold">00–04 分鐘｜🔒 不使用 AI</div>
+    <div class="title" style="font-size:clamp(50px,4.2vw,74px);">先留下<span class="accent">自己的第一反應</span></div>
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card"><div class="label">今天只用</div><div class="body-sm">老師做的 A、B 兩個版本。</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label" style="color:var(--accent-2);">最後由你決定</div><div class="body-sm">每個判斷都回到確切字詞，不交給工具代寫。</div></div>
+    </div>
+    <div class="check-line" style="margin-top:26px;">全週 0 分，累積學習關卡 2。0 分不是不用做；要留下看得見的比較與修改。</div>
+  </div>
+  <div class="page-footer">W7 · 0 分練習｜學習關卡 2</div>
+</section>
+
+<section class="slide dark" data-slide="3" data-section="安全邊界">
+  <div class="slide-inner">
+    <div class="kicker gold">04–08 分鐘｜先說清楚</div>
+    <div class="title" style="font-size:clamp(46px,3.9vw,68px);">這是老師模擬，<br><span class="accent">不是真實平台結果</span></div>
+    <div class="steps-4" style="margin-top:26px;">
+      <div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="s-main">不用登入任何個人帳號</div></div></div>
+      <div class="step-item"><div class="step-num gold">2</div><div class="step-content"><div class="s-main">不看、不問、不截圖任何人的瀏覽紀錄</div></div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content"><div class="s-main">不猜哪個版本「比較像你」</div></div></div>
+    </div>
+  </div>
+  <div class="page-footer">W7 · 只比較老師提供的內容</div>
+</section>
+
+<section class="slide dark" data-slide="4" data-section="先看一版">
   <div class="slide-inner center">
-    <div class="kicker">先問自己</div>
-    <div class="goldline">這則訊息想讓我<br><span class="accent">感覺、相信、做什麼？</span></div>
-    <div class="subtitle muted" style="margin-top:28px;">先指出原詞，再決定要不要跟著走。</div>
+    <div class="kicker gold">08–25 分鐘｜歷程本第 1 頁</div>
+    <div class="title">先只看<span class="accent"> A 或 B</span></div>
+    <div class="subtitle">老師隨機指定版本；用空白紙遮住另一版。</div>
+    <div class="check-line" style="max-width:1050px;margin:34px auto 0;text-align:left;">先不要偷看，也不要問隔壁看到了什麼。這一步要保存你真的第一眼。</div>
   </div>
-  <div class="page-footer">W7 · 中心問題</div>
+  <div class="page-footer">W7 · 第 1 頁｜先只看一版</div>
 </section>
 
-<section class="slide dark" data-slide="3" data-section="W6→W7">
+<section class="slide dark" data-slide="5" data-section="先看一版">
   <div class="slide-inner">
-    <div class="kicker gold">從原文查核，走向公共訊息</div>
-    <div class="title">W6 查「書裡有沒有」<br>W7 查「文字在<span class="accent">推什麼</span>」</div>
+    <div class="kicker">第 1 頁｜先做兩件事</div>
     <div class="choice-row">
-      <div class="choice-card"><div class="tag">W6</div><div class="text">分清原文、反證與腦補。</div></div>
-      <div class="choice-card gold"><div class="tag">W7</div><div class="text">找出情緒、標籤與二分的原詞。</div></div>
+      <div class="choice-card"><div class="tag">先抄</div><div class="text">哪兩個確切字詞最先抓住我？</div></div>
+      <div class="choice-card gold"><div class="tag">再寫</div><div class="text">它先讓我感覺、相信或想做什麼？</div></div>
     </div>
+    <div class="subtitle muted center" style="margin-top:30px;">不要只寫「很有感」；把那兩處字詞逐字抄下來。</div>
   </div>
-  <div class="page-footer">W7 · 能力橋接</div>
+  <div class="page-footer">W7 · 第 1 頁｜確切字詞</div>
 </section>
 
-<section class="slide dark" data-slide="4" data-section="今日路線">
-  <div class="slide-inner">
-    <div class="kicker gold">100 分鐘</div>
-    <div class="title" style="font-size:clamp(54px,4.5vw,76px);">今天怎麼走</div>
-    <div class="timeline">
-      <div class="tl-row"><div class="tl-time">00–10</div><div class="tl-title">兩版本＋公開定義</div><div class="tl-desc">先選，再揭曉</div></div>
-      <div class="tl-row"><div class="tl-time">10–25</div><div class="tl-title">拆 E／L／B</div><div class="tl-desc">回到確切原詞</div></div>
-      <div class="tl-row"><div class="tl-time">25–45</div><div class="tl-title">標記兩則素材</div><div class="tl-desc">一則自帶、一則教師提供</div></div>
-      <div class="tl-row star"><div class="tl-time">45–58</div><div class="tl-title accent-2">手法 ≠ 真假</div><div class="tl-desc">兩個問題分開處理</div></div>
-      <div class="tl-row"><div class="tl-time">58–76</div><div class="tl-title">可討論改寫</div><div class="tl-desc">保留主張，讓證據進來</div></div>
-      <div class="tl-row star"><div class="tl-time">76–86</div><div class="tl-title accent-2">寫形成性判斷</div><div class="tl-desc">拿掉／保留／怎麼檢查</div></div>
-      <div class="tl-row"><div class="tl-time">86–95</div><div class="tl-title">推薦系統連結</div><div class="tl-desc">互動是訊號，不是真假章</div></div>
-      <div class="tl-row"><div class="tl-time">95–100</div><div class="tl-title">完成＋W8</div><div class="tl-desc">第 4 頁自留、不交</div></div>
-    </div>
-  </div>
-  <div class="page-footer">W7 · 今日路線</div>
-</section>
-
-<section class="slide dark" data-slide="5" data-section="評量身分">
-  <div class="slide-inner weekly-score-wrap">
-    <div class="kicker gold">本週不逐份計分｜累積 Gate 2 歷程</div>
-    <div class="title" style="font-size:clamp(56px,4.7vw,80px);">0 分練習</div>
-    <div class="weekly-score-grid">
-      <div class="weekly-score-card"><div class="weekly-score-n">✓</div><div class="weekly-score-t">完成</div><div class="weekly-score-d">兩則 E／L／B＋一版可討論改寫。</div></div>
-      <div class="weekly-score-card"><div class="weekly-score-n">✓</div><div class="weekly-score-t">證據</div><div class="weekly-score-d">至少兩個確切原詞＋它推我感覺、相信或做什麼。</div></div>
-      <div class="weekly-score-card"><div class="weekly-score-n">✓</div><div class="weekly-score-t">判斷</div><div class="weekly-score-d">拿掉什麼及其手法；保留什麼及可用什麼檢查。</div></div>
-    </div>
-    <div class="weekly-score-note">三項是回饋與歷程語言，不換算分數；原作留到 Gate 2 批次查核。</div>
-  </div>
-  <div class="page-footer">W7 · 0 分練習／Gate 2</div>
-</section>
-
-<section class="slide dark" data-slide="6" data-section="兩版本開場">
-  <div class="slide-inner">
-    <div class="kicker gold">00–10 分鐘｜先選，不解釋</div>
-    <div class="title" style="font-size:clamp(52px,4.2vw,72px);">哪一則會讓你停下來？</div>
-    <div class="choice-row">
-      <div class="choice-card"><div class="tag">A</div><div class="text">還不關通知？你正在把專注力送給演算法！</div></div>
-      <div class="choice-card gold"><div class="tag">B</div><div class="text">需要連續閱讀時，可以先關閉非必要通知 20 分鐘，再比較中斷次數。</div></div>
-    </div>
-    <div class="subtitle muted center" style="margin-top:28px;">先舉手。暫時不用替自己的選擇辯護。</div>
-  </div>
-  <div class="page-footer">W7 · 第一反應</div>
-</section>
-
-<section class="slide dark" data-slide="7" data-section="兩版本開場">
+<section class="slide dark" data-slide="6" data-section="先看一版">
   <div class="slide-inner center">
-    <div class="kicker">揭曉</div>
-    <div class="goldline">兩句想談的是<span class="accent-2">同一件事</span></div>
-    <div class="message-box" style="max-width:1200px;margin:28px auto 0;">通知可能中斷需要連續注意的活動。</div>
-    <div class="subtitle muted" style="margin-top:28px;">差別不是有沒有主張，是主張怎麼被送到你面前。</div>
+    <div class="kicker gold">第 1 頁｜留下第一反應</div>
+    <div class="message-box gold" style="text-align:left;">如果只看到這一版，我下一步可能會＿＿，因為＿＿。</div>
+    <div style="margin-top:34px;"><div class="timer-pill" data-timer="1020">17:00</div></div>
+    <div class="subtitle muted" style="margin-top:22px;">先寫自己的；不用寫成老師想看的答案。</div>
   </div>
-  <div class="page-footer">W7 · 主張與手法</div>
+  <div class="page-footer">W7 · 08–25｜完成第 1 頁</div>
 </section>
 
-<section class="slide dark" data-slide="8" data-section="公開素材">
+<section class="slide dark" data-slide="7" data-section="並排比較">
   <div class="slide-inner">
-    <div class="kicker gold">公開，才帶進教室</div>
-    <div class="title" style="font-size:clamp(52px,4.3vw,76px);">陌生人也看得到，<br>才算今天的<span class="accent">公開訊息</span></div>
+    <div class="kicker gold">25–45 分鐘｜歷程本第 2 頁｜現在才揭開</div>
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="card"><div class="label">A</div><div class="body-sm">「還不關通知？你正在把專注力送給平台！自律的人早就全關了。」</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label" style="color:var(--accent-2);">B</div><div class="body-sm">「不是每種通知都一樣。先記一週哪些提醒真的打斷你，再決定關哪些、留哪些必要聯絡。」</div></div>
+    </div>
+    <div class="source-note center">兩版都是老師為本課寫的模擬內容；都還需要查資料，不能直接當答案。</div>
+  </div>
+  <div class="page-footer">W7 · 第 2 頁｜兩版並排</div>
+</section>
+
+<section class="slide dark" data-slide="8" data-section="並排比較">
+  <div class="slide-inner center">
+    <div class="kicker">先找共同點</div>
+    <div class="goldline">兩版都在談<br><span class="accent">什麼事情？</span></div>
+    <div class="subtitle muted" style="margin-top:34px;">先寫一句共同主題，再開始找差異。</div>
+  </div>
+  <div class="page-footer">W7 · 第 2 頁｜共同在談什麼</div>
+</section>
+
+<section class="slide dark" data-slide="9" data-section="並排比較">
+  <div class="slide-inner">
+    <div class="kicker gold">所有判斷都要有字詞</div>
     <div class="grid-2">
-      <div class="card"><div class="label">可以</div><div class="body-sm">不用加好友、不用進群組、不限特定追蹤者；公開頁面可見。</div></div>
-      <div class="card"><div class="label" style="color:var(--alert);">不用帶</div><div class="body-sm">LINE 群組、IG 限動、私訊、同學帳號與可識別個資。</div></div>
+      <div class="card"><div class="label">A</div><div class="body-sm">多放了什麼？少放了什麼？<br>根據哪個確切字詞？</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label" style="color:var(--accent-2);">B</div><div class="body-sm">多放了什麼？少放了什麼？<br>根據哪個確切字詞？</div></div>
     </div>
-    <div class="check-line" style="margin-top:26px;">不確定或不符合？直接改用教師素材 A。不扣分，也不用解釋。</div>
+    <div style="text-align:center;margin-top:30px;"><div class="timer-pill" data-timer="1200">20:00</div></div>
   </div>
-  <div class="page-footer">W7 · 素材安全</div>
+  <div class="page-footer">W7 · 25–45｜完成第 2 頁前半</div>
 </section>
 
-<section class="slide dark" data-slide="9" data-section="三種手法">
-  <div class="slide-inner">
-    <div class="kicker gold">10–25 分鐘</div>
-    <div class="title" style="font-size:clamp(52px,4.2vw,74px);">三種手法，都要回到<span class="accent">原詞</span></div>
-    <div class="elb-grid">
-      <div class="elb-card e"><div class="elb-letter">E</div><div class="elb-name">情緒</div><div class="elb-desc">先把情緒推高，讓人來不及細看主張。</div></div>
-      <div class="elb-card l"><div class="elb-letter">L</div><div class="elb-name">標籤</div><div class="elb-desc">先替人或群體命名，再把標籤當理由。</div></div>
-      <div class="elb-card b"><div class="elb-letter">B</div><div class="elb-name">二分</div><div class="elb-desc">把多種可能壓成兩邊，逼人立刻站隊。</div></div>
-    </div>
+<section class="slide dark" data-slide="10" data-section="我可能漏了什麼">
+  <div class="slide-inner center">
+    <div class="kicker gold">45–62 分鐘｜先守住一條界線</div>
+    <div class="goldline">寫法不同<br><span class="alert">不等於內容是假的</span></div>
+    <div class="subtitle muted" style="margin-top:32px;">今天先比較「我被安排先看到什麼」；內容能不能成立，還要另外找資料。</div>
   </div>
-  <div class="page-footer">W7 · E／L／B</div>
+  <div class="page-footer">W7 · 寫法與真假分開</div>
 </section>
 
-<section class="slide dark" data-slide="10" data-section="三種手法">
+<section class="slide dark" data-slide="11" data-section="我可能漏了什麼">
   <div class="slide-inner">
-    <div class="kicker">教師校準素材 B</div>
-    <div class="message-box gold">「自律的人都在早起，你還在睡？不是贏在清晨，就是輸給懶惰。現在就設五點鬧鐘！」</div>
-    <div class="goldline" style="font-size:clamp(44px,4vw,68px);margin-top:34px;">先圈兩個原詞。<br><span class="small">它在推情緒、貼標籤，還是逼你二選一？</span></div>
-  </div>
-  <div class="page-footer">W7 · 不先公布整題答案</div>
-</section>
-
-<section class="slide dark" data-slide="11" data-section="學生操作">
-  <div class="slide-inner">
-    <div class="kicker gold">25–45 分鐘｜兩則來源固定</div>
-    <div class="title" style="font-size:clamp(52px,4.3vw,76px);">一則真實遇到，<br>一則全班<span class="accent">共同校準</span></div>
+    <div class="kicker">第 2 頁｜只看一版時</div>
     <div class="choice-row">
-      <div class="choice-card"><div class="tag">01</div><div class="text">你的公開訊息；不符合就用教師素材 A。</div></div>
-      <div class="choice-card gold"><div class="tag">02</div><div class="text">歷程本第 2 頁的教師素材 B。</div></div>
+      <div class="choice-card"><div class="tag">我可能漏掉</div><div class="text">另一版才出現的條件、例外或做法。</div></div>
+      <div class="choice-card gold"><div class="tag">我可能被推向</div><div class="text">更快支持、反對、照做，或停下來再查。</div></div>
     </div>
-    <div style="text-align:center;margin-top:22px;"><div class="timer-pill" data-timer="1200">20:00</div></div>
+    <div class="check-line" style="margin-top:28px;">不是猜作者心裡在想什麼。請回到版本裡的字詞與先後順序。</div>
   </div>
-  <div class="page-footer">W7 · 真實案例＋標準案例</div>
+  <div class="page-footer">W7 · 第 2 頁｜漏掉與推向</div>
 </section>
 
-<section class="slide dark" data-slide="12" data-section="學生操作">
+<section class="slide dark" data-slide="12" data-section="我可能漏了什麼">
   <div class="slide-inner center">
-    <div class="kicker">每一則都做</div>
-    <div class="goldline">圈<span class="alert">原詞</span>，<br>不是只寫「它很煽動」</div>
-    <div class="steps-4" style="max-width:1200px;margin:30px auto 0;text-align:left;">
-      <div class="step-item"><div class="step-num">01</div><div class="step-content"><div class="s-main">圈 E／L／B</div><div class="s-sub">某種沒有出現，可以不圈。</div></div></div>
-      <div class="step-item"><div class="step-num gold">02</div><div class="step-content"><div class="s-main">抄至少兩個確切字詞</div><div class="s-sub">讓別人能回到原文核對。</div></div></div>
-      <div class="step-item"><div class="step-num">03</div><div class="step-content"><div class="s-main">寫它想推我感覺、相信或做什麼</div><div class="s-sub">不要改成對作者人格的評論。</div></div></div>
-    </div>
+    <div class="kicker gold">把句子寫完整</div>
+    <div class="message-box gold" style="text-align:left;">如果我只看 A／B，最可能沒想到＿＿；<br>這可能把我推向＿＿。</div>
+    <div style="margin-top:34px;"><div class="timer-pill" data-timer="1020">17:00</div></div>
   </div>
-  <div class="page-footer">W7 · 原詞證據</div>
+  <div class="page-footer">W7 · 45–62｜完成第 2 頁</div>
 </section>
 
-<section class="slide dark" data-slide="13" data-section="行動意圖">
+<section class="slide dark" data-slide="13" data-section="改成可討論版">
   <div class="slide-inner center">
-    <div class="kicker gold">一個追問就好</div>
-    <div class="title">這個字詞想替我<br><span class="accent">先完成哪一步？</span></div>
-    <div class="grid-3" style="margin-top:24px;text-align:left;">
-      <div class="card"><div class="label">感覺</div><div class="body-sm">先氣、先怕、先羞愧？</div></div>
-      <div class="card"><div class="label">相信</div><div class="body-sm">先把某種人當成好／壞？</div></div>
-      <div class="card"><div class="label">行動</div><div class="body-sm">先轉發、站隊、購買或關閉？</div></div>
-    </div>
+    <div class="kicker gold">62–80 分鐘｜歷程本第 3 頁</div>
+    <div class="title">先留下<br><span class="accent">兩版都能檢查的主張</span></div>
+    <div class="subtitle muted">兩版共同在談的，不是「誰比較自律」，而是什麼可以用資料檢查？</div>
   </div>
-  <div class="page-footer">W7 · 文字如何推人</div>
+  <div class="page-footer">W7 · 第 3 頁｜原主張</div>
 </section>
 
-<section class="slide dark" data-slide="14" data-section="手法與真假">
-  <div class="slide-inner center">
-    <div class="kicker gold">45–58 分鐘｜最重要的防誤解</div>
-    <div class="goldline">用了手法<br><span class="alert">不等於內容是假的</span></div>
-    <div class="subtitle muted" style="margin-top:30px;">手法問「怎麼推我」；查證問「內容撐不撐得住」。</div>
-  </div>
-  <div class="page-footer">W7 · 兩個問題</div>
-</section>
-
-<section class="slide dark" data-slide="15" data-section="手法與真假">
+<section class="slide dark" data-slide="14" data-section="改成可討論版">
   <div class="slide-inner">
-    <div class="kicker">兩軸，不是一個「假新聞」桶</div>
-    <div class="axis-grid">
-      <div class="axis-cell head"></div>
-      <div class="axis-cell head">手法明顯</div>
-      <div class="axis-cell head">手法不明顯</div>
-      <div class="axis-cell row">已有資料支持</div>
-      <div class="axis-cell">可能是真主張，但寫得很煽動。</div>
-      <div class="axis-cell">可能是平實、可核對的說法。</div>
-      <div class="axis-cell row">尚未查證／資料不支持</div>
-      <div class="axis-cell">需要查；不因煽動才變假。</div>
-      <div class="axis-cell">語氣平靜，也可能錯。</div>
+    <div class="kicker">拿掉推人的寫法</div>
+    <div class="grid-3">
+      <div class="card"><div class="label">讓人生氣或害怕</div><div class="body-sm">先把感覺拉高，讓人來不及想。</div></div>
+      <div class="card"><div class="label">替人貼標籤</div><div class="body-sm">先說哪種人比較好或比較差。</div></div>
+      <div class="card"><div class="label">逼你只能選一邊</div><div class="body-sm">把其他可能先藏起來。</div></div>
     </div>
+    <div class="check-line" style="margin-top:26px;">有這些寫法，不代表主張一定錯；先拿掉推力，再留下能查的部分。</div>
   </div>
-  <div class="page-footer">W7 · 手法 × 查證狀態</div>
+  <div class="page-footer">W7 · 第 3 頁｜保留主張，拿掉推力</div>
 </section>
 
-<section class="slide dark" data-slide="16" data-section="手法與真假">
-  <div class="slide-inner center">
-    <div class="kicker gold">今天先練左手；W10 再練右手</div>
-    <div class="choice-row" style="text-align:left;">
-      <div class="choice-card"><div class="tag">W7｜拆手法</div><div class="text">指出原詞如何推情緒、標籤人或逼人二選一。</div></div>
-      <div class="choice-card gold"><div class="tag">W10｜做查證</div><div class="text">拆主張、找來源、檢查來源是否真的支持。</div></div>
-    </div>
-    <div class="check-line" style="margin-top:28px;text-align:left;">今天沒有資料，就先寫「尚未查證」；不憑感覺判真或判假。</div>
-  </div>
-  <div class="page-footer">W7 · 能力分工</div>
-</section>
-
-<section class="slide dark" data-slide="17" data-section="改寫">
-  <div class="slide-inner center">
-    <div class="kicker gold">58–76 分鐘</div>
-    <div class="title">改寫不是消毒<br>是讓<span class="accent">證據進得來</span></div>
-    <div class="subtitle muted">保留可討論主張；拿掉先替讀者下結論的字詞。</div>
-  </div>
-  <div class="page-footer">W7 · 可討論版</div>
-</section>
-
-<section class="slide dark" data-slide="18" data-section="改寫">
+<section class="slide dark" data-slide="15" data-section="改成可討論版">
   <div class="slide-inner">
-    <div class="kicker">先做三個限縮</div>
+    <div class="kicker gold">可討論版要讓資料進得來</div>
     <div class="steps-4">
-      <div class="step-item"><div class="step-num">01</div><div class="step-content"><div class="s-main">對象</div><div class="s-sub">談誰？不要推到所有人。</div></div></div>
-      <div class="step-item"><div class="step-num gold">02</div><div class="step-content"><div class="s-main">情境</div><div class="s-sub">在哪裡、何時、多久？</div></div></div>
-      <div class="step-item"><div class="step-num">03</div><div class="step-content"><div class="s-main">檢查方式</div><div class="s-sub">可以比較哪一筆紀錄、觀察或實驗？</div></div></div>
+      <div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="s-main">說清楚談誰或哪種情況</div></div></div>
+      <div class="step-item"><div class="step-num gold">2</div><div class="step-content"><div class="s-main">說清楚要比較什麼</div></div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content"><div class="s-main">讓不同結果與例外也能放進來</div></div></div>
     </div>
-    <div class="message-box" style="margin-top:28px;">通知可能中斷需要連續注意的活動。</div>
+    <div style="text-align:center;margin-top:28px;"><div class="timer-pill" data-timer="1080">18:00</div></div>
   </div>
-  <div class="page-footer">W7 · 主張限縮</div>
+  <div class="page-footer">W7 · 62–80｜完成可討論版</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="判斷">
+<section class="slide dark" data-slide="16" data-section="我的最後決定">
   <div class="slide-inner">
-    <div class="kicker gold">76–86 分鐘｜Gate 2 歷程證據</div>
-    <div class="title" style="font-size:clamp(50px,4.1vw,72px);">不能只寫<br>「拿掉責備，保留提醒」</div>
-    <div class="message-box gold" style="margin-top:26px;">
-      我拿掉＿＿，因為它□先推情緒 □先判斷人 □假設只有兩種；<br>
-      我保留＿＿，因為它可以用＿＿來檢查，並允許＿＿可能不同。
-    </div>
+    <div class="kicker gold">80–92 分鐘｜第 3 頁後半</div>
+    <div class="message-box gold" style="text-align:left;">我拿掉＿＿，因為它先推我＿＿；<br>我保留＿＿，因為可以用＿＿來檢查。</div>
+    <div class="subtitle muted center" style="margin-top:28px;font-size:clamp(34px,3vw,50px);">不要只寫「太誇張」；<br>要抄出你真的拿掉了什麼。</div>
   </div>
-  <div class="page-footer">W7 · 形成性判斷</div>
+  <div class="page-footer">W7 · 第 3 頁｜刪留理由</div>
 </section>
 
-<section class="slide dark" data-slide="20" data-section="判斷">
+<section class="slide dark" data-slide="17" data-section="換一個下一步">
   <div class="slide-inner">
-    <div class="kicker">作答後才看｜證據完整示範</div>
-    <div class="message-box">
-      拿掉「你不自律」與「專注力被送走」，因為它們先判人格、先推失去控制的情緒；保留「通知可能造成中斷」，因為這能以使用紀錄或實驗比較，也允許有人不受影響。
+    <div class="kicker">下一次，不只換答案</div>
+    <div class="grid-3">
+      <div class="card"><div class="label">多搜</div><div class="body-sm">補一個相反說法、限制或例外。</div></div>
+      <div class="card"><div class="label">比較</div><div class="body-sm">把兩個來源或兩種情況放在一起看。</div></div>
+      <div class="card"><div class="label">少追著走</div><div class="body-sm">先停一下，不因第一眼就立刻轉傳或照做。</div></div>
     </div>
-    <div class="check-line" style="margin-top:28px;">
-      可討論版：在需要連續閱讀 20 分鐘的情境中，關閉非必要通知是否能減少中斷次數？效果是否因人而異？
-    </div>
+    <div class="message-box" style="margin-top:26px;text-align:left;">我會多搜＿＿／比較＿＿／少追著＿＿走，因為＿＿。</div>
+    <div style="text-align:center;margin-top:24px;"><div class="timer-pill" data-timer="720">12:00</div></div>
   </div>
-  <div class="page-footer">W7 · 證據完整不是分數</div>
+  <div class="page-footer">W7 · 80–92｜寫下一個動作</div>
 </section>
 
-<section class="slide dark" data-slide="21" data-section="推薦系統">
-  <div class="slide-inner center">
-    <div class="kicker gold">86–95 分鐘</div>
-    <div class="goldline">互動是<span class="accent">排序訊號</span><br>不是真假章</div>
-    <div class="subtitle muted" style="margin-top:28px;">觀看、略過、按讚、分享與留言，都可能影響推薦。</div>
-  </div>
-  <div class="page-footer">W7 · 推薦 ≠ 查證</div>
-</section>
-
-<section class="slide dark" data-slide="22" data-section="推薦系統">
+<section class="slide dark" data-slide="18" data-section="帶到 W8">
   <div class="slide-inner">
-    <div class="kicker">只帶走這一句</div>
-    <div class="message-box gold">
-      它被推到我面前，表示系統預測我可能＿＿；<br>
-      不表示內容已經＿＿。
+    <div class="kicker gold">92–97 分鐘｜歷程本第 4 頁</div>
+    <div class="choice-row">
+      <div class="choice-card"><div class="tag">兩版共同承認</div><div class="text">哪一件事可能是真的？</div></div>
+      <div class="choice-card gold"><div class="tag">我還需要核對</div><div class="text">哪一個主張、範圍或例外？</div></div>
     </div>
-    <div class="subtitle muted" style="margin-top:28px;">不同平台使用的訊號與權重不同，也可能隨時間調整。</div>
-    <div class="source-note">教學依據：TikTok 官方〈How TikTok recommends content〉｜support.tiktok.com</div>
+    <div style="text-align:center;margin-top:32px;"><div class="timer-pill" data-timer="300">5:00</div></div>
   </div>
-  <div class="page-footer">W7 · 精準說法</div>
+  <div class="page-footer">W7 · 第 4 頁｜交給 W8 的兩句話</div>
 </section>
 
-<section class="slide dark" data-slide="23" data-section="影片插播">
-<div class="slide-inner">
-    <div class="kicker gold">86–95 收尾 · 插播約 2.5 分鐘</div>
-    <div class="title" style="font-size:clamp(38px,3.4vw,60px);">正義感被代管</div>
-    <div style="display:flex;align-items:center;gap:24px;margin-top:26px;flex-wrap:wrap;">
-      <a href="https://youtu.be/81WR7hJOWUk?t=304" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;padding:16px 34px;background:rgba(0,198,255,0.10);border:1.5px solid var(--accent);border-radius:12px;color:var(--accent);text-decoration:none;font-weight:900;font-size:calc(var(--t3)*0.9);">▶ 播放</a>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:calc(var(--t3)*0.9);color:var(--accent-2);font-weight:700;">05:04 – 07:40</div>
-      <div style="font-size:var(--t4);color:var(--ink-3);">約 2.5 分鐘 · 課前校準 ±30 秒</div>
-    </div>
-    <div style="margin-top:14px;font-size:var(--t4);color:var(--ink-3);">鄭國威〈AI 時代最重要的思辨力與提問力〉· 大愛《人文講堂》</div>
-    <div style="margin-top:24px;padding:18px 26px;background:rgba(17,34,58,0.55);border-left:4px solid var(--accent-2);border-radius:8px;font-size:calc(var(--t3)*0.88);line-height:1.65;">播完 60 秒不討論，歷程本寫一行：<br><span style="color:var(--accent-2);font-weight:700;">「我最近一次很有正義感地轉發／站隊——當時我的工具（E／L／B、查來源）有跟上嗎？」</span></div>
-    <div style="margin-top:14px;font-size:var(--t4);color:var(--ink-3);text-align:center;">這位講者 20 歲才學會的事，就是你們這兩週在練的招。</div>
-  </div>
-  <div class="page-footer">W7 · 插播 · 刀2</div>
-</section>
-
-<section class="slide dark" data-slide="24" data-section="自留札記">
-  <div class="slide-inner center">
-    <div class="kicker gold">95–100 分鐘｜第 3／4 頁分工</div>
-    <div class="choice-row" style="text-align:left;">
-      <div class="choice-card"><div class="tag">第 3 頁｜Gate 2 歷程</div><div class="text">拿掉什麼、保留什麼、可以用什麼檢查。</div></div>
-      <div class="choice-card gold"><div class="tag">第 4 頁｜自留</div><div class="text">我最容易被哪種手法抓住？可不寫、遮住或撕下。</div></div>
-    </div>
-    <div class="subtitle muted" style="margin-top:30px;">老師不讀第 4 頁，也不把承認弱點當成分數。</div>
-  </div>
-  <div class="page-footer">W7 · 私密不是評量證據</div>
-</section>
-
-<section class="slide dark" data-slide="25" data-section="收束">
+<section class="slide dark" data-slide="19" data-section="完成確認">
   <div class="slide-inner">
-    <div class="kicker gold">走之前</div>
-    <div class="title" style="font-size:clamp(52px,4.3vw,76px);">我今天真的會了嗎？</div>
+    <div class="kicker gold">97–100 分鐘｜勾完再收本</div>
     <div class="steps-4">
-      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我完成兩則標記與可討論版。</div></div></div>
-      <div class="step-item"><div class="step-num gold">□</div><div class="step-content"><div class="s-main">我能指出至少兩個確切原詞與效果。</div></div></div>
-      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我能說出拿掉、保留與檢查方式。</div></div></div>
+      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我先只看一版，留下第一反應。</div></div></div>
+      <div class="step-item"><div class="step-num gold">□</div><div class="step-content"><div class="s-main">我並排找差異，而且寫了確切字詞。</div></div></div>
+      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我完成可討論版與下一個動作。</div></div></div>
+      <div class="step-item"><div class="step-num gold">□</div><div class="step-content"><div class="s-main">我只拍自己的頁面；紙本全本交回。</div></div></div>
     </div>
-    <div class="check-line" style="margin-top:26px;">W8 入場：預讀老師提供的同事件兩篇報導，各寫一句它比較在意什麼。</div>
   </div>
   <div class="page-footer">W7 · 完成確認</div>
 </section>
 
+<section class="slide dark" data-slide="20" data-section="收束">
+  <div class="slide-inner center">
+    <div class="kicker gold">走之前</div>
+    <div class="goldline">我不一定能決定<br>先看到什麼；<br><span class="accent">但我能改變下一步。</span></div>
+    <div class="subtitle muted" style="margin-top:34px;font-size:clamp(30px,2.6vw,42px);">第 4 頁個人反思可改寫、用代稱或留白；不計分。</div>
+  </div>
+  <div class="page-footer">W7 · 0 分練習｜累積學習關卡 2</div>
+</section>
 <script>
 
 const slides = document.querySelectorAll('.slide');

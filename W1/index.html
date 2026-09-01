@@ -296,17 +296,18 @@ body.force-rotate .rotate-hint { display: none; }
 }
 
 .slide[data-slide="13"] .title {
-  font-size: clamp(54px, 4.3vw, 78px);
-  margin-bottom: 12px;
+  font-size: clamp(48px, 3.9vw, 70px);
+  margin-bottom: 8px;
 }
-.slide[data-slide="13"] .subtitle { margin-bottom: 18px !important; }
+.slide[data-slide="13"] .subtitle { margin-bottom: 10px !important; }
 .slide[data-slide="13"] .reveal-grid > div {
-  padding: 14px 20px;
-  font-size: calc(var(--t3) * 0.82);
+  padding: 10px 18px;
+  font-size: calc(var(--t3) * 0.76);
+  line-height: 1.28;
 }
 .slide[data-slide="13"] .body {
-  margin-top: 18px !important;
-  font-size: calc(var(--t3) * 0.82);
+  margin-top: 10px !important;
+  font-size: calc(var(--t3) * 0.76);
 }
 
 .slide[data-slide="31"] .modules { gap: 6px; }
@@ -741,6 +742,11 @@ body.force-rotate .rotate-hint { display: none; }
 .timer-pill::before {
   content: '⌛';
   font-family: sans-serif;
+}
+.slide.light .timer-pill {
+  color: #5C4300;
+  background: #FFF2A8;
+  border-color: #7A5900;
 }
 
 /* Discussion phases (slides 20-22) */
