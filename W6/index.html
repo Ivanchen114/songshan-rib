@@ -564,6 +564,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .weekly-score-d{font-size:clamp(15px,1.25vw,22px);line-height:1.5;color:var(--ink-2);}
 .weekly-score-note{text-align:center;margin-top:26px;font-size:clamp(15px,1.3vw,22px);line-height:1.5;color:var(--ink-2);}
 
+
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
+
 </style>
 
 
@@ -636,24 +649,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W6 · 中心問題</div>
 </section>
 
-<section class="slide dark" data-slide="3" data-section="流程">
-  <div class="slide-inner">
-    <div class="kicker">今天的 100 分鐘</div>
-    <div class="title" style="font-size:clamp(34px,3.4vw,62px);">先有自己的閱讀，再開裝置</div>
-    <div class="timeline">
-      <div class="tl-row"><div class="tl-time">00–10</div><div class="tl-title">腦補示範</div><div class="tl-desc">哪些畫面其實沒寫？</div></div>
-      <div class="tl-row"><div class="tl-time">10–18</div><div class="tl-title">取回 W5 卡</div><div class="tl-desc">確認書、角色與頁碼</div></div>
-      <div class="tl-row"><div class="tl-time">18–28</div><div class="tl-title">重讀原文</div><div class="tl-desc">留下 3 個可核對細節</div></div>
-      <div class="tl-row star"><div class="tl-time">28–36</div><div class="tl-title accent-2">先寫預測</div><div class="tl-desc">寫完才開裝置</div></div>
-      <div class="tl-row"><div class="tl-time">36–48</div><div class="tl-title">取得一版回應</div><div class="tl-desc">AI 或教師固定回應</div></div>
-      <div class="tl-row dstar"><div class="tl-time">48–68</div><div class="tl-title accent">三色回查</div><div class="tl-desc">不湊顏色，只忠於證據</div></div>
-      <div class="tl-row star"><div class="tl-time">68–78</div><div class="tl-title accent-2">畫使用界線</div><div class="tl-desc">可以當／不能當</div></div>
-      <div class="tl-row"><div class="tl-time">78–93</div><div class="tl-title">先寫三句，再自願分享</div><div class="tl-desc">工具幫了什麼／沒確認什麼／原文哪一句</div></div>
-      <div class="tl-row"><div class="tl-time">93–100</div><div class="tl-title">完成確認</div><div class="tl-desc">接到 W7 公開訊息</div></div>
-    </div>
-  </div>
-  <div class="page-footer">W6 · 流程</div>
-</section>
+<section class="slide dark" data-slide="3" data-section="今天先做什麼，再做什麼？"><div class="soil-revision-inner"><div class="soil-kicker">100 分鐘｜照順序，先留自己的想法</div><h2 class="soil-title">今天先做什麼，再做什麼？</h2><div class="soil-columns" style="gap:12px"><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>00–18</strong>　看見腦補，取回書卡</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>18–28</strong>　回原文找三個細節</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>28–36</strong>　自己先預測</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>36–48</strong>　AI 或紙本回應</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>48–68</strong>　三色回查原文</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>68–88</strong>　寫出能當／不能當什麼</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>88–94</strong>　朋友轉述，回原話查</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>94–100</strong>　收件，接 W7</div></div><div class="soil-note">生活練習已排在這 100 分鐘裡，不另外加作業。</div></div><div class="page-footer">今天先做什麼，再做什麼？</div></section>
 
 <section class="slide dark" data-slide="4" data-section="學習關卡 2 證據">
   <div class="slide-inner weekly-score-wrap">
@@ -783,18 +779,12 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W6 · 一版就查</div>
 </section>
 
-<section class="slide dark" data-slide="14" data-section="三色回查">
-  <div class="slide-inner">
-    <div class="kicker">48–68 分鐘</div>
-    <div class="title">三色不是感覺，是三種<span class="accent" style="white-space:nowrap;">證據狀態</span></div>
-    <div class="tricolor-grid">
-      <div class="tc-color green"><div class="tc-dot">●</div><div class="tc-name">G · 原文有</div><div class="tc-def">能指出頁碼、句子或分鏡。</div></div>
-      <div class="tc-color red"><div class="tc-dot">●</div><div class="tc-name">R · 原文反證</div><div class="tc-def">與情節、動作、設定或時間衝突。</div></div>
-      <div class="tc-color yellow"><div class="tc-dot">●</div><div class="tc-name">Y · 原文沒說</div><div class="tc-def">合理，但目前無法確認。</div></div>
-    </div>
-  </div>
-  <div class="page-footer">W6 · G／Y／R</div>
-</section>
+<section class="slide dark" data-slide="14" data-section="三色規則">
+<div class="soil-revision-inner"><div class="soil-kicker">W6 · 三色規則</div>
+<h2 class="soil-title">先看證據，再選顏色</h2><div class="soil-source"><b>綠｜</b>我已看過證據，它支持這句話，而且這句話沒有說得比證據更多。<br><b>紅｜</b>我手上有證據，直接和這句話衝突。<br><b>黃｜</b>目前還不能判斷：沒找到、拿不到，或找到的證據還不夠。</div>
+<div class="soil-action">先圈一小句，不把整段話一起判。</div>
+<div class="soil-note">有地方能查，不等於已查過並支持；沒出現某色，不必硬湊。</div></div>
+<div class="page-footer">W6 · 三色規則</div></section>
 
 <section class="slide dark" data-slide="15" data-section="三色回查">
   <div class="slide-inner center">
@@ -866,17 +856,12 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W6 · 百分比不是答案</div>
 </section>
 
-<section class="slide dark" data-slide="21" data-section="校準">
-  <div class="slide-inner">
-    <div class="kicker">形成中</div>
-    <div class="title">證據成立，判斷還沒成立</div>
-    <div class="grid-2">
-      <div class="card"><div class="label">證據</div><div class="body">AI 寫「跑過鐵道」；原文顯示父親動作費力。<br><b class="accent">有可核對反證。</b></div></div>
-      <div class="card"><div class="label">判斷</div><div class="body">「我相信 70%，因為很像角色。」<br><b class="alert">仍沒有用途與禁區。</b></div></div>
-    </div>
-  </div>
-  <div class="page-footer">W6 · 中程度例</div>
-</section>
+<section class="slide dark" data-slide="21" data-section="紅與黃不要混用">
+<div class="soil-revision-inner"><div class="soil-kicker">W6 · 紅與黃不要混用</div>
+<h2 class="soil-title">有根據，還要說清楚怎麼用</h2><div class="soil-source">原文：『明天中午我可以幫忙畫。』<br>改寫：『他以後都不幫忙。』</div>
+<div class="soil-action">這兩句直接衝突，能指出紅色的根據；但只寫『我相信七成』，還沒說清楚哪裡能用。</div>
+<div class="soil-note">教學用對照句；不是《背影》的原文。</div></div>
+<div class="page-footer">W6 · 紅與黃不要混用</div></section>
 
 <section class="slide dark" data-slide="22" data-section="校準">
   <div class="slide-inner">
@@ -890,7 +875,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="23" data-section="工具界線">
   <div class="slide-inner">
-    <div class="kicker">78–93 分鐘 · 先寫，再自願分享</div>
+    <div class="kicker">78–88 分鐘 · 先寫，再自願分享</div>
     <div class="title">工具幫了哪裡，你確認了哪裡</div>
     <div class="compare-structure">
       <div class="cs-item"><div class="cs-num">01</div><div class="cs-text">工具幫我找到或整理了＿＿。</div></div>
@@ -902,20 +887,30 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W6 · 工具幫忙與原文確認</div>
 </section>
 
-<section class="slide dark" data-slide="24" data-section="收尾">
-  <div class="slide-inner">
-    <div class="kicker gold">走之前</div>
-    <div class="title">我的學習關卡 2 原作留好了嗎？</div>
-    <div class="steps-4">
-      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我先寫自己的預測，再看 AI。</div></div></div>
-      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">每個標色都回得到原文；沒有硬湊顏色。</div></div></div>
-      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我寫出可以／不能當什麼，也指出工具沒確認什麼、原文哪句確認。</div></div></div>
-    </div>
-    <div class="subtitle muted">W6 是 0 分練習；不要重抄漂亮版，和 W7–W8 一起保留到 W9 前批次查核。</div>
-    <div class="card" style="margin-top:24px;"><div class="label">W7 入場</div><div class="body-sm">帶一則讓你停下來看的<b>公開訊息</b>標題或短摘；圈出讓你停下來的字。不要帶私人對話、同學帳號或可識別資料。</div></div>
+<section class="slide dark soil-practice" data-slide="24" data-section="生活練習" data-soil-task="W6-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">88–94 分｜朋友｜先自己做一次</div>
+    <h2 class="soil-title">他真的說過那句話嗎？</h2>
+    <div class="soil-source">朋友轉述：『小安說他以後都不幫忙做海報。』你看到原訊息：『今天來不及，明天中午我可以幫忙畫。』</div>
+    <div class="soil-action">你會怎麼回這位朋友？把原訊息中的根據帶進你的回覆，不替小安補心情。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
   </div>
-  <div class="page-footer">W6 · 完成確認與 W7 入場</div>
+  <div class="page-footer">W6 · 生活練習 · 1／2</div>
 </section>
+
+<section class="slide dark soil-practice" data-slide="25" data-section="生活練習" data-soil-task="W6-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">88–94 分｜朋友｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">朋友改口：『那他今天不幫，應該就是不在乎大家吧。』</div>
+    <div class="soil-action">這次和剛才哪裡不同？寫出你願意說的版本，別把不知道的事說成已經知道。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W6 · 生活練習 · 2／2</div>
+</section>
+
+<section class="slide dark" data-slide="26" data-section="收件">
+<div class="soil-revision-inner"><div class="soil-kicker">94–100 分｜收件與下週準備</div><h2 class="soil-title">原作留好，就可以交回</h2><div class="soil-source">確認：先寫預測 → 回原文標色 → 寫出可以／不能當什麼。<br>不必重抄漂亮版；本週 0 分，與 W7–W8 一起留到學習關卡 2。</div><div class="soil-action">下週帶一則公開標題或短摘，圈出讓你停下來的字。</div><div class="soil-note">不帶私人對話或帳號；自己的歷程本照常收回。</div></div><div class="page-footer">W6 · 收件與 W7 入場</div></section>
 
 <script>
 

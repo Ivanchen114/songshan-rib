@@ -389,7 +389,20 @@
       .back-home, .fullscreen-btn, #pageInfo, #hint, #section-tag, #progress, #progress-bg { display: none; }
       [data-reveal] { opacity: 1 !important; transform: none !important; }
     }
-  </style>
+  
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
+
+</style>
 </head>
 <body>
   <a class="back-home" href="../" title="回 R.I.B. 首頁">← R.I.B.</a>
@@ -412,7 +425,7 @@
     <div class="page-footer">W4 · 任務開始</div>
   </section>
 
-  <section class="slide center" data-slide="2" data-section="中心問題">
+<section class="slide center" data-slide="2" data-section="中心問題">
     <div class="inner">
       <div class="eyebrow yellow">本週中心問題</div>
       <div class="question">我以為<span class="gold">寫清楚了</span>，<br>讀者真的<span class="accent">看見了</span>嗎？</div>
@@ -420,24 +433,9 @@
     <div class="page-footer">W4 · 中心問題</div>
   </section>
 
-  <section class="slide" data-slide="3" data-section="今日流程">
-    <div class="inner">
-      <div class="eyebrow">今日任務序列</div>
-      <h2>100 分鐘 · 今天怎麼走</h2>
-      <div class="timeline">
-        <div class="timeline-row"><span class="time">00–08</span><span class="phase">接回 W3 ＋ 學習關卡 1 證據</span><span class="action">先拿出原文與三個細節，再確認任務</span></div>
-        <div class="timeline-row"><span class="time">08–22</span><span class="phase">盲讀兩個版本</span><span class="action">先選看得見的一版，再說理由</span></div>
-        <div class="timeline-row"><span class="time">22–32</span><span class="phase">整理三個工具</span><span class="action">有地方、有動作、有變化</span></div>
-        <div class="timeline-row"><span class="time">32–48</span><span class="phase">擴寫＋封存原意</span><span class="action">擴寫至約 60 字以上，再把原意摺起來</span></div>
-        <div class="timeline-row"><span class="time">48–68</span><span class="phase">當測試讀者</span><span class="action">示範後兩人輪讀，只寫實際收到什麼</span></div>
-        <div class="timeline-row"><span class="time">68–90</span><span class="phase">做決定＋判斷</span><span class="action">改或保留，再對照封存原意與段落重點</span></div>
-        <div class="timeline-row"><span class="time">90–100</span><span class="phase">自願分享＋收尾</span><span class="action">個人反思（可留白、不計分）、W5 入場作業</span></div>
-      </div>
-    </div>
-    <div class="page-footer">W4 · 流程預告</div>
-  </section>
+<section class="slide dark" data-slide="3" data-section="今天先做什麼，再做什麼？"><div class="soil-revision-inner"><div class="soil-kicker">100 分鐘｜照順序，先留自己的想法</div><h2 class="soil-title">今天先做什麼，再做什麼？</h2><div class="soil-columns" style="gap:12px"><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>00–22</strong>　接 W3，盲讀兩版</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>22–32</strong>　整理三個寫法</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>32–48</strong>　擴寫、摺起原意</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>48–68</strong>　讀者只說收到什麼</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>68–88</strong>　打開原意，再改一次</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>88–90</strong>　確認原作與決定</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>90–96</strong>　新社員領球衣通知</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>96–100</strong>　收件</div></div><div class="soil-note">生活練習已排在這 100 分鐘裡，不另外加作業。</div></div><div class="page-footer">今天先做什麼，再做什麼？</div></section>
 
-  <section class="slide" data-slide="4" data-section="接上 W3">
+<section class="slide" data-slide="4" data-section="接上 W3">
     <div class="inner">
       <div class="eyebrow">W3 → W4</div>
       <h2>上週選細節，<br>這週把它<span class="gold">寫給別人看</span></h2>
@@ -457,7 +455,7 @@
     <div class="page-footer">W4 · 從選擇到表達</div>
   </section>
 
-  <section class="slide" data-slide="5" data-section="學習關卡 1 證據">
+<section class="slide" data-slide="5" data-section="學習關卡 1 證據">
     <div class="inner">
       <div class="eyebrow">本週 0 分練習 · 累積學習關卡 1</div>
       <h2>不看文筆，確認三件事</h2>
@@ -471,7 +469,7 @@
     <div class="page-footer">W4 · 學習關卡 1 形成性證據</div>
   </section>
 
-  <section class="slide center" data-slide="6" data-section="先來盲讀">
+<section class="slide center" data-slide="6" data-section="先來盲讀">
     <div class="inner">
       <div class="eyebrow yellow">先別急著學方法</div>
       <div class="quote">同一個 30 秒，<br>我寫了<span class="accent">兩個版本</span>。</div>
@@ -480,7 +478,7 @@
     <div class="page-footer">W4 · 盲讀開始</div>
   </section>
 
-  <section class="slide light" data-slide="7" data-section="版本 A">
+<section class="slide light" data-slide="7" data-section="版本 A">
     <div class="inner">
       <div class="eyebrow">同一個 30 秒 · 版本 A</div>
       <div class="paper">
@@ -496,7 +494,7 @@
     <div class="page-footer">W4 · 版本 A</div>
   </section>
 
-  <section class="slide light" data-slide="8" data-section="版本 B">
+<section class="slide light" data-slide="8" data-section="版本 B">
     <div class="inner">
       <div class="eyebrow">同一個 30 秒 · 版本 B</div>
       <div class="paper">
@@ -511,7 +509,7 @@
     <div class="page-footer">W4 · 版本 B</div>
   </section>
 
-  <section class="slide center" data-slide="9" data-section="先做選擇">
+<section class="slide center" data-slide="9" data-section="先做選擇">
     <div class="inner">
       <div class="eyebrow">跟同桌說 1 分鐘</div>
       <div class="question">你比較<span class="gold">看得見</span> A 還是 B？</div>
@@ -520,7 +518,7 @@
     <div class="page-footer">W4 · 先選再說理由</div>
   </section>
 
-  <section class="slide" data-slide="10" data-section="揭曉">
+<section class="slide" data-slide="10" data-section="揭曉">
     <div class="inner">
       <div class="eyebrow yellow">揭曉</div>
       <h2>差別不在字多，<br>而在讀者<span class="accent">能不能重建那一刻</span></h2>
@@ -533,7 +531,7 @@
     <div class="page-footer">W4 · 從感覺到發現</div>
   </section>
 
-  <section class="slide" data-slide="11" data-section="三個工具">
+<section class="slide" data-slide="11" data-section="三個工具">
     <div class="inner">
       <div class="eyebrow">從兩個版本整理出來</div>
       <h2>讓讀者看見的三個工具</h2>
@@ -549,7 +547,7 @@
     <div class="page-footer">W4 · 地方、動作、變化</div>
   </section>
 
-  <section class="slide" data-slide="12" data-section="看文字怎麼做">
+<section class="slide" data-slide="12" data-section="看文字怎麼做">
     <div class="inner">
       <div class="eyebrow">回到 B 版</div>
       <h2>哪些字真的把畫面送出去？</h2>
@@ -563,7 +561,7 @@
     <div class="page-footer">W4 · 找得到文字證據</div>
   </section>
 
-  <section class="slide center" data-slide="13" data-section="核心">
+<section class="slide center" data-slide="13" data-section="核心">
     <div class="inner">
       <div class="quote">你腦中的畫面，<br><span class="gold">不會自動跑進讀者腦中。</span></div>
       <p class="lead" style="margin-top:34px;">讀者只能用你留下的字，一點一點重建。</p>
@@ -571,7 +569,7 @@
     <div class="page-footer">W4 · 核心句</div>
   </section>
 
-  <section class="slide" data-slide="14" data-section="安全選材">
+<section class="slide" data-slide="14" data-section="安全選材">
     <div class="inner">
       <div class="step">STEP 1 · 動筆前先選</div>
       <h2>今天要交換，<br>先選<span class="green">可以給同學看的內容</span></h2>
@@ -590,7 +588,7 @@
     <div class="page-footer">W4 · 素材由你決定</div>
   </section>
 
-  <section class="slide" data-slide="15" data-section="寫第一版">
+<section class="slide" data-slide="15" data-section="寫第一版">
     <div class="timer" data-timer="720">12:00</div>
     <div class="inner">
       <div class="step">STEP 2 · 第一版</div>
@@ -605,7 +603,7 @@
     <div class="page-footer">W4 · 自己寫第一版</div>
   </section>
 
-  <section class="slide center" data-slide="16" data-section="封存原意">
+<section class="slide center" data-slide="16" data-section="封存原意">
     <div class="timer" data-timer="60">1:00</div>
     <div class="inner">
       <div class="eyebrow yellow">看到回報之前先寫</div>
@@ -614,18 +612,18 @@
     </div>
     <div class="page-footer">W4 · 保留回饋前的原意</div>
   </section>
+
 <section class="slide center" data-slide="17" data-section="賭注格">
     <div class="inner">
       <div class="eyebrow yellow">封存的同時 · 賭注格</div>
       <div class="question">讀者會自己讀到這個畫面嗎？<br><span class="accent">把握 ＿＿％</span></div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px;max-width:1100px;margin-left:auto;margin-right:auto;"><div style="padding:18px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;text-align:center;"><div style="font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">50%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">像丟硬幣</div></div><div style="padding:18px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;text-align:center;"><div style="font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">70%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">有些把握</div></div><div style="padding:18px 12px;background:var(--panel);border:1px solid var(--yellow);border-radius:10px;text-align:center;"><div style="font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--yellow);">90%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--yellow);margin-top:6px;line-height:1.4;">高度確定</div></div><div style="padding:18px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;text-align:center;"><div style="font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:calc(var(--t2)*0.6);font-weight:900;color:var(--ink-2);">99%</div><div style="font-size:calc(var(--t3)*0.78);color:var(--ink-2);margin-top:6px;line-height:1.4;">幾乎確定</div></div></div>
-      <p class="lead" style="margin-top:28px;">寫在摺起那格的旁邊；80–90 分讀者回報時回填 ✓／✗。<br>只當儀式，不評分。</p>
+      <p class="lead" style="margin-top:28px;">寫在摺起那格的旁邊；68–71 分讀者回報時回填 ✓／✗。<br>只當儀式，不評分。</p>
     </div>
     <div class="page-footer">W4 · 賭注格</div>
   </section>
 
-
-  <section class="slide" data-slide="18" data-section="測試讀者">
+<section class="slide" data-slide="18" data-section="測試讀者">
     <div class="inner">
       <div class="step">STEP 3 · 不是評審</div>
       <h2>你現在是<span class="gold">測試讀者</span></h2>
@@ -640,7 +638,7 @@
     <div class="page-footer">W4 · 描述你真的讀到什麼</div>
   </section>
 
-  <section class="slide" data-slide="19" data-section="怎樣算具體">
+<section class="slide" data-slide="19" data-section="怎樣算具體">
     <div class="inner">
       <div class="eyebrow">回饋先過這一關</div>
       <h2>描述文字，不替作者打分數</h2>
@@ -659,7 +657,7 @@
     <div class="page-footer">W4 · 描述，不評分</div>
   </section>
 
-  <section class="slide" data-slide="20" data-section="交換界線">
+<section class="slide" data-slide="20" data-section="交換界線">
     <div class="inner">
       <div class="eyebrow yellow">交換前先確認</div>
       <h2>只讀文字，<span class="green">不追問私事</span></h2>
@@ -682,7 +680,7 @@
     <div class="page-footer">W4 · 分享有界線</div>
   </section>
 
-  <section class="slide" data-slide="21" data-section="兩人輪流">
+<section class="slide" data-slide="21" data-section="兩人輪流">
     <div class="timer" data-timer="960">16:00</div>
     <div class="inner">
       <div class="step">STEP 3 · 兩人輪流</div>
@@ -698,44 +696,21 @@
     <div class="page-footer">W4 · 測試讀者實作</div>
   </section>
 
-  <section class="slide" data-slide="22" data-section="做出決定">
-    <div class="timer" data-timer="720">12:00</div>
-    <div class="inner">
-      <div class="step">STEP 4 · 拿回自己的文字</div>
-      <h2>做出 <span class="gold">1–2 個決定</span></h2>
-      <p class="lead">先看讀者真的收到什麼；不用為了留下痕跡硬改。</p>
-      <div class="grid-4" style="margin-top:28px;">
-        <div class="card"><h3 class="accent">補一個位置</h3><p>讀者不知道人在哪裡</p></div>
-        <div class="card gold-card"><h3 class="gold">寫清楚動作</h3><p>讀者只知道結果，不知道怎麼發生</p></div>
-        <div class="card green-card"><h3 class="green">補上變化</h3><p>讀者不知道哪一刻改變了</p></div>
-        <div class="card red-card"><h3 class="red">保留原句</h3><p>原意已送到，或意外讀法值得留下</p></div>
-      </div>
-      <p class="lead" style="text-align:center;margin-top:28px;">也可以決定不改，但要說得出理由。</p>
-    </div>
-    <div class="page-footer">W4 · 不用整篇重寫</div>
-  </section>
+<section class="slide dark" data-slide="22" data-section="對照原意">
+<div class="soil-revision-inner"><div class="soil-kicker">W4 · 對照原意</div>
+<h2 class="soil-title">先打開原意，再決定</h2><div class="soil-source">左邊：我原本想讓人讀到＿＿。<br>右邊：讀者真的說＿＿。</div>
+<div class="soil-action">先圈出同與不同，再決定要改哪一處；不要先急著重寫。</div>
+<div class="soil-note">68–71 分；原意與讀者回報都留著，不擦掉。</div></div>
+<div class="page-footer">W4 · 對照原意</div></section>
 
-  <section class="slide" data-slide="23" data-section="比較與判斷">
-    <div class="timer" data-timer="480">8:00</div>
-    <div class="inner">
-      <div class="step">STEP 5 · 最後判斷</div>
-      <h2>打開封存原意，再比較</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3 class="accent">第一頁封存原意</h3>
-          <div class="lines"><div class="line"></div><div class="line"></div></div>
-        </div>
-        <div class="card gold-card">
-          <h3 class="gold">讀者實際讀到</h3>
-          <div class="lines"><div class="line"></div><div class="line"></div></div>
-        </div>
-      </div>
-      <div class="prompt-box"><p><span class="strong">我的決定：</span>我最後改／保留＿＿，因為這一段的重點是＿＿。</p></div>
-    </div>
-    <div class="page-footer">W4 · 落差就是證據</div>
-  </section>
+<section class="slide dark" data-slide="23" data-section="修訂與最後判斷">
+<div class="soil-revision-inner"><div class="soil-kicker">W4 · 修訂與最後判斷</div>
+<h2 class="soil-title">改一處，也可以有理由保留</h2><div class="soil-source">我改／保留＿＿，因為讀者回報＿＿；我想讓他讀到＿＿。</div>
+<div class="soil-action">先做 1–2 個決定，再把新版和第一版放在一起看。</div>
+<div class="soil-note">71–88 分；回饋不是命令。</div></div>
+<div class="page-footer">W4 · 修訂與最後判斷</div></section>
 
-  <section class="slide" data-slide="24" data-section="結果都能用">
+<section class="slide" data-slide="24" data-section="結果都能用">
     <div class="inner">
       <div class="eyebrow">讀者回報可能出現三種結果</div>
       <h2>不一樣，也不等於失敗</h2>
@@ -749,36 +724,29 @@
     <div class="page-footer">W4 · 回饋不是命令</div>
   </section>
 
-  <section class="slide light" data-slide="25" data-section="自願分享">
-    <div class="timer" data-timer="240">4:00</div>
-    <div class="inner">
-      <div class="eyebrow">如果你願意</div>
-      <h2>只分享<span class="accent">文字落差</span></h2>
-      <div class="card">
-        <div class="choice"><span class="n">1</span><span>「我封存的原意是＿＿＿＿。」</span></div>
-        <div class="choice"><span class="n">2</span><span>「讀者實際讀到＿＿＿＿。」</span></div>
-        <div class="choice"><span class="n">3</span><span>「我最後改／保留＿＿，因為這一段的重點是＿＿。」</span></div>
-      </div>
-      <p class="lead" style="margin-top:28px;">不用說人物是誰，也不用交代事件背景；不分享不影響學習關卡 1。</p>
-    </div>
-    <div class="page-footer">W4 · 只談文字，不追問私事</div>
-  </section>
+<section class="slide dark soil-practice" data-slide="25" data-section="生活練習" data-soil-task="W4-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜社團｜先自己做一次</div>
+    <h2 class="soil-title">這樣約，大家找得到嗎？</h2>
+    <div class="soil-source">你要通知新社員領球衣：週五十二點二十分，在體育館一樓門口，由你發放。草稿只寫『星期五老地方找我拿。』</div>
+    <div class="soil-action">把通知改成新社員看得懂的版本。請同學只看文字，說出他會何時到哪裡、找誰做什麼。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W4 · 生活練習 · 1／2</div>
+</section>
 
-  <section class="slide light" data-slide="26" data-section="個人反思（可留白、不計分）">
-    <div class="timer" data-timer="240">4:00</div>
-    <div class="inner">
-      <div class="eyebrow">寫給自己的 4 分鐘</div>
-      <h2>今天哪一個落差，<br>最值得你記住？</h2>
-      <div class="grid-2">
-        <div class="card green-card"><h3>可以寫</h3><p>哪一處你原本以為很清楚？<br>哪個讀者回報讓你意外？<br>下次動筆，你想多做哪一步？</p></div>
-        <div class="card red-card"><h3>這一欄</h3><p>教師不以內容評分，<br>不必分享，也不需要寫得完整。</p></div>
-      </div>
-      <p class="lead" style="text-align:center;margin-top:28px;">想寫多或寫少都可以；這一格留給自己。</p>
-    </div>
-    <div class="page-footer">W4 · 個人反思（可留白、不計分）</div>
-  </section>
+<section class="slide dark soil-practice" data-slide="26" data-section="生活練習" data-soil-task="W4-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜社團｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">新社員不知道『老地方』在哪裡，也不知道你是哪一位。</div>
+    <div class="soil-action">把同學真的說出的做法記下來；只補最需要的一處，再讓他說一次。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W4 · 生活練習 · 2／2</div>
+</section>
 
-  <section class="slide" data-slide="27" data-section="完成確認">
+<section class="slide" data-slide="27" data-section="完成確認">
     <div class="inner">
       <div class="eyebrow">本週形成性證據 · 離開前確認</div>
       <h2>我完成了嗎？</h2>
@@ -792,7 +760,7 @@
     <div class="page-footer">W4 · 學習關卡 1 證據確認</div>
   </section>
 
-  <section class="slide" data-slide="28" data-section="下週入口">
+<section class="slide" data-slide="28" data-section="下週入口">
     <div class="inner">
       <div class="eyebrow yellow">W5 入場作業</div>
       <h2>重新讀 W2 的舊作，<br>你現在最想修哪 <span class="gold">3 個地方</span>？</h2>
@@ -804,7 +772,7 @@
     <div class="page-footer">W4 · 進入 W5</div>
   </section>
 
-  <section class="slide center" data-slide="29" data-section="結尾">
+<section class="slide center" data-slide="29" data-section="結尾">
     <div class="inner">
       <div class="quote">不是你寫了什麼，<br>而是讀者<span class="accent">真的讀到了什麼</span>。</div>
       <p class="lead" style="margin-top:34px;">回饋提供證據；細節要不要留下，仍由你決定。</p>

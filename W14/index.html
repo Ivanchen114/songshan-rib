@@ -546,6 +546,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .weekly-score-d{font-size:clamp(15px,1.25vw,22px);line-height:1.5;color:var(--ink-2);}
 .weekly-score-note{text-align:center;margin-top:26px;font-size:clamp(15px,1.3vw,22px);line-height:1.5;color:var(--ink-2);}
 
+
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
+
 </style>
 
 
@@ -615,26 +628,17 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   </div><div class="page-footer">W14 · 接回專題</div>
 </section>
 
-
 <section class="slide dark" data-slide="4" data-section="本週身分">
 <div class="slide-inner"><div class="kicker gold">可選練習 · 都是 0 分</div><div class="title" style="font-size:clamp(34px,3vw,54px);">先一起看，再照真正缺口分流</div>
     <div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(3,1fr);">
       <div class="card"><div class="label">00–20｜全班</div><div class="body-sm">同一句話，比較四種說法。</div></div>
-      <div class="card"><div class="label">A｜換一種說法</div><div class="body-sm">自己先做，再看 AI 怎麼改。</div></div>
+      <div class="card"><div class="label">A｜先建立關係</div><div class="body-sm">自己先做兩個兩件事的對應，再看 AI／媒體候選。</div></div>
       <div class="card"><div class="label">B｜把資料補齊</div><div class="body-sm">回 W13，讓目前那句站穩。</div></div>
     </div><div class="body-sm" style="margin-top:24px;text-align:center;color:var(--ink-2);">20 分鐘後選 A 或 B；做到哪裡就誠實留到哪裡，不排名、不補交。下課前整本交回保管。</div>
   </div><div class="page-footer">W14 · 本週身分</div>
 </section>
 
-<section class="slide dark" data-slide="5" data-section="今日流程">
-<div class="slide-inner"><div class="kicker">今天 100 分鐘</div><div class="timeline" style="margin-top:8px;">
-    <div class="tl-row"><div class="tl-time">00 — 08</div><div class="tl-title">抓住原句</div><div class="tl-desc">哪個條件不能丟？</div></div>
-    <div class="tl-row star"><div class="tl-time">08 — 20</div><div class="tl-title accent-2">排好差異</div><div class="tl-desc">多了／少了／可能誤會</div></div>
-    <div class="tl-row"><div class="tl-time">20 — 88</div><div class="tl-title">接回自己的主張</div><div class="tl-desc">A 換說法；B 補資料</div></div>
-    <div class="tl-row dstar"><div class="tl-time">88 — 97</div><div class="tl-title accent">換一個人也說得回來</div><div class="tl-desc">真人看／聽後關起來說</div></div>
-    <div class="tl-row"><div class="tl-time">97 — 100</div><div class="tl-title">帶到 W15</div><div class="tl-desc">留下 30 字主張</div></div>
-  </div></div><div class="page-footer">W14 · 今日流程</div>
-</section>
+<section class="slide dark" data-slide="5" data-section="今天先做什麼，再做什麼？"><div class="soil-revision-inner"><div class="soil-kicker">100 分鐘｜照順序，先留自己的想法</div><h2 class="soil-title">今天先做什麼，再做什麼？</h2><div class="soil-columns" style="gap:12px"><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>00–20</strong>　同一資料，比較四種說法</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>20–44</strong>　選路：練說法或補資料</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>44–70</strong>　比較版本，先自己決定</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>70–82</strong>　小組整理目前版本</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>82–86</strong>　請真人說回去</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>86–91</strong>　修一次，準備接 W15</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>91–97</strong>　圖卡與文字誰說得準？</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>97–100</strong>　收件</div></div><div class="soil-note">生活練習已排在這 100 分鐘裡，不另外加作業。</div></div><div class="page-footer">今天先做什麼，再做什麼？</div></section>
 
 <section class="slide dark" data-slide="6" data-section="老師案例原句">
 <div class="slide-inner center"><div class="kicker alert">老師自編練習資料，不是真實調查</div>
@@ -693,7 +697,21 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   </div><div class="page-footer">W14 · 短片草圖待查</div>
 </section>
 
-<section class="slide dark" data-slide="12" data-section="整理差異">
+<section class="slide dark" data-slide="12" data-section="準確圖卡">
+<div class="soil-revision-inner"><div class="soil-kicker">W14 · 準確圖卡</div>
+<h2 class="soil-title">圖卡也可以說得準</h2><div class="soil-source"><b>12／20</b> 位填答者<br>願意延長社課 <b>15 分鐘</b></div>
+<div class="soil-action">對照原資料：誰回答、多少人、願意做什麼，有沒有被改掉？</div>
+<div class="soil-note">換一組教學用模擬問卷；不是『全體社員』，也不是『一小時』。</div></div>
+<div class="page-footer">W14 · 準確圖卡</div></section>
+
+<section class="slide dark" data-slide="13" data-section="說過頭的文字">
+<div class="soil-revision-inner"><div class="soil-kicker">W14 · 說過頭的文字</div>
+<h2 class="soil-title">長篇文字也可能說過頭</h2><div class="soil-source">『問卷顯示，全體社員都願意多留一小時，因此社課一定要延長。』</div>
+<div class="soil-action">原資料只有二十位填答者，其中十二位願意多留十五分鐘。這段多說了哪些事？</div>
+<div class="soil-note">不要靠文字、圖片或影片的形式判真假；看它有沒有改掉內容。</div></div>
+<div class="page-footer">W14 · 說過頭的文字</div></section>
+
+<section class="slide dark" data-slide="14" data-section="整理差異">
 <div class="slide-inner"><div class="kicker gold">紙本第 1 頁</div><div class="title" style="font-size:clamp(34px,3vw,54px);">每一種都只查三件事</div>
     <div class="grid-2" style="margin-top:22px;grid-template-columns:repeat(3,1fr);">
       <div class="card"><div class="label">多了什麼？</div><div class="body-sm">原資料沒有，版本自己補上的。</div></div>
@@ -703,81 +721,113 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   </div><div class="page-footer">W14 · 多了／少了／可能誤會</div>
 </section>
 
-<section class="slide dark" data-slide="13" data-section="路徑選擇">
+<section class="slide dark" data-slide="15" data-section="路徑選擇">
 <div class="slide-inner"><div class="kicker">20–24 分｜接回自己的需要</div><div class="title" style="font-size:clamp(34px,3vw,54px);">現在選 A 或 B</div>
     <div class="grid-2" style="margin-top:22px;">
-      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜換一種說法</div><div class="body-sm">給誰看？希望他懂什麼？先做自己的第一版，再看 AI。</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜先建立關係</div><div class="body-sm">自己先做兩個跨領域兩件事的對應，寫成立處、失效處與不能證明什麼，再看 AI／媒體候選。</div></div>
       <div class="card"><div class="label">B｜把資料補齊</div><div class="body-sm">回 W13 補原始出處、資料最多能說到哪裡、最有力的反對證據或例外。</div></div>
     </div><div class="body" style="margin-top:28px;text-align:center;color:var(--ink-2);">B 不是比較簡單；它是把真正缺的地基補回來。</div>
   </div><div class="page-footer">W14 · 20 分鐘分流</div>
 </section>
 
-<section class="slide dark" data-slide="14" data-section="自己的起點">
-<div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker alert">24–40 分｜先留下自己的起點</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">A 先做第一版；B 先回原文</div></div><div class="timer-pill" data-timer="960">16:00</div></div>
-    <div class="grid-2" style="margin-top:20px;">
-      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜暫不使用 AI</div><div class="body-sm">選文字＋圖、20 秒聲音稿或六格短片草圖。先寫到看得見，不求精美。</div></div>
-      <div class="card"><div class="label">B｜回原始來源</div><div class="body-sm">留下頁碼、網址或卡號；逐字確認它真的說了什麼。</div></div>
-    </div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">先自己做，不是因為 AI 做不到；是為了等一下看得見它替你改了什麼。</div>
-  </div><div class="page-footer">W14 · 自己的起點</div>
+<section class="slide dark" data-slide="16" data-section="關係映射示範">
+<div class="slide-inner"><div class="kicker gold">先看懂：不是找長得像</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">要找的是兩邊的關係怎麼運作</div>
+    <div class="grid-2" style="margin-top:18px;grid-template-columns:repeat(3,1fr);">
+      <div class="card"><div class="label">只看表面｜還不夠</div><div class="body-sm">「證據像橋。」只說很像，沒有說哪個關係一樣。</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label">關係對得上</div><div class="body-sm">橋的承重上限限制能過的重量；資料測到的範圍限制我們能把話說多大。</div></div>
+      <div class="card" style="border-color:var(--alert);"><div class="label">失效邊界</div><div class="body-sm">橋重不重不是資料真不真。這個比喻只幫忙看懂「上限」，不能證明結論成立。</div></div>
+    </div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">一句檢查：它幫我看懂＿＿；到了＿＿就不像；它不能證明＿＿。</div>
+  </div><div class="page-footer">W14 · 關係、失效、不能證明</div>
 </section>
 
-<section class="slide dark" data-slide="15" data-section="AI 版本與資料界線">
-<div class="slide-inner"><div class="kicker gold">40–58 分｜兩路各做該做的事</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">A 看 AI 版本；B 寫資料界線</div>
+<section class="slide dark" data-slide="17" data-section="本人先做兩個關係映射">
+<div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker alert">24–44 分｜先留下自己的起點</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">A 做兩個關係；B 先回原文</div></div><div class="timer-pill" data-timer="1200">20:00</div></div>
     <div class="grid-2" style="margin-top:18px;">
-      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜AI 可用</div><div class="body-sm">只用公開材料，請它改給指定對象；不要補新事實，保留「資料不能說＿＿」。</div><div class="body-sm" style="margin-top:12px;color:var(--ink-2);">校方工具／老師共用裝置／老師備援版都可以；不必新建帳號。</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜暫不使用 AI</div><div class="body-sm">自己先做兩個：在＿＿領域，＿＿會讓／限制／改變＿＿；在本題，＿＿也會讓／限制／改變＿＿。選一個，再寫「只解釋＿＿，不能證明＿＿」。</div></div>
+      <div class="card"><div class="label">B｜回原始來源</div><div class="body-sm">留下頁碼、網址或卡號；逐字確認它真的說了什麼、最多能說到哪裡。</div></div>
+    </div><div class="body-sm" style="margin-top:20px;text-align:center;color:var(--ink-2);">A 至少一個例子要自己想；提示卡只能救援，不能代替你的兩個候選。</div>
+  </div><div class="page-footer">W14 · 本人先做兩個關係</div>
+</section>
+
+<section class="slide dark" data-slide="18" data-section="AI 版本與資料界線">
+<div class="slide-inner"><div class="kicker gold">44–58 分｜兩路各做該做的事</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">A 看 AI／媒體候選；B 寫資料界線</div>
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜你的兩個關係已先完成</div><div class="body-sm">AI 可幫忙整理或換成文字、圖卡、聲音稿、短片草圖；若它新增關係，要圈出來並回原文查。</div><div class="body-sm" style="margin-top:12px;color:var(--ink-2);">校方工具／老師共用裝置／老師備援版都可以；不必新建帳號。</div></div>
       <div class="card"><div class="label">B｜原文優先</div><div class="body-sm">這筆資料能說＿＿；不能直接說＿＿。AI 或搜尋只能幫忙找路，最後仍回原文。</div></div>
     </div><div class="body-sm" style="margin-top:18px;text-align:center;color:var(--ink-2);">本週不評提示詞；只看你有沒有查出版本與原文的差距。</div>
   </div><div class="page-footer">W14 · AI 版本／資料界線</div>
 </section>
 
-<section class="slide dark" data-slide="16" data-section="個人先決定">
+<section class="slide dark" data-slide="19" data-section="個人先決定">
 <div class="slide-inner"><div class="kicker alert">58–70 分｜討論前，每個人先寫</div><div class="title" style="font-size:clamp(34px,3vw,54px);">我的判斷不能被小組吃掉</div>
     <div class="grid-2" style="margin-top:20px;">
-      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜看 AI 改了什麼</div><div class="body-sm">多加＿＿、拿掉＿＿、說重＿＿。我先選：□保留 □不用 □修改。</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜看關係怎麼被改</div><div class="body-sm">□保留 □新增 □壓扁 □拉過頭哪個關係？我先選：□保留 □不用 □修改，因為＿＿。</div></div>
       <div class="card"><div class="label">B｜看資料逼我改什麼</div><div class="body-sm">最有力的反對證據或例外是＿＿。我先選：□維持 □縮小 □改變 □暫停。</div></div>
     </div><div class="body" style="margin-top:26px;text-align:center;color:var(--ink-2);">兩條路都要寫一個確切根據，不能只勾選。</div>
   </div><div class="page-footer">W14 · 個人先決定</div>
 </section>
 
-
-<section class="slide dark" data-slide="17" data-section="小組決定與完成">
-<div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker gold">70–88 分｜小組再決定</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">留下版本，也留下不同意見</div></div><div class="timer-pill" data-timer="1080">18:00</div></div>
+<section class="slide dark" data-slide="20" data-section="小組決定與完成">
+<div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker gold">70–82 分｜小組再決定</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">留下版本，也留下不同意見</div></div><div class="timer-pill" data-timer="720">12:00</div></div>
     <div class="grid-2" style="margin-top:18px;">
-      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜完成簡單草稿</div><div class="body-sm">留下＿＿、刪掉＿＿、改成＿＿。不求精美，只求別人看得懂。</div></div>
+      <div class="card" style="border-color:var(--accent-2);"><div class="label">A｜完成簡單草稿</div><div class="body-sm">至少留下 1 個兩件事的對應與 1 條失效邊界；再決定用文字、圖卡、聲音稿或短片草圖呈現。</div></div>
       <div class="card"><div class="label">B｜完成補好的版本</div><div class="body-sm">原始出處＿＿；資料最多能說＿＿；所以現在只說＿＿。</div></div>
     </div><div class="card" style="margin-top:16px;"><div class="body-sm">還有不同意見：＿＿。公開前最後再查一次的人：＿＿。</div></div>
   </div><div class="page-footer">W14 · 小組決定與完成</div>
 </section>
-<section class="slide" data-slide="18" data-section="真人說回去">
-<div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker alert">88–97 分 · 兩條路都做</div><div class="title" style="font-size:clamp(34px,3vw,54px);">看／聽一次，關起來說</div></div><div class="timer-pill" data-timer="540">09:00</div></div>
+
+<section class="slide" data-slide="21" data-section="真人說回去">
+<div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker alert">82–91 分 · 兩條路都做</div><div class="title" style="font-size:clamp(34px,3vw,54px);">看／聽一次，關起來說</div></div></div>
     <div class="grid-2" style="margin-top:22px;grid-template-columns:repeat(3,1fr);">
-      <div class="card"><div class="label">我以為你想說</div><div class="body-sm">＿＿＿＿＿＿</div></div>
-      <div class="card"><div class="label">我記得的根據</div><div class="body-sm">＿＿＿＿＿＿</div></div>
-      <div class="card"><div class="label">我沒收到／不確定</div><div class="body-sm">＿＿＿＿＿＿</div></div>
+      <div class="card"><div class="label">核心主張</div><div class="body-sm">我以為你想說＿＿。</div></div>
+      <div class="card"><div class="label">關係</div><div class="body-sm">我記得＿＿會讓／限制／改變＿＿。</div></div>
+      <div class="card"><div class="label">邊界</div><div class="body-sm">這個比喻不能證明＿＿。</div></div>
     </div><div class="body" style="margin-top:26px;text-align:center;color:var(--ink-2);">作者先不要補講；只記下對方真的收到什麼。</div>
   </div><div class="page-footer">W14 · 真人說回去</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="作者回應">
+<section class="slide dark" data-slide="22" data-section="作者回應">
 <div class="slide-inner"><div class="kicker gold">先找作品位置，再決定</div><div class="title" style="font-size:clamp(34px,3vw,54px);">讀者的說法不是命令</div>
     <div class="card" style="margin-top:22px;border-color:var(--accent-2);"><div class="body-sm">我找到第＿＿處，可能讓他這樣讀。<br><br>我 □採用 □部分採用 □不採用，因為＿＿。<br><br>我把＿＿改成＿＿；或我保留＿＿，更強理由是＿＿。</div></div>
     <div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">改或不改都可以；理由要回到作品與原始資料。</div>
   </div><div class="page-footer">W14 · 作者回應</div>
 </section>
 
-<section class="slide dark" data-slide="20" data-section="W15 交棒">
+<section class="slide dark soil-practice" data-slide="23" data-section="生活練習" data-soil-task="W14-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">91–97 分｜社團｜先自己做一次</div>
+    <h2 class="soil-title">文字一定比圖卡準嗎？</h2>
+    <div class="soil-source">社團問卷有二十人回答，十二人願意延長社課十五分鐘。圖卡寫『12／20 位填答者願意多留 15 分鐘』；文字貼文寫『全體社員都願意多留一小時』。</div>
+    <div class="soil-action">選一個可以採用的版本，指出理由；再把另一個版本改成你願意貼出的內容。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W14 · 生活練習 · 1／2</div>
+</section>
+
+<section class="slide dark soil-practice" data-slide="24" data-section="生活練習" data-soil-task="W14-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">91–97 分｜社團｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">朋友說：『把十二人畫成十二個人形，不是比較有說服力嗎？』</div>
+    <div class="soil-action">可以畫，但旁邊還要留下什麼，別人才不會以為只有十二人回答？直接補寫。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W14 · 生活練習 · 2／2</div>
+</section>
+
+<section class="slide dark" data-slide="25" data-section="W15 交棒">
 <div class="slide-inner"><div class="kicker">97–100 分｜交給 W15</div><div class="title" style="font-size:clamp(34px,3vw,54px);">帶走的不是漂亮成品<br><span class="accent-2">是已經檢查過的選擇</span></div>
     <div class="grid-2" style="margin-top:20px;">
       <div class="card" style="border-color:var(--accent-2);"><div class="label">30 字主張</div><div class="body-sm">我們目前主張＿＿＿＿＿＿。</div></div>
-      <div class="card"><div class="label">一句資料界線</div><div class="body-sm">目前資料最多只能說＿＿＿＿＿＿。</div></div>
+      <div class="card"><div class="label">資料界線＋可選映射</div><div class="body-sm">目前資料最多只能說＿＿。A 可帶已核過的關係與邊界；沒有也不阻擋 W15。</div></div>
     </div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">若使用 AI、圖片、聲音或短片草圖，一起帶上來源與 AI 幫忙的那一步。</div>
   </div><div class="page-footer">W14 · 交棒 W15</div>
 </section>
 
-<section class="slide dark" data-slide="21" data-section="自檢與交棒">
+<section class="slide dark" data-slide="26" data-section="自檢與交棒">
 <div class="slide-inner"><div class="kicker alert">A／B 都是 0 分｜整本交回</div><div class="title" style="font-size:clamp(34px,3vw,54px);">今天做到哪裡，就誠實留到哪裡</div>
     <div class="grid-2" style="margin-top:22px;grid-template-columns:repeat(3,1fr);">
-      <div class="card"><div class="label">完成確認</div><div class="body-sm">比較／A 第一版或 B 補資料／個人決定／真人說回去</div></div>
+      <div class="card"><div class="label">完成確認</div><div class="body-sm">共同比較／A 兩個映射＋邊界或 B 補資料／個人決定／真人說回去</div></div>
       <div class="card"><div class="label">收件方式</div><div class="body-sm">不必拍照上傳；下課前整本交回保管。</div></div>
       <div class="card"><div class="label">缺席邊界</div><div class="body-sm">不必補交；回來直接準備同一個 W15 入場句。</div></div>
     </div>
@@ -794,16 +844,6 @@ const total = slides.length;
 let current = 1;
 let timerInterval = null;
 
-const BOARD_KEY = 'w14_board';
-
-function getBoard() {
-  try { return JSON.parse(localStorage.getItem(BOARD_KEY)) || {}; }
-  catch(e) { return {}; }
-}
-function setBoard(data) {
-  try { localStorage.setItem(BOARD_KEY, JSON.stringify(data)); } catch(e) {}
-}
-
 function show(n) {
   if (n < 1 || n > total) return;
   if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
@@ -818,7 +858,6 @@ function show(n) {
   current = n;
   const timerEl = target.querySelector('[data-timer]');
   if (timerEl) startTimer(timerEl);
-  if (n === 6) hydrateBoard();
 }
 
 function startTimer(el) {
@@ -914,43 +953,6 @@ window.toggleFullscreen = function() {
     if (document.exitFullscreen) document.exitFullscreen();
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
   }
-};
-
-// === 互動白板（slide 6）— 隱喻檢查 6 欄 ===
-const BOARD_FIELDS = ['issue','cross','map','help','mislead','decide'];
-
-function hydrateBoard() {
-  const data = getBoard();
-  BOARD_FIELDS.forEach(k => {
-    const el = document.getElementById('bd_' + k);
-    if (el && data[k]) el.value = data[k];
-  });
-}
-
-window.saveBoard = function() {
-  const data = {};
-  BOARD_FIELDS.forEach(k => {
-    const el = document.getElementById('bd_' + k);
-    if (el) data[k] = el.value;
-  });
-  setBoard(data);
-  const btn = document.querySelector('.board-btn.save');
-  if (btn) {
-    const orig = btn.textContent;
-    btn.textContent = '✓ 已存';
-    btn.style.background = 'var(--accent)';
-    btn.style.color = 'var(--bg)';
-    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; }, 1200);
-  }
-};
-
-window.clearBoard = function() {
-  if (!confirm('要清掉示範白板嗎？')) return;
-  setBoard({});
-  BOARD_FIELDS.forEach(k => {
-    const el = document.getElementById('bd_' + k);
-    if (el) el.value = '';
-  });
 };
 
 show(1);

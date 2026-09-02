@@ -418,15 +418,64 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .choice-card.gold .tag { color:var(--accent-2); }
 .choice-card .text { font-size:calc(var(--t3) * .92); line-height:1.55; font-weight:700; }
 .check-line { padding:18px 24px; border-left:4px solid var(--accent-2); background:rgba(255,215,0,.07); border-radius:7px; font-size:calc(var(--t3) * .82); line-height:1.55; }
+
+/* W7 透明排序器：資料與規則皆在本檔，不讀取任何真實帳號或紀錄 */
+.sorter-head { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:14px; }
+.sorter-head .subtitle { margin:0; font-size:clamp(38px,3.2vw,54px); }
+.sorter-query { padding:10px 18px; border:1px solid rgba(255,215,0,.55); border-radius:999px; color:var(--accent-2); font-size:clamp(22px,1.7vw,28px); font-weight:900; white-space:nowrap; }
+.sorter-shell { display:grid; grid-template-columns:minmax(360px,.82fr) minmax(650px,1.45fr); gap:22px; align-items:start; }
+.sorter-controls { padding:18px 20px; border:1px solid rgba(0,198,255,.32); border-radius:12px; background:rgba(17,34,58,.72); }
+.sorter-person { margin-bottom:12px; font-size:clamp(22px,1.65vw,28px); font-weight:900; color:var(--accent); }
+.sorter-person span { color:var(--ink-2); font-weight:700; }
+.sorter-control { display:grid; grid-template-columns:132px 1fr; gap:12px; align-items:center; margin-top:9px; }
+.sorter-control label { font-size:clamp(20px,1.45vw,24px); font-weight:900; color:var(--ink-2); }
+.sorter-control select,
+.sorter-reset { min-height:42px; border:1px solid rgba(0,198,255,.5); border-radius:8px; background:#11223A; color:var(--ink); font:700 clamp(19px,1.35vw,23px)/1.25 "Noto Sans TC",sans-serif; padding:7px 10px; }
+.sorter-control select:focus,
+.sorter-reset:focus { outline:3px solid var(--accent-2); outline-offset:2px; }
+.sorter-reset { width:100%; margin-top:11px; cursor:pointer; color:var(--accent); }
+.sorter-status { margin-top:10px; padding:9px 12px; border-left:4px solid var(--accent); border-radius:6px; background:rgba(0,198,255,.08); font-size:clamp(19px,1.3vw,22px); line-height:1.35; font-weight:800; }
+.sorter-status.warning { border-left-color:var(--alert); background:rgba(255,68,102,.08); color:#FFD7DF; }
+.sorter-rule { margin-top:9px; color:var(--ink-2); font-size:clamp(17px,1.16vw,20px); line-height:1.35; }
+.sorter-list { display:grid; gap:7px; list-style:none; }
+.sorter-row { display:grid; grid-template-columns:48px minmax(0,1fr) 84px; gap:12px; align-items:center; padding:9px 14px; border:1px solid rgba(122,139,184,.28); border-radius:9px; background:rgba(17,34,58,.62); }
+.sorter-row:first-child { border-color:var(--accent-2); background:rgba(255,215,0,.08); }
+.sorter-rank { font:900 clamp(24px,1.8vw,30px)/1 "JetBrains Mono",monospace; color:var(--accent); text-align:center; }
+.sorter-card-title { font-size:clamp(22px,1.58vw,27px); line-height:1.22; font-weight:900; }
+.sorter-breakdown { margin-top:3px; color:var(--ink-3); font-size:clamp(16px,1.05vw,19px); line-height:1.22; }
+.sorter-score { font:900 clamp(24px,1.8vw,30px)/1 "JetBrains Mono",monospace; color:var(--accent-2); text-align:right; }
+.sorter-boundary { margin-top:12px; text-align:center; color:var(--ink-2); font-size:clamp(20px,1.45vw,24px); line-height:1.35; }
+.sorter-fallback { display:grid; grid-template-columns:minmax(300px,.7fr) minmax(700px,1.55fr); gap:22px; margin-top:16px; }
+.sorter-baseline { padding:20px 22px; border:1px solid var(--accent); border-radius:12px; background:rgba(0,198,255,.07); }
+.sorter-baseline .label { color:var(--accent); font-size:clamp(21px,1.5vw,25px); font-weight:900; }
+.sorter-baseline .order { margin-top:15px; color:var(--accent-2); font:900 clamp(36px,3vw,52px)/1.15 "JetBrains Mono",monospace; }
+.sorter-baseline .small { margin-top:15px; color:var(--ink-2); font-size:clamp(19px,1.35vw,23px); line-height:1.4; }
+.sorter-fallback-list { display:grid; gap:8px; }
+.sorter-fallback-row { display:grid; grid-template-columns:minmax(230px,1fr) 1.05fr; gap:14px; align-items:center; padding:10px 16px; border-bottom:1px solid rgba(122,139,184,.25); }
+.sorter-fallback-row .change { font-size:clamp(20px,1.45vw,24px); font-weight:800; }
+.sorter-fallback-row .order { color:var(--accent-2); font:900 clamp(22px,1.7vw,28px)/1.15 "JetBrains Mono",monospace; }
 /* Dense pages remain at native scale; compact spacing is handled per component. */
+
+
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
 
 </style>
 <style id="projection-safety">
 /* Keep dense activity instructions inside the projection safe zone at native scale. */
+.slide[data-slide="11"],
+.slide[data-slide="12"] { padding-top:60px; padding-bottom:58px; }
+.slide[data-slide="11"] .kicker,
 .slide[data-slide="12"] .kicker { margin-bottom:8px; }
-.slide[data-slide="12"] .goldline { line-height:1.08; }
-.slide[data-slide="12"] .steps-4 { gap:8px; margin-top:18px!important; }
-.slide[data-slide="12"] .step-item { padding:10px 20px; }
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
@@ -562,39 +611,88 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="card"><div class="label">A</div><div class="body-sm">多放了什麼？少放了什麼？<br>根據哪個確切字詞？</div></div>
       <div class="card" style="border-color:var(--accent-2);"><div class="label" style="color:var(--accent-2);">B</div><div class="body-sm">多放了什麼？少放了什麼？<br>根據哪個確切字詞？</div></div>
     </div>
-    <div style="text-align:center;margin-top:30px;"><div class="timer-pill" data-timer="1200">20:00</div></div>
+    <div class="check-line" style="margin-top:20px;">再補一句：如果只看其中一版，我最可能漏掉什麼？這可能把我推向哪一步？</div>
+    <div style="text-align:center;margin-top:18px;"><div class="timer-pill" data-timer="1200">20:00</div></div>
   </div>
-  <div class="page-footer">W7 · 25–45｜完成第 2 頁前半</div>
+  <div class="page-footer">W7 · 25–45｜完成 A／B 比較與漏掉／推向</div>
 </section>
 
-<section class="slide dark" data-slide="10" data-section="我可能漏了什麼">
+<section class="slide dark" data-slide="10" data-section="先守住界線">
   <div class="slide-inner center">
-    <div class="kicker gold">45–62 分鐘｜先守住一條界線</div>
-    <div class="goldline">寫法不同<br><span class="alert">不等於內容是假的</span></div>
-    <div class="subtitle muted" style="margin-top:32px;">今天先比較「我被安排先看到什麼」；內容能不能成立，還要另外找資料。</div>
+    <div class="kicker gold">45–48 分鐘｜兩件事分開</div>
+    <div class="goldline" style="font-size:clamp(44px,4.3vw,74px);">寫法不同，<span class="alert">不等於假</span><br>排得前面，<span class="accent">也不等於真</span></div>
+    <div class="subtitle muted" style="margin-top:28px;">先看內容怎麼被寫、怎麼被排；真假仍要另外找資料。</div>
   </div>
-  <div class="page-footer">W7 · 寫法與真假分開</div>
+  <div class="page-footer">W7 · 寫法／排序與真假分開</div>
 </section>
 
-<section class="slide dark" data-slide="11" data-section="我可能漏了什麼">
+<section class="slide dark" data-slide="11" data-section="透明排序" data-w7-sorter>
   <div class="slide-inner">
-    <div class="kicker">第 2 頁｜只看一版時</div>
-    <div class="choice-row">
-      <div class="choice-card"><div class="tag">我可能漏掉</div><div class="text">另一版才出現的條件、例外或做法。</div></div>
-      <div class="choice-card gold"><div class="tag">我可能被推向</div><div class="text">更快支持、反對、照做，或停下來再查。</div></div>
+    <div class="kicker gold">48–57 分鐘｜教室透明排序器｜🔒 不使用 AI</div>
+    <div class="sorter-head">
+      <div class="subtitle">同一句搜尋，<span class="accent">只改一項</span></div>
+      <div class="sorter-query">查詢固定：通知　專注</div>
     </div>
-    <div class="check-line" style="margin-top:28px;">不是猜作者心裡在想什麼。請回到版本裡的字詞與先後順序。</div>
+    <div class="sorter-shell" data-w7-sorter>
+      <div class="sorter-controls">
+        <div class="sorter-person">小澄 <span>｜虛構人物，不是真實學生</span></div>
+        <div class="sorter-control">
+          <label for="w7-sort-history">曾看過</label>
+          <select id="w7-sort-history">
+            <option value="study">研究摘要</option>
+            <option value="quick">快速技巧</option>
+          </select>
+        </div>
+        <div class="sorter-control">
+          <label for="w7-sort-location">虛構地點</label>
+          <select id="w7-sort-location">
+            <option value="east">東城</option>
+            <option value="west">西城</option>
+          </select>
+        </div>
+        <div class="sorter-control">
+          <label for="w7-sort-goal">排序目標</label>
+          <select id="w7-sort-goal">
+            <option value="relevance">相關性</option>
+            <option value="dwell">預估停留時間</option>
+            <option value="paid">付費置頂</option>
+          </select>
+        </div>
+        <button class="sorter-reset" id="w7-sort-reset" type="button">回到基準｜研究摘要＋東城＋相關性</button>
+        <div class="sorter-status" id="w7-sort-status" role="status">現在是基準。請只改一項。</div>
+        <div class="sorter-rule" id="w7-sort-rule"></div>
+      </div>
+      <ol class="sorter-list" id="w7-rank-list" aria-live="polite" aria-label="目前排序結果"></ol>
+    </div>
+    <div class="sorter-boundary">老師把資料與規則都攤開；不登入、不上傳，也不代表任何真實平台。</div>
   </div>
-  <div class="page-footer">W7 · 第 2 頁｜漏掉與推向</div>
+  <div class="page-footer">W7 · 改一個輸入，再看誰往前</div>
 </section>
 
-<section class="slide dark" data-slide="12" data-section="我可能漏了什麼">
-  <div class="slide-inner center">
-    <div class="kicker gold">把句子寫完整</div>
-    <div class="message-box gold" style="text-align:left;">如果我只看 A／B，最可能沒想到＿＿；<br>這可能把我推向＿＿。</div>
-    <div style="margin-top:34px;"><div class="timer-pill" data-timer="1020">17:00</div></div>
+<section class="slide dark" data-slide="12" data-section="留下變化">
+  <div class="slide-inner">
+    <div class="kicker gold">57–62 分鐘｜第 2 頁｜不能按也能比較</div>
+    <div class="sorter-head">
+      <div class="subtitle">每一列都<span class="accent">只改一項</span></div>
+      <div class="sorter-query">排序不是真假章</div>
+    </div>
+    <div class="sorter-fallback">
+      <div class="sorter-baseline">
+        <div class="label">基準</div>
+        <div class="order">A · C · B · D · E</div>
+        <div class="small">研究摘要＋東城＋相關性。<br>離線 PowerPoint 或互動故障時，直接從右邊選一列比較。</div>
+      </div>
+      <div class="sorter-fallback-list">
+        <div class="sorter-fallback-row"><div class="change">只換「快速技巧紀錄」</div><div class="order">B · C · A · D · E</div></div>
+        <div class="sorter-fallback-row"><div class="change">只換「西城」</div><div class="order">A · E · B · C · D</div></div>
+        <div class="sorter-fallback-row"><div class="change">只換「預估停留」</div><div class="order">B · A · C · D · E</div></div>
+        <div class="sorter-fallback-row"><div class="change">只換「付費置頂」</div><div class="order">D · A · B · C · E</div></div>
+      </div>
+    </div>
+    <div class="check-line" style="margin-top:14px;">我只改了＿＿；卡片＿＿從第＿＿變成第＿＿。這能說明先看到的順序可能改變，不能證明內容真或假。</div>
+    <div style="position:absolute;right:0;bottom:-2px;"><div class="timer-pill" data-timer="300">5:00</div></div>
   </div>
-  <div class="page-footer">W7 · 45–62｜完成第 2 頁</div>
+  <div class="page-footer">W7 · 57–62｜留下一次單一變因比較</div>
 </section>
 
 <section class="slide dark" data-slide="13" data-section="改成可討論版">
@@ -634,53 +732,58 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 
 <section class="slide dark" data-slide="16" data-section="我的最後決定">
   <div class="slide-inner">
-    <div class="kicker gold">80–92 分鐘｜第 3 頁後半</div>
+    <div class="kicker gold">80–90 分鐘｜第 3 頁後半</div>
     <div class="message-box gold" style="text-align:left;">我拿掉＿＿，因為它先推我＿＿；<br>我保留＿＿，因為可以用＿＿來檢查。</div>
     <div class="subtitle muted center" style="margin-top:28px;font-size:clamp(34px,3vw,50px);">不要只寫「太誇張」；<br>要抄出你真的拿掉了什麼。</div>
   </div>
   <div class="page-footer">W7 · 第 3 頁｜刪留理由</div>
 </section>
 
-<section class="slide dark" data-slide="17" data-section="換一個下一步">
-  <div class="slide-inner">
-    <div class="kicker">下一次，不只換答案</div>
-    <div class="grid-3">
-      <div class="card"><div class="label">多搜</div><div class="body-sm">補一個相反說法、限制或例外。</div></div>
-      <div class="card"><div class="label">比較</div><div class="body-sm">把兩個來源或兩種情況放在一起看。</div></div>
-      <div class="card"><div class="label">少追著走</div><div class="body-sm">先停一下，不因第一眼就立刻轉傳或照做。</div></div>
-    </div>
-    <div class="message-box" style="margin-top:26px;text-align:left;">我會多搜＿＿／比較＿＿／少追著＿＿走，因為＿＿。</div>
-    <div style="text-align:center;margin-top:24px;"><div class="timer-pill" data-timer="720">12:00</div></div>
+<section class="slide dark" data-slide="17" data-section="個人提醒">
+<div class="soil-revision-inner"><div class="soil-kicker">W7 · 個人提醒</div>
+<h2 class="soil-title">下一個動作，可以自己想</h2><div class="soil-source">多找一種說法、比較另一份資料，或先停一下。</div>
+<div class="soil-action">這是可留白的提醒，不列完成清單；不必交出私人經驗。</div>
+</div>
+<div class="page-footer">W7 · 個人提醒</div></section>
+
+<section class="slide dark soil-practice" data-slide="18" data-section="生活練習" data-soil-task="W7-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜社團｜先自己做一次</div>
+    <h2 class="soil-title">推薦頁都是它，就該選它？</h2>
+    <div class="soil-source">你正在選社團，推薦頁連著出現五支熱舞社影片。朋友說：『大家都選熱舞，我們也去吧。』你只看過這五支。</div>
+    <div class="soil-action">寫下你現在會做的一個動作，讓自己不只靠這五支影片決定；並寫出你要找的資訊。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
   </div>
-  <div class="page-footer">W7 · 80–92｜寫下一個動作</div>
+  <div class="page-footer">W7 · 生活練習 · 1／2</div>
 </section>
 
-<section class="slide dark" data-slide="18" data-section="帶到 W8">
-  <div class="slide-inner">
-    <div class="kicker gold">92–97 分鐘｜歷程本第 4 頁</div>
-    <div class="choice-row">
-      <div class="choice-card"><div class="tag">兩版共同承認</div><div class="text">哪一件事可能是真的？</div></div>
-      <div class="choice-card gold"><div class="tag">我還需要核對</div><div class="text">哪一個主張、範圍或例外？</div></div>
-    </div>
-    <div style="text-align:center;margin-top:32px;"><div class="timer-pill" data-timer="300">5:00</div></div>
+<section class="slide dark soil-practice" data-slide="19" data-section="生活練習" data-soil-task="W7-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜社團｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">你發現五支影片都是同一位社員上傳的；另一個社團的練習時間更適合你。</div>
+    <div class="soil-action">你要改決定，還是仍選熱舞？寫出理由；不能只用『看到最多次』當理由。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
   </div>
-  <div class="page-footer">W7 · 第 4 頁｜交給 W8 的兩句話</div>
+  <div class="page-footer">W7 · 生活練習 · 2／2</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="完成確認">
+<section class="slide dark" data-slide="20" data-section="原作留好，交到下一週"><div class="soil-revision-inner"><div class="soil-kicker">96–100 分｜收尾</div><h2 class="soil-title">原作留好，交到下一週</h2><div class="soil-source">本週已比較兩個版本，也試過排序改變。<br>帶到 W8：兩邊都承認什麼？還要核對什麼？</div><div class="soil-action">前面已寫過就不重抄；確認原作在，再整本交回。</div><div class="soil-note">這是收件提醒，不再開一輪五分鐘反思。</div></div><div class="page-footer">原作留好，交到下一週</div></section>
+
+<section class="slide dark" data-slide="21" data-section="完成確認">
   <div class="slide-inner">
-    <div class="kicker gold">97–100 分鐘｜勾完再收本</div>
+    <div class="kicker gold">96–100 分鐘｜勾完再收本</div>
     <div class="steps-4">
       <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我先只看一版，留下第一反應。</div></div></div>
       <div class="step-item"><div class="step-num gold">□</div><div class="step-content"><div class="s-main">我並排找差異，而且寫了確切字詞。</div></div></div>
-      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我完成可討論版與下一個動作。</div></div></div>
+      <div class="step-item"><div class="step-num">□</div><div class="step-content"><div class="s-main">我完成可討論版與刪留理由。</div></div></div>
       <div class="step-item"><div class="step-num gold">□</div><div class="step-content"><div class="s-main">我只拍自己的頁面；紙本全本交回。</div></div></div>
     </div>
   </div>
   <div class="page-footer">W7 · 完成確認</div>
 </section>
 
-<section class="slide dark" data-slide="20" data-section="收束">
+<section class="slide dark" data-slide="22" data-section="收束">
   <div class="slide-inner center">
     <div class="kicker gold">走之前</div>
     <div class="goldline">我不一定能決定<br>先看到什麼；<br><span class="accent">但我能改變下一步。</span></div>
@@ -694,6 +797,86 @@ const slides = document.querySelectorAll('.slide');
 const total = slides.length;
 let current = 1;
 let timerInterval = null;
+
+const W7_SORTER_CARDS = Object.freeze([
+  { id:'A', title:'研究摘要｜通知與閱讀中斷', q:3, study:2, quick:0, east:0, west:0, dwell:1, paid:0 },
+  { id:'B', title:'短片｜30 秒全關通知挑戰', q:3, study:0, quick:2, east:0, west:0, dwell:3, paid:0 },
+  { id:'C', title:'東城圖書館｜安靜閱讀活動', q:2, study:0, quick:0, east:3, west:0, dwell:1, paid:0 },
+  { id:'D', title:'廣告｜專注 App 一鍵封鎖', q:2, study:0, quick:1, east:0, west:0, dwell:2, paid:1 },
+  { id:'E', title:'西城圖書館｜安靜閱讀活動', q:2, study:0, quick:0, east:0, west:3, dwell:1, paid:0 }
+]);
+
+const W7_SORTER_BASE = Object.freeze({ history:'study', location:'east', goal:'relevance' });
+const W7_SORTER_LABELS = Object.freeze({ history:'曾看過的內容', location:'虛構地點', goal:'排序目標' });
+const W7_SORTER_RULES = Object.freeze({
+  relevance:'相關性＝題目相近×3＋紀錄相近×3＋地點相近×2',
+  dwell:'預估停留＝題目相近×2＋紀錄相近×2＋地點相近×2＋可能停留×3',
+  paid:'付費置頂＝題目相近×2＋紀錄相近＋地點相近＋可能停留＋付費×12'
+});
+
+function w7SorterState() {
+  return {
+    history: document.getElementById('w7-sort-history')?.value || W7_SORTER_BASE.history,
+    location: document.getElementById('w7-sort-location')?.value || W7_SORTER_BASE.location,
+    goal: document.getElementById('w7-sort-goal')?.value || W7_SORTER_BASE.goal
+  };
+}
+
+function w7SorterScore(card, state) {
+  const history = card[state.history];
+  const location = card[state.location];
+  if (state.goal === 'relevance') {
+    return { total:3*card.q + 3*history + 2*location, detail:`題目 ${3*card.q}＋紀錄 ${3*history}＋地點 ${2*location}` };
+  }
+  if (state.goal === 'dwell') {
+    return { total:2*card.q + 2*history + 2*location + 3*card.dwell, detail:`題目 ${2*card.q}＋紀錄 ${2*history}＋地點 ${2*location}＋停留 ${3*card.dwell}` };
+  }
+  return { total:2*card.q + history + location + card.dwell + 12*card.paid, detail:`題目 ${2*card.q}＋紀錄 ${history}＋地點 ${location}＋停留 ${card.dwell}＋付費 ${12*card.paid}` };
+}
+
+function w7SorterOrder(state) {
+  return W7_SORTER_CARDS.map(card => ({ card, score:w7SorterScore(card, state) }))
+    .sort((left, right) => right.score.total - left.score.total || left.card.id.localeCompare(right.card.id));
+}
+
+function renderW7Sorter() {
+  const list = document.getElementById('w7-rank-list');
+  const status = document.getElementById('w7-sort-status');
+  const rule = document.getElementById('w7-sort-rule');
+  if (!list || !status || !rule) return;
+
+  const state = w7SorterState();
+  const ordered = w7SorterOrder(state);
+  list.dataset.order = ordered.map(item => item.card.id).join('');
+  list.replaceChildren(...ordered.map((item, index) => {
+    const row = document.createElement('li');
+    row.className = 'sorter-row';
+    row.innerHTML = `<div class="sorter-rank">${index + 1}</div><div><div class="sorter-card-title">${item.card.id}｜${item.card.title}</div><div class="sorter-breakdown">${item.score.detail}</div></div><div class="sorter-score">${item.score.total}</div>`;
+    return row;
+  }));
+
+  const changed = Object.keys(W7_SORTER_BASE).filter(key => state[key] !== W7_SORTER_BASE[key]);
+  status.classList.toggle('warning', changed.length > 1);
+  if (changed.length === 0) status.textContent = '現在是基準。請只改一項。';
+  else if (changed.length === 1) status.textContent = `你只改了：${W7_SORTER_LABELS[changed[0]]}。`;
+  else status.textContent = `你一次改了 ${changed.length} 項。請先回到基準，再只改一項。`;
+  rule.textContent = W7_SORTER_RULES[state.goal];
+}
+
+function resetW7Sorter() {
+  document.getElementById('w7-sort-history').value = W7_SORTER_BASE.history;
+  document.getElementById('w7-sort-location').value = W7_SORTER_BASE.location;
+  document.getElementById('w7-sort-goal').value = W7_SORTER_BASE.goal;
+  renderW7Sorter();
+}
+
+function initW7Sorter() {
+  ['w7-sort-history', 'w7-sort-location', 'w7-sort-goal'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', renderW7Sorter);
+  });
+  document.getElementById('w7-sort-reset')?.addEventListener('click', resetW7Sorter);
+  renderW7Sorter();
+}
 
 function show(n) {
   if (n < 1 || n > total) return;
@@ -755,6 +938,7 @@ function prev() {
 }
 
 document.addEventListener('keydown', e => {
+  if (e.target.closest?.('[data-w7-sorter]')) return;
   if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
     e.preventDefault(); next();
   } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
@@ -767,6 +951,7 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('click', e => {
+  if (e.target.closest('[data-w7-sorter]')) return;
   if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
   if (e.target.closest('input, textarea, select, a, .rotate-hint')) return;
   if (document.body.classList.contains('force-rotate')) {
@@ -811,6 +996,7 @@ window.toggleFullscreen = function() {
   }
 };
 
+initW7Sorter();
 show(1);
 
 paintReveal();

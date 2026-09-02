@@ -488,6 +488,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .weekly-score-d{font-size:clamp(15px,1.25vw,22px);line-height:1.5;color:var(--ink-2);}
 .weekly-score-note{text-align:center;margin-top:26px;font-size:clamp(15px,1.3vw,22px);line-height:1.5;color:var(--ink-2);}
 
+
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
+
 </style>
 
 
@@ -549,21 +562,21 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 </section>
 
 <section class="slide dark" data-slide="3" data-section="三股證據">
-<div class="slide-inner"><div class="kicker alert">三股證據分開歸因</div><div class="title" style="font-size:clamp(34px,3vw,54px);">學習關卡、團隊、個人<span class="accent-2">不互相冒充</span></div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(3,1fr);"><div class="card"><div class="label">學習關卡 4／0 分里程碑</div><div class="body-sm">每人必要歷程<br>通過／需修正</div></div><div class="card"><div class="label">團隊成果／10</div><div class="body-sm">允許工具準備<br>同組共同分</div></div><div class="card"><div class="label">個人事前未知答辯／15</div><div class="body-sm">5 分鐘受控<br>每人獨立作答</div></div></div></div><div class="page-footer">W16 · 三股證據</div>
+<div class="slide-inner"><div class="kicker alert">三種表現分開記錄</div><div class="title" style="font-size:clamp(34px,3vw,54px);">學習關卡、團隊、個人<span class="accent-2">不互相冒充</span></div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(3,1fr);"><div class="card"><div class="label">學習關卡 4／0 分里程碑</div><div class="body-sm">每人必要歷程<br>通過／需修正</div></div><div class="card"><div class="label">團隊成果／10</div><div class="body-sm">允許工具準備<br>同組共同分</div></div><div class="card"><div class="label">個人事前未知答辯／15</div><div class="body-sm">5 分鐘受控<br>每人獨立作答</div></div></div></div><div class="page-footer">W16 · 三股證據</div>
 </section>
-
 
 <section class="slide dark" data-slide="4" data-section="評分契約">
-<div class="slide-inner"><div class="kicker gold">同四項，不同證據流</div><div class="title" style="font-size:clamp(34px,3vw,54px);">原始 8 分<span class="accent-2">分開換算</span></div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">閱讀證據</div><div class="body-sm">證據與支持上限</div></div><div class="card"><div class="label">形成判斷</div><div class="body-sm">範圍與不確定</div></div><div class="card"><div class="label">回應追問</div><div class="body-sm">碰到核心挑戰</div></div><div class="card"><div class="label">修正能力</div><div class="body-sm">前後差異與理由</div></div></div><div class="body-sm" style="margin-top:20px;text-align:center;color:var(--ink-2);">團隊 8 → 10；個人 8 → 15。團隊五張不能直接變成個人分數。</div></div><div class="page-footer">W16 · 評分契約</div>
+<div class="slide-inner"><div class="kicker gold">同四項，不同證據流</div><div class="title" style="font-size:clamp(34px,3vw,54px);">原始 8 分<span class="accent-2">分開換算</span></div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">閱讀證據</div><div class="body-sm">證據與資料最多能說到哪裡</div></div><div class="card"><div class="label">形成判斷</div><div class="body-sm">範圍與不確定</div></div><div class="card"><div class="label">回應追問</div><div class="body-sm">碰到核心挑戰</div></div><div class="card"><div class="label">修正能力</div><div class="body-sm">前後差異與理由</div></div></div><div class="body-sm" style="margin-top:20px;text-align:center;color:var(--ink-2);">團隊 8 → 10；個人 8 → 15。團隊五張不能直接變成個人分數。</div></div><div class="page-footer">W16 · 評分契約</div>
 </section>
 
-<section class="slide dark" data-slide="5" data-section="今日流程">
-<div class="slide-inner"><div class="kicker">今天 100 分鐘</div><div class="timeline" style="margin-top:8px;"><div class="tl-row"><div class="tl-time">00 — 10</div><div class="tl-title">學習關卡 4 發布預檢</div><div class="tl-desc">缺口版本不先公開</div></div><div class="tl-row star"><div class="tl-time">10 — 65</div><div class="tl-title accent-2">已放行團隊報告＋質詢</div><div class="tl-desc">65 分準停</div></div><div class="tl-row dstar"><div class="tl-time">65 — 78</div><div class="tl-title accent">個人答辯卡</div><div class="tl-desc">5 分作答＋收卷緩衝</div></div><div class="tl-row"><div class="tl-time">78 — 88</div><div class="tl-title">團隊 V2</div><div class="tl-desc">個人卷收走後才協作</div></div><div class="tl-row"><div class="tl-time">88 — 95</div><div class="tl-title">學習關卡狀態定案</div><div class="tl-desc">通過／需修正與補正安排</div></div><div class="tl-row"><div class="tl-time">95 — 100</div><div class="tl-title">分流收件</div><div class="tl-desc">學習關卡／團隊／個人分開</div></div></div></div><div class="page-footer">W16 · 今日流程</div>
-</section>
+<section class="slide dark" data-slide="5" data-section="今天先做什麼，再做什麼？"><div class="soil-revision-inner"><div class="soil-kicker">100 分鐘｜照順序，先留自己的想法</div><h2 class="soil-title">今天先做什麼，再做什麼？</h2><div class="soil-columns" style="gap:12px"><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>00–10</strong>　規則、提問、準備</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>10–63</strong>　團隊報告與提問</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>63–66</strong>　清場、發個人題卡</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>66–71</strong>　個人獨立作答五分鐘</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>71–76</strong>　先收個人答辯卡</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>76–91</strong>　團隊修正、確認原作</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>91–97</strong>　貼錯時間，寫出更正</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>97–100</strong>　整本收回</div></div><div class="soil-note">生活練習已排在這 100 分鐘裡，不另外加作業。</div></div><div class="page-footer">今天先做什麼，再做什麼？</div></section>
 
-<section class="slide dark" data-slide="6" data-section="主持容量">
-<div class="slide-inner"><div class="kicker gold">容量先算好</div><div class="title" style="font-size:clamp(38px,3.4vw,62px);">8 組用 4+2；9–10 組用 3+2</div><div class="grid-2" style="margin-top:24px;"><div class="card"><div class="label">8 組</div><div class="body-sm">4 分報告＋2 分質詢，共 48 分</div></div><div class="card"><div class="label">9–10 組</div><div class="body-sm">3 分報告＋2 分質詢，留換組緩衝</div></div></div><div class="body" style="margin-top:28px;text-align:center;color:var(--ink-2);">65 分準時停；個人答辯卡不能被前組吃掉。</div></div><div class="page-footer">W16 · 主持節奏</div>
-</section>
+<section class="slide dark" data-slide="6" data-section="組數與公平">
+<div class="soil-revision-inner"><div class="soil-kicker">W16 · 組數與公平</div>
+<h2 class="soil-title">每組時間，從第一組就一樣</h2><div class="soil-source">八組以內：報告 4 分＋提問 2 分＋換組記錄 15 秒。<br><br>九到十組：報告 3 分＋提問 2 分＋換組記錄 15 秒。</div>
+<div class="soil-action">八組需 50 分；十組需 52 分 30 秒。全都放在 10–63 分。</div>
+<div class="soil-note">超過十組要課前另排等值場次，不臨時搶別組或個人的時間。</div></div>
+<div class="page-footer">W16 · 組數與公平</div></section>
 
 <section class="slide dark" data-slide="7" data-section="四類追問">
 <div class="slide-inner"><div class="kicker">只能問這四類</div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">證據</div><div class="body-sm">根據在哪？支持到哪？</div></div><div class="card"><div class="label">推論</div><div class="body-sm">資料怎麼走到主張？</div></div><div class="card"><div class="label">價值</div><div class="body-sm">你優先什麼、犧牲什麼？</div></div><div class="card"><div class="label">定義</div><div class="body-sm">關鍵詞到底是什麼？</div></div></div><div class="body-sm" style="margin-top:26px;text-align:center;color:var(--ink-2);">提問先指向一句主張、證據、前提或定義。</div></div><div class="page-footer">W16 · 四類追問</div>
@@ -584,18 +597,16 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 <section class="slide dark" data-slide="11" data-section="團隊觀察">
 <div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker alert">團隊報告期間 · 不要等</div><div class="title" style="font-size:clamp(34px,3vw,54px);">每組結束，15 秒填一行</div></div><div class="timer-pill" data-timer="15">00:15</div></div><div class="card" style="margin-top:24px;border-color:var(--accent-2);"><div class="body-sm">組別／最清楚的一句主張／可核對證據／追問類別</div></div><div class="body-sm" style="margin-top:24px;text-align:center;color:var(--ink-2);">這是團隊成果觀察，不直接算成個人事前未知答辯。</div></div><div class="page-footer">W16 · 團隊觀察格</div>
 </section>
-<section class="slide dark" data-slide="12" data-section="信心預測">
-<div class="slide-inner"><div class="kicker gold">報告開始前 · 信心預測</div><div class="title" style="font-size:clamp(34px,3vw,54px);line-height:1.3;">我們組最可能被哪類追問打中？<br>目前接得住幾成？</div><div class="grid-2" style="margin-top:26px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">證據</div><div class="body-sm">來源與支持上限</div></div><div class="card"><div class="label">推論</div><div class="body-sm">資料到主張的跳步</div></div><div class="card"><div class="label">價值</div><div class="body-sm">優先與犧牲</div></div><div class="card"><div class="label">定義</div><div class="body-sm">關鍵詞界線</div></div></div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">留在團隊頁面：最可能中＿＿；信心＿＿％；理由＿＿。0 分、不排名。</div></div><div class="page-footer">W16 · 信心預測</div>
-</section>
 
+<section class="slide dark" data-slide="12" data-section="信心預測">
+<div class="slide-inner"><div class="kicker gold">報告開始前 · 信心預測</div><div class="title" style="font-size:clamp(34px,3vw,54px);line-height:1.3;">我們組最可能被哪類追問打中？<br>目前接得住幾成？</div><div class="grid-2" style="margin-top:26px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">證據</div><div class="body-sm">來源與資料最多能說到哪裡</div></div><div class="card"><div class="label">推論</div><div class="body-sm">資料到主張的跳步</div></div><div class="card"><div class="label">價值</div><div class="body-sm">優先與犧牲</div></div><div class="card"><div class="label">定義</div><div class="body-sm">關鍵詞界線</div></div></div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">留在團隊頁面：最可能中＿＿；信心＿＿％；理由＿＿。0 分、不排名。</div></div><div class="page-footer">W16 · 信心預測</div>
+</section>
 
 <section class="slide dark" data-slide="13" data-section="提問品質">
 <div class="slide-inner"><div class="kicker gold">有效追問不是刁難</div><div class="grid-2" style="margin-top:20px;"><div class="card"><div class="label">太空泛</div><div class="body-sm">你們為什麼支持？</div></div><div class="card" style="border-color:var(--accent-2);"><div class="label">指向前提</div><div class="body-sm">61／96 是自評、又無兩方案對照；你們用什麼標準決定值得延續？</div></div></div><div class="body" style="margin-top:28px;text-align:center;color:var(--ink-2);">最承重的問題，會讓回答後的主張站穩、縮小或待查。</div></div><div class="page-footer">W16 · 提問品質</div>
 </section>
 
-<section class="slide dark" data-slide="14" data-section="團隊回應">
-<div class="slide-inner"><div class="kicker">團隊回答三句型 · 接回 W9</div><div class="steps-4"><div class="step-item"><div class="step-num">1</div><div class="step-content"><div class="s-main">我們先回答：＿＿</div></div></div><div class="step-item"><div class="step-num gold">2</div><div class="step-content"><div class="s-main">團隊根據是：＿＿</div></div></div><div class="step-item"><div class="step-num alert">3</div><div class="step-content"><div class="s-main">團隊也承認：＿＿</div></div></div></div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">這一段只屬團隊成果；65 分後每人另答未知題。</div></div><div class="page-footer">W16 · 團隊回應</div>
-</section>
+<section class="slide dark" data-slide="14" data-section="先回答，再指出根據與限制"><div class="soil-revision-inner"><div class="soil-kicker">團隊答問｜接回 W9</div><h2 class="soil-title">先回答，再指出根據與限制</h2><div style="display:grid;gap:16px"><div class="soil-source" style="font-size:30px;padding:16px 22px"><strong>1　我們先回答</strong><br>我們目前的做法是＿＿。</div><div class="soil-source" style="font-size:30px;padding:16px 22px"><strong>2　我們的根據</strong><br>資料中的＿＿讓我們這樣判斷。</div><div class="soil-source" style="font-size:30px;padding:16px 22px"><strong>3　我們也承認</strong><br>現在還不知道＿＿；如果＿＿，就要改。</div></div><div class="soil-note">這是團隊回答；65 分發個人題卡，66–71 分各自完成，不互相代答。</div></div><div class="page-footer">先回答，再指出根據與限制</div></section>
 
 <section class="slide dark" data-slide="15" data-section="承認未知">
 <div class="slide-inner center"><div class="kicker gold">團隊與個人都適用</div><div class="title" style="font-size:clamp(42px,3.9vw,70px);">「我不知道」是<span class="accent-2">合法答案</span></div><div class="body" style="margin-top:30px;color:var(--ink-2);">但要指出：目前哪一點不知道？它限制哪個結論？下一步要查什麼？</div></div><div class="page-footer">W16 · 承認未知</div>
@@ -614,13 +625,37 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 </section>
 
 <section class="slide dark" data-slide="19" data-section="團隊規準">
-<div class="slide-inner"><div class="kicker gold">團隊成果／10</div><div class="title" style="font-size:clamp(34px,3vw,54px);">四項各 0–2，原始 8 分換算</div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">閱讀證據</div><div class="body-sm">來源與支持上限</div></div><div class="card"><div class="label">形成判斷</div><div class="body-sm">主張範圍清楚</div></div><div class="card"><div class="label">回應追問</div><div class="body-sm">團隊正面回應</div></div><div class="card"><div class="label">修正能力</div><div class="body-sm">V2／重申理由</div></div></div><div class="body-sm" style="margin-top:20px;text-align:center;color:var(--ink-2);">同組共同分；不借個人答辯卡補團隊缺口，也不反向把團隊分給個人。</div></div><div class="page-footer">W16 · 團隊規準</div>
+<div class="slide-inner"><div class="kicker gold">團隊成果／10</div><div class="title" style="font-size:clamp(34px,3vw,54px);">四項各 0–2，原始 8 分換算</div><div class="grid-2" style="margin-top:20px;grid-template-columns:repeat(4,1fr);"><div class="card"><div class="label">閱讀證據</div><div class="body-sm">來源與資料最多能說到哪裡</div></div><div class="card"><div class="label">形成判斷</div><div class="body-sm">主張範圍清楚</div></div><div class="card"><div class="label">回應追問</div><div class="body-sm">團隊正面回應</div></div><div class="card"><div class="label">修正能力</div><div class="body-sm">V2／重申理由</div></div></div><div class="body-sm" style="margin-top:20px;text-align:center;color:var(--ink-2);">同組共同分；不借個人答辯卡補團隊缺口，也不反向把團隊分給個人。</div></div><div class="page-footer">W16 · 團隊規準</div>
 </section>
+
 <section class="slide dark" data-slide="20" data-section="學習關卡 4">
 <div class="slide-inner"><div class="kicker alert">學習關卡 4／0 分發布閘門 · 通過／需修正</div><div class="grid-2" style="margin-top:22px;"><div class="card"><div class="label">報告前已預檢</div><div class="body-sm">W13 來源／上限／挑戰／修正；W15 人類復述／定位／V2。</div></div><div class="card"><div class="label">課末只定案</div><div class="body-sm">通過或需修正＋補正期限；有缺口的團隊版本不倒推成已放行。</div></div></div><div class="body" style="margin-top:28px;text-align:center;color:var(--ink-2);">W14 可選；缺項回原作補，修正後另排等值公開說明。</div></div><div class="page-footer">W16 · 學習關卡 4</div>
 </section>
-<section class="slide dark" data-slide="21" data-section="分流收件">
-<div class="slide-inner"><div class="kicker alert">95 分 · 三股分開登錄</div><div class="title" style="font-size:clamp(36px,3.2vw,58px);">學習關卡／團隊／個人<span class="accent-2">不是同一筆證據</span></div><div class="grid-2" style="margin-top:22px;grid-template-columns:repeat(3,1fr);"><div class="card"><div class="label">每人</div><div class="body-sm">學習關卡 4 定位</div></div><div class="card"><div class="label">每組</div><div class="body-sm">團隊成果</div></div><div class="card"><div class="label">每人</div><div class="body-sm">個人答辯卡</div></div></div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">歷程本第 1–4 頁整本交回；第 4 頁可留白、不計分。</div></div><div class="page-footer">W16 · 分流收件</div>
+
+<section class="slide dark soil-practice" data-slide="21" data-section="生活練習" data-soil-task="W16-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">91–97 分｜社團｜先自己做一次</div>
+    <h2 class="soil-title">你貼錯時間，接下來怎麼辦？</h2>
+    <div class="soil-source">你貼出的社團海報寫十七點開始，核准的場地單卻是十六點。有人提醒後，你確認是自己看錯。已經有人轉貼。</div>
+    <div class="soil-action">直接寫出你會發布的更正，讓看過舊版的人知道哪裡錯、現在該照哪個時間。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W16 · 生活練習 · 1／2</div>
+</section>
+
+<section class="slide dark soil-practice" data-slide="22" data-section="生活練習" data-soil-task="W16-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">91–97 分｜社團｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">同學問：『只把圖片換掉就好了嗎？已經轉傳的人怎麼知道？』</div>
+    <div class="soil-action">補寫一個你能做到的處理動作；做不到或尚未確認的，不先保證。這是練習，不真的發布。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W16 · 生活練習 · 2／2</div>
+</section>
+
+<section class="slide dark" data-slide="23" data-section="分流收件">
+<div class="slide-inner"><div class="kicker alert">97–100 分 · 三股分開登錄</div><div class="title" style="font-size:clamp(36px,3.2vw,58px);">學習關卡／團隊／個人<span class="accent-2">不是同一筆證據</span></div><div class="grid-2" style="margin-top:22px;grid-template-columns:repeat(3,1fr);"><div class="card"><div class="label">每人</div><div class="body-sm">學習關卡 4 定位</div></div><div class="card"><div class="label">每組</div><div class="body-sm">團隊成果</div></div><div class="card"><div class="label">每人</div><div class="body-sm">個人答辯卡</div></div></div><div class="body-sm" style="margin-top:22px;text-align:center;color:var(--ink-2);">歷程本第 1–4 頁整本交回；第 4 頁可留白、不計分。</div></div><div class="page-footer">W16 · 分流收件</div>
 </section>
 
 <div id="hint">←→ 切頁 · F 全螢幕</div>

@@ -394,6 +394,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
 .weekly-score-d{font-size:clamp(24px,1.65vw,29px);line-height:1.42;color:var(--ink-2);}
 .weekly-score-note{text-align:center;margin-top:18px;font-size:clamp(22px,1.5vw,26px);line-height:1.45;color:var(--ink-2);}
 
+
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
+
 </style>
 <style id="deck-chrome-layout">
 /* UI chrome uses its own compact scale and reserves a collision-free top row. */
@@ -457,22 +470,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:clamp(15px,1.1vw,20px);color:#7A8BB8;letter-spacing:0.18em;">W10 · 中心問題</div>
 </section>
 
-
-<section class="slide dark" data-slide="3" data-section="今日流程">
-<div class="slide-inner">
-    <div class="kicker">今天 100 分鐘</div>
-    <div class="title" style="font-size:clamp(34px,3vw,52px);">先扣留，再查證，最後判斷後果</div>
-    <div class="timeline" style="margin-top:14px;">
-      <div class="tl-row"><div class="tl-time">00 — 12</div><div class="tl-title">接 W9＋發材料</div><div class="tl-desc">任務包、歷程本、查核工具卡先到手</div></div>
-      <div class="tl-row star"><div class="tl-time">12 — 25</div><div class="tl-title accent-2">★ 教師示範</div><div class="tl-desc">一萬小時說法：來源名稱不等於主張成立</div></div>
-      <div class="tl-row dstar"><div class="tl-time">25 — 55</div><div class="tl-title accent">★★ 個人查核</div><div class="tl-desc">保留第一眼判斷 → AI 提方向 → 本人搜尋、開資料、下判斷</div></div>
-      <div class="tl-row star"><div class="tl-time">55 — 73</div><div class="tl-title accent-2">★ 最危險一句</div><div class="tl-desc">像真的＋誰會信＋會做什麼決定</div></div>
-      <div class="tl-row"><div class="tl-time">73 — 100</div><div class="tl-title">回饋、修訂、交回</div><div class="tl-desc">保留第一眼判斷與新版；拍自己的頁面備份，紙本全本交回</div></div>
-    </div>
-  </div>
-  <div class="page-footer">W10 · 今日流程</div>
-</section>
-
+<section class="slide dark" data-slide="3" data-section="今天先做什麼，再做什麼？"><div class="soil-revision-inner"><div class="soil-kicker">100 分鐘｜照順序，先留自己的想法</div><h2 class="soil-title">今天先做什麼，再做什麼？</h2><div class="soil-columns" style="gap:12px"><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>00–25</strong>　接 W9，示範查核</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>25–35</strong>　個人第一眼判斷</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>35–41</strong>　先替兩種讀者排順序</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>41–59</strong>　自己找，打開原資料</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>59–73</strong>　資料支持到哪裡？</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>73–90</strong>　回應一問，修正或保留</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>90–96</strong>　替家人查活動消息</div><div class="soil-source" style="font-size:28px;line-height:1.35;padding:12px 18px"><strong>96–100</strong>　收件</div></div><div class="soil-note">生活練習已排在這 100 分鐘裡，不另外加作業。</div></div><div class="page-footer">今天先做什麼，再做什麼？</div></section>
 
 <section class="slide dark" data-slide="4" data-section="15 分看什麼">
 <div class="slide-inner weekly-score-wrap">
@@ -621,7 +619,6 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 階段一</div>
 </section>
 
-
 <section class="slide dark" data-slide="14" data-section="基線">
 <div class="slide-inner center">
     <div class="kicker gold">開放來源前 10 秒 · 基線不計分</div>
@@ -630,11 +627,19 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   </div>
   <div class="page-footer">W10 · 初判基線</div>
 </section>
-<section class="slide dark" data-slide="15" data-section="開放工具查核">
-<div class="slide-inner" style="transform:scale(.90);transform-origin:center center;">
+
+<section class="slide dark" data-slide="15" data-section="查找前先決定">
+<div class="soil-revision-inner"><div class="soil-kicker">W10 · 查找前先決定</div>
+<h2 class="soil-title">先查哪句，替誰想？</h2><div class="soil-source"><b>你自己</b>｜哪句寫錯，會讓你做錯什麼決定？<br><br><b>要聯絡你的家長</b>｜哪句寫錯，會讓他遇到什麼麻煩？</div>
+<div class="soil-action">三句各排先後；最先查的那一句，補一個具體後果。</div>
+<div class="soil-note">35–41 分｜先自己排，不問 AI。兩邊排一樣也可以，有理由就好。</div></div>
+<div class="page-footer">W10 · 查找前先決定</div></section>
+
+<section class="slide dark" data-slide="16" data-section="開放工具查核">
+<div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-      <div><div class="kicker gold">35–55 分 · 全班共用方向｜現場 AI 可選</div><div class="title" style="font-size:clamp(34px,3vw,54px);">方向不是答案；打開資料再判斷</div></div>
-      <div class="timer-pill" data-timer="1200">20:00</div>
+      <div><div class="kicker gold">41–59 分 · 全班共用方向｜現場 AI 可選</div><div class="title" style="font-size:clamp(34px,3vw,54px);">方向不是答案；打開資料再判斷</div></div>
+      <div class="timer-pill" data-timer="1080">18:00</div>
     </div>
     <div class="steps-4" style="gap:9px;">
       <div class="step-item" style="padding:9px 18px;"><div class="step-num gold">①</div><div class="step-content"><div class="s-main">讀查找方向</div><div class="s-sub">共用 AI 方向：①問卷題目與總共有多少人／份；②成績測量與比較組；③緊急聯絡紀錄。</div></div></div>
@@ -642,25 +647,25 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
       <div class="step-item" style="padding:9px 18px;"><div class="step-num">③</div><div class="step-content"><div class="s-main">打開原始資料</div><div class="s-sub">記來源，再寫它實際支持什麼、不能支持什麼。</div></div></div>
       <div class="step-item" style="padding:9px 18px;"><div class="step-num alert">④</div><div class="step-content"><div class="s-main alert">本人最後判斷</div><div class="s-sub">寫 G／Y／R＋限制；查不到可留 Y。</div></div></div>
     </div>
-    <div class="body-sm" style="margin-top:14px;text-align:center;color:var(--ink-2);">全班仍只查共同三句，不增加查核量。<span class="accent-2 bold">AI 不是來源</span>；沒網路或裝置，就用投影方向＋離線原文資料卡。最後由本人決定。</div>
+    <div class="body-sm" style="margin-top:10px;text-align:center;color:var(--ink-2);font-size:calc(var(--t3)*.72);line-height:1.35;"><span class="accent-2 bold">AI 不是來源</span>；沒網路就用投影方向＋離線資料卡；最後仍由本人決定。</div>
   </div>
   <div class="page-footer">W10 · 階段二</div>
 </section>
 
-<section class="slide dark" data-slide="16" data-section="最危險一句">
+<section class="slide dark" data-slide="17" data-section="最危險一句">
 <div class="arena-overlay">
-    <div class="kicker gold" style="margin-bottom:14px;">55–73 分 · 判斷</div>
+    <div class="kicker gold" style="margin-bottom:14px;">59–73 分 · 判斷</div>
     <div class="title" style="font-size:clamp(50px,4.6vw,88px);line-height:1.15;margin-bottom:18px;">最危險<br><span class="accent-2">不一定最錯</span></div>
     <div class="body" style="color:var(--ink-2);max-width:1000px;margin:0 auto;line-height:1.7;">很明顯的紅色常容易識破。<br>最危險的，可能是看起來像正式研究、卻沒有檢驗依據的<span class="accent-2 bold">黃色句</span>。</div>
   </div>
   <div class="page-footer">W10 · 最危險一句</div>
 </section>
 
-<section class="slide dark" data-slide="17" data-section="形成判斷">
+<section class="slide dark" data-slide="18" data-section="形成判斷">
 <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
       <div><div class="kicker gold">把後果說清楚</div><div class="title" style="font-size:clamp(32px,2.8vw,50px);">誰會信？接著會做什麼？</div></div>
-      <div class="timer-pill" data-timer="1080">18:00</div>
+      <div class="timer-pill" data-timer="840">14:00</div>
     </div>
     <div class="steps-4" style="gap:9px;">
       <div class="step-item" style="padding:9px 18px;"><div class="step-num">①</div><div class="step-content"><div class="s-main">完整原句＋最後顏色</div></div></div>
@@ -673,11 +678,11 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 形成判斷</div>
 </section>
 
-<section class="slide dark" data-slide="18" data-section="回應回饋">
+<section class="slide dark" data-slide="19" data-section="回應回饋">
 <div class="slide-inner">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-      <div><div class="kicker">73–88 分 · 回應回饋</div><div class="title" style="font-size:clamp(36px,3.2vw,56px);">記下一問，再由本人回應</div></div>
-      <div class="timer-pill" data-timer="900">15:00</div>
+      <div><div class="kicker">73–83 分 · 回應回饋</div><div class="title" style="font-size:clamp(36px,3.2vw,56px);">記下一問，再由本人回應</div></div>
+      <div class="timer-pill" data-timer="600">10:00</div>
     </div>
     <div class="grid-2" style="margin-top:20px;">
       <div class="card" style="border-color:var(--accent-2);"><div class="label">同儕回饋</div><div class="body-sm">「你這個判斷漏看了哪一筆來源、範圍或後果？」</div></div>
@@ -688,7 +693,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 同儕交換規則</div>
 </section>
 
-<section class="slide dark" data-slide="19" data-section="帶走規則">
+<section class="slide dark" data-slide="20" data-section="帶走規則">
 <div class="slide-inner center">
     <div class="epilogue">
       <div class="ep-line ep-fade">AI 可以先提查找方向。</div>
@@ -699,7 +704,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 帶走規則</div>
 </section>
 
-<section class="slide dark" data-slide="20" data-section="查主張不猜作者">
+<section class="slide dark" data-slide="21" data-section="查主張不猜作者">
 <div class="slide-inner">
     <div class="kicker">為什麼不教「猜是不是 AI 寫的」？</div>
     <div class="title" style="font-size:clamp(36px,3.2vw,56px);">猜作者會過期，查主張不會</div>
@@ -712,9 +717,9 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 查主張，不猜作者</div>
 </section>
 
-<section class="slide dark" data-slide="21" data-section="修訂">
+<section class="slide dark" data-slide="22" data-section="修訂">
 <div class="slide-inner">
-    <div class="kicker">88–96 分 · 修訂</div>
+    <div class="kicker">83–90 分 · 修訂</div>
     <div class="title" style="font-size:clamp(38px,3.4vw,60px);">保留第一眼判斷、回饋與新版</div>
     <div class="grid-2" style="margin-top:24px;">
       <div class="card"><div class="label">保留原判斷</div><div class="body-sm">寫出回饋挑戰哪裡，以及為何現有資料仍支持原判斷。</div></div>
@@ -725,7 +730,29 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 修訂</div>
 </section>
 
-<section class="slide dark" data-slide="22" data-section="備份與交回">
+<section class="slide dark soil-practice" data-slide="23" data-section="生活練習" data-soil-task="W10-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜家庭｜先自己做一次</div>
+    <h2 class="soil-title">同一張活動單，先查哪件事？</h2>
+    <div class="soil-source">你要安排家人去校慶。轉貼寫：①不用預約；②結束後仍有接駁車；③紀念品每人一份。弟弟在意紀念品，搭車來的家人在意怎麼回去。</div>
+    <div class="soil-action">分別替這兩人選一件最先要查的事，寫出『如果寫錯，他會遇到什麼麻煩』。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W10 · 生活練習 · 1／2</div>
+</section>
+
+<section class="slide dark soil-practice" data-slide="24" data-section="生活練習" data-soil-task="W10-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜家庭｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">活動單寫：『活動十九點結束；末班接駁車十八點。紀念品限預約者領取。』</div>
+    <div class="soil-action">直接寫一則給家人的提醒，把已查到的事與還不知道的事分開；不用真的傳送。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+  <div class="page-footer">W10 · 生活練習 · 2／2</div>
+</section>
+
+<section class="slide dark" data-slide="25" data-section="備份與交回">
 <div class="slide-inner">
     <div class="kicker gold">96–100 分 · 備份、交回、交棒</div>
     <div class="title" style="font-size:clamp(34px,3vw,54px);">先備份，再交回；15 分看第 1–3 頁</div>
@@ -738,7 +765,7 @@ body.reveal-all [data-reveal]{opacity:1!important;transform:none!important;}
   <div class="page-footer">W10 · 備份與交回</div>
 </section>
 
-<section class="slide dark" data-slide="23" data-section="個人反思">
+<section class="slide dark" data-slide="26" data-section="個人反思">
 <div class="slide-inner">
     <div class="meta-reflect-wrap">
       <div class="meta-reflect-tag">⌖ 個人反思 · 可留白 · 不計分</div>

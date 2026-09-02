@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>W5｜重寫，看見自己變了多少</title>
+<title>W5｜重寫，讓改動說得出根據</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -60,6 +60,19 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 @media(max-width:900px){.slide{padding:80px 5vw 64px}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}#help{display:none}.card{padding:18px}.timeline{grid-template-columns:95px 1fr}#section{display:none}.fullscreen-btn{left:auto;right:18px}.back-home{left:18px}}
 @media(max-height:650px){:root{--t1:52px;--t2:38px;--t3:25px;--t4:18px}.slide{padding-top:6vh}.card{padding:16px 20px}.grid2,.grid3,.grid4{margin-top:18px;gap:14px}.timeline{margin-top:12px}.time,.event{padding:7px 12px}}
 @media print{html,body{overflow:visible;height:auto}.back-home,.fullscreen-btn,#section,#page,#help,#progress,#progress-bg{display:none!important}.slide{position:relative;display:flex!important;width:1600px;height:900px;page-break-after:always}[data-reveal]{opacity:1!important;transform:none!important}}
+
+/* SOIL 高一白話版：投影主檔內的共用課末練習樣式。 */
+.soil-revision-inner { position:absolute; inset:68px 110px 92px; display:flex; flex-direction:column; justify-content:center; gap:24px; max-width:1360px; margin:auto; font-family:"PingFang TC","Microsoft JhengHei",sans-serif; }
+.soil-kicker { font-size:22px; line-height:1.35; font-weight:700; color:#FFD700; }
+.soil-title { margin:0; font-size:54px; line-height:1.25; font-weight:900; color:#EEF3FF; }
+.soil-source { font-size:34px; line-height:1.5; color:#EEF3FF; padding:22px 26px; background:#152C43; border-radius:12px; }
+.soil-action { font-size:34px; line-height:1.5; color:#EEF3FF; font-weight:700; }
+.soil-note { font-size:22px; line-height:1.4; color:#B8C5E0; }
+.soil-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.soil-columns .soil-source { font-size:33px; }
+.soil-mini { font-size:28px; line-height:1.45; }
+@media (max-width:1000px) { .soil-revision-inner { inset:50px 6vw 70px; gap:16px; } .soil-title { font-size:clamp(28px,4vw,54px); } .soil-source,.soil-action { font-size:clamp(19px,2.5vw,34px); } .soil-kicker,.soil-note { font-size:clamp(13px,1.7vw,22px); } }
+
 </style>
 </head>
 <body>
@@ -73,14 +86,14 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 
 <section class="slide" data-slide="2" data-section="中心問題"><div class="inner center">
   <div class="eyebrow">先問問題</div>
-  <div class="question">W2 的我，<br>跟現在的我，<span class="gold">差在哪裡</span>？</div>
+  <div class="question">我的改動，<br><span class="gold">說得出根據嗎</span>？</div>
 </div></section>
 
 <section class="slide" data-slide="3" data-section="W5 節點評量"><div class="inner">
   <div class="eyebrow">兩套證據，分開記錄</div><h2>學習關卡 1 看歷程；W5 看個人表現</h2>
   <p class="small"><span class="gold strong">學習關卡 1｜0 分里程碑：</span>W2–W4 原作、具體回饋／查核、回應／修訂；只判通過／需修正，期限內補正後改為通過。</p>
   <div class="grid4">
-    <div class="card"><div class="score">0–2</div><h3>經驗痕跡</h3><p>圈出可核對的經驗細節，說明它承載的經驗重點。</p></div>
+    <div class="card"><div class="score">0–2</div><h3>經驗痕跡</h3><p>圈出可核對的經驗細節，說明別人可以追問它什麼。</p></div>
     <div class="card"><div class="score">0–2</div><h3>讀者接收</h3><p>保留真人讀者的復述、誤讀、疑問或停頓。</p></div>
     <div class="card"><div class="score">0–2</div><h3>回應決定</h3><p>逐項標示採用、部分採用或不採用，並說明依據。</p></div>
     <div class="card"><div class="score">0–2</div><h3>修訂效力</h3><p>V2 處理接收落差；若保留，說明原句仍站得住的理由與限制。</p></div>
@@ -210,7 +223,7 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
 <section class="slide" data-slide="19" data-section="評分自查"><div class="inner">
   <div class="eyebrow">交件前自己看一次</div><h2>我的 W5 15 分證據在哪裡？</h2>
   <div class="grid4">
-    <div class="card"><h3>經驗痕跡</h3><p>具體經驗細節＋經驗重點</p></div>
+    <div class="card"><h3>經驗痕跡</h3><p>具體經驗細節＋可被追問的程度</p></div>
     <div class="card"><h3>讀者接收</h3><p>真人讀者實際接收</p></div>
     <div class="card"><h3>回應決定</h3><p>採用／部分採用／不採用＋理由</p></div>
     <div class="card"><h3>修訂效力</h3><p>V1＋V2／保留理由＋接收落差</p></div>
@@ -228,13 +241,27 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   <p class="lead">教師只回：「可以」或「這欄補一下」。</p>
 </div></section>
 
-<section class="slide" data-slide="21" data-section="個人反思（可留白、不計分）"><div class="inner center">
-  <div class="eyebrow">92–100｜先保護隱私，再收件</div><h2>第 4 頁由你保管</h2>
-  <div class="tear">可改寫、用代稱或留白｜不需撕下</div>
-  <p class="lead">教師不以內容評分；不需要自己猜哪些內容要遮。</p>
-</div></section>
+<section class="slide dark soil-practice" data-slide="21" data-section="生活練習" data-soil-task="W5-a">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜朋友｜先自己做一次</div>
+    <h2 class="soil-title">朋友把你的話看反了</h2>
+    <div class="soil-source">下雨，原本約好打球。你想改成明天，卻寫『算了，你不要來了。』朋友回：『你是在生我的氣嗎？』</div>
+    <div class="soil-action">寫出你現在會回的一小段話。保留原句，讓人看得到你補了或改了什麼。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+</section>
 
-<section class="slide" data-slide="22" data-section="收件"><div class="inner">
+<section class="slide dark soil-practice" data-slide="22" data-section="生活練習" data-soil-task="W5-b">
+  <div class="soil-revision-inner">
+    <div class="soil-kicker">90–96 分｜朋友｜先寫完，才看這一頁</div>
+    <h2 class="soil-title">再看看，要不要改？</h2>
+    <div class="soil-source">朋友說：『所以是今天取消、明天還要約？幾點？』</div>
+    <div class="soil-action">補一個真正還缺的資訊；不知道時間就寫還要確認，不用編。也可以說明原句哪裡已經夠清楚。</div>
+    <div class="soil-note">不計分 · 不用真實私事 · 不必真的傳送 · 紙本照常收回</div>
+  </div>
+</section>
+
+<section class="slide" data-slide="23" data-section="收件"><div class="inner">
   <div class="eyebrow">教師收回第 1–4 頁整本保管</div><h2>兩套證據分欄確認</h2>
   <div class="checklist">
     <div class="check"><div class="n">□</div><div class="txt">V1 留著</div></div>
@@ -246,12 +273,12 @@ h1,h2,h3,p{margin:0}h1{font-size:var(--t1);line-height:1.12;letter-spacing:-.03e
   <p class="lead center"><span class="gold strong">學習關卡 1：</span>通過／需修正＋缺項期限　｜　<span class="gold strong">W5：</span>四項原始分→15 分</p>
 </div></section>
 
-<section class="slide" data-slide="23" data-section="下一週"><div class="inner center">
+<section class="slide" data-slide="24" data-section="下一週"><div class="inner center">
   <div class="eyebrow">W5 → W6</div><h2>從自己的記憶，<br>走向<span class="gold">別人的文本</span></h2>
   <p class="lead">下週：書裡真的寫了什麼？讀者與 AI 又補了什麼？</p>
 </div></section>
 
-<section class="slide" data-slide="24" data-section="帶走一句話"><div class="inner center">
+<section class="slide" data-slide="25" data-section="帶走一句話"><div class="inner center">
   <div class="question">重寫不是證明<br>我<span class="red">變厲害</span>了</div>
   <div class="rule"></div>
   <div class="question" style="font-size:var(--t2)">是證明我現在<br><span class="gold">看得見自己怎麼做決定</span></div>

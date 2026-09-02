@@ -115,6 +115,87 @@ try {
     throw new Error(`Timer did not decrement: ${timerBefore} -> ${timerAfter}`);
   }
 
+  let sorterReport = null;
+  const sorterSlide = await evaluate("Number(document.querySelector('[data-w7-sorter]')?.dataset.slide || 0)");
+  if (sorterSlide) {
+    await evaluate(`show(${sorterSlide}); document.getElementById('w7-sort-reset').click()`);
+    const order = async () => await evaluate("document.getElementById('w7-rank-list')?.dataset.order || ''");
+    const changeOne = async (id, value) => {
+      await evaluate(`(() => {
+        document.getElementById('w7-sort-reset').click();
+        const control = document.getElementById(${JSON.stringify(id)});
+        control.value = ${JSON.stringify(value)};
+        control.dispatchEvent(new Event('change', { bubbles:true }));
+      })()`);
+      return await order();
+    };
+
+    const observed = {
+      baseline: await order(),
+      history: await changeOne("w7-sort-history", "quick"),
+      location: await changeOne("w7-sort-location", "west"),
+      dwell: await changeOne("w7-sort-goal", "dwell"),
+      paid: await changeOne("w7-sort-goal", "paid"),
+    };
+    const expected = {
+      baseline: "ACBDE",
+      history: "BCADE",
+      location: "AEBCD",
+      dwell: "BACDE",
+      paid: "DABCE",
+    };
+    for (const [key, expectedOrder] of Object.entries(expected)) {
+      if (observed[key] !== expectedOrder) {
+        throw new Error(`W7 sorter ${key} order mismatch: ${observed[key]} != ${expectedOrder}`);
+      }
+    }
+
+    const singleChangeStatus = await evaluate("document.getElementById('w7-sort-status')?.textContent || ''");
+    if (!singleChangeStatus.includes("你只改了：排序目標")) {
+      throw new Error(`W7 sorter single-change status failed: ${singleChangeStatus}`);
+    }
+    const multiChangeStatus = await evaluate(`(() => {
+      document.getElementById('w7-sort-reset').click();
+      for (const [id, value] of [['w7-sort-history','quick'], ['w7-sort-location','west']]) {
+        const control = document.getElementById(id);
+        control.value = value;
+        control.dispatchEvent(new Event('change', { bubbles:true }));
+      }
+      return document.getElementById('w7-sort-status').textContent;
+    })()`);
+    if (!multiChangeStatus.includes("一次改了 2 項")) {
+      throw new Error(`W7 sorter multi-change warning failed: ${multiChangeStatus}`);
+    }
+
+    const navigationGuard = await evaluate(`(() => {
+      document.getElementById('w7-sort-reset').click();
+      const before = Number(document.querySelector('.slide.active')?.dataset.slide || 0);
+      document.querySelector('#w7-rank-list .sorter-row').click();
+      const afterCardClick = Number(document.querySelector('.slide.active')?.dataset.slide || 0);
+      const select = document.getElementById('w7-sort-history');
+      select.focus();
+      select.dispatchEvent(new KeyboardEvent('keydown', { key:'ArrowRight', bubbles:true }));
+      const afterSelectKey = Number(document.querySelector('.slide.active')?.dataset.slide || 0);
+      return { before, afterCardClick, afterSelectKey };
+    })()`);
+    if (
+      navigationGuard.before !== sorterSlide
+      || navigationGuard.afterCardClick !== sorterSlide
+      || navigationGuard.afterSelectKey !== sorterSlide
+    ) {
+      throw new Error(`W7 sorter navigation guard failed: ${JSON.stringify(navigationGuard)}`);
+    }
+
+    const sorterBounds = await evaluate(`(() => [${sorterSlide}, ${sorterSlide + 1}].map(number => {
+      show(number);
+      const rect = document.querySelector('.slide.active .slide-inner').getBoundingClientRect();
+      return { number, top:rect.top, bottom:rect.bottom, viewport:innerHeight };
+    }))()`);
+    const clipped = sorterBounds.find(item => item.top < 42 || item.bottom > item.viewport - 42);
+    if (clipped) throw new Error(`W7 sorter projection bounds failed: ${JSON.stringify(sorterBounds)}`);
+    sorterReport = { slide: sorterSlide, observed, navigationGuard, sorterBounds };
+  }
+
   await cdp("Emulation.setDeviceMetricsOverride", {
     width: 390, height: 844, deviceScaleFactor: 2, mobile: true,
   });
@@ -128,6 +209,7 @@ try {
     totalSlides: total,
     arrowRight: `${initial}->${afterArrow}`,
     timer: `${timerBefore}->${timerAfter}`,
+    sorter: sorterReport,
     portraitRotateHint: rotateHint,
     runtimeErrors: runtimeErrors.length,
   }));

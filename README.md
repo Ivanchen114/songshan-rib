@@ -14,7 +14,7 @@ songshan-rib/
 ├── W1/index.html           # 第 1 週現行白話版簡報
 ├── W2/index.html           # 第 2 週簡報
 ├── W3/index.html           # 第 3 週（2026-07 合併版：捕捉與選材）
-├── W7/index.html           # 第 7 週（2026-07 新增：情報生態圈）
+├── W7/index.html           # 第 7 週（雙畫面比較＋透明排序器）
 ├── ...
 ├── W18/index.html
 ├── README.md
@@ -22,7 +22,7 @@ songshan-rib/
 ```
 
 > **2026-07 改號紀錄**：原 W3/W4 合併為新 W3；原 W5/W6/W7 依序改為 W4/W5/W6；
-> 新 W7 = 情報生態圈（訊息生態週）。原 W4 deck 移至 `_archive_2026-07/`。
+> 新 W7 由訊息生態週發展為「雙畫面比較＋透明排序器」；原 W4 deck 移至 `_archive_2026-07/`。
 > W1 原版已封存於 `_archive_2026-07/W1_原版/`；正式入口只維護 `W1/index.html`。
 
 每週簡報是**單一 self-contained HTML**：所有圖片以 base64 內嵌、CSS/JS 內嵌、字體走 Google Fonts CDN。檔案 200KB–500KB 不等。
