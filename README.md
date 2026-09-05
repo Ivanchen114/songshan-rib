@@ -4,6 +4,13 @@
 
 **R.I.B.** = Reading · Intelligence · Being
 
+## 現行教材入口｜2026-09-05
+
+- 本輪教學與教材修訂到 W7。首頁以 W1–W7 為主要入口；W8–W18 保留原版連結，標為「待本輪修訂」，不是全學期均已完成本輪修訂。
+- `worksheets/#disciplinary` 提供 W1–W6 六份學科遷移卡（共 14 頁）的 PDF／DOCX，並連到各週練習、提示及最後詳解。詳解是依課堂安排公開的學生回讀材料；教師逐字稿、評分答案與受控評量題本仍不放公開站。
+- W1–W6 原 100 分鐘流程保留；新增學科延伸尚未重新排入原時程。W7 是 27 頁、100 分鐘修訂版。
+- 首頁與下載中心本輪修訂來源：課程目錄 `build_tools/refresh_home_and_downloads_20260905.py`；投影仍以本 repo 的 `Wn/index.html` 為母版，學科卡由課程目錄 `build_tools/add_disciplinary_end_tasks.py` 建置。
+
 ---
 
 ## 結構
@@ -14,7 +21,7 @@ songshan-rib/
 ├── W1/index.html           # 第 1 週現行白話版簡報
 ├── W2/index.html           # 第 2 週簡報
 ├── W3/index.html           # 第 3 週（2026-07 合併版：捕捉與選材）
-├── W7/index.html           # 第 7 週（雙畫面比較＋透明排序器）
+├── W7/index.html           # 第 7 週（同一事件，為什麼看到的不同？）
 ├── ...
 ├── W18/index.html
 ├── README.md
@@ -25,7 +32,7 @@ songshan-rib/
 > 新 W7 由訊息生態週發展為「雙畫面比較＋透明排序器」；原 W4 deck 移至 `_archive_2026-07/`。
 > W1 原版已封存於 `_archive_2026-07/W1_原版/`；正式入口只維護 `W1/index.html`。
 
-每週簡報是**單一 self-contained HTML**：所有圖片以 base64 內嵌、CSS/JS 內嵌、字體走 Google Fonts CDN。檔案 200KB–500KB 不等。
+每週簡報是**單一 self-contained HTML**：圖片以 base64 內嵌、CSS/JS 內嵌、字體走 Google Fonts CDN；檔案大小隨內嵌材料而異，離線可使用系統字型。
 
 URL 結構：
 - `/` → 首頁
@@ -42,7 +49,7 @@ URL 結構：
 2. **章節骨架**：教師確認頁面結構
 3. **圖像清單**：教師到 ChatGPT / Gemini 生圖，丟到 `W{N}/assets/`
 4. **建 HTML**：build 腳本輸出到 `songshan-rib/W{N}/index.html`
-5. **更新首頁**：把 `index.html` 的 `W{N}` card 從 `pending` 改為可點，把 `WAIT` 改為 `DONE`
+5. **更新首頁**：依實際修訂範圍更新狀態、週次摘要與下載入口；既有原版可開啟，不代表已完成本輪修訂。同步 `worksheets/index.html`。
 6. **commit + push** → Vercel 自動 deploy
 
 ---

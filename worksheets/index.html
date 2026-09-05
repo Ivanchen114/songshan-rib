@@ -39,6 +39,8 @@
     footer { margin-top:34px; color:#7f93b0; font-size:13px; }
     @media (max-width:860px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:560px) { .wrap { width:min(calc(100% - 22px),1120px); } header { padding-top:38px; } .grid { grid-template-columns:1fr; } .week { min-height:0; } .actions.w1-actions { display:grid; grid-template-columns:1fr; } }
+
+    .download-nav{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}.download-nav a{padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--cyan);text-decoration:none}.disciplinary-grid{margin:22px 0 45px}.disciplinary-grid h3{font-size:21px;color:var(--cyan);margin:0 0 10px}.disciplinary-grid .subject{font-size:13px;color:var(--gold);margin-bottom:12px}.disciplinary-grid .actions{flex-wrap:wrap}.disciplinary-grid .actions a{flex:1 1 42%;font-size:15px}.disciplinary-grid p{font-size:16px}.material-status{display:block;font-size:12px;color:var(--muted);margin:0 0 10px}.material-status.revised{color:var(--cyan)}[id]{scroll-margin-top:24px}.section-head{margin-bottom:22px}
   </style>
 </head>
 <body>
@@ -47,31 +49,31 @@
     <header>
       <div class="kicker">STUDENT WORKSHEETS · W1–W18</div>
       <h1>學習單下載</h1>
-      <p class="lead">上方是 W1–W18 每週主歷程本；下方收齊當週另外要印的活動材料、預讀文本與備用材料。PDF 適合直接列印，DOCX 可依班級需求編修。</p>
-    </header>
+      <p class="lead">先選學科遷移卡或每週主歷程本，下方另有活動與備用材料。PDF 適合補印，DOCX 供老師編修。W1–W7 本輪已修訂；W8–W18 保留原版，待本輪修訂。</p>
+    <nav class="download-nav" aria-label="材料分類"><a href="#disciplinary">W1–W6 學科遷移卡</a><a href="#weekly">每週主歷程本</a><a href="#extras">加印材料</a></nav></header>
     <div class="notice">學生補印請用 PDF；DOCX 供老師調整版面。每週學習單照常交老師保管，需要使用時再發還；W18 清點後發還全本。課末生活練習不另計分，私事可改用題目情境。</div>
-    <section class="grid" aria-label="18 週學習單">
-      <article class="week"><h2>W1</h2><p>AI 時代，我們要學什麼？</p><div class="actions w1-actions"><a href="W1-start.pdf" download>起點檢核 PDF</a><a href="W1.pdf" download>歷程本 PDF</a><a href="W1.docx" download>歷程本 DOCX</a></div></article>
-      <article class="week"><h2>W2</h2><p>這個下午，真的發生過嗎？</p><div class="actions"><a href="W2.pdf" download>PDF</a><a href="W2.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W3</h2><p>這一週，哪個 30 秒你還記得？</p><div class="actions"><a href="W3.pdf" download>PDF</a><a href="W3.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W4</h2><p>讓你看見這一刻｜故事圖卡</p><div class="actions"><a href="W4.pdf" download>PDF</a><a href="W4.docx" download>DOCX</a><a href="W4_七個創作起點卡.pdf" download>創作起點卡</a></div></article>
-      <article class="week"><h2>W5</h2><p>讓你看見這一刻｜微故事短片與個人修訂紀錄</p><div class="actions"><a href="W5.pdf" download>PDF</a><a href="W5.docx" download>DOCX</a><a href="../tools/storyboard/">分鏡工作台</a></div></article>
-      <article class="week"><h2>W6</h2><p>微故事介紹與查核：先讀別組成品，再逐句回查</p><div class="actions"><a href="W6.pdf" download>PDF</a><a href="W6.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W7</h2><p>同一事件，為什麼看到的不同？</p><div class="actions"><a href="W7.pdf" download>PDF</a><a href="W7.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W8</h2><p>先找共享事實與四類證據</p><div class="actions"><a href="W8.pdf" download>PDF</a><a href="W8.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W9</h2><p>先讀新材料，再用追問檢查立場</p><div class="actions"><a href="W9.pdf" download>PDF</a><a href="W9.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W10</h2><p>先扣留判斷，再追來源</p><div class="actions"><a href="W10.pdf" download>PDF</a><a href="W10.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W11</h2><p>先寫反方強版</p><div class="actions"><a href="W11.pdf" download>PDF</a><a href="W11.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W12</h2><p>先提公共問題，不先選邊</p><div class="actions"><a href="W12.pdf" download>PDF</a><a href="W12.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W13</h2><p>先救成可被資料碰到的問題</p><div class="actions"><a href="W13.pdf" download>PDF</a><a href="W13.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W14</h2><p>換種說法，有沒有說過頭？</p><div class="actions"><a href="W14.pdf" download>PDF</a><a href="W14.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W15</h2><p>先畫固定五格，不先美化</p><div class="actions"><a href="W15.pdf" download>PDF</a><a href="W15.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W16</h2><p>公開答辯與即時回應</p><div class="actions"><a href="W16.pdf" download>PDF</a><a href="W16.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W17</h2><p>陌生文本三色查核與修正</p><div class="actions"><a href="W17.pdf" download>PDF</a><a href="W17.docx" download>DOCX</a></div></article>
-      <article class="week"><h2>W18</h2><p>拿回歷程本，選三件作品</p><div class="actions"><a href="W18.pdf" download>PDF</a><a href="W18.docx" download>DOCX</a></div></article>
+    <section id="disciplinary" aria-labelledby="disciplinary-title"><div class="section-head"><h2 id="disciplinary-title">W1–W6 學科遷移卡</h2><p>六份卡片共 14 頁，取材自大考中心公開試題；部分任務經本課改編。先自己解，需要時才看提示，最後核對詳解。紙本保留初答與修訂，不用重抄投影；課堂不另計分、不另開繳交作業。</p></div><div class="grid disciplinary-grid"><article class="week"><div class="subject">國文 × 生物 · 2 頁</div><h3>W1 學科遷移卡</h3><p>查一句知識筆記的範圍與原文依據。</p><div class="actions"><a href="W1_學科遷移.pdf" download>學生卡 PDF</a><a href="W1_學科遷移.docx" download>學生卡 DOCX</a><a href="../W1/#45">練習與提示</a><a href="../W1/#48">做完再看詳解</a></div></article><article class="week"><div class="subject">化學 · 2 頁</div><h3>W2 學科遷移卡</h3><p>用兩張表判斷三句話，再解原題。</p><div class="actions"><a href="W2_學科遷移.pdf" download>學生卡 PDF</a><a href="W2_學科遷移.docx" download>學生卡 DOCX</a><a href="../W2/#34">練習與提示</a><a href="../W2/#37">做完再看詳解</a></div></article><article class="week"><div class="subject">物理 × 地科 · 2 頁</div><h3>W3 學科遷移卡</h3><p>依題目選線索，再換問題重新選材。</p><div class="actions"><a href="W3_學科遷移.pdf" download>學生卡 PDF</a><a href="W3_學科遷移.docx" download>學生卡 DOCX</a><a href="../W3/#p37">練習與提示</a><a href="../W3/#p40">做完再看詳解</a></div></article><article class="week"><div class="subject">英文 · 2 頁</div><h3>W4 學科遷移卡</h3><p>寫英文短句，依搭檔回讀修訂或保留。</p><div class="actions"><a href="W4_學科遷移.pdf" download>學生卡 PDF</a><a href="W4_學科遷移.docx" download>學生卡 DOCX</a><a href="../W4/#33">練習與提示</a><a href="../W4/#36">做完再看詳解</a></div></article><article class="week"><div class="subject">數學 · 2 頁</div><h3>W5 學科遷移卡</h3><p>解誤差範圍，讓搭檔回做，再解變式。</p><div class="actions"><a href="W5_學科遷移.pdf" download>學生卡 PDF</a><a href="W5_學科遷移.docx" download>學生卡 DOCX</a><a href="../W5/#31">練習與提示</a><a href="../W5/#34">做完再看詳解</a></div></article><article class="week"><div class="subject">國文／歷史 · 4 頁</div><h3>W6 學科遷移卡</h3><p>讀推理評論與史料，分開線索、推論和補白。</p><div class="actions"><a href="W6_學科遷移.pdf" download>學生卡 PDF</a><a href="W6_學科遷移.docx" download>學生卡 DOCX</a><a href="../W6/#30">練習與提示</a><a href="../W6/#36">做完再看詳解</a></div></article></div></section><div class="section-head" id="weekly"><h2>每週主歷程本</h2><p>W1–W7 本輪已修訂；W8–W18 尚待本輪修訂，原版下載仍保留。</p></div><section class="grid" aria-label="18 週學習單">
+      <article class="week"><h2>W1</h2><span class="material-status revised">本輪已修訂</span><p>AI 時代，我們要學什麼？</p><div class="actions w1-actions"><a href="W1-start.pdf" download>起點檢核 PDF</a><a href="W1.pdf" download>歷程本 PDF</a><a href="W1.docx" download>歷程本 DOCX</a></div></article>
+      <article class="week"><h2>W2</h2><span class="material-status revised">本輪已修訂</span><p>這句話，拿什麼判定它？</p><div class="actions"><a href="W2.pdf" download>PDF</a><a href="W2.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W3</h2><span class="material-status revised">本輪已修訂</span><p>這一週，哪個 30 秒你還記得？</p><div class="actions"><a href="W3.pdf" download>PDF</a><a href="W3.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W4</h2><span class="material-status revised">本輪已修訂</span><p>讓你看見這一刻｜故事圖卡</p><div class="actions"><a href="W4.pdf" download>PDF</a><a href="W4.docx" download>DOCX</a><a href="W4_七個創作起點卡.pdf" download>創作起點卡</a></div></article>
+      <article class="week"><h2>W5</h2><span class="material-status revised">本輪已修訂</span><p>讓你看見這一刻｜微故事短片與個人修訂紀錄</p><div class="actions"><a href="W5.pdf" download>PDF</a><a href="W5.docx" download>DOCX</a><a href="../tools/storyboard/">分鏡工作台</a></div></article>
+      <article class="week"><h2>W6</h2><span class="material-status revised">本輪已修訂</span><p>微故事介紹與查核：先讀別組成品，再逐句回查</p><div class="actions"><a href="W6.pdf" download>PDF</a><a href="W6.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W7</h2><span class="material-status revised">本輪已修訂</span><p>同一事件，為什麼看到的不同？</p><div class="actions"><a href="W7.pdf" download>PDF</a><a href="W7.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W8</h2><span class="material-status">原版・待本輪修訂</span><p>先找共享事實與四類證據</p><div class="actions"><a href="W8.pdf" download>PDF</a><a href="W8.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W9</h2><span class="material-status">原版・待本輪修訂</span><p>先讀新材料，再用追問檢查立場</p><div class="actions"><a href="W9.pdf" download>PDF</a><a href="W9.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W10</h2><span class="material-status">原版・待本輪修訂</span><p>先扣留判斷，再追來源</p><div class="actions"><a href="W10.pdf" download>PDF</a><a href="W10.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W11</h2><span class="material-status">原版・待本輪修訂</span><p>先寫反方強版</p><div class="actions"><a href="W11.pdf" download>PDF</a><a href="W11.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W12</h2><span class="material-status">原版・待本輪修訂</span><p>先提公共問題，不先選邊</p><div class="actions"><a href="W12.pdf" download>PDF</a><a href="W12.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W13</h2><span class="material-status">原版・待本輪修訂</span><p>先救成可被資料碰到的問題</p><div class="actions"><a href="W13.pdf" download>PDF</a><a href="W13.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W14</h2><span class="material-status">原版・待本輪修訂</span><p>換種說法，有沒有說過頭？</p><div class="actions"><a href="W14.pdf" download>PDF</a><a href="W14.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W15</h2><span class="material-status">原版・待本輪修訂</span><p>先畫固定五格，不先美化</p><div class="actions"><a href="W15.pdf" download>PDF</a><a href="W15.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W16</h2><span class="material-status">原版・待本輪修訂</span><p>公開答辯與即時回應</p><div class="actions"><a href="W16.pdf" download>PDF</a><a href="W16.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W17</h2><span class="material-status">原版・待本輪修訂</span><p>陌生文本三色查核與修正</p><div class="actions"><a href="W17.pdf" download>PDF</a><a href="W17.docx" download>DOCX</a></div></article>
+      <article class="week"><h2>W18</h2><span class="material-status">原版・待本輪修訂</span><p>拿回歷程本，選三件作品</p><div class="actions"><a href="W18.pdf" download>PDF</a><a href="W18.docx" download>DOCX</a></div></article>
     </section>
     <div class="section-head">
-      <h2>各週加印材料</h2>
+      <h2 id="extras">各週加印材料</h2>
       <p>依週次收錄課堂活動卡、預讀材料、備用材料與跨週工具。<strong>W9、W17 的正式評量題本不放公開下載</strong>，由老師在評量當天發放。</p>
     </div>
     <section class="tools" aria-label="各週加印材料">
