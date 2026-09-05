@@ -1151,7 +1151,8 @@ window.addEventListener('resize',updateRotateHint);window.addEventListener('orie
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}
 // The mirror stays byte-identical; local download paths resolve beside it.
 if(decodeURI(location.pathname).endsWith('/W3_簡報.html')){document.querySelectorAll('.download-tools a').forEach(a=>a.href=a.textContent.includes('PDF')?'W3_學生歷程本_SOIL紙本.pdf':'W3_學生歷程本_SOIL紙本.docx');document.querySelector('.back-home').href='W3_精修版入口.html'}
-const startPage=Number(location.hash.match(/^#p(\d+)$/)?.[1]||1);show(startPage>=1&&startPage<=total?startPage:1);updateRotateHint();
+function pageFromHash(){const n=Number(location.hash.match(/^#p?(\d+)$/)?.[1]||1);return n>=1&&n<=total?n:1;}
+show(pageFromHash());addEventListener('hashchange',()=>show(pageFromHash()));updateRotateHint();
 </script>
 
 <dialog id="promptDialog"><header><strong>AI 完整指令</strong><button onclick="closePrompt()">關閉 ×</button></header><p id="promptGuide"></p><textarea id="promptText" aria-label="可手動選取的完整指令"></textarea><button class="copy-btn" id="dialogCopy" onclick="copyPrompt()">複製指令</button><span id="copyStatus" role="status"></span></dialog>
