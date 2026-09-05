@@ -7,9 +7,9 @@
 ## 現行教材入口｜2026-09-05
 
 - 本輪教學與教材修訂到 W7。首頁以 W1–W7 為主要入口；W8–W18 保留原版連結，標為「待本輪修訂」，不是全學期均已完成本輪修訂。
-- `worksheets/#disciplinary` 提供 W1–W6 六份學科遷移卡（課內共 12 頁；W6 歷史另附 2 頁選做）的 PDF／DOCX，並連到各週練習、提示及最後詳解。詳解是依課堂安排公開的學生回讀材料；教師逐字稿、評分答案與受控評量題本仍不放公開站。
+- `worksheets/#disciplinary` 提供 W1–W6 學科練習、提示、詳解入口；`worksheets/#weekly` 每週只下載 Wn.pdf／docx 一份歷程本。W1／W3／W4／W5 共 6 頁；W2 共 8 頁；W6 共 8 頁，其中第 7–8 頁歷史可不印、自留。
 - W1–W7 已整合兩節各 50 分鐘（下課另計）。生活題與學科方法都保留，課內完成初答、搭檔回饋與本人改留；原題的額外部分、變式與詳解可回家選做，不計分、不追交、不列缺件。W7 為 31 頁，先示範麥當勞真實廣告，再換 YouBike 同事件材料練習。
-- 投影仍以本 repo 的 `Wn/index.html` 為母版；現行時程在課程目錄 `build_tools/integrated_lesson_plan.json`，學科卡由 `build_tools/build_integrated_academic_cards.py` 建置。舊版 `add_disciplinary_end_tasks.py` 已加防覆寫保護，整合後不可重新套用一次性遷移腳本。學生依老師當週發紙作答，卡片夾回主本合收，不另上傳；網站不新增個資收集或評分。
+- 投影以 `Wn/index.html` 為母版。課程目錄以 `build_tools/build_merged_academic_workbooks.py` 重建同週完整歷程本，以 `refine_academic_visuals.py` 重建學科圖解，以 `sync_merged_academic_delivery.py` 同步公開檔。教師逐字稿 Markdown 為教師來源。舊一次性遷移已有防覆寫保護。學科頁不另上傳、不新增評分；W6 歷史自留。原獨立卡已封存，舊公開 URL 轉向當週歷程本。
 
 ---
 
