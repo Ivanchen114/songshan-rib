@@ -1,72 +1,72 @@
 {
   "redirects": [
     {
-      "source": "/worksheets/W1_學科遷移.pdf",
+      "source": "/worksheets/W1_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.pdf",
       "destination": "/worksheets/W1.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W1_學科遷移.docx",
+      "source": "/worksheets/W1_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.docx",
       "destination": "/worksheets/W1.docx",
       "permanent": true
     },
     {
-      "source": "/worksheets/W2_學科遷移.pdf",
+      "source": "/worksheets/W2_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.pdf",
       "destination": "/worksheets/W2.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W2_學科遷移.docx",
+      "source": "/worksheets/W2_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.docx",
       "destination": "/worksheets/W2.docx",
       "permanent": true
     },
     {
-      "source": "/worksheets/W3_學科遷移.pdf",
+      "source": "/worksheets/W3_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.pdf",
       "destination": "/worksheets/W3.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W3_學科遷移.docx",
+      "source": "/worksheets/W3_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.docx",
       "destination": "/worksheets/W3.docx",
       "permanent": true
     },
     {
-      "source": "/worksheets/W4_學科遷移.pdf",
+      "source": "/worksheets/W4_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.pdf",
       "destination": "/worksheets/W4.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W4_學科遷移.docx",
+      "source": "/worksheets/W4_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.docx",
       "destination": "/worksheets/W4.docx",
       "permanent": true
     },
     {
-      "source": "/worksheets/W5_學科遷移.pdf",
+      "source": "/worksheets/W5_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.pdf",
       "destination": "/worksheets/W5.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W5_學科遷移.docx",
+      "source": "/worksheets/W5_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.docx",
       "destination": "/worksheets/W5.docx",
       "permanent": true
     },
     {
-      "source": "/worksheets/W6_學科遷移.pdf",
+      "source": "/worksheets/W6_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.pdf",
       "destination": "/worksheets/W6.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W6_學科遷移.docx",
+      "source": "/worksheets/W6_%E5%AD%B8%E7%A7%91%E9%81%B7%E7%A7%BB.docx",
       "destination": "/worksheets/W6.docx",
       "permanent": true
     },
     {
-      "source": "/worksheets/W6_歷史延伸.pdf",
+      "source": "/worksheets/W6_%E6%AD%B7%E5%8F%B2%E5%BB%B6%E4%BC%B8.pdf",
       "destination": "/worksheets/W6.pdf",
       "permanent": true
     },
     {
-      "source": "/worksheets/W6_歷史延伸.docx",
+      "source": "/worksheets/W6_%E6%AD%B7%E5%8F%B2%E5%BB%B6%E4%BC%B8.docx",
       "destination": "/worksheets/W6.docx",
       "permanent": true
     }
