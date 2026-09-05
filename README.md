@@ -7,9 +7,9 @@
 ## 現行教材入口｜2026-09-05
 
 - 本輪教學與教材修訂到 W7。首頁以 W1–W7 為主要入口；W8–W18 保留原版連結，標為「待本輪修訂」，不是全學期均已完成本輪修訂。
-- `worksheets/#disciplinary` 提供 W1–W6 六份學科遷移卡（共 14 頁）的 PDF／DOCX，並連到各週練習、提示及最後詳解。詳解是依課堂安排公開的學生回讀材料；教師逐字稿、評分答案與受控評量題本仍不放公開站。
-- W1–W6 原 100 分鐘流程保留；新增學科延伸尚未重新排入原時程。W7 是 27 頁、100 分鐘修訂版。
-- 首頁與下載中心本輪修訂來源：課程目錄 `build_tools/refresh_home_and_downloads_20260905.py`；投影仍以本 repo 的 `Wn/index.html` 為母版，學科卡由課程目錄 `build_tools/add_disciplinary_end_tasks.py` 建置。
+- `worksheets/#disciplinary` 提供 W1–W6 六份學科遷移卡（課內共 12 頁；W6 歷史另附 2 頁選做）的 PDF／DOCX，並連到各週練習、提示及最後詳解。詳解是依課堂安排公開的學生回讀材料；教師逐字稿、評分答案與受控評量題本仍不放公開站。
+- W1–W7 已整合兩節各 50 分鐘（下課另計）。生活題與學科方法都保留，課內完成初答、搭檔回饋與本人改留；原題的額外部分、變式與詳解可回家選做，不計分、不追交、不列缺件。W7 為 31 頁，先示範麥當勞真實廣告，再換 YouBike 同事件材料練習。
+- 投影仍以本 repo 的 `Wn/index.html` 為母版；現行時程在課程目錄 `build_tools/integrated_lesson_plan.json`，學科卡由 `build_tools/build_integrated_academic_cards.py` 建置。舊版 `add_disciplinary_end_tasks.py` 已加防覆寫保護，整合後不可重新套用一次性遷移腳本。學生依老師當週發紙作答，卡片夾回主本合收，不另上傳；網站不新增個資收集或評分。
 
 ---
 
@@ -43,14 +43,14 @@ URL 結構：
 
 ## 加新一週的流程
 
-> Claude 端流程，詳見 `rib-deck` skill
+依最新版 `soil-course-deck` 與 `soil-course-worksheet` 操作。
 
-1. **素材勘查**：讀 `W{N}/W{N}_教師流程速查.md`、`W{N}/W{N}_完整簡報.pptx`、`閱讀理解與表達_18週課程認知與負荷審查報告.md` 對應章節
-2. **章節骨架**：教師確認頁面結構
-3. **圖像清單**：教師到 ChatGPT / Gemini 生圖，丟到 `W{N}/assets/`
-4. **建 HTML**：build 腳本輸出到 `songshan-rib/W{N}/index.html`
-5. **更新首頁**：依實際修訂範圍更新狀態、週次摘要與下載入口；既有原版可開啟，不代表已完成本輪修訂。同步 `worksheets/index.html`。
-6. **commit + push** → Vercel 自動 deploy
+1. 讀目標、評量、前後活動及全部投影、紙本、教師稿。
+2. 先檢查 L → I → O → S，再走讀投影任務、學生產出與教師收束。
+3. 沿用有效圖像；可準確文轉圖的關係直接製作並嵌入，逐組同步揭露。
+4. 修改 `Wn/index.html`，同步課程目錄的 HTML 鏡像、紙本、教師口令、時間及離線衍生。
+5. 實測 1600×900 初始、中間與全顯，以及前進、返回、計時及既有控制。
+6. 依實際修訂範圍同步首頁與下載中心；經授權 commit + push 後核對正式網址內容與檔案雜湊。
 
 ---
 
@@ -111,7 +111,8 @@ curl -I https://songshan-rib.vercel.app/sitemap.xml
 
 | 鍵 | 動作 |
 |---|---|
-| ← → / 空白 | 切頁 |
+| ← → / 空白 | 前後揭露／切頁 |
+| P | 當頁全顯／回初始 |
 | F | 全螢幕 |
 | Home / End | 首頁／末頁 |
 | 點畫面左右 30% | 切頁 |
