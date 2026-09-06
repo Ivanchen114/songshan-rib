@@ -350,35 +350,19 @@ html.rib-reading .plain-slide .plain-inner{gap:16px!important}
 html.rib-reading .plain-slide .plain-part{padding-top:10px!important}
 html.rib-reading .plain-slide .plain-prompt{font-size:inherit!important}
 </style>
-<style id="rib-projection-style">/* One fixed slide viewport; only the surrounding phone controls reflow. */
-html.rib-phone,html.rib-phone body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#162c29!important;color:#faf6ed!important;font-family:system-ui,-apple-system,"PingFang TC",sans-serif!important;font-size:16px!important;-webkit-text-size-adjust:100%}
+<style id="rib-projection-style">/* Fit the full desktop canvas; phones add no separate navigation chrome. */
+html.rib-phone,html.rib-phone body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#faf6ed!important;color:#193b31!important;font-family:system-ui,-apple-system,"PingFang TC",sans-serif!important;font-size:16px!important;-webkit-text-size-adjust:100%}
 .rib-phone *{box-sizing:border-box}
-.rib-phone button,.rib-phone input,.rib-phone a{font:inherit}
-#rib-shell{position:fixed;inset:0;display:flex;flex-direction:column;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:#162c29}
+#rib-shell{position:fixed;inset:0;display:flex;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:#faf6ed}
 #rib-stage{position:relative;flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
 #rib-frame-wrap{flex:none;position:relative}
 #rib-frame{display:block;width:1600px!important;height:900px!important;max-width:none!important;max-height:none!important;border:0;transform-origin:0 0;background:#faf6ed}
-#rib-orientation{display:none;position:absolute;top:14px;left:12px;right:12px;text-align:center;color:#e8e1d3;pointer-events:none;font-size:15px}
+#rib-orientation{display:none;position:absolute;top:max(18px,env(safe-area-inset-top));left:12px;right:12px;text-align:center;color:#31594f;pointer-events:none;font-size:16px;line-height:1.7}
+#rib-orientation small{font-size:13px}
 @media (orientation:portrait){#rib-orientation{display:block}}
-#rib-loading{position:absolute;inset:0;display:grid;place-content:center;background:#162c29;z-index:2;text-align:center;gap:12px}
+#rib-loading{position:absolute;inset:0;display:grid;place-content:center;background:#faf6ed;z-index:2;text-align:center;gap:12px}
 #rib-loading[hidden]{display:none}
-#rib-bar{flex:none;display:flex;align-items:center;justify-content:center;gap:6px;padding:4px 8px;background:#162c29;border-top:1px solid #ffffff25;min-height:54px}
-.rib-phone button,.rib-phone .rib-menu-link{min-width:44px;min-height:44px;border:1px solid #c5d9cf;border-radius:8px;padding:8px 12px;background:#f5f0e4;color:#193b31;font-weight:650;cursor:pointer;touch-action:manipulation}
-.rib-phone button:disabled{opacity:.4;cursor:default}
-.rib-phone button:focus-visible,.rib-phone a:focus-visible,.rib-phone input:focus-visible{outline:3px solid #e7bc56;outline-offset:2px}
-#rib-next{background:#cae7d6;border-color:#cae7d6;min-width:118px}
-#rib-page{font-variant-numeric:tabular-nums;font-size:14px;min-width:64px;text-align:center}
-#rib-menu{border:1px solid #b9c6bb;border-radius:14px;padding:18px;background:#fcf8ee;color:#193b31;width:min(460px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
-#rib-menu::backdrop{background:#0008}
-#rib-menu header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-#rib-menu h2{margin:0;font-size:20px}
-#rib-menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#rib-menu-grid [hidden]{display:none}
-#rib-menu a{text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center}
-#rib-jump-form{display:flex;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}
-#rib-jump{width:76px;min-height:44px;padding:8px;border:1px solid #456452;border-radius:6px}
-#rib-phone-note{font-size:14px;line-height:1.6;margin:14px 0 0}
-html.rib-framed .rib-native-chrome{display:none!important}
+#rib-loading button{font:inherit;padding:10px;border:1px solid #31594f;background:#fff;color:#193b31;border-radius:6px}
 </style>
 </head>
 <body>
@@ -857,8 +841,8 @@ paintReveal();
  }
 })();
 </script>
-<script id="rib-projection-runtime">/* A 1600 x 900 child viewport prevents each week's old media queries and
-   native resize code from scaling an already scaled phone presentation. */
+<script id="rib-projection-runtime">/* A single 1600 x 900 viewport keeps the desktop slide and controls intact.
+   On phones, the outer page only fits that viewport; it adds no toolbar. */
 (()=>{
 'use strict';
 const params=new URLSearchParams(location.search),root=document.documentElement;
@@ -876,13 +860,10 @@ if(!phone){
  activate();
  if(!framed)return;
  root.classList.add('rib-framed');
- for(const parent of [document.body,document.querySelector('#stage')].filter(Boolean)){
-  for(const e of parent.children)if(!['SCRIPT','STYLE','DIALOG'].includes(e.tagName)&&!e.classList.contains('slide')&&e.id!=='stage')e.classList.add('rib-native-chrome');
- }
  const deck=window.semesterDeck,slides=[...document.querySelectorAll('.slide')];
  if(!deck)return;
  const visible=e=>getComputedStyle(e).visibility!=='hidden'&&Number(getComputedStyle(e).opacity)>0;
- let queued=false,last='';
+ let queued=false,last='',zoomed=false;
  function sync(){
   queued=false;const page=deck.page,cfg=deck.config,s=document.querySelector('.slide.active');
   const nodes=[...s.querySelectorAll('[data-reveal]')],groups=[...new Set(nodes.map(e=>+e.dataset.reveal))].sort((a,b)=>a-b);
@@ -892,53 +873,82 @@ if(!phone){
   const key=JSON.stringify(state);if(key!==last){last=key;parent.postMessage({channel,state},'*')}
  }
  function schedule(){if(!queued){queued=true;requestAnimationFrame(sync)}}
- addEventListener('message',e=>{
-  if(e.source!==parent||e.data?.channel!==channel)return;
-  const {action,page}=e.data;
-  if(action==='sync'){last='';sync();return}
+ function command(action,page){
   if(action==='next')deck.next();else if(action==='prev')deck.prev();else if(action==='all')deck.toggleAll();
   else if(action==='go'&&Number.isInteger(page)&&page>=1&&page<=slides.length)deck.go(page);
   else if(['task','answer','main'].includes(action))document.querySelector('.semester-menu [data-sem="'+action+'"]')?.click();
   schedule();setTimeout(schedule,300);
+ }
+ addEventListener('message',e=>{
+  if(e.source!==parent||e.data?.channel!==channel)return;
+  if(e.data.action==='sync'){last='';sync();return}
+  if(e.data.action==='zoom'){zoomed=!!e.data.zoomed;return}
+  command(e.data.action,e.data.page);
  });
  new MutationObserver(schedule).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden','inert']});
- // Empty-space taps do not unexpectedly advance; real lesson controls still work.
- addEventListener('click',e=>{if(!e.target.closest('button,a,input,textarea,select,dialog,[role="button"],[data-timer],[data-video],[data-storyboard]'))e.stopImmediatePropagation()},true);
+ const controls='button,a,input,textarea,select,dialog,summary,[role="button"],[contenteditable="true"],[data-timer],[data-video],[data-storyboard],video,audio,.prompt-modal,.modal';
+ const interactive=t=>t instanceof Element&&!!t.closest(controls);
+ const blocked=()=>zoomed||(visualViewport?.scale||1)>1.05||!!getSelection()?.toString()||!!document.querySelector('dialog[open],.modal.open,.prompt-modal.open');
+ let gesture=null,muteClickUntil=0;
+ addEventListener('touchstart',e=>{
+  gesture=null;if(e.touches.length!==1||interactive(e.target)||blocked())return;
+  const t=e.touches[0];gesture={id:t.identifier,x:t.clientX,y:t.clientY,time:Date.now()};
+ },{capture:true,passive:true});
+ addEventListener('touchmove',e=>{
+  if(e.touches.length!==1||blocked()){gesture=null;return}
+  if(!gesture)return;const t=e.touches[0],dx=t.clientX-gesture.x,dy=t.clientY-gesture.y;
+  // Only reserve a horizontal, one-finger swipe. Pinching and control scrolling stay native.
+  if(Math.abs(dx)>18&&Math.abs(dx)>Math.abs(dy)*1.4&&e.cancelable)e.preventDefault();
+ },{capture:true,passive:false});
+ addEventListener('touchend',e=>{
+  const g=gesture;gesture=null;if(!g||e.touches.length||blocked())return;
+  const t=[...e.changedTouches].find(t=>t.identifier===g.id);if(!t)return;
+  const dx=t.clientX-g.x,dy=t.clientY-g.y;let action=null;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4)action=dx<0?'next':'prev';
+  else if(Math.hypot(dx,dy)<16&&Date.now()-g.time<650)action=g.x<innerWidth*.28?'prev':'next';
+  muteClickUntil=Date.now()+750;
+  if(action){if(e.cancelable)e.preventDefault();command(action)}
+ },{capture:true,passive:false});
+ addEventListener('touchcancel',()=>{gesture=null;muteClickUntil=Date.now()+750},{capture:true,passive:true});
+ addEventListener('click',e=>{
+  const target=e.target instanceof Element?e.target:null;
+  const fs=target?.closest('[onclick*="Fullscreen"],[onclick*="fullscreen"],#fullscreenButton,#fsButton,.fullscreen-btn');
+  if(fs){e.preventDefault();e.stopImmediatePropagation();parent.postMessage({channel,action:'fullscreen'},'*');return}
+  const link=target?.closest('a[href]');
+  if(link&&!link.getAttribute('href').startsWith('#')&&!link.target)link.target='_top';
+  if(interactive(target))return;
+  e.stopImmediatePropagation();
+  if(Date.now()<muteClickUntil||blocked())return;
+  command(e.clientX<innerWidth*.28?'prev':'next');
+ },true);
+ addEventListener('keydown',e=>{
+  if(e.key.toLowerCase()==='f'&&!interactive(e.target)){e.preventDefault();e.stopImmediatePropagation();parent.postMessage({channel,action:'fullscreen'},'*')}
+ },true);
  sync();return;
 }
-// Native lesson scripts remain inert in this outer phone document.
+// The parent fits the unchanged desktop canvas; all lesson controls remain inside it.
 const css=document.querySelector('#rib-projection-style');
 for(const el of document.querySelectorAll('style,link[rel="stylesheet"]'))if(el!==css)el.remove();
 root.className='rib-phone';document.body.removeAttribute('class');document.body.removeAttribute('style');
-document.body.innerHTML='<main id="rib-shell"><section id="rib-stage" aria-label="本週簡報"><div id="rib-frame-wrap"><iframe id="rib-frame" title="本週簡報內容" allow="fullscreen; clipboard-write"></iframe></div><p id="rib-orientation">↻ 將手機橫放，圖文會更清楚</p><div id="rib-loading" role="status">簡報載入中…</div></section><nav id="rib-bar" aria-label="簡報翻頁"><button id="rib-prev" data-action="prev" aria-label="上一步" disabled>←</button><span id="rib-page" aria-live="polite">—</span><button id="rib-next" data-action="next" disabled>下一步 →</button><button data-action="menu" aria-haspopup="dialog">選單</button></nav></main><dialog id="rib-menu" aria-labelledby="rib-menu-title"><header><h2 id="rib-menu-title">簡報選單</h2><button data-action="close">關閉</button></header><div id="rib-menu-grid"><button data-action="all">當頁全顯／收起</button><button data-action="main">回主課</button><button data-action="task">學科選做</button><button data-action="answer">參考詳解</button><a class="rib-menu-link" id="rib-book">本週完整歷程本</a><a class="rib-menu-link" id="rib-home">課程首頁</a></div><form id="rib-jump-form"><label for="rib-jump">跳到第</label><input id="rib-jump" type="number" inputmode="numeric" min="1" required><span>頁</span><button type="submit">前往</button></form><p id="rib-phone-note">橫放看簡報；需要細看時，可用雙指放大。翻頁會依序展開提示。</p></dialog>';
-const stage=document.querySelector('#rib-stage'),wrap=document.querySelector('#rib-frame-wrap'),frame=document.querySelector('#rib-frame'),menu=document.querySelector('#rib-menu'),jump=document.querySelector('#rib-jump');
+document.body.innerHTML='<main id="rib-shell"><section id="rib-stage" aria-label="本週簡報"><div id="rib-frame-wrap"><iframe id="rib-frame" title="本週簡報內容" allow="fullscreen; clipboard-write"></iframe></div><p id="rib-orientation">↻ 將手機橫放觀看<br><small>點右側空白前進，左側空白返回；也可左右滑動。</small></p><div id="rib-loading" role="status">簡報載入中…</div></section></main>';
+const stage=document.querySelector('#rib-stage'),wrap=document.querySelector('#rib-frame-wrap'),frame=document.querySelector('#rib-frame');
 let state=null;
 function command(action,page){frame.contentWindow?.postMessage({channel,action,page},'*')}
 function layout(){const scale=Math.min(stage.clientWidth/1600,stage.clientHeight/900);wrap.style.width=1600*scale+'px';wrap.style.height=900*scale+'px';frame.style.transform='scale('+scale+')'}
-new ResizeObserver(layout).observe(stage);addEventListener('resize',layout);layout();
+function zoom(){frame.contentWindow?.postMessage({channel,action:'zoom',zoomed:(visualViewport?.scale||1)>1.05},'*')}
+new ResizeObserver(layout).observe(stage);addEventListener('resize',layout);visualViewport?.addEventListener('resize',zoom);layout();
 addEventListener('message',e=>{
- if(e.source!==frame.contentWindow||e.data?.channel!==channel||!e.data.state)return;
- const previous=state;state=e.data.state;
- document.querySelector('#rib-loading').hidden=true;
- document.querySelector('#rib-page').textContent=state.page+' / '+state.total;
- document.querySelector('#rib-prev').disabled=!state.canPrev;
- const next=document.querySelector('#rib-next');next.disabled=!state.canNext;next.textContent=!state.canNext?'本段結束':state.hidden?'展開下一步':'下一頁 →';
- jump.max=state.total;if(document.activeElement!==jump)jump.value=state.page;
- document.querySelector('[data-action="task"]').textContent=state.academic?'學科選做':'課後題庫';document.querySelector('[data-action="answer"]').hidden=!state.answer;
+ if(e.source!==frame.contentWindow||e.data?.channel!==channel)return;
+ if(e.data.action==='fullscreen'){
+  const active=document.fullscreenElement||document.webkitFullscreenElement;
+  const result=active?(document.exitFullscreen?.()||document.webkitExitFullscreen?.()):(root.requestFullscreen?.()||root.webkitRequestFullscreen?.());result?.catch?.(()=>{});return;
+ }
+ if(!e.data.state)return;state=e.data.state;document.querySelector('#rib-loading').hidden=true;
  if(location.hash!=='#'+state.page)history.replaceState(null,'','#'+state.page);
- let base=new URL('../',location.href);if(location.protocol==='file:'&&!location.pathname.includes('/songshan-rib/'))base=new URL('../songshan-rib/',location.href);
- document.querySelector('#rib-book').href=new URL('worksheets/W'+state.week+'.pdf',base);document.querySelector('#rib-home').href=base;
- if(previous&&previous.page!==state.page)menu.close();
 });
-document.body.addEventListener('click',e=>{
- const action=e.target.closest('[data-action]')?.dataset.action;if(!action)return;
- if(action==='menu'){menu.showModal();return}if(action==='close'){menu.close();return}
- command(action);menu.close();
-});
-document.querySelector('#rib-jump-form').addEventListener('submit',e=>{e.preventDefault();if(!state)return;const n=Number(jump.value);if(Number.isInteger(n)&&n>=1&&n<=state.total){command('go',n);menu.close()}});
 addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(state&&n!==state.page)command('go',n)});
-addEventListener('keydown',e=>{if(menu.open||e.target.closest('input,button,a'))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();command('next')}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();command('prev')}});
-frame.addEventListener('load',()=>command('sync'));
+addEventListener('keydown',e=>{if(e.target.closest('input,button,a'))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();command('next')}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();command('prev')}else if(e.key.toLowerCase()==='p'){e.preventDefault();command('all')}});
+frame.addEventListener('load',()=>{command('sync');zoom()});
 const src=new URL(location.href);src.searchParams.delete('view');src.searchParams.set('projection-frame','1');frame.src=src.href;
 setTimeout(()=>{if(!state){const loading=document.querySelector('#rib-loading');loading.textContent='簡報尚未載入完成';const retry=document.createElement('button');retry.textContent='重新載入';retry.onclick=()=>location.reload();loading.append(retry)}},20000);
 window.ribProjection={get state(){return state},get frame(){return frame}};
