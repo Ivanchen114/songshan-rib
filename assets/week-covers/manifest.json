@@ -1,0 +1,406 @@
+{
+  "generatedAt": "2026-09-06T06:59:07.792Z",
+  "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
+  "weeks": [
+    {
+      "week": 1,
+      "title": "AI（人工智慧）時代，\n我們要學什麼？",
+      "source": "W1/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W1.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "1b5e3b5f47782fdfb4c1f423a4f1e986e00cf3986a24192671f1382198e77a6c",
+          "bytes": 58796
+        },
+        {
+          "path": "assets/week-covers/W1-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "10e767834785987548e33aea58120719136a6d26d2238e7f05d5f5bb260cc910",
+          "bytes": 17968
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "title": "這句話，\n有什麼根據？",
+      "source": "W2/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W2.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "064aaad1f55fed77dacee4285636b85ef48d16898c891b714afefd152379e05c",
+          "bytes": 53050
+        },
+        {
+          "path": "assets/week-covers/W2-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "8cadfa254dadc07afdac971e6db873525b4a4f874beb8a1a548b708e99d5d9ca",
+          "bytes": 16748
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "title": "這一週，哪個 30 秒\n你還記得？",
+      "source": "W3/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W3.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "2c0e626ac536828649924bdb16fd172f21ff0515bc00e5250874c3532e03fd31",
+          "bytes": 51448
+        },
+        {
+          "path": "assets/week-covers/W3-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "24b624572946c33c7a8df4dfad16241c9d5c923f6f5cad3071b4526ef471acf3",
+          "bytes": 16292
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "title": "讓你看見這一刻",
+      "source": "W4/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W4.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "e66cc4f96a095f5120a268e8a469e29d727b9537a959d12e5aa11fdca0baa81a",
+          "bytes": 49258
+        },
+        {
+          "path": "assets/week-covers/W4-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "b6302ec613c45ce9d9643ed02ce36303bf0d2104ab97ff5f9fc7a16887d11013",
+          "bytes": 15230
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "title": "讓你看見這一刻",
+      "source": "W5/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W5.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "ceb6d4e0ef49dd3d57e692314a569a33619239175858b31774206c411d2df119",
+          "bytes": 48012
+        },
+        {
+          "path": "assets/week-covers/W5-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "203b168632ce4b9f85e2154cbc2f9b72ac340b4f3c9969bd1e2f6e277006ac8b",
+          "bytes": 14834
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "title": "我介紹的，是作品，\n還是我的補白？",
+      "source": "W6/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W6.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "9c8fcffab30e1fd97695beced0f90b4c2d026d07e7099094462c4ca1c3f26a91",
+          "bytes": 58378
+        },
+        {
+          "path": "assets/week-covers/W6-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "ddbb7df7490909b2f53488294fda51e5a16068b23aae013ec6140bd9d84be777",
+          "bytes": 18308
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "title": "同一事件，\n為什麼看到的不同？",
+      "source": "W7/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W7.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "c3e82f7a6e95c695f3552e63756862cc7c2c78f13d5ee4bb8eec18be8ea207fa",
+          "bytes": 68840
+        },
+        {
+          "path": "assets/week-covers/W7-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "162f42ee9778d4120caa7197d99ed8b01fd4170a215058d541412f7a7de80369",
+          "bytes": 20634
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "title": "看見不同，\n我暫時怎麼判斷？",
+      "source": "W8/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W8.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "f14c05b352c250321238ee31078b78c76dfe5744a8e8ecb8484e0aa7df73e455",
+          "bytes": 68834
+        },
+        {
+          "path": "assets/week-covers/W8-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "e97090df380d6343c25e6683504bbe41de9c3c4ba36daca1a3f49f5b00696f44",
+          "bytes": 20266
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "title": "讓反方測試\n你的立場",
+      "source": "W9/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W9.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "85af4585e14512e7a07d87f472314849c8f378c34173a85c1ff0655912440392",
+          "bytes": 57304
+        },
+        {
+          "path": "assets/week-covers/W9-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "04151f3f87ee111961e2730d8841268c28b1415edffe313348cba45370b61f3b",
+          "bytes": 17488
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "title": "流暢文字的陷阱",
+      "source": "W10/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W10.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "feca9fc34cadaf85f84b5f4636574ebd8ef29f6617114ca8ee2eb5f853f5fa2d",
+          "bytes": 53178
+        },
+        {
+          "path": "assets/week-covers/W10-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "efb3c5e29f377031c70fe9df2f350065847112064ef61581125c38e1d1c0a3c3",
+          "bytes": 16550
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "title": "把反方說公平",
+      "source": "W11/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W11.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "384297538bc7651753c41c24a21cc4d89c98a915e069ff769724b965b647c767",
+          "bytes": 51776
+        },
+        {
+          "path": "assets/week-covers/W11-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "60d4d33e08291ff09455fc4a7f82d51b6c7f96bb9be45e09ad06c9078732e08d",
+          "bytes": 16202
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "title": "選你的公共問題",
+      "source": "W12/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W12.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "33ffe6a638019c4f819b9cc4462c10a3cac124dd04c48feb337ec61eb154781a",
+          "bytes": 53798
+        },
+        {
+          "path": "assets/week-covers/W12-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "f837ac12fabf69f4a1a03b931244040ca025d83e1525bff3e1d5f21fde3d31ca",
+          "bytes": 16820
+        }
+      ]
+    },
+    {
+      "week": 13,
+      "title": "用資料\n把自己的話說準",
+      "source": "W13/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W13.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "5b3e09601e078c5960b909509b5724ba675101218a58adccf0a78fc0c4d98379",
+          "bytes": 56330
+        },
+        {
+          "path": "assets/week-covers/W13-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "f8ef889ae287066d303a97eda97b6391494b257c3d188ac681b71e3270df6e73",
+          "bytes": 17296
+        }
+      ]
+    },
+    {
+      "week": 14,
+      "title": "同一個意思，\n換成四種說法",
+      "source": "W14/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W14.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "0e0eb92f9c127d53766845004d7a9b1034a4be09c7ac657693c9871c622a7f15",
+          "bytes": 48644
+        },
+        {
+          "path": "assets/week-covers/W14-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "2bcbff7bae2bd036016bafb81d7c5b8da865e95c78b98c58e602125fdc14daf8",
+          "bytes": 15850
+        }
+      ]
+    },
+    {
+      "week": 15,
+      "title": "讓簡報降低誤解",
+      "source": "W15/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W15.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "35fc7ba1d74b38199c647ae120d3021c0427d172ecb17f38a10915a070d66fde",
+          "bytes": 47808
+        },
+        {
+          "path": "assets/week-covers/W15-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "806ff5f2984bdc6b0eccc11427a12c07b4fd4bc10ba16b11073b688ffe8d43e3",
+          "bytes": 14882
+        }
+      ]
+    },
+    {
+      "week": 16,
+      "title": "公開質詢，\n不是辯論輸贏",
+      "source": "W16/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W16.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "03bae5b088121a0ceb9d317b4606431aedeaf947c1a86ad0d515c897428b4c58",
+          "bytes": 48664
+        },
+        {
+          "path": "assets/week-covers/W16-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "829b6ffe8fd9aa595615611a7b91301261bceb23bc360f7e41239064de23bf1a",
+          "bytes": 15686
+        }
+      ]
+    },
+    {
+      "week": 17,
+      "title": "換一批沒看過的材料\n我也能獨立判斷",
+      "source": "W17/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W17.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "844adb169be6a1e5e6e7e2f72678437d1a05c6b8efddbcf42625774ff4039ef1",
+          "bytes": 60450
+        },
+        {
+          "path": "assets/week-covers/W17-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "ff30ea0bfd83c3c076e8ac5ea459e5e0d43c8f4f4f9fc290b6b566c094e55cea",
+          "bytes": 18676
+        }
+      ]
+    },
+    {
+      "week": 18,
+      "title": "我選擇自己做的事",
+      "source": "W18/index.html",
+      "images": [
+        {
+          "path": "assets/week-covers/W18.webp",
+          "width": 768,
+          "height": 432,
+          "sha256": "6ab3d8e9a4250941cc8f301e6f36b8768cbb3be51bb92f9ad34e59c58f269c8e",
+          "bytes": 45150
+        },
+        {
+          "path": "assets/week-covers/W18-small.webp",
+          "width": 384,
+          "height": 216,
+          "sha256": "0d5a03026ec10cfd202e0ac40fa34ef68dd2118a51f1ececb9064cf8cbc73a2f",
+          "bytes": 14438
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "W1/index.html": "22608ed8708eb63b464fe1dc0764d2f1ef09d31aedf8dc1ce8c9a2a8317bc76f",
+    "W10/index.html": "39e91422d39736f19168d88efcb5be78acb2565badc8c46bd3808028c724e96c",
+    "W11/index.html": "8dfd1234ac8138f2576b270c266df49839b5ee6bb7a7f2015ce5ca2f5417676f",
+    "W12/index.html": "5f8207574035f9d021b82f46d027ac34d5922e4636343facaf5186d674c6e9d8",
+    "W13/index.html": "ece12cc8bdcec4c8ccb602f7e7b6a3868a17fc17c5ed1430a0c5be400965ccc4",
+    "W14/index.html": "903d684d2bac44ea034a0488c2feff4396515e754996278a3e50074c16f0eda4",
+    "W15/index.html": "81a58548e024247efbc85b296ade45c1b4292df3b954bdc296dc37bdfab72288",
+    "W16/index.html": "c003dd488bb457ace2d355d66f6941c8ceedd83f03872a94b02f334bd429607a",
+    "W17/index.html": "39fddbfc3e5cf76559ee1f82c602d551dccdd7206aa769aceca4b40b91705873",
+    "W18/index.html": "ba9235bda505d3a118f217eed699c7727d90fe8efd5571adfcf943e56b4d7b54",
+    "W2/index.html": "d4637b5a6a2e4085eb92fc3e02d6ebd389c3dd98aaaecbeeae7258a3f8625d99",
+    "W3/index.html": "3bfed214069daea550c8de4252c45932e00149eba41809824395a275d9c3ea06",
+    "W4/index.html": "cf943f120e98e331e84230207720a371d33582cf4ea576f122bd2c75230cf98e",
+    "W5/index.html": "2014a98a923107974c6f6984493aa5574c899db8b6083cd6c05f314b69f986f4",
+    "W6/index.html": "4c6c7e918865cea4f27ae9795f9882b300ca65cd2eed545eaf3b8295707d41c7",
+    "W7/index.html": "13ad7a3465c02ccbe5fa52b44769f9aafb17afac86a4b104d59d85270085adee",
+    "W8/index.html": "64103811aade7d15b2379cfc079112d4a469aa0c15bc70ffc3c06a264891403a",
+    "W9/index.html": "34ccd4b0c594e63cdfe6dfa30ba28adf71834dbbe3cb917a2a19fb9d64a40815",
+    "assets/downloads.css": "782c959f6bcba8a57c5801adcb29290ccb5af5e984e7ac6d297d96d90a797e0f",
+    "assets/songshan-logo.svg": "512065dbe125cdc10a748045c1cce96d9d192dd374b88290269840d6550dd9ae"
+  }
+}
