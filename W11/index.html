@@ -845,31 +845,70 @@ paintReveal();
   const toolbar=document.createElement('nav');toolbar.id='semester-presenter-tools';toolbar.setAttribute('aria-label','投影工具');
   const fs=document.querySelector('.fullscreen-btn,#fullscreenButton,#fsButton,#fullBtn');
   const home=document.querySelector('.back-home,#homeLink,.nav a');
-  if(home)toolbar.append(home);
+  if(home){home.textContent='← 首頁';home.title='回課程首頁';toolbar.append(home);}
   if(fs){fs.classList.add('semester-fullscreen');fs.textContent='⛶ 全螢幕';toolbar.append(fs);}
   const disclosure=document.createElement('div');disclosure.className='semester-disclosure';
   const trigger=document.createElement('button');trigger.type='button';trigger.id='semester-tools-toggle';trigger.textContent='⋯ 工具';trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-controls','semester-tools-panel');
   menu.id='semester-tools-panel';menu.setAttribute('aria-label','投影工具選單');menu.hidden=true;
+  // All weeks share the same secondary actions and download location.
+  menu.querySelectorAll('button:not([data-sem])').forEach(b=>b.remove());
+  const allButton=document.createElement('button');allButton.type='button';allButton.dataset.sem='all';allButton.textContent='當頁全顯／收起 P';allButton.onclick=toggle;menu.append(allButton);
+  const downloads=document.createElement('div');downloads.className='semester-downloads';
+  for(const [ext,label] of [['pdf','本週歷程本 PDF'],['docx','本週歷程本 DOCX']]){
+   const a=document.createElement('a');a.href='../worksheets/W'+cfg.week+'.'+ext;a.textContent=label;a.setAttribute('download','');downloads.append(a);
+  }
+  menu.append(downloads);
+  const shortcuts=document.createElement('p');shortcuts.className='semester-shortcuts';shortcuts.textContent='← → 逐步／換頁\nP 全顯 · F 全螢幕';menu.append(shortcuts);
   const input=menu.querySelector('input');input.required=true;input.parentElement.firstChild.textContent='跳到第 ';input.after(document.createTextNode(' 頁'));
   disclosure.append(trigger,menu);toolbar.append(disclosure);document.body.append(toolbar);
+  // Keep native nodes for the lesson scripts, but replace their presentation chrome.
+  for(const el of document.querySelectorAll('.download-tools,.footer,#controls,#hint,#help,#pageInfo,#page,#section,#section-tag,#revealInfo,#revealState,#progress,#progress-bg')){
+   if(!el.closest('.slide')&&!toolbar.contains(el))el.classList.add('semester-old-chrome');
+  }
+  const section=document.createElement('div');section.id='semester-section';
+  const footer=document.createElement('footer');footer.id='semester-footer';footer.innerHTML='<div class="semester-stage"></div><span class="semester-page" aria-label="目前頁碼"></span>';
+  const routeIndicator=document.querySelector('#routeIndicator');
+  footer.querySelector('.semester-stage').append(routeIndicator||section);
+  document.body.append(footer);
+  const pageLabel=footer.querySelector('.semester-page'),stepLabel=document.createElement('p');stepLabel.className='semester-step';menu.append(stepLabel);
+  function syncChrome(){
+   const slide=active();if(!slide)return;
+   section.textContent=slide.dataset.section||'';
+   pageLabel.textContent=page()+' / '+all.length;
+   const nodes=[...slide.querySelectorAll('[data-reveal]')],groups=[...new Set(nodes.map(e=>e.dataset.reveal))];
+   const complete=document.body.classList.contains('reveal-all')||slide.classList.contains('review-all');
+   const shown=complete?groups.length:groups.filter(g=>nodes.filter(e=>e.dataset.reveal===g).every(e=>e.classList.contains('revealed'))).length;
+   stepLabel.textContent=groups.length?shown+' / '+groups.length+' 組':'';
+  }
+  new MutationObserver(syncChrome).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden','inert']});syncChrome();
   const css=document.createElement('style');css.id='semester-presenter-style';css.textContent=`
-   #w1-reveal-button,#revealToggle,#allButton,#allBtn{display:none!important}
-   #semester-presenter-tools{position:fixed;top:8px;left:16px;z-index:1300;display:flex;align-items:center;gap:4px;font:16px/1.4 var(--font-teaching,"Noto Sans TC",sans-serif)}
+   .semester-old-chrome,#w1-reveal-button,#revealToggle,#allButton,#allBtn,#prevButton,#nextButton,#prevBtn,#nextBtn{display:none!important}
+   #semester-presenter-tools,#semester-footer{-webkit-font-smoothing:antialiased;font-synthesis:none;text-rendering:auto}
+   #semester-presenter-tools{position:fixed;top:8px;left:16px;z-index:1300;display:flex;align-items:center;gap:4px;font:16px/1.4 system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
    #semester-presenter-tools>a,#semester-presenter-tools>.semester-fullscreen,#semester-tools-toggle{position:static!important;display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;min-height:40px;padding:8px 10px;margin:0;border:0!important;border-radius:6px;background:transparent!important;color:#536b71!important;font:inherit!important;letter-spacing:0!important;text-decoration:none;box-shadow:none;backdrop-filter:none;cursor:pointer}
+   #semester-presenter-tools>a{width:80px}#semester-presenter-tools>.semester-fullscreen{width:100px}#semester-tools-toggle{width:76px}
+   #semester-footer{position:fixed;left:24px;right:24px;bottom:12px;height:40px;display:grid;grid-template-columns:1fr 1fr;align-items:center;z-index:110;color:#536b71;font:16px/1.4 system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;pointer-events:none}
+   #semester-footer .semester-stage{justify-self:start;max-width:100%;min-width:0}
+   #semester-section,#semester-footer #routeIndicator{position:static!important;display:block!important;box-sizing:border-box;max-width:100%;margin:0;padding:7px 13px;border:1px solid #b6c9c0;border-radius:999px;background:#faf7eede;color:#536b71;font:16px/1.4 system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif!important;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transform:none!important}
+   #semester-footer #routeIndicator strong{color:#176b63}
+   #semester-footer .semester-page{justify-self:end;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:88px;text-align:right}
    #semester-presenter-tools>a:hover,#semester-presenter-tools>.semester-fullscreen:hover,#semester-tools-toggle:hover,#semester-tools-toggle[aria-expanded="true"]{background:#e8eeea!important;color:#183b4c!important}
    #semester-presenter-tools :focus-visible{outline:2px solid #176b63;outline-offset:2px}
    .semester-disclosure{position:relative}
    #semester-tools-panel{position:absolute;top:calc(100% + 6px)!important;left:0;right:auto;bottom:auto!important;display:grid;gap:4px;min-width:208px;max-height:calc(100vh - 72px);overflow:auto;box-sizing:border-box;padding:8px;background:#fffdf8;border:1px solid #d3ddda;border-radius:8px;box-shadow:0 6px 20px #183b4c14}
    #semester-tools-panel[hidden],#semester-tools-panel [hidden]{display:none!important}
-   #semester-tools-panel button{display:block;width:100%;min-height:40px;text-align:left;padding:8px 12px;background:transparent;border:0;border-radius:4px;color:#183b4c;font:inherit;white-space:nowrap;cursor:pointer}
-   #semester-tools-panel button:hover{background:#e8eeea}
+   #semester-tools-panel button,#semester-tools-panel a{display:block;box-sizing:border-box;width:100%;min-height:40px;text-align:left;padding:8px 12px;background:transparent;border:0;border-radius:4px;color:#183b4c;font:inherit;letter-spacing:0;text-decoration:none;white-space:nowrap;cursor:pointer}
+   #semester-tools-panel button:hover,#semester-tools-panel a:hover{background:#e8eeea}
+   #semester-tools-panel .semester-downloads{border-top:1px solid #e2e7e3;padding-top:4px;margin-top:4px}
+   #semester-tools-panel .semester-shortcuts{white-space:pre-line;max-width:240px;margin:8px 4px 0;color:#536b71;font:13px/1.5 system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;letter-spacing:0}
+   #semester-tools-panel .semester-step{margin:4px;color:#536b71;font:13px/1.5 system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;font-variant-numeric:tabular-nums}
    #semester-tools-panel label{display:flex;align-items:center;gap:6px;margin-top:4px;padding:8px 4px 4px;border-top:1px solid #e2e7e3;color:#536b71!important;font:inherit!important;white-space:nowrap}
    #semester-tools-panel input{width:64px;min-height:36px;box-sizing:border-box;padding:4px 6px;background:#fffdf8;border:1px solid #a4b5b0;border-radius:4px;font:inherit}
-   @media print{#semester-presenter-tools{display:none!important}}
+   @media print{#semester-presenter-tools,#semester-footer,#semester-section{display:none!important}}
   `;document.head.append(css);
   function close(restore=false){menu.hidden=true;trigger.setAttribute('aria-expanded','false');if(restore)trigger.focus({preventScroll:true});}
   trigger.addEventListener('click',e=>{e.stopPropagation();const open=menu.hidden;menu.hidden=!open;trigger.setAttribute('aria-expanded',String(open));if(open)input.value=page();});
-  menu.addEventListener('click',e=>{e.stopPropagation();if(e.target.closest('button'))close(true);});
+  menu.addEventListener('click',e=>{e.stopPropagation();if(e.target.closest('button,a'))close(true);});
   input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();if(input.reportValidity()){go(Number(input.value));close(true);}}});
   // Capture before the lesson shortcuts: typing or navigating this panel cannot reveal slides.
   window.addEventListener('keydown',e=>{
