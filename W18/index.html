@@ -473,7 +473,7 @@ window.toggleFullscreen = function() {
 show(1);
 paintReveal();
 </script>
-<script type="application/x-rib-deck" id="semester-runtime">window.semesterConfig={"week": 18, "main": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], "academic": [], "extra": [], "answer": null};
+<script type="application/x-rib-deck" id="semester-runtime">window.semesterConfig={"week": 18, "main": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], "academic": [], "extra": [], "answer": null, "closing": 21, "flow": "academic-main-20260907"};
 /* 現行投影逐組揭露：當頁全顯、返回、手動計時與主課／選做分流。 */
 (()=>{
  const cfg=window.semesterConfig, all=[...document.querySelectorAll('.slide')];
@@ -552,7 +552,8 @@ paintReveal();
   setInterval(()=>states.forEach(paintTimer),200);
   const p=document.createElement('button');p.textContent='當頁全顯 P';p.onclick=toggle;menu.prepend(p);
  }
- const optional=n=>{if(cfg.main.includes(page()))branchReturn=page();go(n);};
+ const optional=n=>{if(branchReturn===null&&cfg.main.includes(page()))branchReturn=page();go(n);};
+ const closingButton=document.createElement('button');closingButton.dataset.sem='closing';closingButton.textContent=cfg.week===18?'整理與帶走 End':'收件與保存 End';closingButton.onclick=()=>go(cfg.closing||cfg.main.at(-1));menu.append(closingButton);
  menu.querySelector('[data-sem="main"]').onclick=()=>{go(branchReturn||cfg.main.at(-1));branchReturn=null;};
  menu.querySelector('[data-sem="task"]').onclick=()=>cfg.academic.length?optional(cfg.academic[0]):window.open('../worksheets/#disciplinary','_blank');
  menu.querySelector('[data-sem="answer"]').onclick=()=>cfg.answer?optional(cfg.answer):window.open('../worksheets/#disciplinary','_blank');
