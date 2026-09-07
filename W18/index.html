@@ -561,6 +561,58 @@ paintReveal();
  window.semesterDeck={go,next:advance,prev:back,toggleAll:toggle,get page(){return page()},get step(){return legacy?currentGroup:revealNodes().filter(visible).length},config:cfg};
  addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(n&&n!==page())go(n);});
  go(Number(location.hash.slice(1))||1);
+ // Presenter chrome is a disclosure; export keeps its original static layout.
+ if(new URLSearchParams(location.search).get('export')!=='1')installPresenterTools();
+ function installPresenterTools(){
+  const toolbar=document.createElement('nav');toolbar.id='semester-presenter-tools';toolbar.setAttribute('aria-label','投影工具');
+  const fs=document.querySelector('.fullscreen-btn,#fullscreenButton,#fsButton,#fullBtn');
+  const home=document.querySelector('.back-home,#homeLink,.nav a');
+  if(home)toolbar.append(home);
+  if(fs){fs.classList.add('semester-fullscreen');fs.textContent='⛶ 全螢幕';toolbar.append(fs);}
+  const disclosure=document.createElement('div');disclosure.className='semester-disclosure';
+  const trigger=document.createElement('button');trigger.type='button';trigger.id='semester-tools-toggle';trigger.textContent='⋯ 工具';trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-controls','semester-tools-panel');
+  menu.id='semester-tools-panel';menu.setAttribute('aria-label','投影工具選單');menu.hidden=true;
+  const input=menu.querySelector('input');input.required=true;input.parentElement.firstChild.textContent='跳到第 ';input.after(document.createTextNode(' 頁'));
+  disclosure.append(trigger,menu);toolbar.append(disclosure);document.body.append(toolbar);
+  const css=document.createElement('style');css.id='semester-presenter-style';css.textContent=`
+   #w1-reveal-button,#revealToggle,#allButton,#allBtn{display:none!important}
+   #semester-presenter-tools{position:fixed;top:8px;left:16px;z-index:1300;display:flex;align-items:center;gap:4px;font:16px/1.4 var(--font-teaching,"Noto Sans TC",sans-serif)}
+   #semester-presenter-tools>a,#semester-presenter-tools>.semester-fullscreen,#semester-tools-toggle{position:static!important;display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;min-height:40px;padding:8px 10px;margin:0;border:0!important;border-radius:6px;background:transparent!important;color:#536b71!important;font:inherit!important;letter-spacing:0!important;text-decoration:none;box-shadow:none;backdrop-filter:none;cursor:pointer}
+   #semester-presenter-tools>a:hover,#semester-presenter-tools>.semester-fullscreen:hover,#semester-tools-toggle:hover,#semester-tools-toggle[aria-expanded="true"]{background:#e8eeea!important;color:#183b4c!important}
+   #semester-presenter-tools :focus-visible{outline:2px solid #176b63;outline-offset:2px}
+   .semester-disclosure{position:relative}
+   #semester-tools-panel{position:absolute;top:calc(100% + 6px)!important;left:0;right:auto;bottom:auto!important;display:grid;gap:4px;min-width:208px;max-height:calc(100vh - 72px);overflow:auto;box-sizing:border-box;padding:8px;background:#fffdf8;border:1px solid #d3ddda;border-radius:8px;box-shadow:0 6px 20px #183b4c14}
+   #semester-tools-panel[hidden],#semester-tools-panel [hidden]{display:none!important}
+   #semester-tools-panel button{display:block;width:100%;min-height:40px;text-align:left;padding:8px 12px;background:transparent;border:0;border-radius:4px;color:#183b4c;font:inherit;white-space:nowrap;cursor:pointer}
+   #semester-tools-panel button:hover{background:#e8eeea}
+   #semester-tools-panel label{display:flex;align-items:center;gap:6px;margin-top:4px;padding:8px 4px 4px;border-top:1px solid #e2e7e3;color:#536b71!important;font:inherit!important;white-space:nowrap}
+   #semester-tools-panel input{width:64px;min-height:36px;box-sizing:border-box;padding:4px 6px;background:#fffdf8;border:1px solid #a4b5b0;border-radius:4px;font:inherit}
+   @media print{#semester-presenter-tools{display:none!important}}
+  `;document.head.append(css);
+  function close(restore=false){menu.hidden=true;trigger.setAttribute('aria-expanded','false');if(restore)trigger.focus({preventScroll:true});}
+  trigger.addEventListener('click',e=>{e.stopPropagation();const open=menu.hidden;menu.hidden=!open;trigger.setAttribute('aria-expanded',String(open));if(open)input.value=page();});
+  menu.addEventListener('click',e=>{e.stopPropagation();if(e.target.closest('button'))close(true);});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();if(input.reportValidity()){go(Number(input.value));close(true);}}});
+  // Capture before the lesson shortcuts: typing or navigating this panel cannot reveal slides.
+  window.addEventListener('keydown',e=>{
+   if(menu.hidden)return;
+   if(e.key==='Tab')setTimeout(()=>{if(!disclosure.contains(document.activeElement))close();},0);
+   if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();close(true);return;}
+   if(e.target===trigger&&e.key==='ArrowDown'){e.preventDefault();e.stopImmediatePropagation();menu.querySelector('button:not([hidden])')?.focus();return;}
+   if(['ArrowRight','ArrowLeft','PageUp','PageDown','Home','End','p','P','f','F'].includes(e.key))e.stopImmediatePropagation();
+  },true);
+  window.addEventListener('click',e=>{
+   if(menu.hidden||disclosure.contains(e.target))return;
+   close();
+   if(!e.target.closest('button,a,input,textarea,select,[role="button"],[data-timer]')){e.preventDefault();e.stopImmediatePropagation();}
+  },true);
+  window.addEventListener('touchend',e=>{
+   if(menu.hidden||disclosure.contains(e.target)||e.touches.length)return;
+   close();
+   if(!e.target.closest('button,a,input,textarea,select,[role="button"],[data-timer]')){if(e.cancelable)e.preventDefault();e.stopImmediatePropagation();}
+  },{capture:true,passive:false});
+  toolbar.addEventListener('focusout',e=>{if(e.relatedTarget&&!toolbar.contains(e.relatedTarget))close();});
+ }
 })();
 </script>
 
@@ -625,9 +677,9 @@ if(!phone){
   command(e.data.action,e.data.page);
  });
  new MutationObserver(schedule).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class','aria-hidden','inert']});
- const controls='button,a,input,textarea,select,dialog,summary,[role="button"],[contenteditable="true"],[data-timer],[data-video],[data-storyboard],video,audio,.prompt-modal,.modal';
+ const controls='button,a,input,textarea,select,dialog,summary,[role="button"],[contenteditable="true"],[data-timer],[data-video],[data-storyboard],video,audio,.prompt-modal,.modal,#semester-presenter-tools';
  const interactive=t=>t instanceof Element&&!!t.closest(controls);
- const blocked=()=>zoomed||(visualViewport?.scale||1)>1.05||!!getSelection()?.toString()||!!document.querySelector('dialog[open],.modal.open,.prompt-modal.open');
+ const blocked=()=>zoomed||(visualViewport?.scale||1)>1.05||!!getSelection()?.toString()||!!document.querySelector('dialog[open],.modal.open,.prompt-modal.open,#semester-tools-panel:not([hidden])');
  let gesture=null,muteClickUntil=0;
  addEventListener('touchstart',e=>{
   gesture=null;if(e.touches.length!==1||interactive(e.target)||blocked())return;
@@ -651,7 +703,7 @@ if(!phone){
  addEventListener('touchcancel',()=>{gesture=null;muteClickUntil=Date.now()+750},{capture:true,passive:true});
  addEventListener('click',e=>{
   const target=e.target instanceof Element?e.target:null;
-  const fs=target?.closest('[onclick*="Fullscreen"],[onclick*="fullscreen"],#fullscreenButton,#fsButton,.fullscreen-btn');
+  const fs=target?.closest('[onclick*="Fullscreen"],[onclick*="fullscreen"],#fullscreenButton,#fsButton,#fullBtn,.fullscreen-btn');
   if(fs){e.preventDefault();e.stopImmediatePropagation();parent.postMessage({channel,action:'fullscreen'},'*');return}
   const link=target?.closest('a[href]');
   if(link&&!link.getAttribute('href').startsWith('#')&&!link.target)link.target='_top';
