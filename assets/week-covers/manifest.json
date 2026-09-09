@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T15:57:27.083Z",
+  "generatedAt": "2026-09-09T11:38:30.785Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
   "weeks": [
     {
@@ -46,22 +46,22 @@
     },
     {
       "week": 3,
-      "title": "這一週，哪個 30 秒\n你還記得？",
+      "title": "同一件小事，\n怎麼寫得更清楚？",
       "source": "W3/index.html",
       "images": [
         {
           "path": "assets/week-covers/W3.webp",
           "width": 768,
           "height": 432,
-          "sha256": "17a45cd76486cf0c152cc9c66f97c63da8e8ebe9e0ed2e7821071960b838b2ff",
-          "bytes": 60116
+          "sha256": "4c6bb8e78e14ce4765a0f0ee999fb3bf6993acbbab00e30979b31dffc0325b75",
+          "bytes": 60526
         },
         {
           "path": "assets/week-covers/W3-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "9d44fc3ba3c045ddf19de5a235515e8052b4fe9aae75b5dbdf8a07597b978a65",
-          "bytes": 18256
+          "sha256": "ae35fd4bc221f864b66d833c7d902b116be17e2ebc2a281cacc98c92badff149",
+          "bytes": 18296
         }
       ]
     },
@@ -116,14 +116,14 @@
           "path": "assets/week-covers/W6.webp",
           "width": 768,
           "height": 432,
-          "sha256": "0a90d8cc4313496f960de91cb48900a12af9af572fb68e0d3bb69832c3fe256a",
-          "bytes": 50458
+          "sha256": "517b0f72f1f5bfedebb5a5d6a9ecf256eecf1c3a5f123cc4e352a3770a6fb376",
+          "bytes": 50464
         },
         {
           "path": "assets/week-covers/W6-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "cb759bf683f786d8d7bf295a8f678477394f4124e3f2c075f5bfff64aa6cca82",
+          "sha256": "55d3628c9ddf6d25d576e60c23420a059e6f24ab48fafb424559ddc5e468683e",
           "bytes": 16406
         }
       ]
@@ -137,15 +137,15 @@
           "path": "assets/week-covers/W7.webp",
           "width": 768,
           "height": 432,
-          "sha256": "e4d97275c6043ebcc027fd8ff261ac0211719a6a3fcea2c8480c7b6489b2cf69",
+          "sha256": "9e1d2c03fd3b6285118818468f4e30775a2467aaab329a81efc402a8775b01be",
           "bytes": 48366
         },
         {
           "path": "assets/week-covers/W7-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "06b3d1bdc97366b7581957b35923fb7495483b48f96d6e54ff7a1627271e53cb",
-          "bytes": 15726
+          "sha256": "d3e6801a96bc0e9677d809b65fef2340847981951be70caad92451c20f4bbf54",
+          "bytes": 15730
         }
       ]
     },
@@ -382,24 +382,24 @@
     }
   ],
   "dependencies": {
-    "W1/index.html": "bf951a775c527e8bdf177bedbe4894fe15ec3a012e47d05282c7803ba8e9df48",
-    "W10/index.html": "63b8f49a05bf347d6eb310b48ec0e51978e80bf1491871a3bb33b7f7c65b75b4",
-    "W11/index.html": "3c10cb227935702dc58f2406f4fdda992731d63b53352b6cdd18167afe07318e",
-    "W12/index.html": "2309805c1895f81734238d6bd37f954b3cec10244e5795709c26859c4069819b",
-    "W13/index.html": "50300de6a397906e7ebad68cbe4de88d4c9d3162a2985fc443f17c4894ab7656",
-    "W14/index.html": "a039d93e62721ef87752b2c8d0365319c637d4f99b5216aa4f40c0c5da45db30",
-    "W15/index.html": "b99966ddc5f7cbcefc550af102c212d938a46f6a237ccb1ce46c4af50d26215d",
-    "W16/index.html": "aeb8cc859ff00f33c48ff9a3cef5f69346704cfce01fbe9074eece060c1f6a78",
-    "W17/index.html": "c50816bd4db24e3b58029f4bfe7d25bc0669e03edec270daa8f5085c88d430d7",
-    "W18/index.html": "1a2b30a30f20c4b1bc190b67ee518e68f568707c66ab3fa413925a168cd2f627",
-    "W2/index.html": "c3e38ed5d5ee794f738e252daa1b4d7f38558ccb3ae7d8130dd6e271c301881c",
-    "W3/index.html": "25ba5211af2c3342fc5c9bc5ebe3e1be686df45a8792f3970a2261ce06a9e1ee",
-    "W4/index.html": "6472a4d2f3028980bd4b8c31fd955b6d9faaee5505c4f3419d6c377b2da796f8",
-    "W5/index.html": "ba0ed0b17c0e25f5e5b91fb40014e76bedfe6ab56eebb37b91c3eb1a5a2eaac7",
-    "W6/index.html": "ef86ba490d04884fd3504ff6df046761332f85f8427da45b8e98ec042446ae97",
-    "W7/index.html": "05a9c0251ab2f9e4faace985f3e2a89627146f064333c2bd2657f6dfb28a829c",
-    "W8/index.html": "99e470bc641660703e35fdf406679a9e229778a2b04a13961bfe960a0112d492",
-    "W9/index.html": "ccaaf9bf0334fdaf6a977cbc934207a014424cc3f1334483aaafd20ff7d1dc66",
+    "W1/index.html": "2ba36d33c4181a2dd31a2285d66b0dc9e7c072eda56d60e88f22d96a1a77178d",
+    "W10/index.html": "1e9cbcc35f6bf36c1f5f728c1e11996b79b49e67d0990e9a88bd6a6b88f7f21c",
+    "W11/index.html": "4e9629dd6d69ef9cbc99c3007737177a2ec2a2496bd64c221497d9f7756835b3",
+    "W12/index.html": "b61270a0883df3fe96e24afff094abdeb76925e7afe6c69219d6c23eb47b8495",
+    "W13/index.html": "47215cba0f13af3f1eb50b5021f093d84315c005f2544351bb3b35e167fb90cb",
+    "W14/index.html": "995910a820189232e1c0f63b2e7570ed04555bcb350078ddc787061513ba741f",
+    "W15/index.html": "82761277c58e2ef8fa17c1fdc62a5fc8298ccb2a6eaa4b5e104cf3c1bef2b62b",
+    "W16/index.html": "7378bc76d555e2890c32cf2bf2784dfba1b68479eaaaf32713f90ea17a4c3a79",
+    "W17/index.html": "6dbec7df8c8c6eddeed3cc8446f0af4c4bc121367a757f313d6f08ac858f5b2e",
+    "W18/index.html": "8b2f22e4005dc3ac68999cf7c21edf87cc8c0c9d73bcdf4657b4e5f9e22afe06",
+    "W2/index.html": "cda902fcaf20edeb44f83612b26bbab7c91bf5395546c8bdb56207ab9ff476af",
+    "W3/index.html": "4669453a94d15b5d34ebc3e12df9f8304c8fe04c74d80803c131d9b902c56fe0",
+    "W4/index.html": "b1bc0b6f1ec84a37d6573a3bd807ddf15e4ded640f28de32b0e0c5faf89c537b",
+    "W5/index.html": "9dd8bea60879c1318af9122f209160ed87f62503ae11da858a6e58b48f498640",
+    "W6/index.html": "dc318d8bb0ea548fa34ba2269262a315692473bf2df04328c3ac4776be16d786",
+    "W7/index.html": "f31e4eca72ca79ac9a048fc8ace16e73ccc61dcc423861cd3cdfef733b4e7ba8",
+    "W8/index.html": "7390ff5e9b402cd7065f16548d63c50aacbd7f683e3652509951c64e262efaa1",
+    "W9/index.html": "5f24c6c087bd8d4a30284bee09b0166643a90da7fb349f840b955cf25223ce92",
     "assets/downloads.css": "782c959f6bcba8a57c5801adcb29290ccb5af5e984e7ac6d297d96d90a797e0f",
     "assets/songshan-logo.svg": "512065dbe125cdc10a748045c1cce96d9d192dd374b88290269840d6550dd9ae",
     "assets/weekly-watercolor/W1.webp": "7628400a183458d8480cf4d29f424ffa48365fc2469a12130ac110ae3f55835a",
