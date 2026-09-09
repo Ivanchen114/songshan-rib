@@ -1,0 +1,19 @@
+{
+  "gasUrl": "https://script.google.com/macros/s/AKfycbyvnyo34je0yLuPQg80pl1iYVY59tXgYkBubLCmYEWryp1yoM6j2lQ0VrEG8jLS6Rkg/exec",
+  "courses": [
+    {
+      "code": "4EE1B1",
+      "week": 3,
+      "title": "W3 文字重建挑戰",
+      "term": "11501",
+      "accepting": true
+    },
+    {
+      "code": "9EBDF6",
+      "week": 4,
+      "title": "W4 讓你看見這一刻",
+      "term": "11501",
+      "accepting": true
+    }
+  ]
+}

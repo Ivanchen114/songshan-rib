@@ -1100,7 +1100,7 @@ document.querySelector('#nextButton')?.removeEventListener('click',lessonNativeN
   const home=document.querySelector('.back-home,#homeLink,.nav a');
   if(home){home.textContent='← 首頁';home.title='回課程首頁';toolbar.append(home);}
   if(fs){fs.classList.add('semester-fullscreen');fs.textContent='⛶ 全螢幕';toolbar.append(fs);}
-  const wall=document.createElement('a');wall.href='https://script.google.com/macros/s/AKfycbyvnyo34je0yLuPQg80pl1iYVY59tXgYkBubLCmYEWryp1yoM6j2lQ0VrEG8jLS6Rkg/exec';wall.target='_blank';wall.rel='noopener noreferrer';wall.textContent='作品牆 ↗';wall.title='開啟班級作品牆，輸入老師的活動代碼';wall.dataset.artworkWall='';wall.style.width='100px';wall.style.whiteSpace='nowrap';toolbar.append(wall);
+  const wall=document.createElement('a');wall.href='https://script.google.com/macros/s/AKfycbyvnyo34je0yLuPQg80pl1iYVY59tXgYkBubLCmYEWryp1yoM6j2lQ0VrEG8jLS6Rkg/exec#code=4EE1B1';wall.target='_blank';wall.rel='noopener noreferrer';wall.textContent='作品牆 ↗';wall.title='直接進入 W3 課堂作品位置';wall.dataset.artworkWall='';wall.style.width='100px';wall.style.whiteSpace='nowrap';toolbar.append(wall);
   const disclosure=document.createElement('div');disclosure.className='semester-disclosure';
   const trigger=document.createElement('button');trigger.type='button';trigger.id='semester-tools-toggle';trigger.textContent='⋯ 工具';trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-controls','semester-tools-panel');
   menu.id='semester-tools-panel';menu.setAttribute('aria-label','投影工具選單');menu.hidden=true;
