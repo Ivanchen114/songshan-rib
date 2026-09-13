@@ -397,13 +397,13 @@
     "W3/assets/paperball-models/image-b.png": "b03342edc401f9432119b77e57953627c61969100977b7de6db24003d17bb1c9",
     "W3/assets/paperball-models/image-c.jpeg": "7ed4409ad03da11138539cbc223fe816796c2d8a6f9ca6777d3d6c46ecb78934",
     "W3/assets/paperball-models/image-d.jpeg": "de93b8228ae76f1e50f0f89e9881b90071f62d295b90a172efc8614e0ee1c1a8",
-    "W3/index.html": "24f8238c6336779f9fc99f57cf8ea4de99fdde5c897df573cfc5d2e02eae77cb",
-    "W4/index.html": "4f32ddebf9e020f1e88fc33997f0d6efed4598d19491480b417e1b94f94384ee",
+    "W3/index.html": "d4266aa4e53d9362f160de5e282d4c50758d9c0e8d59fdcfe5f9e986768185b7",
+    "W4/index.html": "057b6b5b0d121a7955287a34a91d456488b32965e2b512c277a4050adc84eaef",
     "W5/assets/ai-ending.png": "6f6c882773f68ce02c80eca21815656f20434fe92409ce242a41ede905a4d32c",
     "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
     "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
     "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
-    "W5/index.html": "a851f68f08079ad9d684bf5e073292ab14d04d26ab4d598571af7fc3a7dd58d5",
+    "W5/index.html": "5ce4247d6f61aaa7fc85972c3e587f7424884bb0046d01bb5a68309f464ce790",
     "W6/index.html": "a124ed449aa1b7da7b0e4a85a840ce11887d8dffa9e52ca3c5e7d7d261854f87",
     "W7/index.html": "6688fd196bd187b4bd56b3241eccab34d7b22768bd28cef386ada188b94d0113",
     "W8/index.html": "103fd67cc013343c30fa02200ccef78bb1be6c208f0c3b60ce699c318ed0ddf3",
@@ -428,5 +428,14 @@
     "assets/weekly-watercolor/W7.webp": "4e8c299a19daae45f588bb943c16e27e1e91c9781274739d3de325cd97e4c67f",
     "assets/weekly-watercolor/W8.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
     "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634"
+  },
+  "sourceRefresh": {
+    "date": "2026-09-13",
+    "weeks": [
+      3,
+      4,
+      5
+    ],
+    "reason": "School-account instructions on inner slides only. First slide, all style/script elements and cover assets unchanged; existing renders remain valid."
   }
 }
