@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T17:13:01.024Z",
+  "generatedAt": "2026-09-13T13:47:54.917Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
   "weeks": [
     {
@@ -137,15 +137,15 @@
           "path": "assets/week-covers/W7.webp",
           "width": 768,
           "height": 432,
-          "sha256": "9e1d2c03fd3b6285118818468f4e30775a2467aaab329a81efc402a8775b01be",
-          "bytes": 48366
+          "sha256": "db32df239cb70baefa1ba6cdcc94afd4a56e432bb75fe1ea245be38deacb9125",
+          "bytes": 48496
         },
         {
           "path": "assets/week-covers/W7-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "d3e6801a96bc0e9677d809b65fef2340847981951be70caad92451c20f4bbf54",
-          "bytes": 15730
+          "sha256": "e6625bbcf280d0e0494e9319f8653c68179ff7375429db138a801b08e30bff76",
+          "bytes": 15810
         }
       ]
     },
@@ -405,7 +405,7 @@
     "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
     "W5/index.html": "5ce4247d6f61aaa7fc85972c3e587f7424884bb0046d01bb5a68309f464ce790",
     "W6/index.html": "a124ed449aa1b7da7b0e4a85a840ce11887d8dffa9e52ca3c5e7d7d261854f87",
-    "W7/index.html": "6688fd196bd187b4bd56b3241eccab34d7b22768bd28cef386ada188b94d0113",
+    "W7/index.html": "deea035ff352de4fac8a4d1773be2a6fe09e2af5e948bcc7fa1bdfb054947c33",
     "W8/index.html": "103fd67cc013343c30fa02200ccef78bb1be6c208f0c3b60ce699c318ed0ddf3",
     "W9/index.html": "fb8db0714366e5de19415cb80d9fb54037c9d6dc264d47cc8fd63e85cd25f877",
     "assets/downloads.css": "782c959f6bcba8a57c5801adcb29290ccb5af5e984e7ac6d297d96d90a797e0f",
