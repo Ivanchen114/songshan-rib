@@ -11,6 +11,7 @@ module.exports=async function handler(req,res){
   const str=(v,n)=>typeof v==='string'?v.slice(0,n):'';const week=v=>Number.isInteger(v)&&v>=1&&v<=18?v:null;
   const courses=[...new Map(d.courses.filter(x=>week(x.week)&&(x.code===''||/^[A-F0-9]{6}$/.test(x.code))).map(x=>[x.week,{code:x.code,title:str(x.title,60),term:str(x.term,40),week:week(x.week),accepting:x.accepting===true}])).values()];
   const collections=d.collections.filter(x=>/^[a-f0-9]{64}$/.test(x.id)&&Number.isInteger(x.count)&&x.count>0).map(x=>({id:x.id,title:str(x.title,60),term:str(x.term,40),week:week(x.week),count:x.count}));
-  return res.status(200).json({ok:true,data:{courses,collections}});
+  const exhibits=(Array.isArray(d.exhibits)?d.exhibits:[]).filter(x=>/^[a-f0-9]{32}$/.test(x.id)).map(x=>({id:x.id,title:str(x.title,80),term:str(x.term,40),week:week(x.week)}));
+  return res.status(200).json({ok:true,data:{courses,collections,exhibits}});
  }catch{return res.status(502).json({ok:false,error:'catalog_unavailable'});}
 };

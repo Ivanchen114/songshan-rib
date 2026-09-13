@@ -97,7 +97,8 @@ try {
   const total = await evaluate("document.querySelectorAll('.slide').length");
   const initial = await evaluate("Number(document.querySelector('.slide.active')?.dataset.slide || 0)");
   for (let attempt = 0; attempt < 12; attempt += 1) {
-    await evaluate("document.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))");
+    await cdp("Input.dispatchKeyEvent", {type:"keyDown", key:"ArrowRight", code:"ArrowRight", windowsVirtualKeyCode:39});
+    await cdp("Input.dispatchKeyEvent", {type:"keyUp", key:"ArrowRight", code:"ArrowRight", windowsVirtualKeyCode:39});
     if (await evaluate("Number(document.querySelector('.slide.active')?.dataset.slide || 0)") > initial) break;
   }
   const afterArrow = await evaluate("Number(document.querySelector('.slide.active')?.dataset.slide || 0)");
@@ -107,7 +108,15 @@ try {
 
   const timerSlide = await evaluate("Number(document.querySelector('[data-timer]')?.closest('.slide')?.dataset.slide || 0)");
   if (!timerSlide) throw new Error("No configured timer found");
-  await evaluate(`show(${timerSlide})`);
+  await evaluate(`location.hash = "#${timerSlide}"`);
+  await new Promise(resolve => setTimeout(resolve, 200));
+  // Exercise the actual teacher click; current timers start manually.
+  await evaluate(`(() => {
+    const timer=document.querySelector('.slide.active [data-timer]');
+    const toggle=timer?.querySelector('[data-action="toggle"]');
+    if (toggle) toggle.click();
+    else if (timer && (/開始/.test(timer.textContent) || timer.dataset.timerStart === 'manual')) timer.click();
+  })()`);
   const timerBefore = await evaluate("document.querySelector('.slide.active [data-timer]')?.textContent.trim()");
   await new Promise((resolve) => setTimeout(resolve, 1250));
   const timerAfter = await evaluate("document.querySelector('.slide.active [data-timer]')?.textContent.trim()");
@@ -199,8 +208,8 @@ try {
   await cdp("Emulation.setDeviceMetricsOverride", {
     width: 390, height: 844, deviceScaleFactor: 2, mobile: true,
   });
-  await evaluate("updateRotateHint(); new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))", true);
-  const rotateHint = await evaluate("document.getElementById('rotateHint')?.classList.contains('visible') || false");
+  await evaluate("if (typeof updateRotateHint === 'function') updateRotateHint(); new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))", true);
+  const rotateHint = await evaluate("(() => { const el=document.getElementById('rotateHint'); return !!el && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden'; })()");
   if (!rotateHint) throw new Error("Portrait-phone rotate hint is not visible");
   if (runtimeErrors.length) throw new Error(`Runtime errors: ${runtimeErrors.join(' | ')}`);
 

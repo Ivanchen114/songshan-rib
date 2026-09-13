@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-09T11:38:30.785Z",
+  "generatedAt": "2026-09-12T17:13:01.024Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
   "weeks": [
     {
@@ -95,15 +95,15 @@
           "path": "assets/week-covers/W5.webp",
           "width": 768,
           "height": 432,
-          "sha256": "8df32e5bb8f9c5708808d6138d25c4e131026ae2286e7fad9abd5bc84677c11c",
-          "bytes": 58456
+          "sha256": "d010295ffa9e5a3691a4154f9c4e89120e3403a9754eb3ee2960b353a20aeb1e",
+          "bytes": 58460
         },
         {
           "path": "assets/week-covers/W5-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "944a5d6661e8e01b6786efe94d9cee213ba2047f4db3bca3b7448b9287f81c61",
-          "bytes": 18022
+          "sha256": "5ebb82ce9da35304b75b7d5623f9ee558a64ae6ebc0ae23b7b8e40b185eb7334",
+          "bytes": 18002
         }
       ]
     },
@@ -116,15 +116,15 @@
           "path": "assets/week-covers/W6.webp",
           "width": 768,
           "height": 432,
-          "sha256": "517b0f72f1f5bfedebb5a5d6a9ecf256eecf1c3a5f123cc4e352a3770a6fb376",
-          "bytes": 50464
+          "sha256": "8fc9ea6ed690a0af713e9f2d49b5c2b098ff50eded1139f95891bee8c83f6944",
+          "bytes": 50832
         },
         {
           "path": "assets/week-covers/W6-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "55d3628c9ddf6d25d576e60c23420a059e6f24ab48fafb424559ddc5e468683e",
-          "bytes": 16406
+          "sha256": "b1aae5e1cf2c2b3d0eebd1880bf1fa33807e498759316d81131c447a4e14f467",
+          "bytes": 16598
         }
       ]
     },
@@ -382,24 +382,32 @@
     }
   ],
   "dependencies": {
-    "W1/index.html": "2ba36d33c4181a2dd31a2285d66b0dc9e7c072eda56d60e88f22d96a1a77178d",
-    "W10/index.html": "1e9cbcc35f6bf36c1f5f728c1e11996b79b49e67d0990e9a88bd6a6b88f7f21c",
-    "W11/index.html": "4e9629dd6d69ef9cbc99c3007737177a2ec2a2496bd64c221497d9f7756835b3",
-    "W12/index.html": "b61270a0883df3fe96e24afff094abdeb76925e7afe6c69219d6c23eb47b8495",
-    "W13/index.html": "47215cba0f13af3f1eb50b5021f093d84315c005f2544351bb3b35e167fb90cb",
-    "W14/index.html": "995910a820189232e1c0f63b2e7570ed04555bcb350078ddc787061513ba741f",
-    "W15/index.html": "82761277c58e2ef8fa17c1fdc62a5fc8298ccb2a6eaa4b5e104cf3c1bef2b62b",
-    "W16/index.html": "7378bc76d555e2890c32cf2bf2784dfba1b68479eaaaf32713f90ea17a4c3a79",
-    "W17/index.html": "6dbec7df8c8c6eddeed3cc8446f0af4c4bc121367a757f313d6f08ac858f5b2e",
-    "W18/index.html": "8b2f22e4005dc3ac68999cf7c21edf87cc8c0c9d73bcdf4657b4e5f9e22afe06",
-    "W2/index.html": "cda902fcaf20edeb44f83612b26bbab7c91bf5395546c8bdb56207ab9ff476af",
-    "W3/index.html": "09ec4f18f0fd6b4af220c5b6008d1276bdbc7237191407c3015ebdc96d1047f7",
-    "W4/index.html": "b1bc0b6f1ec84a37d6573a3bd807ddf15e4ded640f28de32b0e0c5faf89c537b",
-    "W5/index.html": "9dd8bea60879c1318af9122f209160ed87f62503ae11da858a6e58b48f498640",
-    "W6/index.html": "dc318d8bb0ea548fa34ba2269262a315692473bf2df04328c3ac4776be16d786",
-    "W7/index.html": "f31e4eca72ca79ac9a048fc8ace16e73ccc61dcc423861cd3cdfef733b4e7ba8",
-    "W8/index.html": "7390ff5e9b402cd7065f16548d63c50aacbd7f683e3652509951c64e262efaa1",
-    "W9/index.html": "5f24c6c087bd8d4a30284bee09b0166643a90da7fb349f840b955cf25223ce92",
+    "W1/index.html": "59b6019dfadb845484e32353579798495ad01cad55930bc8c232f05c67ab0974",
+    "W10/index.html": "8b137ded66f8ec190c4c577311ac52b733d1f3904fa2272d7cd4910c9d36ac54",
+    "W11/index.html": "45e12bd0742adb1a2d1b641c09026cdfce688f1b141ceb4b5b3387d2535f476b",
+    "W12/index.html": "9f87335d9fbf561b7e0a06937b113b22d0a59b7921f17f3d6b5fd72a2d00f939",
+    "W13/index.html": "18f8be34208e523cbd7ccb3c597bdfaa4107a0b3a54c49d5086efa68de710211",
+    "W14/index.html": "13954f23e712670cc52cb05c8f53b2c61c9bbcc4c4d66a938624f2bea4d2baae",
+    "W15/index.html": "095b0c4eec52ff4a7a1c070255b13873fb8c4dceb33caf119286f71f6b406b8c",
+    "W16/index.html": "17a411a494769a732b2714651f6c8339b8c4f7d5f03001db847b2b2ebe928428",
+    "W17/index.html": "fc8fb0be5b6d5099e9b0291b65903dbc8b0c05ff65abc517ddd9c4d9fc653a87",
+    "W18/index.html": "e7a3af0e85bb7ad1fc69022e29f50301185c7a506c694059b7a2ef2ebd2640e3",
+    "W2/index.html": "9a8fbf071ff92e11dfa3f9fc39296a84f4f6716b44910ba198122788f8989b0f",
+    "W3/assets/paperball-models/image-a.jpeg": "03155ffc9188abf48790e40d19a94c186b09b99791fedee77f156e06fc961899",
+    "W3/assets/paperball-models/image-b.png": "b03342edc401f9432119b77e57953627c61969100977b7de6db24003d17bb1c9",
+    "W3/assets/paperball-models/image-c.jpeg": "7ed4409ad03da11138539cbc223fe816796c2d8a6f9ca6777d3d6c46ecb78934",
+    "W3/assets/paperball-models/image-d.jpeg": "de93b8228ae76f1e50f0f89e9881b90071f62d295b90a172efc8614e0ee1c1a8",
+    "W3/index.html": "24f8238c6336779f9fc99f57cf8ea4de99fdde5c897df573cfc5d2e02eae77cb",
+    "W4/index.html": "4f32ddebf9e020f1e88fc33997f0d6efed4598d19491480b417e1b94f94384ee",
+    "W5/assets/ai-ending.png": "6f6c882773f68ce02c80eca21815656f20434fe92409ce242a41ede905a4d32c",
+    "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
+    "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
+    "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
+    "W5/index.html": "a851f68f08079ad9d684bf5e073292ab14d04d26ab4d598571af7fc3a7dd58d5",
+    "W6/index.html": "a124ed449aa1b7da7b0e4a85a840ce11887d8dffa9e52ca3c5e7d7d261854f87",
+    "W7/index.html": "6688fd196bd187b4bd56b3241eccab34d7b22768bd28cef386ada188b94d0113",
+    "W8/index.html": "103fd67cc013343c30fa02200ccef78bb1be6c208f0c3b60ce699c318ed0ddf3",
+    "W9/index.html": "fb8db0714366e5de19415cb80d9fb54037c9d6dc264d47cc8fd63e85cd25f877",
     "assets/downloads.css": "782c959f6bcba8a57c5801adcb29290ccb5af5e984e7ac6d297d96d90a797e0f",
     "assets/songshan-logo.svg": "512065dbe125cdc10a748045c1cce96d9d192dd374b88290269840d6550dd9ae",
     "assets/weekly-watercolor/W1.webp": "7628400a183458d8480cf4d29f424ffa48365fc2469a12130ac110ae3f55835a",
