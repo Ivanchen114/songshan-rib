@@ -22,7 +22,7 @@ module.exports=async function handler(req,res){
   const ids=typeof q.ids==='string'?q.ids.split(','):[];if(!ids.length||ids.length>24||ids.some(id=>!validId(id)))return res.status(400).json({ok:false,error:'invalid_check'});url.searchParams.set('ids',ids.join(','));
  }
  try{
-  const upstream=await fetch(url,{signal:AbortSignal.timeout(10000),redirect:'follow',headers:{Accept:'application/json'}});
+  const upstream=await fetch(url,{signal:AbortSignal.timeout(25000),redirect:'follow',headers:{Accept:'application/json'}});
   if(!upstream.ok)throw Error('upstream');const raw=await upstream.text();if(raw.length>1000000)throw Error('size');const payload=JSON.parse(raw),d=payload.data;if(!payload.ok||!d)throw Error('schema');
   let data;
   if(view==='gallery'){

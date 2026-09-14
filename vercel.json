@@ -70,5 +70,10 @@
       "destination": "/worksheets/W6.docx",
       "permanent": true
     }
-  ]
+  ],
+  "functions": {
+    "api/portfolio.js": {
+      "maxDuration": 30
+    }
+  }
 }
