@@ -220,7 +220,19 @@ body .slide .page-footer.task-essential>span:last-child{display:none!important;}
 <div id="progress" aria-hidden="true"></div><nav id="controls" aria-label="投影控制"><div class="left"><button id="prevBtn" aria-label="上一步">←</button><label>頁 <input id="positionInput" type="number" min="1" max="33" aria-label="前往頁碼"></label><span id="total"></span><button id="nextBtn" aria-label="下一步">→</button><span id="revealState"></span></div><div class="right"><a id="homeLink" href="../index.html">首頁</a><span>← → 前後・P 本頁全顯</span><button id="allBtn">本頁全顯／收起</button><button id="rotateBtn">旋轉</button><button id="fullBtn">全螢幕</button></div></nav></main><div id="rotateHint"><div><p>橫向閱讀比較清楚。<br>可旋轉裝置，或使用下方按鈕。</p><button>旋轉投影</button></div></div><dialog id="mediaDialog"><button id="closeMedia">關閉影音</button><iframe title="原報導 YouTube 影音" src="about:blank" allow="fullscreen; encrypted-media" allowfullscreen=""></iframe><p>無法播放時，可<a id="watchLink" target="_blank" rel="noopener">開啟原影音</a>；本課也能使用已附紙本摘要完成。</p></dialog><script type="application/x-rib-deck">
 const slides=[...document.querySelectorAll('.slide')];let current=0,step=0,rotated=false;const timers=new Map();
 const groups=s=>[...new Set([...s.querySelectorAll('[data-reveal]')].map(x=>+x.dataset.reveal))].sort((a,b)=>a-b);
-function fit(){const w=innerWidth,h=innerHeight;let scale=rotated?Math.min(h/1600,w/900):Math.min(w/1600,h/900);const stage=document.querySelector('#stage');stage.style.transform=rotated?`translate(${(w+900*scale)/2}px,${(h-1600*scale)/2}px) rotate(90deg) scale(${scale})`:`translate(${(w-1600*scale)/2}px,${(h-900*scale)/2}px) scale(${scale})`;document.querySelector('#rotateHint').style.display=w<h&&!rotated?'flex':'none'}
+// Desktop canvas follows the viewport aspect ratio; keep artwork and type proportional.
+// The mobile iframe and static export retain the authored 1600 x 900 canvas.
+function fitResponsiveStage(rotated=false){
+ const stage=document.querySelector('#stage'),params=new URLSearchParams(location.search);
+ if(rotated||params.get('export')==='1'||params.get('projection-frame')==='1'){
+  stage.style.width='1600px';stage.style.height='900px';return false;
+ }
+ const scale=Math.min(innerWidth/1600,innerHeight/900);
+ stage.style.width=innerWidth/scale+'px';stage.style.height=innerHeight/scale+'px';
+ stage.style.left='0px';stage.style.top='0px';stage.style.transform=`scale(${scale})`;
+ return true;
+}
+function fit(){if(fitResponsiveStage(rotated))return;const w=innerWidth,h=innerHeight;let scale=rotated?Math.min(h/1600,w/900):Math.min(w/1600,h/900);const stage=document.querySelector('#stage');stage.style.transform=rotated?`translate(${(w+900*scale)/2}px,${(h-1600*scale)/2}px) rotate(90deg) scale(${scale})`:`translate(${(w-1600*scale)/2}px,${(h-900*scale)/2}px) scale(${scale})`;document.querySelector('#rotateHint').style.display=w<h&&!rotated?'flex':'none'}
 function render(){document.querySelector('#progress').style.width=((current+1)/slides.length*100)+'%';const s=slides[current],gs=groups(s);s.querySelectorAll('[data-reveal]').forEach(x=>x.classList.toggle('revealed',gs.indexOf(+x.dataset.reveal)<step));document.querySelector('#positionInput').value=current+1;document.querySelector('#total').textContent='/ '+slides.length;document.querySelector('#revealState').textContent=gs.length?`揭露 ${step}/${gs.length}`:'完整閱讀';document.querySelector('#allBtn').setAttribute('aria-pressed',step===gs.length&&gs.length>0?'true':'false')}
 function pauseTimers(){timers.forEach(t=>{t.running=false;t.paint()})}
 function show(n,full=false,hash=true){pauseTimers();closeMedia();current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===current);s.inert=i!==current;s.setAttribute('aria-hidden',i!==current?'true':'false')});step=full?groups(slides[current]).length:0;render();if(hash)history.replaceState(null,'','#'+(current+1))}

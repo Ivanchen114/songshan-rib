@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T16:22:48.527Z",
+  "generatedAt": "2026-09-14T14:30:27.295Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
   "weeks": [
     {
@@ -116,15 +116,15 @@
           "path": "assets/week-covers/W6.webp",
           "width": 768,
           "height": 432,
-          "sha256": "8fc9ea6ed690a0af713e9f2d49b5c2b098ff50eded1139f95891bee8c83f6944",
-          "bytes": 50832
+          "sha256": "98a2ccbce9dc75fdd64b277cca409feedbe04863062e65854dbdd6aebcd2bfc4",
+          "bytes": 50836
         },
         {
           "path": "assets/week-covers/W6-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "b1aae5e1cf2c2b3d0eebd1880bf1fa33807e498759316d81131c447a4e14f467",
-          "bytes": 16598
+          "sha256": "7d6bf7470b7ed39f3064ca40effa33f6c398d95123e9d127b56f4cde78d3ce05",
+          "bytes": 16596
         }
       ]
     },
@@ -137,15 +137,15 @@
           "path": "assets/week-covers/W7.webp",
           "width": 768,
           "height": 432,
-          "sha256": "db32df239cb70baefa1ba6cdcc94afd4a56e432bb75fe1ea245be38deacb9125",
-          "bytes": 48496
+          "sha256": "eaface50e4e28f0dad3f5364f8d52e7c2f54a8af2443a18b07cc507e7abac2c8",
+          "bytes": 48490
         },
         {
           "path": "assets/week-covers/W7-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "e6625bbcf280d0e0494e9319f8653c68179ff7375429db138a801b08e30bff76",
-          "bytes": 15810
+          "sha256": "b5a11fd73ec75bc1c8d1cb833f4b5bfbb9c9f4aa639de0109c5e6a9ba8881b5a",
+          "bytes": 15816
         }
       ]
     },
@@ -392,21 +392,21 @@
     "W16/index.html": "17a411a494769a732b2714651f6c8339b8c4f7d5f03001db847b2b2ebe928428",
     "W17/index.html": "fc8fb0be5b6d5099e9b0291b65903dbc8b0c05ff65abc517ddd9c4d9fc653a87",
     "W18/index.html": "e7a3af0e85bb7ad1fc69022e29f50301185c7a506c694059b7a2ef2ebd2640e3",
-    "W2/index.html": "9a8fbf071ff92e11dfa3f9fc39296a84f4f6716b44910ba198122788f8989b0f",
+    "W2/index.html": "7b07875dc0dbf53185c05eff64f3bd6de5fdff1da83a5a9991ea0eff1d3df730",
     "W3/assets/paperball-models/image-a.jpeg": "03155ffc9188abf48790e40d19a94c186b09b99791fedee77f156e06fc961899",
     "W3/assets/paperball-models/image-b.png": "b03342edc401f9432119b77e57953627c61969100977b7de6db24003d17bb1c9",
     "W3/assets/paperball-models/image-c.jpeg": "7ed4409ad03da11138539cbc223fe816796c2d8a6f9ca6777d3d6c46ecb78934",
     "W3/assets/paperball-models/image-d.jpeg": "de93b8228ae76f1e50f0f89e9881b90071f62d295b90a172efc8614e0ee1c1a8",
-    "W3/index.html": "d4266aa4e53d9362f160de5e282d4c50758d9c0e8d59fdcfe5f9e986768185b7",
-    "W4/index.html": "057b6b5b0d121a7955287a34a91d456488b32965e2b512c277a4050adc84eaef",
+    "W3/index.html": "5265bd0b72de538859b90089fea93e97622e0588f72ca7eabb359a409c6d9908",
+    "W4/index.html": "2beb407b84480094cf991a4007fbfc039b17238da32cb6aaed3933da406b6093",
     "W5/assets/ai-ending.png": "6f6c882773f68ce02c80eca21815656f20434fe92409ce242a41ede905a4d32c",
     "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
     "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
     "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
-    "W5/index.html": "f580f6daff659dd88a7c20997523a51934e8681b1adaa92c7030a5d28ec01318",
-    "W6/index.html": "a124ed449aa1b7da7b0e4a85a840ce11887d8dffa9e52ca3c5e7d7d261854f87",
-    "W7/index.html": "b94ac3ba1e999eb7e3d132757580b08134aacd83ada9fa490f421dfdac72af32",
-    "W8/index.html": "103fd67cc013343c30fa02200ccef78bb1be6c208f0c3b60ce699c318ed0ddf3",
+    "W5/index.html": "1ea655e1b5566243e1ddbcaf31a0085873f1dc01bb459f3d7cff91f65a46ad33",
+    "W6/index.html": "e12c02759ee9972415e2389301245eedc595360130ea848b1b5be72295d35433",
+    "W7/index.html": "601f60f046c093b7c07aaee22f2fe1eb5ab9aa32036385c75dd88fe141a3fe7d",
+    "W8/index.html": "a4999429997059cdbc59dfb9f5c638cdfcce8ce3dbe3ce795f946d36205f0637",
     "W9/index.html": "fb8db0714366e5de19415cb80d9fb54037c9d6dc264d47cc8fd63e85cd25f877",
     "assets/downloads.css": "782c959f6bcba8a57c5801adcb29290ccb5af5e984e7ac6d297d96d90a797e0f",
     "assets/songshan-logo.svg": "512065dbe125cdc10a748045c1cce96d9d192dd374b88290269840d6550dd9ae",

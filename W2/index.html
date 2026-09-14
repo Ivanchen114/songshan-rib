@@ -49,9 +49,9 @@ body.force-rotate .rotate-hint { display: none; }
 #hint { position: fixed; bottom: 18px; left: 32px; font-size: var(--t-ui); color: var(--ink-3); z-index: 50; opacity: 0.55; }
 .slide { position: absolute; inset: 0px; display: flex; align-items: center; justify-content: center; padding: 70px 90px; opacity: 0; pointer-events: none; transition: opacity 0.55s, transform 0.55s; transform: translateY(16px); overflow: hidden; }
 .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0px); }
-body.compact-deck .slide { inset: 50% auto auto 50%; width: 1600px; height: 900px; transform: translate(-50%, -50%) scale(var(--deck-scale, 1)); transform-origin: center center; }
+body.compact-deck .slide { inset: 0px !important; width: var(--deck-width, 1600px) !important; height: var(--deck-height, 900px) !important; transform: scale(var(--deck-scale, 1)) !important; transform-origin: 0 0; }
 body.compact-deck { --t1: 108px; --t2: 68px; --t3: 40px; --t4: 28px; }
-body.compact-deck .slide.active { transform: translate(-50%, -50%) scale(var(--deck-scale, 1)); }
+body.compact-deck .slide.active { transform: scale(var(--deck-scale, 1)) !important; }
 body.compact-deck .slide[data-slide="17"] .title { font-size: 42px !important; }
 body.compact-deck .slide[data-slide="17"] .prompt-quote { font-size: 30px !important; }
 .slide-inner { width: 100%; max-width: 1500px; margin: 0px auto; position: relative; z-index: 2; }
@@ -1273,8 +1273,13 @@ function updateDeckScale() {
   if (compact) {
     const scale = Math.min(width / 1600, height / 900);
     document.documentElement.style.setProperty('--deck-scale', String(scale));
+    // A short desktop window still fills its own aspect ratio.
+    document.documentElement.style.setProperty('--deck-width', width / scale + 'px');
+    document.documentElement.style.setProperty('--deck-height', height / scale + 'px');
   } else {
     document.documentElement.style.removeProperty('--deck-scale');
+    document.documentElement.style.removeProperty('--deck-width');
+    document.documentElement.style.removeProperty('--deck-height');
   }
 }
 window.forceRotate = function(e) {
