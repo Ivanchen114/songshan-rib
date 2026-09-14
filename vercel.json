@@ -71,6 +71,11 @@
       "permanent": true
     },
     {
+      "source": "/W3/art-prompts/",
+      "destination": "/W3/#24",
+      "permanent": false
+    },
+    {
       "source": "/W3/art-prompts/:path*",
       "destination": "/W3/#24",
       "permanent": false
