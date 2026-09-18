@@ -4,6 +4,7 @@ const str=(v,n)=>typeof v==='string'?v.slice(0,n):'';
 const week=v=>Number.isInteger(v)&&v>=1&&v<=18?v:null;
 const item=x=>({id:x.id,title:str(x.title,80),term:str(x.term,40),week:week(x.week),hash:x.hash,hasPreview:x.hasPreview===true});
 const validId=v=>/^[a-f0-9]{32}$/.test(v||'');
+const validCursor=v=>typeof v==='string'&&/^(?:\d{1,9}_[a-f0-9]{12}|r\d{1,9}_\d{1,9}_[a-f0-9]{12})$/.test(v||'');
 const validHash=v=>/^[a-f0-9]{64}$/.test(v||'');
 module.exports=async function handler(req,res){
  res.setHeader('Cache-Control','private, no-store');res.setHeader('X-Content-Type-Options','nosniff');
@@ -11,8 +12,8 @@ module.exports=async function handler(req,res){
  const q=req.query||{},view=['gallery','preview','check'].includes(q.view)?q.view:'catalog';
  const url=new URL(gasUrl);url.searchParams.set('view',view);
  if(view==='gallery'){
-  if((q.term&&!/^\d{3}0[12]$/.test(q.term))||(q.week&&(!/^\d{1,2}$/.test(q.week)||!week(Number(q.week))))||(q.cursor&&!/^\d{1,9}_[a-f0-9]{12}$/.test(q.cursor))||(q.limit&&(!/^\d{1,2}$/.test(q.limit)||Number(q.limit)<1||Number(q.limit)>24)))return res.status(400).json({ok:false,error:'invalid_page'});
-  for(const k of ['term','week','cursor','limit'])if(q[k])url.searchParams.set(k,q[k]);
+  if((q.term&&!/^\d{3}0[12]$/.test(q.term))||(q.week&&(!/^\d{1,2}$/.test(q.week)||!week(Number(q.week))))||(q.cursor&&!validCursor(q.cursor))||(q.seed&&(typeof q.seed!=='string'||!/^[a-f0-9]{32}$/.test(q.seed)))||(q.cursor?.startsWith('r')&&!q.seed)||(q.limit&&(!/^\d{1,2}$/.test(q.limit)||Number(q.limit)<1||Number(q.limit)>24)))return res.status(400).json({ok:false,error:'invalid_page'});
+  for(const k of ['term','week','cursor','limit','seed'])if(q[k])url.searchParams.set(k,q[k]);
  }
  if(view==='preview'){
   if(!validId(q.id)||!validHash(q.hash))return res.status(400).json({ok:false,error:'invalid_preview'});
@@ -26,7 +27,7 @@ module.exports=async function handler(req,res){
   if(!upstream.ok)throw Error('upstream');const raw=await upstream.text();if(raw.length>1000000)throw Error('size');const payload=JSON.parse(raw),d=payload.data;if(!payload.ok||!d)throw Error('schema');
   let data;
   if(view==='gallery'){
-   if(!Array.isArray(d.items)||d.items.length>24||(d.nextCursor!==null&&!/^\d{1,9}_[a-f0-9]{12}$/.test(d.nextCursor)))throw Error('page');
+   if(!Array.isArray(d.items)||d.items.length>24||(d.nextCursor!==null&&!validCursor(d.nextCursor)))throw Error('page');
    if(d.items.some(x=>!validId(x.id)||!validHash(x.hash)||!week(x.week)))throw Error('item');data={items:d.items.map(item),nextCursor:d.nextCursor};
   }else if(view==='preview'){
    if(d.available===false)data={available:false};else{if(d.hash!==q.hash||typeof d.src!=='string'||d.src.length>90000||!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(d.src))throw Error('preview');data={available:true,hash:d.hash,src:d.src};}
