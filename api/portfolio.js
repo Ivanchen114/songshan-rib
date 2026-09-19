@@ -12,14 +12,16 @@ module.exports=async function handler(req,res){
  const q=req.query||{},view=['gallery','preview','check'].includes(q.view)?q.view:'catalog';
  const url=new URL(gasUrl);url.searchParams.set('view',view);
  if(view==='gallery'){
+  if(q.featured&&q.featured!=='1')return res.status(400).json({ok:false,error:'invalid_page'});
   if((q.term&&!/^\d{3}0[12]$/.test(q.term))||(q.week&&(!/^\d{1,2}$/.test(q.week)||!week(Number(q.week))))||(q.cursor&&!validCursor(q.cursor))||(q.seed&&(typeof q.seed!=='string'||!/^[a-f0-9]{32}$/.test(q.seed)))||(q.cursor?.startsWith('r')&&!q.seed)||(q.limit&&(!/^\d{1,2}$/.test(q.limit)||Number(q.limit)<1||Number(q.limit)>24)))return res.status(400).json({ok:false,error:'invalid_page'});
-  for(const k of ['term','week','cursor','limit','seed'])if(q[k])url.searchParams.set(k,q[k]);
+  for(const k of ['term','week','cursor','limit','seed','featured'])if(q[k])url.searchParams.set(k,q[k]);
  }
  if(view==='preview'){
   if(!validId(q.id)||!validHash(q.hash))return res.status(400).json({ok:false,error:'invalid_preview'});
   url.searchParams.set('id',q.id);url.searchParams.set('hash',q.hash);
  }
  if(view==='check'){
+  if(q.featured==='1')url.searchParams.set('featured','1');
   const ids=typeof q.ids==='string'?q.ids.split(','):[];if(!ids.length||ids.length>24||ids.some(id=>!validId(id)))return res.status(400).json({ok:false,error:'invalid_check'});url.searchParams.set('ids',ids.join(','));
  }
  try{
