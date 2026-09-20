@@ -9,15 +9,15 @@
           "path": "assets/week-covers/W1.webp",
           "width": 768,
           "height": 432,
-          "sha256": "75c8bf1fb1be0f0835fdbf44c0c4c3ea0cef7ad439dad8e799e9dad8d792230e",
-          "bytes": 49758
+          "sha256": "f8c4d0460da59f1b14981a4a5f0fbe79813f71b6f50d67e22a30d3783538c0f7",
+          "bytes": 49978
         },
         {
           "path": "assets/week-covers/W1-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "d78368533def69159b8d1a5c26ff6d54cce2b5ff80ccf3c4e49069c9bb4ff3ec",
-          "bytes": 16606
+          "sha256": "2f25f4b4f1ea9606ae17c2e6b4520208b2b1c659c118e40aab50564e11d10e06",
+          "bytes": 16786
         }
       ]
     },
@@ -30,15 +30,15 @@
           "path": "assets/week-covers/W2.webp",
           "width": 768,
           "height": 432,
-          "sha256": "0046dac053b71c6a3389f12b217953c2d833ec18d14a75832c95f99c5673bb3b",
-          "bytes": 48968
+          "sha256": "fcf38ef3897631ae5a0fcf63f16000c9d8f07cfb569d903ae075f882daf0731e",
+          "bytes": 48884
         },
         {
           "path": "assets/week-covers/W2-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "bfa7ac39a8aa70481b4aa9752d3ae8c9b789ebc7d1af6132bc1f286badc470a0",
-          "bytes": 15928
+          "sha256": "28fcb2aaca758f02a63cc50644d4d751df408ab161b1ec7af39e7f66120efaaa",
+          "bytes": 15672
         }
       ]
     },
@@ -51,15 +51,15 @@
           "path": "assets/week-covers/W3.webp",
           "width": 768,
           "height": 432,
-          "sha256": "4c6bb8e78e14ce4765a0f0ee999fb3bf6993acbbab00e30979b31dffc0325b75",
-          "bytes": 60526
+          "sha256": "32eb23b6cd26ed46401360ea03f77f982c0f8fed99e96349ebfcd9779a801d55",
+          "bytes": 58914
         },
         {
           "path": "assets/week-covers/W3-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "ae35fd4bc221f864b66d833c7d902b116be17e2ebc2a281cacc98c92badff149",
-          "bytes": 18296
+          "sha256": "a9592495285cf36efffc3d6832b1aef7a9ac84c5e417e606267c74fc879361de",
+          "bytes": 17934
         }
       ]
     },
@@ -72,15 +72,15 @@
           "path": "assets/week-covers/W4.webp",
           "width": 768,
           "height": 432,
-          "sha256": "b094894e23ece95925be996294f80649e120825c7ff9a608257ddce9eb65a532",
-          "bytes": 43332
+          "sha256": "3fc695b9bfe2840c8f25ad2a8ad5113cf4dba2d153a9da04456db256a55e022b",
+          "bytes": 42300
         },
         {
           "path": "assets/week-covers/W4-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "dec636658bdc799d4d672b05848c6e354670f84fa1aa2527be63042ffafdcf4d",
-          "bytes": 14592
+          "sha256": "b04b6ff162f5e2fb6f50aa36d500b4325cd4540fc01a273d0beab7cfcd5011d3",
+          "bytes": 14278
         }
       ]
     },
@@ -380,23 +380,25 @@
     }
   ],
   "dependencies": {
-    "W1/index.html": "59b6019dfadb845484e32353579798495ad01cad55930bc8c232f05c67ab0974",
+    "W1/index.html": "9a6d5962d525e0b270af2417aabb19d14c51c5d491fec040703289e1fec78bb7",
     "W10/index.html": "f4a883462235a3eacba86b7f3f733f5915e6a0ecae800eeb1cc139c6bba24695",
     "W11/index.html": "b33c23f9d3a41ee8ee5fa7ee726f44c1a4417ee33ce5678a72218d841fa5945d",
     "W12/index.html": "6dd04c72901219c1e21e081eba86fb87b11aad56901c7ff0bb86ff990e80683d",
     "W13/index.html": "05885a0f784cb163157d09115207234e4cab3c87cc86424d6a057c8c1ccc8b92",
     "W14/index.html": "01270352b92633149c035e1af11246c97816fd9e85426161082f5d9f326dc361",
+    "W15/assets/work-wall-w15.svg": "a089ceaacba45b5e8c3d4f58bd45dfe29f67624d71bd79385d819fed008a498b",
     "W15/index.html": "014782280f35fb53c3edf32b08a192d0d914aa780a986cc853332a4d1543b989",
     "W16/index.html": "b4fd3112fef28fb61be583141f0a1f6e927ea08d55421721ff43cba5b60ed178",
     "W17/index.html": "140b87ab26b572cc36fe17d07f001ea7ab5baa581177957ad01ed6890da94521",
+    "W18/assets/work-wall-w18.svg": "9524df9d092a54159e2301e6bb8d5638ff3db4d8b5e808977f112d56d0c34c2a",
     "W18/index.html": "7181837f27186a0dc2d22f92baaca44779030d6102c850d36126ce28978740e6",
-    "W2/index.html": "7b07875dc0dbf53185c05eff64f3bd6de5fdff1da83a5a9991ea0eff1d3df730",
+    "W2/index.html": "59bb27a4f091aa294ccfe0e3fbe6f439ea2b53ea868eb70231700a5ef386ceed",
     "W3/assets/paperball-models/image-a.jpeg": "03155ffc9188abf48790e40d19a94c186b09b99791fedee77f156e06fc961899",
     "W3/assets/paperball-models/image-b.png": "b03342edc401f9432119b77e57953627c61969100977b7de6db24003d17bb1c9",
     "W3/assets/paperball-models/image-c.jpeg": "7ed4409ad03da11138539cbc223fe816796c2d8a6f9ca6777d3d6c46ecb78934",
     "W3/assets/paperball-models/image-d.jpeg": "de93b8228ae76f1e50f0f89e9881b90071f62d295b90a172efc8614e0ee1c1a8",
-    "W3/index.html": "5265bd0b72de538859b90089fea93e97622e0588f72ca7eabb359a409c6d9908",
-    "W4/index.html": "2beb407b84480094cf991a4007fbfc039b17238da32cb6aaed3933da406b6093",
+    "W3/index.html": "eca4024ec484170e2af0e7fac737b9937229a3e85c0e917db2e44dde6e545acb",
+    "W4/index.html": "6b738bd824c3c2cd58ecf96df7e1cb9c47a832b1994a8ce26fec7a331ef84e41",
     "W5/assets/ai-ending.png": "6f6c882773f68ce02c80eca21815656f20434fe92409ce242a41ede905a4d32c",
     "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
     "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
@@ -425,10 +427,8 @@
     "assets/weekly-watercolor/W6.webp": "7615dae301ae96e0854dda8367c95c76ff0025de13830feddcd471fe2b03efec",
     "assets/weekly-watercolor/W7.webp": "4e8c299a19daae45f588bb943c16e27e1e91c9781274739d3de325cd97e4c67f",
     "assets/weekly-watercolor/W8.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
-    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634",
-    "W15/assets/work-wall-w15.svg": "a089ceaacba45b5e8c3d4f58bd45dfe29f67624d71bd79385d819fed008a498b",
-    "W18/assets/work-wall-w18.svg": "9524df9d092a54159e2301e6bb8d5638ff3db4d8b5e808977f112d56d0c34c2a"
+    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634"
   },
-  "generatedAt": "2026-09-19T17:22:34.470Z",
+  "generatedAt": "2026-09-20T00:51:50.568Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP"
 }
