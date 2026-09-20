@@ -1,6 +1,4 @@
 {
-  "generatedAt": "2026-09-14T14:30:27.295Z",
-  "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
   "weeks": [
     {
       "week": 1,
@@ -95,15 +93,15 @@
           "path": "assets/week-covers/W5.webp",
           "width": 768,
           "height": 432,
-          "sha256": "d010295ffa9e5a3691a4154f9c4e89120e3403a9754eb3ee2960b353a20aeb1e",
-          "bytes": 58460
+          "sha256": "5b9e2e840f4af2f1ee7cd26791b2d855f6c05e50d3502c54580cb3b734fa3721",
+          "bytes": 59010
         },
         {
           "path": "assets/week-covers/W5-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "5ebb82ce9da35304b75b7d5623f9ee558a64ae6ebc0ae23b7b8e40b185eb7334",
-          "bytes": 18002
+          "sha256": "779dfbdf4c059e4e5f5fe41503ba2dcec48787d7f38c8d073311b065903b0e9b",
+          "bytes": 18016
         }
       ]
     },
@@ -116,36 +114,36 @@
           "path": "assets/week-covers/W6.webp",
           "width": 768,
           "height": 432,
-          "sha256": "98a2ccbce9dc75fdd64b277cca409feedbe04863062e65854dbdd6aebcd2bfc4",
-          "bytes": 50836
+          "sha256": "e7f3bb84b48d1ebee5fefee87665e43748325989f0cbea83f850e6e991c8e473",
+          "bytes": 50870
         },
         {
           "path": "assets/week-covers/W6-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "7d6bf7470b7ed39f3064ca40effa33f6c398d95123e9d127b56f4cde78d3ce05",
-          "bytes": 16596
+          "sha256": "0502cc6d27399c51c5cf59c1428dca7ed85b0b9c5ff1a5c7bff732caa2cadc05",
+          "bytes": 16598
         }
       ]
     },
     {
       "week": 7,
-      "title": "同一事件，\n為什麼看到的不同？",
+      "title": "先獨立作答，再讓作品給人讀",
       "source": "W7/index.html",
       "images": [
         {
           "path": "assets/week-covers/W7.webp",
           "width": 768,
           "height": 432,
-          "sha256": "eaface50e4e28f0dad3f5364f8d52e7c2f54a8af2443a18b07cc507e7abac2c8",
-          "bytes": 48490
+          "sha256": "ca6cad94d986d776f283d1577a047e90116f44639cefac6271572440c4c74312",
+          "bytes": 28496
         },
         {
           "path": "assets/week-covers/W7-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "b5a11fd73ec75bc1c8d1cb833f4b5bfbb9c9f4aa639de0109c5e6a9ba8881b5a",
-          "bytes": 15816
+          "sha256": "bf5eb8fa0497efaa46502e8c6d972fe0906756ea24e0f6c26667d14af8ffc9fb",
+          "bytes": 9382
         }
       ]
     },
@@ -158,15 +156,15 @@
           "path": "assets/week-covers/W8.webp",
           "width": 768,
           "height": 432,
-          "sha256": "ac8ffabf2a1ade686f5757a6d7319fc201961d29d1f021d2976eeea0ed9c9e03",
-          "bytes": 55706
+          "sha256": "d1e5d975d374fe075d4992fdee2d4e4f923b3c6ef6dc385f5e34366641e5c484",
+          "bytes": 57162
         },
         {
           "path": "assets/week-covers/W8-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "ef6f35c10571237c11cc9a3444c5e439af31edd66c35c45add93361399d2b9a3",
-          "bytes": 17536
+          "sha256": "a6d0e545ab4c69e7dc89b5712df9b07bbb55bcbea8ff3d342e7a525ff1db0c9a",
+          "bytes": 18034
         }
       ]
     },
@@ -179,15 +177,15 @@
           "path": "assets/week-covers/W9.webp",
           "width": 768,
           "height": 432,
-          "sha256": "9c3e24150d9554bfa7550f06f7973f71211551ee8b1d129aba2130db018836a1",
-          "bytes": 46448
+          "sha256": "200bf4884dd7e7c2649382b2cc11ea0f61dfecec868f6d3b55012198e9207314",
+          "bytes": 44788
         },
         {
           "path": "assets/week-covers/W9-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "946a35eb7a55860f10fdb8d24a86c4cb48c45d5c1baba4f8f92e09a3a19b2a2b",
-          "bytes": 14684
+          "sha256": "3e2a5dd3717bc6afeb5cedae259756609f87df8e52d88ddcce033b4a55bde923",
+          "bytes": 13952
         }
       ]
     },
@@ -200,15 +198,15 @@
           "path": "assets/week-covers/W10.webp",
           "width": 768,
           "height": 432,
-          "sha256": "0d78160ba45c2c5e77bcd8d43c5d1acb55b29775ad23c55d6ac60583ed3e35fc",
-          "bytes": 50834
+          "sha256": "2ada3f5d0c3d8af1ab048dd248f7c7e00014d5c0f60678ff8b382940b8f3febb",
+          "bytes": 50954
         },
         {
           "path": "assets/week-covers/W10-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "5636b013ba6ff05e8b5a87fbaa66e729a1f135d3c7870042a1d1c2446f4195ac",
-          "bytes": 16268
+          "sha256": "857f349f81e48a496d88b4d0f942459dc06581137705e9a4d64bbdb6385db7b0",
+          "bytes": 16346
         }
       ]
     },
@@ -221,15 +219,15 @@
           "path": "assets/week-covers/W11.webp",
           "width": 768,
           "height": 432,
-          "sha256": "ffad51cadbd13043ae80a36599bb5ede90cf4d184c370f3fd67264150ff4cb63",
-          "bytes": 56960
+          "sha256": "536d2a10b72dc439225fd4aebb870f4d4842dae9a1a5d5b172fcda27e2f5aba9",
+          "bytes": 57510
         },
         {
           "path": "assets/week-covers/W11-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "94f9982bfff06f2535e58347388388310d99d8fcba6373291b7b24e02a29c511",
-          "bytes": 18016
+          "sha256": "e28c013021b587d8d9255fc20163e4149972f0dc535eff867686adac6a8352f4",
+          "bytes": 18134
         }
       ]
     },
@@ -242,15 +240,15 @@
           "path": "assets/week-covers/W12.webp",
           "width": 768,
           "height": 432,
-          "sha256": "0dadce5179180349f58cdf09be6eeb6334fd9f56727722f5a4ab635f0f1057a7",
-          "bytes": 60922
+          "sha256": "1d749e0aa60141daec1be901506ab9adc2654baae9c79c73e07309a16bd5ffa2",
+          "bytes": 60448
         },
         {
           "path": "assets/week-covers/W12-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "1e059ae8e31067d8467d2cd4e0fb48703b3936ddda5b20210adac6d90426b56f",
-          "bytes": 18652
+          "sha256": "2e5c520f4b7b12a95e11e53f34fd61ce6e1346ce35c5df89831e7ec14e6288b3",
+          "bytes": 18656
         }
       ]
     },
@@ -263,15 +261,15 @@
           "path": "assets/week-covers/W13.webp",
           "width": 768,
           "height": 432,
-          "sha256": "07715c94bbb98dda2a7e7b332e62048fc2cec075720ff4c2ecaa05b7c9c95949",
-          "bytes": 35418
+          "sha256": "c51e34313032f45fe7aca75313d559ef78c935b8c0b067c605f789a6573dbf50",
+          "bytes": 35488
         },
         {
           "path": "assets/week-covers/W13-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "0ac0006647aa24a3fea2b9e6dfa6710965483045873991bbdde205d51bf5d28f",
-          "bytes": 12206
+          "sha256": "e483bffb517f7fe915d227f3903a489711c4840c118f634e731733ea346286ba",
+          "bytes": 12210
         }
       ]
     },
@@ -284,15 +282,15 @@
           "path": "assets/week-covers/W14.webp",
           "width": 768,
           "height": 432,
-          "sha256": "75de35934324b7efb415bd3f128132adc32dfb4e7946c19fee25eb66e3f82795",
-          "bytes": 54328
+          "sha256": "39a0627402ab108000bf630b12bf9bf372262a90ed05d60160c304b1957915a7",
+          "bytes": 53992
         },
         {
           "path": "assets/week-covers/W14-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "05efa14bc5be49cf2c9e73418f8000fc5978618bb7e0708b7777deec458bcf93",
-          "bytes": 17302
+          "sha256": "28ce54f13586cd40e35263a8bc414421bf0ddf1273c983c15413bd35198cf613",
+          "bytes": 17246
         }
       ]
     },
@@ -305,15 +303,15 @@
           "path": "assets/week-covers/W15.webp",
           "width": 768,
           "height": 432,
-          "sha256": "8f2939bad4da9f4009ebe9e109dde90a1a7b6a131996eb17d6f7fabc40d438c1",
-          "bytes": 52798
+          "sha256": "4dc37f264b8843a07cdadbdc771e5fd969146adbb6c0907175544914b4e5ab73",
+          "bytes": 52484
         },
         {
           "path": "assets/week-covers/W15-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "bc27c62109d040ea0c9613181869e99a8d9f14e5d4079b91d543274ff2f33934",
-          "bytes": 17076
+          "sha256": "f200d07f5a52fc1b6953263b39c666078e23576934ef01bc94f3567e70777052",
+          "bytes": 16756
         }
       ]
     },
@@ -326,15 +324,15 @@
           "path": "assets/week-covers/W16.webp",
           "width": 768,
           "height": 432,
-          "sha256": "e9410dcb7b15f572bdfc69bdfc1fcf6dbda95d589a1c4a7968b1cce89b0b1a1b",
-          "bytes": 48556
+          "sha256": "6e922427763481c929e152770fd27aacafeedaf2d513e486eeea8513f862ea77",
+          "bytes": 48694
         },
         {
           "path": "assets/week-covers/W16-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "9be306058abc00916c625f510aa81a6107e4bf6cbb18358b05893ef4dda1def1",
-          "bytes": 15370
+          "sha256": "6f42a449426e3b7a292d466cc9e088261b1aea7de9d47d57db5f95f0b15bcb36",
+          "bytes": 15670
         }
       ]
     },
@@ -347,15 +345,15 @@
           "path": "assets/week-covers/W17.webp",
           "width": 768,
           "height": 432,
-          "sha256": "1ef1c38a426c4f380063759167ff80db5dcd17654a61d37c9f9511d746741426",
-          "bytes": 48628
+          "sha256": "74b29342a6159f5fdd9735645c4c0c344700a4c7d1795e24bdadb3a3d26d6d3a",
+          "bytes": 48886
         },
         {
           "path": "assets/week-covers/W17-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "24f65ec40f43c635e96f4e2dbd49ce1df62f70d36bc6356823d138ed0779ea13",
-          "bytes": 16628
+          "sha256": "0bf41b306180ddb711bcf9b91882dddd215d7d0fa30a1665bab8f918e649a6df",
+          "bytes": 16646
         }
       ]
     },
@@ -368,30 +366,30 @@
           "path": "assets/week-covers/W18.webp",
           "width": 768,
           "height": 432,
-          "sha256": "c88d92bc26c242a4c61ea3d5356d1ef94cb6ab8f383fcc68df5c35cb077040a1",
-          "bytes": 59198
+          "sha256": "24ab1fb2422fe63f86e575d8efe48318f77468bc4b1a31d01fda6119e3620808",
+          "bytes": 59810
         },
         {
           "path": "assets/week-covers/W18-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "98b5a8c5c14f7947bfb907de7b6145131eb8ece201ba7d176accf5ae779bc95a",
-          "bytes": 18738
+          "sha256": "5e4e77bbd435dd6c8b0b8950fa2a35fbcddbca8bae3c9f959f196240f78640ca",
+          "bytes": 18836
         }
       ]
     }
   ],
   "dependencies": {
     "W1/index.html": "59b6019dfadb845484e32353579798495ad01cad55930bc8c232f05c67ab0974",
-    "W10/index.html": "8b137ded66f8ec190c4c577311ac52b733d1f3904fa2272d7cd4910c9d36ac54",
-    "W11/index.html": "45e12bd0742adb1a2d1b641c09026cdfce688f1b141ceb4b5b3387d2535f476b",
-    "W12/index.html": "9f87335d9fbf561b7e0a06937b113b22d0a59b7921f17f3d6b5fd72a2d00f939",
-    "W13/index.html": "18f8be34208e523cbd7ccb3c597bdfaa4107a0b3a54c49d5086efa68de710211",
-    "W14/index.html": "13954f23e712670cc52cb05c8f53b2c61c9bbcc4c4d66a938624f2bea4d2baae",
-    "W15/index.html": "095b0c4eec52ff4a7a1c070255b13873fb8c4dceb33caf119286f71f6b406b8c",
-    "W16/index.html": "17a411a494769a732b2714651f6c8339b8c4f7d5f03001db847b2b2ebe928428",
-    "W17/index.html": "fc8fb0be5b6d5099e9b0291b65903dbc8b0c05ff65abc517ddd9c4d9fc653a87",
-    "W18/index.html": "e7a3af0e85bb7ad1fc69022e29f50301185c7a506c694059b7a2ef2ebd2640e3",
+    "W10/index.html": "f4a883462235a3eacba86b7f3f733f5915e6a0ecae800eeb1cc139c6bba24695",
+    "W11/index.html": "b33c23f9d3a41ee8ee5fa7ee726f44c1a4417ee33ce5678a72218d841fa5945d",
+    "W12/index.html": "6dd04c72901219c1e21e081eba86fb87b11aad56901c7ff0bb86ff990e80683d",
+    "W13/index.html": "05885a0f784cb163157d09115207234e4cab3c87cc86424d6a057c8c1ccc8b92",
+    "W14/index.html": "01270352b92633149c035e1af11246c97816fd9e85426161082f5d9f326dc361",
+    "W15/index.html": "014782280f35fb53c3edf32b08a192d0d914aa780a986cc853332a4d1543b989",
+    "W16/index.html": "b4fd3112fef28fb61be583141f0a1f6e927ea08d55421721ff43cba5b60ed178",
+    "W17/index.html": "140b87ab26b572cc36fe17d07f001ea7ab5baa581177957ad01ed6890da94521",
+    "W18/index.html": "7181837f27186a0dc2d22f92baaca44779030d6102c850d36126ce28978740e6",
     "W2/index.html": "7b07875dc0dbf53185c05eff64f3bd6de5fdff1da83a5a9991ea0eff1d3df730",
     "W3/assets/paperball-models/image-a.jpeg": "03155ffc9188abf48790e40d19a94c186b09b99791fedee77f156e06fc961899",
     "W3/assets/paperball-models/image-b.png": "b03342edc401f9432119b77e57953627c61969100977b7de6db24003d17bb1c9",
@@ -403,11 +401,11 @@
     "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
     "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
     "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
-    "W5/index.html": "1ea655e1b5566243e1ddbcaf31a0085873f1dc01bb459f3d7cff91f65a46ad33",
-    "W6/index.html": "e12c02759ee9972415e2389301245eedc595360130ea848b1b5be72295d35433",
-    "W7/index.html": "601f60f046c093b7c07aaee22f2fe1eb5ab9aa32036385c75dd88fe141a3fe7d",
-    "W8/index.html": "a4999429997059cdbc59dfb9f5c638cdfcce8ce3dbe3ce795f946d36205f0637",
-    "W9/index.html": "fb8db0714366e5de19415cb80d9fb54037c9d6dc264d47cc8fd63e85cd25f877",
+    "W5/index.html": "1ec44187eedb1d8b61f7018294325521e6ff6904d72f7ecae7485677b8a8a0fa",
+    "W6/index.html": "bc20254c7d62832cac7c4308c25e9b31dc3ea897612f792d08d1c3611f6b05c7",
+    "W7/index.html": "c7283989845901bf0963cd9e04addb2ee4a563297c2aaefec059a34a3f67912c",
+    "W8/index.html": "9707d80cf1409e7147c3731563c353cd20c9e0975baa380b396d779f350dc8f1",
+    "W9/index.html": "bdb20eda1460dba91ed67e099fdf39b188f17629055890a258496da9c6a6e289",
     "assets/downloads.css": "782c959f6bcba8a57c5801adcb29290ccb5af5e984e7ac6d297d96d90a797e0f",
     "assets/songshan-logo.svg": "512065dbe125cdc10a748045c1cce96d9d192dd374b88290269840d6550dd9ae",
     "assets/weekly-watercolor/W1.webp": "7628400a183458d8480cf4d29f424ffa48365fc2469a12130ac110ae3f55835a",
@@ -427,15 +425,10 @@
     "assets/weekly-watercolor/W6.webp": "7615dae301ae96e0854dda8367c95c76ff0025de13830feddcd471fe2b03efec",
     "assets/weekly-watercolor/W7.webp": "4e8c299a19daae45f588bb943c16e27e1e91c9781274739d3de325cd97e4c67f",
     "assets/weekly-watercolor/W8.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
-    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634"
+    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634",
+    "W15/assets/work-wall-w15.svg": "a089ceaacba45b5e8c3d4f58bd45dfe29f67624d71bd79385d819fed008a498b",
+    "W18/assets/work-wall-w18.svg": "9524df9d092a54159e2301e6bb8d5638ff3db4d8b5e808977f112d56d0c34c2a"
   },
-  "sourceRefresh": {
-    "date": "2026-09-13",
-    "weeks": [
-      3,
-      4,
-      5
-    ],
-    "reason": "School-account instructions on inner slides only. First slide, all style/script elements and cover assets unchanged; existing renders remain valid."
-  }
+  "generatedAt": "2026-09-19T17:22:34.470Z",
+  "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP"
 }
