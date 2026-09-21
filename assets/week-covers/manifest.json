@@ -86,22 +86,22 @@
     },
     {
       "week": 5,
-      "title": "讓你看見這一刻",
+      "title": "我的作品，兩種讀法",
       "source": "W5/index.html",
       "images": [
         {
           "path": "assets/week-covers/W5.webp",
           "width": 768,
           "height": 432,
-          "sha256": "5b9e2e840f4af2f1ee7cd26791b2d855f6c05e50d3502c54580cb3b734fa3721",
-          "bytes": 59010
+          "sha256": "4f39bf5c6af40b3bef6a52840a3f33093f5915ff3e51e69f1188c2ae68b2962e",
+          "bytes": 62876
         },
         {
           "path": "assets/week-covers/W5-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "779dfbdf4c059e4e5f5fe41503ba2dcec48787d7f38c8d073311b065903b0e9b",
-          "bytes": 18016
+          "sha256": "956fd2285e958f4c2929a18ebf9b6c634b4ecf58b44173b409063499a8efc3de",
+          "bytes": 19372
         }
       ]
     },
@@ -398,12 +398,12 @@
     "W3/assets/paperball-models/image-c.jpeg": "7ed4409ad03da11138539cbc223fe816796c2d8a6f9ca6777d3d6c46ecb78934",
     "W3/assets/paperball-models/image-d.jpeg": "de93b8228ae76f1e50f0f89e9881b90071f62d295b90a172efc8614e0ee1c1a8",
     "W3/index.html": "eca4024ec484170e2af0e7fac737b9937229a3e85c0e917db2e44dde6e545acb",
-    "W4/index.html": "6b738bd824c3c2cd58ecf96df7e1cb9c47a832b1994a8ce26fec7a331ef84e41",
+    "W4/index.html": "769adbb66ca6cd14baaaec9bb70848e1466a6d8fb8823f638483d6c9956f546c",
     "W5/assets/ai-ending.png": "6f6c882773f68ce02c80eca21815656f20434fe92409ce242a41ede905a4d32c",
     "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
     "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
     "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
-    "W5/index.html": "1ec44187eedb1d8b61f7018294325521e6ff6904d72f7ecae7485677b8a8a0fa",
+    "W5/index.html": "5975226923f97117df524e4d6f7cd5dcf78270e44dde5f914258468c76039816",
     "W6/index.html": "bc20254c7d62832cac7c4308c25e9b31dc3ea897612f792d08d1c3611f6b05c7",
     "W7/index.html": "c7283989845901bf0963cd9e04addb2ee4a563297c2aaefec059a34a3f67912c",
     "W8/index.html": "9707d80cf1409e7147c3731563c353cd20c9e0975baa380b396d779f350dc8f1",
@@ -427,8 +427,18 @@
     "assets/weekly-watercolor/W6.webp": "7615dae301ae96e0854dda8367c95c76ff0025de13830feddcd471fe2b03efec",
     "assets/weekly-watercolor/W7.webp": "4e8c299a19daae45f588bb943c16e27e1e91c9781274739d3de325cd97e4c67f",
     "assets/weekly-watercolor/W8.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
-    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634"
+    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634",
+    "W5/assets/deck-media/2d0b87a53e04967bc8a5.png": "2d0b87a53e04967bc8a5daab91c81fc104218ba46e6e4e8ef92cacf309889898",
+    "W5/assets/deck-media/5b725fac9a0f7a595ea6.png": "5b725fac9a0f7a595ea6923157d6bb5a13858ea890dadf8a69e51a9e00e45065",
+    "W5/assets/deck-media/70361b9e8819338f7e5a.png": "70361b9e8819338f7e5aab1518bf1ce70959c7ede0006e115d163f0da472b383",
+    "W5/assets/deck-media/a91e4624fa9b8dd71c15.webp": "a91e4624fa9b8dd71c15f1b922ddcebde5fdbb88981e01d0dafdb9cf75be7a3a",
+    "W5/assets/deck-media/c143ab4dc3d2e0022446.png": "c143ab4dc3d2e0022446a740fda819ce9c42a320f64a0954d501e62f630d3904",
+    "W5/assets/deck-media/d87ca4937b8195393602.png": "d87ca4937b8195393602e7c2847f2b8449b982f0796f16585d1dc00ec092ee3d",
+    "W5/assets/workshop/cards-qr.png": "2d0b87a53e04967bc8a5daab91c81fc104218ba46e6e4e8ef92cacf309889898",
+    "W5/assets/workshop/original-family.png": "d87ca4937b8195393602e7c2847f2b8449b982f0796f16585d1dc00ec092ee3d",
+    "W5/assets/workshop/wall-qr.png": "c143ab4dc3d2e0022446a740fda819ce9c42a320f64a0954d501e62f630d3904"
   },
   "generatedAt": "2026-09-20T00:51:50.568Z",
-  "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP"
+  "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
+  "w5UpdatedAt": "2026-09-21"
 }
