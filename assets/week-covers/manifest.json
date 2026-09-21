@@ -72,36 +72,36 @@
           "path": "assets/week-covers/W4.webp",
           "width": 768,
           "height": 432,
-          "sha256": "3fc695b9bfe2840c8f25ad2a8ad5113cf4dba2d153a9da04456db256a55e022b",
-          "bytes": 42300
+          "sha256": "2cbd037aaac144bc33c5180d1127aee54ee6e89cf5c15d1bb69be299afce7760",
+          "bytes": 41008
         },
         {
           "path": "assets/week-covers/W4-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "b04b6ff162f5e2fb6f50aa36d500b4325cd4540fc01a273d0beab7cfcd5011d3",
-          "bytes": 14278
+          "sha256": "7df4e2fc3eb85bd9775b82fbcf6276083c8f8cf3c2c3b74b292887fed8d639f9",
+          "bytes": 13704
         }
       ]
     },
     {
       "week": 5,
-      "title": "我的作品，兩種讀法",
+      "title": "把文字，畫成結構",
       "source": "W5/index.html",
       "images": [
         {
           "path": "assets/week-covers/W5.webp",
           "width": 768,
           "height": 432,
-          "sha256": "4f39bf5c6af40b3bef6a52840a3f33093f5915ff3e51e69f1188c2ae68b2962e",
-          "bytes": 62876
+          "sha256": "fad7aafacbbbbe16dfe66512e789aa3d420b0d4559300a69d97cee71944c3ef3",
+          "bytes": 54042
         },
         {
           "path": "assets/week-covers/W5-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "956fd2285e958f4c2929a18ebf9b6c634b4ecf58b44173b409063499a8efc3de",
-          "bytes": 19372
+          "sha256": "9a4ae353deb6036644d11b8f281b61068835a3decc59207cd063828bed0dc6ca",
+          "bytes": 18458
         }
       ]
     },
@@ -465,7 +465,18 @@
     "W3/assets/paperball-models/image-c.jpeg": "7ed4409ad03da11138539cbc223fe816796c2d8a6f9ca6777d3d6c46ecb78934",
     "W3/assets/paperball-models/image-d.jpeg": "de93b8228ae76f1e50f0f89e9881b90071f62d295b90a172efc8614e0ee1c1a8",
     "W3/index.html": "cc2d3d95a88e5532dac1b4e1579c1893438c2f1382d8fb46ab653126e9d1d27b",
-    "W4/index.html": "769adbb66ca6cd14baaaec9bb70848e1466a6d8fb8823f638483d6c9956f546c",
+    "W4/assets/deck-media/0f8e12857e07ba2f4268.png": "0f8e12857e07ba2f42686498123e24652f8b99aca2cf5a4e51c5116c5d1e598b",
+    "W4/assets/deck-media/1813464ff7052bd0adc3.webp": "1813464ff7052bd0adc36a8e0cf9dd91eda1cc452a4a36457da9a182f566ac19",
+    "W4/assets/deck-media/349036a48880ef3e8f72.png": "349036a48880ef3e8f72f27e94b59c9fec45c7c5b939ccf73ec43b52e03145a6",
+    "W4/assets/deck-media/3e03eb03f9cc4f501119.webp": "3e03eb03f9cc4f501119c01e4a57bb193f79e68a4fce90236859e022f1424446",
+    "W4/assets/deck-media/3fa122027c16c9ae7547.jpg": "3fa122027c16c9ae754721b931f75e1a219bd255007cad618d681ac9956fef2b",
+    "W4/assets/deck-media/4876c7bcc5668177087f.webp": "4876c7bcc5668177087f183cb7ce7c9d349a5f80996dadedfa61c5da9f24ace1",
+    "W4/assets/deck-media/719aaae5d8abca466618.png": "719aaae5d8abca466618c1f2165aaeb76f099b9eda8952e37d66597e8eaa1c7a",
+    "W4/assets/deck-media/bf1fb617856a070f3b0f.png": "bf1fb617856a070f3b0fbf2c35d9266e0da03ea219cf03b14ecbf4e4680bc2c2",
+    "W4/assets/deck-media/df55b5dab0f7c0ef2b2c.webp": "df55b5dab0f7c0ef2b2ca68c4dda9357a5aba00400757f0cff1193b1d25e229a",
+    "W4/assets/deck-media/f0dcfde4dd73f1f58ff9.svg": "f0dcfde4dd73f1f58ff95910b921d49573b911c009fe8be498a1031c35644778",
+    "W4/assets/deck-media/fec8feddf5105c848ce8.png": "fec8feddf5105c848ce833d18bfe5203d625416d31a55393aefd3c51fee269ea",
+    "W4/index.html": "22535575b1ed9702f509444d0820a3fdaee4beb351626c3d951cd88df1da3b4b",
     "W5/assets/ai-ending.png": "6f6c882773f68ce02c80eca21815656f20434fe92409ce242a41ede905a4d32c",
     "W5/assets/ai-invite.png": "4860ef8a30d8dcce5fbce4d7144211789c3ec4abf6a210b7c498a9066bd8f207",
     "W5/assets/deck-media/2d0b87a53e04967bc8a5.png": "2d0b87a53e04967bc8a5daab91c81fc104218ba46e6e4e8ef92cacf309889898",
@@ -474,12 +485,13 @@
     "W5/assets/deck-media/a91e4624fa9b8dd71c15.webp": "a91e4624fa9b8dd71c15f1b922ddcebde5fdbb88981e01d0dafdb9cf75be7a3a",
     "W5/assets/deck-media/c143ab4dc3d2e0022446.png": "c143ab4dc3d2e0022446a740fda819ce9c42a320f64a0954d501e62f630d3904",
     "W5/assets/deck-media/d87ca4937b8195393602.png": "d87ca4937b8195393602e7c2847f2b8449b982f0796f16585d1dc00ec092ee3d",
+    "W5/assets/deck-media/e3f57f38850f9dd56dd4.webp": "e3f57f38850f9dd56dd46ab93c09d497daf85368302bd61628216710ba6a56a3",
     "W5/assets/line-family-change.png": "f96509db57127a15c9970c02cbcd3114b427d623ab4937bed216847b515ca5d0",
     "W5/assets/w5-portfolio-qr.png": "7a6437b40ecf43fb415eaba6fb9a2b9c371a35e7c7732189c0e1528ae36dde5e",
     "W5/assets/workshop/cards-qr.png": "2d0b87a53e04967bc8a5daab91c81fc104218ba46e6e4e8ef92cacf309889898",
     "W5/assets/workshop/original-family.png": "d87ca4937b8195393602e7c2847f2b8449b982f0796f16585d1dc00ec092ee3d",
     "W5/assets/workshop/wall-qr.png": "c143ab4dc3d2e0022446a740fda819ce9c42a320f64a0954d501e62f630d3904",
-    "W5/index.html": "5975226923f97117df524e4d6f7cd5dcf78270e44dde5f914258468c76039816",
+    "W5/index.html": "90d8e630b9cf4ae7c0fdf9842ade2ba39c27a52e4d3f5d87ef3be911588fedfe",
     "W6/assets/deck-media/7615dae301ae96e0854d.webp": "7615dae301ae96e0854dda8367c95c76ff0025de13830feddcd471fe2b03efec",
     "W6/index.html": "5f5339dac69201d87cc50e556a5abb619e8e3002c49cfc627d60f08b03e420df",
     "W7/assets/deck-media/10b0f13f6bc6706a8626.png": "10b0f13f6bc6706a8626cfd24cae0c6992d093d839c657d92c4b40b8b4095220",
@@ -506,13 +518,13 @@
     "assets/weekly-watercolor/W2.webp": "432149d2384947a705a8e4e9bf599af7ce085a7618c83b81349a157951c31462",
     "assets/weekly-watercolor/W3.webp": "8830af193f610911b764022999e3bf0b458be1deb810c16241e02b7ab519ffe8",
     "assets/weekly-watercolor/W4.webp": "1813464ff7052bd0adc36a8e0cf9dd91eda1cc452a4a36457da9a182f566ac19",
-    "assets/weekly-watercolor/W5.webp": "a91e4624fa9b8dd71c15f1b922ddcebde5fdbb88981e01d0dafdb9cf75be7a3a",
+    "assets/weekly-watercolor/W5.webp": "e3f57f38850f9dd56dd46ab93c09d497daf85368302bd61628216710ba6a56a3",
     "assets/weekly-watercolor/W6.webp": "7615dae301ae96e0854dda8367c95c76ff0025de13830feddcd471fe2b03efec",
     "assets/weekly-watercolor/W7.webp": "4e8c299a19daae45f588bb943c16e27e1e91c9781274739d3de325cd97e4c67f",
     "assets/weekly-watercolor/W8.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
     "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634"
   },
-  "generatedAt": "2026-09-21T12:25:39.883Z",
+  "generatedAt": "2026-09-21T15:20:40.006Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
   "w5UpdatedAt": "2026-09-21"
 }
