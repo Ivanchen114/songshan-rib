@@ -1,6 +1,7 @@
+import {learningBrief} from './learning-brief.js';
 import {createJourneyUI} from './journey-ui.js';
 import {createRosterUI} from './roster-ui.js';
-import {ACTIVITY,isGroup,canUpload} from './activities.js';
+import {ACTIVITY,isGroup,canUpload,activityTitle} from './activities.js';
 import {createWeeklyUI} from './weekly-ui.js';
 import {createAccountsUI} from './accounts-ui.js';
 import {phaseLabel,supported,workFlags,matchesWork,missingStudents,studentNext} from './ui-model.js';
@@ -11,7 +12,7 @@ const button=(label,action,data='',secondary=false)=>`<button type="button" ${se
 async function api(action,data={},write=false){const response=await fetch('/api/workspace'+(write?'':'?'+new URLSearchParams({action,...data})),{method:write?'POST':'GET',credentials:'same-origin',headers:write?{'Content-Type':'application/json'}:{},...(write?{body:JSON.stringify({action,...data})}:{})});const payload=await response.json();if(!payload.ok)throw new Error(payload.error||'暫時無法完成，請稍後再試。');return payload.data;}
 function say(s,error=false){notice.textContent=s;notice.className=error?'error':'';}
 function show(html){$('#detailBody').innerHTML=html;const title=$('#detailBody h2');if(title){title.id='dialogTitle';dialog.setAttribute('aria-labelledby','dialogTitle');}if(!dialog.open)dialog.showModal();dialog.scrollTop=0;}
-function heading(title,subtitle=''){document.querySelector('.intro h1').textContent=title;$('#pageSubtitle').textContent=subtitle;document.title=title+'｜閱讀理解與表達';}
+function heading(title,subtitle='',kind=''){document.querySelector('#learningBrief').innerHTML=learningBrief(kind);document.querySelector('.intro h1').textContent=title;$('#pageSubtitle').textContent=subtitle;document.title=title+'｜閱讀理解與表達';}
 $('#closeDialog').onclick=()=>{if(state.busy)return;if(state.dirty&&!confirm('內容還沒送出。確定關閉？'))return;state.dirty=false;dialog.close();};
 dialog.addEventListener('cancel',e=>{if(state.busy||state.dirty)e.preventDefault();});
 document.addEventListener('input',e=>{if(e.target.closest('#detail'))state.dirty=true;});
@@ -30,7 +31,7 @@ function renderHome(){
  if(!terms.includes(state.termView))state.termView=terms.includes(state.home.currentTerm)?state.home.currentTerm:terms[0];
  heading(teacher?'教學工作台':'我的學習作品',teacher?'先選活動，再查看班級進度與需要協助的同學。':'選擇課堂正在進行的活動，接著完成自己的下一步。');
  const activities=state.home.activities.filter(a=>!teacher||a.term===state.termView),current=activities.filter(a=>supported(a)&&!a.archived&&(!teacher||!a.test_only)).sort((a,b)=>a.week-b.week||(a.kind==='w3-rebuild'?-1:b.kind==='w3-rebuild'?1:0)),testing=teacher?activities.filter(a=>supported(a)&&!a.archived&&a.test_only):[],history=activities.filter(a=>!current.includes(a)&&!testing.includes(a));
- const cards=list=>list.map(a=>`<button class="card activity-card" data-action="activity" data-id="${esc(a.id)}"><span class="card-top"><span class="week-mark">W${a.week===15?'15–W16':a.week}</span><span class="tag">${a.test_only?'測試活動':esc(phaseLabel(a,state.config))}</span></span><strong>${esc(a.title.replace(/^W\d+(?:[–-]W?\d+)?\s*/,''))}</strong><span class="muted">${esc(ACTIVITY[a.kind]?.description||'早期課程 · 原件與歷程查閱')}</span><span class="card-bottom">${esc(a.term)} 學期<span>${teacher?'查看班級':'進入作品'} →</span></span></button>`).join('');
+ const cards=list=>list.map(a=>`<button class="card activity-card" data-action="activity" data-id="${esc(a.id)}"><span class="card-top"><span class="week-mark">W${a.week===15?'15–W16':a.week}</span><span class="tag">${a.test_only?'測試活動':esc(phaseLabel(a,state.config))}</span></span><strong>${esc(activityTitle(a).replace(/^W\d+(?:[–-]W?\d+)?\s*/,''))}</strong><span class="muted">${esc(ACTIVITY[a.kind]?.description||'早期課程 · 原件與歷程查閱')}</span><span class="card-bottom">${esc(a.term)} 學期<span>${teacher?'查看班級':'進入作品'} →</span></span></button>`).join('');
  app.innerHTML=`<div class="home-toolbar"><div class="row">${teacher?`<label class="term-filter">查看學期<select id="termView">${terms.map(t=>`<option value="${esc(t)}" ${state.termView===t?'selected':''}>${esc(t)}${state.home.currentTerm===t?' · 目前學期':' · 歷史查閱'}</option>`).join('')}</select></label>`:`<span class="tag">${esc(state.home.currentTerm)} 學期</span>`}</div><div class="row">${button(teacher?'學生學期歷程':'我的學期作品','journey','',true)}<a class="button secondary" href="/workspace/guide.html" target="_blank" rel="noopener">系統導覽與期末示範 ↗</a>${teacher?button('系統維護','maintenance','',true):''}${teacher?button('學生帳號與登入碼','studentAccounts','',true):''}${p.role==='admin'?button('學期管理','termManager','',true)+button('搬遷封存紀錄','archive','',true):''}${!teacher?button('匿名展示說明','sharingInfo','',true):''}</div></div><section aria-labelledby="activitiesTitle"><div class="section-title"><h2 id="activitiesTitle">課堂活動</h2><span class="muted">${current.length} 個活動</span></div><div class="grid activity-grid">${cards(current)||'<div class="empty-state">目前沒有開放的課堂活動，可在下方查閱歷史紀錄。</div>'}${weekly.selectionCard()}</div></section>${testing.length?`<details class="history-section"><summary>測試活動 · ${testing.length}</summary><p class="muted">供教師與測試學生驗收，不列入正式班級或公開展廳。</p><div class="grid">${cards(testing)}${weekly.selectionCard(true)}</div></details>`:''}${history.length?`<details class="history-section" ${current.length?'':'open'}><summary>歷史與封存活動 · ${history.length}</summary><p class="muted">保留原有作品與學習紀錄。</p><div class="grid">${cards(history)}</div></details>`:''}`;
 }
 function agreementContent(){const a=state.home.sharingAgreement;return `<h2>${esc(a.title)}</h2>${a.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}`;}
@@ -53,7 +54,7 @@ async function openActivity(activityId){say('');state.activity=activityId;state.
 async function board(){
  const expanded=[...document.querySelectorAll('[data-work-details][open]')].map(el=>el.dataset.workDetails),queues=[...document.querySelectorAll('.queue')].map(el=>el.open),focusId=document.activeElement?.id,scroll=window.scrollY;
  const b=await api('board',{activityId:state.activity,...(state.className?{className:state.className}:{})});state.board=b;const teacher=state.home.person.role!=='student',a=b.activity;
- heading(a.title,teacher?'查看班級交件、作品版本與需要協助的同學。':ACTIVITY[a.kind]?.description||'查閱原件與歷程。');
+ heading(activityTitle(a),teacher?'查看班級交件、作品版本與需要協助的同學。':ACTIVITY[a.kind]?.description||'查閱原件與歷程。',a.kind);
  app.innerHTML=`<div class="board-toolbar"><div class="row">${button('← 課堂活動','home','',true)}<span class="tag">${esc(phaseLabel(a,state.config))}</span>${a.testOnly?'<span class="tag test-tag">測試活動</span>':''}</div><button class="secondary refresh-button" data-action="refresh" aria-label="更新作品與回饋"><span class="refresh-long">更新作品與回饋</span><span class="refresh-short">更新</span></button></div>${a.archived?'<p class="notice">此學期已封存，作品、回饋與評閱保留查閱。</p>':''}${teacher?teacherPanel(b):studentPanel(b)}`;
  if(!teacher&&a.kind!=='w4'&&!b.reviews.length)state.studentView='work';
  if(teacher){renderWorks();for(const el of document.querySelectorAll('[data-work-details]'))el.open=expanded.includes(el.dataset.workDetails);document.querySelectorAll('.queue').forEach((el,i)=>{if(queues[i])el.open=true;});}else setStudentView(state.studentView);

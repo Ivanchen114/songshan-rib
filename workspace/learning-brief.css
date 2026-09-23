@@ -1,0 +1,8 @@
+/* Two quiet lines connect the purpose to the existing next-step instruction. */
+.learning-brief{margin:20px 0 0;max-width:56rem;font-size:15px;line-height:1.8;color:#52645b}
+.learning-brief p{display:grid;grid-template-columns:6em minmax(0,1fr);gap:12px;margin:7px 0}
+.learning-brief strong{color:#284c40;font-weight:650}
+.learning-brief span{overflow-wrap:anywhere}
+#learningBrief:empty{display:none}
+.curator-note .learning-brief{max-width:52rem;font-size:16px}
+@media(max-width:600px){.learning-brief,.curator-note .learning-brief{font-size:14px;line-height:1.75;margin-top:16px}.learning-brief p{grid-template-columns:1fr;gap:2px;margin:12px 0}}
