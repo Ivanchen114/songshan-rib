@@ -10,6 +10,7 @@ import {createSession,sha} from './security.mjs';
 import sharp from 'sharp';
 const f=await fixture(5),port=Number(process.env.PORT||8946),origin=`http://127.0.0.1:${port}`,root=path.resolve(import.meta.dirname,'..');
 if(process.env.RIB_DEMO_UI==='true'){await f.db.query("update rib.students set class_name='102' where student_id='11500005'");f.people[4].student.class_name='102';}
+if(process.env.RIB_DEMO_W5_PERSONAL==='true'){await f.db.query("update rib.activities set kind='w5-personal',title='W5 個人文字轉圖',phase='exhibit' where id='w5-demo'");}
 if(process.env.RIB_DEMO_ALL==='true'){for(const [kind,week,title] of [['w3-rebuild',3,'W3 小組文字重建'],['w3-personal',3,'W3 個人短文作畫'],['w7',7,'W7 同一事件，兩種呈現'],['w15-deck',15,'W15–W16 公共說明作品']])await f.db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting) values($1,'11501',$2,$3,$1,'exhibit',true)",[kind,week,title]);await f.db.query("update rib.workspace_state set current_term='11501'");}
 const tokens=new Map();f.store.signUpload=async key=>{const token=sha('put:'+key);tokens.set(token,{key,put:true});return origin+'/__media/'+token;};f.store.signRead=async key=>{const token=sha('get:'+key);tokens.set(token,{key,put:false});return origin+'/__media/'+token;};
 if(process.env.RIB_DEMO_AGREEMENT==='true')await f.db.query('update rib.students set sharing_agreement=null');

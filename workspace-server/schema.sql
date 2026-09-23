@@ -150,3 +150,6 @@ do $$ declare item record; begin
   execute format('alter table rib.%I enable row level security',item.tablename);
  end loop;
 end $$;
+
+-- Nullable for older works and activities without topic selection.
+alter table rib.works add column if not exists topic text;

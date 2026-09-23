@@ -1,6 +1,7 @@
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
-import {GroupMembership} from './group-membership.mjs';
+import {TopicSelection} from './topic-selection.mjs';
+import {w5Topic} from '../workspace/w5-topics.js';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
@@ -11,7 +12,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
 const one = async(db,q,args) => (await db.query(q,args))[0];
-export class Workspace extends GroupMembership {
+export class Workspace extends TopicSelection {
   constructor(db,store){super();this.db=db;this.store=store;}
   async event(db,p,a,kind,resource,detail={}){await db.query('insert into rib.events(activity_id,actor,kind,resource,detail) values($1,$2,$3,$4,$5)',[a,actor(p),kind,resource,json(detail)]);}
   async login(input,ip) {
@@ -97,7 +98,7 @@ export class Workspace extends GroupMembership {
     demand(supportedKind(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');
     const previous=await this.db.query('select id,ordinal,metadata from rib.versions where work_id=$1 order by ordinal',[w.id]);const extra=submissionMetadata(w.kind,input,previous);const files=input.files;
     for(const f of files)demand(Number.isInteger(f.bytes)&&f.bytes>0&&f.bytes<=MAX_IMAGE&&/^[a-f0-9]{64}$/.test(f.sha256)&&['image/jpeg','image/png','image/webp'].includes(f.mime),400,'圖片需為 JPG、PNG 或 WebP，每張最多 8 MB。');
-    const [student]=await this.db.query('select sharing_agreement from rib.students where term=$1 and student_id=$2',[p.term,p.studentId]);demand(hasAgreement(student),403,'請先閱讀登入後的匿名展示說明。');const metadata={publicDisplay:true,sharingAgreementVersion:AGREEMENT_VERSION,...extra};if(w.kind==='w5-workshop'){demand(/^A0[2-5]$/.test(input.topics?.[0])&&/^B(?:0[2356789]|10)$/.test(input.topics?.[1]),400,'請選 A、B 區各一題。');metadata.topics=input.topics;}
+    const [student]=await this.db.query('select sharing_agreement from rib.students where term=$1 and student_id=$2',[p.term,p.studentId]);demand(hasAgreement(student),403,'請先閱讀登入後的匿名展示說明。');const metadata={publicDisplay:true,sharingAgreementVersion:AGREEMENT_VERSION,...extra};if(w.kind==='w5-personal'){demand(w5Topic(w.topic),409,'請先選定題目，再上傳作品。');demand(!input.topic||input.topic===w.topic,409,'題目已更新，請重新整理後再上傳。');metadata.topic=w.topic;metadata.topics=[w.topic];}if(w.kind==='w5-workshop'){demand(/^A0[2-5]$/.test(input.topics?.[0])&&/^B(?:0[2356789]|10)$/.test(input.topics?.[1]),400,'請選 A、B 區各一題。');metadata.topics=input.topics;}
     const requestId=id(input.requestId);
     let ticket=await one(this.db,'select * from rib.uploads where work_id=$1 and request_id=$2',[w.id,requestId]);
     if(ticket){demand(ticket.actor===actor(p)&&ticket.files.length===files.length&&ticket.files.every((f,i)=>f.bytes===files[i].bytes&&f.mime===files[i].mime&&f.sha256===files[i].sha256)&&isDeepStrictEqual(ticket.metadata,metadata),409,'重送內容不同，請重新選圖。');if(ticket.version_id)return {versionId:ticket.version_id};demand(new Date(ticket.expires_at)>new Date(),409,'上傳已到期，請重新選圖。');}

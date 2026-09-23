@@ -5,7 +5,7 @@ import {Workspace} from './service.mjs';
 import {currentTerm} from './terms.mjs';
 import {authenticate,createSession,demand,ipKey,Problem,sha,uid,rate} from './security.mjs';
 const reads=new Set(['maintenance','journey','journeyMedia','studentAccounts','conversation','archive','home','board','classes','roster','media','evidence','gallery','updates','terms','termBackup','classWall','selections','selectionTeacher','original']);
-const writes=new Set(['backupRun','rosterPreview','rosterImport','studentProfile','studentAccountUpdate','testFeedback','assignReader','reply','ensureWork','invitePreview','invite','leaveGroup','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','termSave','termActivate','agreement','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize']);
+const writes=new Set(['chooseTopic','backupRun','rosterPreview','rosterImport','studentProfile','studentAccountUpdate','testFeedback','assignReader','reply','ensureWork','invitePreview','invite','leaveGroup','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','termSave','termActivate','agreement','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize']);
 const cookies=req=>Object.fromEntries(String(req.headers.cookie||'').split(';').map(x=>x.trim().split('=')));
 export function handler({db,store,origin,enabled=true,rateSecret,secure=true,authClientFactory=createClient}) {
   const service=new Workspace(db,store);

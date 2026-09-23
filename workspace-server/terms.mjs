@@ -111,9 +111,9 @@ export class TermManager {
  }
 }
 
-export const activityWrites=['testFeedback','assignReader','reply','ensureWork','invite','leaveGroup','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize'];
+export const activityWrites=['chooseTopic','testFeedback','assignReader','reply','ensureWork','invite','leaveGroup','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize'];
 export async function guardActivityWrite(db,action,input){
- let activityId=['ensureWork','invitation','dispatch','control','referencePrepare'].includes(action)?input.activityId:null;
+ let activityId=['chooseTopic','ensureWork','invitation','dispatch','control','referencePrepare'].includes(action)?input.activityId:null;
  if(['testFeedback','assignReader','invite','leaveGroup','prepare','decision','consent','assess','wallComment','wallVote','markCurrent','paperKeep'].includes(action)&&input.workId)activityId=(await db.query('select activity_id from rib.works where id=$1',[input.workId]))[0]?.activity_id;
  if(['review','requestReplacement','replace','reply'].includes(action)&&input.reviewId)activityId=(await db.query('select activity_id from rib.reviews where id=$1',[input.reviewId]))[0]?.activity_id;
  if(action==='finalize'&&input.ticketId)activityId=(await db.query('select w.activity_id from rib.uploads u join rib.works w on w.id=u.work_id where u.id=$1',[input.ticketId]))[0]?.activity_id;

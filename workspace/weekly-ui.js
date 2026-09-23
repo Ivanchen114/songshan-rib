@@ -1,3 +1,4 @@
+import {w5Topic} from './w5-topics.js';
 import {ACTIVITY} from './activities.js';
 export function createWeeklyUI(ctx){
  const {state,api,show,heading,app,button,esc,images,board,home,say,dialog,uploadFile}=ctx;
@@ -9,6 +10,7 @@ export function createWeeklyUI(ctx){
   let fields=img('作品圖片');
   if(['w3-rebuild','w3-personal'].includes(k))fields=`<label>${k==='w3-personal'?'自己的短文':'本版使用的完整描述'}<textarea name="text" maxlength="3000" required></textarea></label>`+fields;
   if(k==='w7')fields=`${w.versions.length?'': '<label>材料<select name="topic"><option value="Z">動物園</option><option value="M">校園手機</option></select></label>'}<p>V1 保存圖文作品；V2 保存修訂處。真人回讀及改留理由仍記在歷程本，不必重寫在網站。</p>`+img(w.versions.length?'修訂處 V2':'圖文作品 V1');
+  if(k==='w5-personal'){const t=w5Topic(w.topic);if(!t)throw Error('請先選題，再上傳。');fields=`<div class="notice"><strong>${esc(t.id)} · ${esc(t.title)}</strong><p>${esc(t.purpose)}</p></div><p>每人交一張自己的作品；修訂時延續這一題。</p>`+img('我的文字轉圖作品（一張）');}
   if(k==='w5-workshop')fields='<label>A 區題號<select name="topicA">'+['A02','A03','A04','A05'].map(t=>`<option>${t}</option>`).join('')+'</select></label>'+img('A 題照片','imageA')+'<label>B 區題號<select name="topicB">'+['B02','B03','B05','B06','B07','B08','B09','B10'].map(t=>`<option>${t}</option>`).join('')+'</select></label>'+img('B 題照片','imageB');
   if(k==='w15-deck')fields=`<label>本版用途<select name="purpose">${['試讀版','試讀修訂','發表定稿','提問後修訂'].map(t=>'<option>'+t+'</option>').join('')}</select></label><label>作品形式<select name="layout" id="deckLayout"><option value="slides">五張投影片圖片</option><option value="paper">一張完整 A3 五格照片</option></select></label><div id="deckFiles">${[1,2,3,4,5].map(i=>img('第 '+i+' 頁','page'+i)).join('')}</div><p>各頁順序由上到下。PDF／PPTX 先匯出圖片；沒有修改可以直接沿用既有版本。</p>`;
   if(k==='w4'&&w.versions.length)fields+='<label>根據同學初讀，我改了什麼？<textarea name="reason" required maxlength="1200"></textarea></label>';
