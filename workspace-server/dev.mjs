@@ -28,6 +28,17 @@ if(process.env.RIB_DEMO_LATE==='true'){
  for(const r of await f.db.query('select * from rib.reviews'))await s.review(f.people.find(p=>p.studentId===r.reviewer_id),{reviewId:r.id,expectedRevision:r.revision,situation:'【本機測試】看見一個空位。',meaning:'【本機測試】像在等人加入。'});
  await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:1,phase:'exhibit',accepting:true});
 }
+if(process.env.RIB_DEMO_EXHIBITION==='true'){
+ const s=new Workspace(f.db,f.store);
+ await f.db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting) values('exhibition-demo','11501',3,'W3 文字重建挑戰','w3-rebuild','exhibit',true)");
+ const colors=['#567664','#a78360','#6d8090','#b6906e'];
+ for(const [i,p]of f.people.slice(0,4).entries()){const w=await s.ensureWork(p,{activityId:'exhibition-demo'});
+  for(const ordinal of [1,2]){const bytes=await sharp(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720"><rect width="960" height="720" fill="#eae2ce"/><circle cx="'+(340+i*60)+'" cy="250" r="130" fill="'+colors[i]+'"/><path d="M0 590L300 350L620 540L960 340V720H0Z" fill="#91a28d"/><path d="M0 660L400 '+(530-ordinal*30)+'L780 670L960 480V720H0Z" fill="'+colors[i]+'"/><rect x="630" y="120" width="140" height="260" fill="#ece8db" stroke="#5d685c" stroke-width="8"/><path d="M700 120V380M630 250H770" stroke="#5d685c" stroke-width="6"/></svg>')).png().toBuffer();
+   const [current]=await f.db.query('select revision from rib.works where id=$1',[w.id]);const u=await s.prepare(p,{workId:w.id,requestId:'exhibition-'+i+'-'+ordinal,expectedRevision:current.revision,text:'【虛構測試作品】一扇窗，留住了遠方的山色。前景的深綠色山坡緩緩向右延伸，後方是一輪安靜的圓日。'+(ordinal===2?'第二版把山線往上移，讓窗內與窗外的視線有了呼應。':'第一版試著用幾個簡單的形狀，描述午後看向窗外的景象。'),files:[{bytes:bytes.length,mime:'image/png',sha256:sha(bytes)}]});
+   const [ticket]=await f.db.query('select files from rib.uploads where id=$1',[u.ticketId]);f.store.objects.set(ticket.files[0].key,bytes);await s.finalize(p,{ticketId:u.ticketId});
+  }
+ }
+}
 http.createServer(async(req,res)=>{try{
   const url=new URL(req.url,origin);
   if(url.pathname==='/__demo/teacher'&&req.method==='GET'){const s=await createSession(f.db,{role:'admin',email:f.teacher.email});res.setHeader('Set-Cookie',`rib_session=${s.token}; HttpOnly; SameSite=Lax; Path=/`);res.writeHead(302,{Location:'/workspace/'});return res.end();}
