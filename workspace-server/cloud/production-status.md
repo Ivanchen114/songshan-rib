@@ -1,3 +1,18 @@
+# 全週次正式切換（2026-09-23）
+
+本節取代下方早先 W4／W5 的範圍說明。W3 小組／個人、W4、W5 文字轉圖、W7、W15–W16、W18 均已實作，網站全部課堂作品入口統一使用新工作區。
+
+- 重新核對舊 Sheets：108 小組、114 版本、55 留言逐筆相同；Votes／Selections 均無資料。原始 316 媒體、73 份目前登入資料、既有 64 初讀與 24 改留紀錄保留。
+- 剩餘四個舊活動已關閉交件與互動，連同先前 W4／W5 共六個活動均停寫。原始 JSON 保存於私密 weekly-activities-before.json。
+- 資料庫追加四張私有表，W3／W7 正規化；建立 W15–W16（先關閉交件）及四個隔離測試活動。W18 使用選件紀錄，不另創活動。早期 W5 短片保留封存。
+- 切換前資料庫備份 weekly-before.json SHA-256：dbd7b337a61afe23bb68ed129e36e3ab37e4d156833cc1ab0e93391cfab61238。
+- 整合後 weekly-after.json SHA-256：87347afa62109466b9404d43a463fd72d214fcd751e1d53dfc37a0b560934be8。逐筆核對學生、驗證、成員、初讀、回覆、改留、評閱、來源紀錄及原媒體未變。其後 W3 課程既有教師原圖另存私人 reference。
+- 41 項測試通過，涵蓋新週次、六種流程換學期、不可跨班／測試隔離、公開同意、精選撤回、完整還原與重跑整合不重複。正式 PostgreSQL 整合亦先交易回滾演練。
+- Supabase advisory 沒有私有表 RLS 漏洞；一般 Auth 密碼外洩檢查未開，本站教師使用 Google OAuth、學生使用自有驗證，不使用 Supabase 密碼登入。參考：https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection 。
+- 本機畫面已驗證 W3 圖文與 W15 五頁保存讀回。瀏覽器外掛檔案權限阻擋自動選檔，以僅限 loopback 的虛構檔案注入驗證後續上傳流程；不把它當成手機相簿實測。
+
+以下保留第一階段發布與復原紀錄。
+
 # W4／W5 正式發布紀錄
 
 日期：2026-09-23（Asia/Taipei）

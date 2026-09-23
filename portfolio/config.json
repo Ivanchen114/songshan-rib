@@ -1,34 +1,28 @@
 {
-  "gasUrl": "https://script.google.com/macros/s/AKfycbyvnyo34je0yLuPQg80pl1iYVY59tXgYkBubLCmYEWryp1yoM6j2lQ0VrEG8jLS6Rkg/exec",
   "courses": [
     {
-      "code": "4EE1B1",
       "week": 3,
       "title": "W3 文字重建挑戰",
       "term": ""
     },
     {
-      "code": "9EBDF6",
       "week": 4,
       "title": "W4 個人圖卡",
       "term": "",
-      "subtitle": "先初讀與改留，W5接原件再讀"
+      "subtitle": "真人初讀與本人改留"
     },
     {
-      "code": "",
       "week": 5,
-      "title": "W5 原作再讀・小組文字轉圖",
+      "title": "W5 小組文字轉圖",
       "term": "",
-      "subtitle": "原作品・原讀者・核對實際結果"
+      "subtitle": "小組兩題 A3"
     },
     {
-      "code": "",
       "week": 7,
       "title": "W7 同一事件，兩種呈現",
       "term": ""
     },
     {
-      "code": "",
       "week": 15,
       "title": "W15–W16 公共說明作品",
       "term": ""

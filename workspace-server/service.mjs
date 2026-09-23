@@ -1,3 +1,5 @@
+import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
+import {Weekly,submissionMetadata} from './weekly.mjs';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
@@ -8,7 +10,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
 const one = async(db,q,args) => (await db.query(q,args))[0];
-export class Workspace extends TermManager {
+export class Workspace extends Weekly {
   constructor(db,store){super();this.db=db;this.store=store;}
   async event(db,p,a,kind,resource,detail={}){await db.query('insert into rib.events(activity_id,actor,kind,resource,detail) values($1,$2,$3,$4,$5)',[a,actor(p),kind,resource,json(detail)]);}
   async login(input,ip) {
@@ -76,21 +78,21 @@ export class Workspace extends TermManager {
       this.db.query(`select * from rib.assessments where work_id=any($1::text[]) ${p.role==='student'?"and student_id=$2 and status='graded'":''}`,p.role==='student'?[workIds,p.studentId]:[workIds])]);
     const items=works.map(w=>({...w,versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
     const invitations=p.role==='student'?await this.db.query(`select w.id from rib.members m join rib.works w on w.id=m.work_id where w.activity_id=$1 and m.student_id=$2 and m.status='invited'`,[a.id,p.studentId]):[];
-    return {activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations};
+    return {activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations};
   }
   async ensureWork(p,input) {
-    demand(p.role==='student',403,'請使用學生帳號。');const a=await this.activity(p,input.activityId);demand(['w4','w5-workshop'].includes(a.kind),409,'此歷史活動僅供查閱。');demand(a.accepting&&!a.archived,403,'老師尚未開放交件。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'測試帳號請使用測試活動，正式帳號請使用課堂活動。');
+    demand(p.role==='student',403,'請使用學生帳號。');const a=await this.activity(p,input.activityId);demand(supportedKind(a.kind),409,'此歷史活動僅供查閱。');demand(a.accepting&&!a.archived,403,'老師尚未開放交件。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'測試帳號請使用測試活動，正式帳號請使用課堂活動。');
     return this.db.transaction(async db=>{
       await db.query('select id from rib.activities where id=$1 for update',[a.id]);
       const existing=await one(db,`select w.* from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status in ('confirmed','invited')`,[a.id,p.studentId]);
       if(existing)return existing;
-      const workId=uid();await db.query(`insert into rib.works(id,activity_id,class_name,owner_id) values($1,$2,$3,$4)`,[workId,a.id,p.student.class_name,a.kind==='w5-workshop'?null:p.studentId]);
+      const workId=uid();await db.query(`insert into rib.works(id,activity_id,class_name,owner_id) values($1,$2,$3,$4)`,[workId,a.id,p.student.class_name,isGroup(a.kind)?null:p.studentId]);
       await db.query(`insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'confirmed')`,[workId,p.term,p.studentId]);
       return {id:workId,revision:0};
     });
   }
   async inviteSeats(p,w,seats,db=this.db) {
-    demand(p.role==='student'&&w.kind==='w5-workshop'&&w.class_name===p.student.class_name&&p.student.is_test===w.test_only,403,'請在自己的同班小組邀請。');
+    demand(p.role==='student'&&isGroup(w.kind)&&w.class_name===p.student.class_name&&p.student.is_test===w.test_only,403,'請在自己的同班小組邀請。');
     demand(Array.isArray(seats)&&seats.length>0&&seats.length<=3&&seats.every(n=>Number.isInteger(n)&&n>0&&n<=999)&&new Set(seats).size===seats.length,400,'請填一至三位不重複的同班座號。');
     const rows=await db.query('select student_id,name,seat from rib.students where term=$1 and class_name=$2 and seat=any($3::int[]) and active and is_test=$4 for share',[w.term,w.class_name,seats,w.test_only]);
     const students=seats.map(seat=>{const found=rows.filter(s=>s.seat===seat);demand(found.length===1,400,`${seat} 號無法唯一對應到可邀請的同班同學，請核對座號或洽老師。`);demand(found[0].student_id!==p.studentId,400,'不用邀請自己，請只填其他組員的座號。');return found[0];});
@@ -106,7 +108,7 @@ export class Workspace extends TermManager {
     return {className:w.class_name,students:students.map(s=>({studentId:s.student_id,name:s.name,seat:s.seat}))};
   }
   async invite(p,input) {
-    const w=await this.work(p,input.workId,{write:true});demand(p.role==='student'&&w.kind==='w5-workshop'&&p.student.is_test===w.test_only,403,'此區不使用小組邀請。');
+    const w=await this.work(p,input.workId,{write:true});demand(p.role==='student'&&isGroup(w.kind)&&p.student.is_test===w.test_only,403,'此區不使用小組邀請。');
     let ids=input.studentIds;if(input.seats===undefined)demand(Array.isArray(ids)&&ids.length>0&&ids.length<=3&&new Set(ids).size===ids.length,400,'請填一至三位不重複的同組學號。');
     return this.db.transaction(async db=>{
       await db.query('select id from rib.activities where id=$1 for update',[w.activity_id]);
@@ -124,10 +126,10 @@ export class Workspace extends TermManager {
     const rows=await this.db.query(`update rib.members set status=$1 where work_id=$2 and term=$3 and student_id=$4 and status='invited' and exists(select 1 from rib.works where id=$2 and activity_id=$5) returning work_id`,[choice,id(input.workId),p.term,p.studentId,a.id]);demand(rows.length,409,'邀請已更新，請重新整理。');await this.event(this.db,p,a.id,'invitation',input.workId,{choice});return {saved:true};}
   async prepare(p,input) {
     demand(p.role==='student',403,'請使用學生交件入口。');const w=await this.work(p,input.workId,{write:true});
-    demand(['w4','w5-workshop'].includes(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');
-    const files=input.files;demand(Array.isArray(files)&&files.length===(w.kind==='w5-workshop'?2:1),400,'請選取本週需要的圖片數量。');
+    demand(supportedKind(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');
+    const previous=await this.db.query('select id,ordinal,metadata from rib.versions where work_id=$1 order by ordinal',[w.id]);const extra=submissionMetadata(w.kind,input,previous);const files=input.files;
     for(const f of files)demand(Number.isInteger(f.bytes)&&f.bytes>0&&f.bytes<=MAX_IMAGE&&/^[a-f0-9]{64}$/.test(f.sha256)&&['image/jpeg','image/png','image/webp'].includes(f.mime),400,'圖片需為 JPG、PNG 或 WebP，每張最多 8 MB。');
-    const [student]=await this.db.query('select sharing_agreement from rib.students where term=$1 and student_id=$2',[p.term,p.studentId]);demand(hasAgreement(student),403,'請先閱讀登入後的匿名展示說明。');const metadata={publicDisplay:true,sharingAgreementVersion:AGREEMENT_VERSION};if(w.kind==='w5-workshop'){demand(/^A0[2-5]$/.test(input.topics?.[0])&&/^B(?:0[2356789]|10)$/.test(input.topics?.[1]),400,'請選 A、B 區各一題。');metadata.topics=input.topics;}
+    const [student]=await this.db.query('select sharing_agreement from rib.students where term=$1 and student_id=$2',[p.term,p.studentId]);demand(hasAgreement(student),403,'請先閱讀登入後的匿名展示說明。');const metadata={publicDisplay:true,sharingAgreementVersion:AGREEMENT_VERSION,...extra};if(w.kind==='w5-workshop'){demand(/^A0[2-5]$/.test(input.topics?.[0])&&/^B(?:0[2356789]|10)$/.test(input.topics?.[1]),400,'請選 A、B 區各一題。');metadata.topics=input.topics;}
     const requestId=id(input.requestId);
     let ticket=await one(this.db,'select * from rib.uploads where work_id=$1 and request_id=$2',[w.id,requestId]);
     if(ticket){demand(ticket.actor===actor(p)&&ticket.files.length===files.length&&ticket.files.every((f,i)=>f.bytes===files[i].bytes&&f.mime===files[i].mime&&f.sha256===files[i].sha256)&&isDeepStrictEqual(ticket.metadata,metadata),409,'重送內容不同，請重新選圖。');if(ticket.version_id)return {versionId:ticket.version_id};demand(new Date(ticket.expires_at)>new Date(),409,'上傳已到期，請重新選圖。');}
@@ -147,10 +149,12 @@ export class Workspace extends TermManager {
       demand(!(await one(db,"select student_id from rib.members where work_id=$1 and status='invited'",[w.id])),409,'請先讓同組同學確認加入。');
       const versions=await db.query('select * from rib.versions where work_id=$1 order by ordinal',[w.id]);
       if(w.kind==='w4'&&versions.length){demand(versions.length<2&&current.phase==='review',409,'這份圖卡已有 V2 或已展示。');demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
+      demand(versions.length<ACTIVITY[w.kind].maxVersions,409,'本週版本已保存完成。');
       const versionId=uid(),ordinal=versions.length?Math.max(...versions.map(v=>v.ordinal))+1:1;
       await db.query('insert into rib.versions(id,work_id,ordinal,media,metadata,request_id) values($1,$2,$3,$4,$5,$6)',[versionId,w.id,ordinal,json(media),json(ticket.metadata),ticket.request_id]);
-      await db.query('update rib.works set revision=revision+1 where id=$1',[w.id]);await db.query('update rib.uploads set version_id=$1 where id=$2',[versionId,ticket.id]);
+      await db.query('update rib.works set revision=revision+1,current_version_id=$2 where id=$1',[w.id,versionId]);await db.query('update rib.uploads set version_id=$1 where id=$2',[versionId,ticket.id]);
       await db.query("update rib.reviews set version_id=$1,status='assigned',revision=revision+1 where target_work_id=$2 and status='waiting'",[versionId,w.id]);
+      if(w.kind==='w7'&&ordinal===2)await db.query("insert into rib.decisions(id,work_id,student_id,choice,reason,version_id) values($1,$2,$3,'revise','修改依據記在歷程本。',$4)",[uid(),w.id,p.studentId,versionId]);
       if(w.kind==='w4'&&ordinal===2)await db.query("insert into rib.decisions(id,work_id,student_id,choice,reason,version_id) values($1,$2,$3,'revise',$4,$5)",[uid(),w.id,p.studentId,text(input.reason),versionId]);
       await db.query('insert into rib.publications(id,version_id) values($1,$2)',[uid(),versionId]);await autoPublish(db,w.id);await this.event(db,p,w.activity_id,'submission',versionId);return {versionId};
     });
@@ -159,7 +163,9 @@ export class Workspace extends TermManager {
     const v=await one(this.db,'select * from rib.versions where id=$1',[id(input.versionId)]);demand(v,404,'找不到版本。');const w=await this.work(p,v.work_id);
     if(p.role==='student'&&!w.own&&w.phase!=='exhibit')demand(w.review?.version_id===v.id,403,'請查看指定的初讀版本。');
     const images=[];for(const m of v.media){demand(m.fullKey,409,'此媒體尚未完成搬遷，請使用原入口。');images.push({url:await this.store.signRead(input.size==='thumb'?m.thumbKey:m.fullKey)});}
-    return {images,ordinal:v.ordinal,metadata:v.metadata};
+    const projectUrl=v.metadata.legacyProjectKey&&(p.role!=='student'||w.own)?await this.store.signRead(v.metadata.legacyProjectKey):null;
+    const contextImages=[];if(w.kind==='w7'&&v.ordinal===2){const first=await one(this.db,'select media from rib.versions where work_id=$1 and ordinal=1',[w.id]);for(const m of first?.media||[])contextImages.push({url:await this.store.signRead(m.fullKey)});}
+    return {images,contextImages,ordinal:v.ordinal,metadata:{...v.metadata,legacyProjectKey:undefined},projectUrl};
   }
   async dispatch(p,input) {
     const a=await this.activity(p,input.activityId);const cls=text(input.className,20);teacherScope(p,a.term,cls);demand(a.kind==='w4'&&!a.archived&&a.phase!=='exhibit',409,'目前不能分派。');
@@ -231,7 +237,7 @@ export class Workspace extends TermManager {
     const records=await this.db.query('select source_id,source_hash,payload from rib.legacy_records where source_table=$1 order by source_id limit 30 offset $2',[input.table,offset]);return {records,next:records.length===30?offset+30:null};}
   async classes(p,input){demand(p.role!=='student',403,'請使用教師帳號。');const a=await this.activity(p,input.activityId);const rows=await this.db.query('select distinct class_name from rib.students where term=$1 and is_test=$2 order by class_name',[a.term,a.legacy?.testOnly===true]);return {classes:rows.map(r=>r.class_name).filter(c=>p.role==='admin'||p.teacher.scopes.some(s=>s.term===a.term&&s.className===c))};}
   async roster(p,input){const a=await this.activity(p,input.activityId);teacherScope(p,a.term,input.className);return {students:await this.db.query('select student_id,name,seat,is_test,active from rib.students where term=$1 and class_name=$2 order by seat',[a.term,input.className])};}
-  async control(p,input){const a=await this.activity(p,input.activityId);demand(p.role==='admin',403,'全活動開關由管理教師操作。');demand(input.accepting!==true||['w4','w5-workshop'].includes(a.kind),409,'此歷史模式尚未開放新流程，請使用原入口。');demand(['production','review','exhibit'].includes(input.phase),400,'請選有效階段。');demand(process.env.RIB_ACCEPTANCE_ONLY!=='true'||a.legacy?.testOnly||input.accepting!==true,403,'驗收期間只能開放測試活動，原活動保持查閱。');
+  async control(p,input){const a=await this.activity(p,input.activityId);demand(p.role==='admin',403,'全活動開關由管理教師操作。');demand(input.accepting!==true||supportedKind(a.kind),409,'此歷史模式尚未開放新流程，請使用原入口。');demand(['production','review','exhibit'].includes(input.phase),400,'請選有效階段。');demand(process.env.RIB_ACCEPTANCE_ONLY!=='true'||a.legacy?.testOnly||input.accepting!==true,403,'驗收期間只能開放測試活動，原活動保持查閱。');
     const rows=await this.db.query('update rib.activities set phase=$1,accepting=$2,revision=revision+1 where id=$3 and revision=$4 returning id',[input.phase,input.accepting===true,a.id,input.expectedRevision]);demand(rows.length,409,'設定已更新，請重新整理。');await this.event(this.db,p,a.id,'control',a.id,{phase:input.phase,accepting:input.accepting});return {saved:true};}
   async consent(p,input){return this.db.transaction(async db=>{
     await db.query('select id from rib.works where id=$1 for update',[id(input.workId)]);

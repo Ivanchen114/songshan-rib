@@ -21,11 +21,12 @@ export async function autoPublish(db,workId){
 export async function galleryList(db,store,input={}){
  if(process.env.RIB_ACCEPTANCE_ONLY==='true')return {items:[],hasMore:false};
  const page=Number(input.page||0);demand(Number.isInteger(page)&&page>=0&&page<=1000,400,'頁碼不正確。');
- const rows=await db.query(`select p.id,p.title,a.week,v.media from ${publicFrom} where ${publicWhere} order by p.created_at desc,p.id desc limit 25 offset $1`,[page*24]);
- return {items:await Promise.all(rows.slice(0,24).map(async r=>({id:r.id,title:r.title,week:r.week,thumbnails:await Promise.all(r.media.map(m=>store.signRead(m.thumbKey)))}))),hasMore:rows.length>24};
+ const featured=input.featured==='true';
+ const rows=await db.query(`select p.id,p.title,a.week,v.media,p.featured from ${publicFrom} where ${publicWhere} ${featured?"and p.featured and exists(select 1 from rib.selections s where s.term=a.term and s.version_ids ? v.id)":''} order by p.created_at desc,p.id desc limit 25 offset $1`,[page*24]);
+ return {items:await Promise.all(rows.slice(0,24).map(async r=>({id:r.id,title:r.title,week:r.week,featured:r.featured,thumbnails:await Promise.all(r.media.map(m=>store.signRead(m.thumbKey)))}))),hasMore:rows.length>24};
 }
 export async function galleryDetail(db,store,input){
  demand(process.env.RIB_ACCEPTANCE_ONLY!=='true',404,'這件作品目前沒有公開。');
- const [r]=await db.query(`select p.id,p.title,a.week,v.media from ${publicFrom} where p.id=$1 and ${publicWhere}`,[String(input.publicationId||'')]);
- demand(r,404,'這件作品目前沒有公開。');return {id:r.id,title:r.title,week:r.week,images:await Promise.all(r.media.map(m=>store.signRead(m.fullKey)))};
+ const [r]=await db.query(`select p.id,p.title,a.week,a.kind,v.media,v.metadata,v.ordinal,w.id as work_id from ${publicFrom} where p.id=$1 and ${publicWhere}`,[String(input.publicationId||'')]);
+ demand(r,404,'這件作品目前沒有公開。');let context=[];if(r.kind==='w7'&&r.ordinal===2){const [first]=await db.query('select media from rib.versions where work_id=$1 and ordinal=1',[r.work_id]);context=first?.media||[];}return {id:r.id,title:r.title,week:r.week,text:['w3-rebuild','w3-personal'].includes(r.kind)?r.metadata.text||'':'',contextImages:await Promise.all(context.map(m=>store.signRead(m.fullKey))),images:await Promise.all(r.media.map(m=>store.signRead(m.fullKey)))};
 }

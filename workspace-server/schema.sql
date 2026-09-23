@@ -112,6 +112,34 @@ create table if not exists rib.term_changes (
  actor text not null, snapshot jsonb not null, snapshot_hash text not null,
  summary jsonb not null, created_at timestamptz not null default now()
 );
+-- Additive whole-course migration; existing works and credentials are untouched.
+alter table rib.works add column if not exists current_version_id text references rib.versions;
+alter table rib.publications add column if not exists featured boolean not null default false;
+create table if not exists rib.wall_comments (
+ id text primary key,activity_id text not null references rib.activities,
+ target_work_id text not null references rib.works,actor_work_id text not null references rib.works,
+ body text not null,request_id text not null,hidden boolean not null default false,
+ created_at timestamptz not null default now(),unique(actor_work_id,request_id)
+);
+create index if not exists wall_comments_target on rib.wall_comments(target_work_id,created_at);
+create table if not exists rib.wall_votes (
+ activity_id text not null references rib.activities,actor_work_id text not null references rib.works,
+ target_work_id text not null references rib.works,active boolean not null default true,
+ primary key(actor_work_id,target_work_id)
+);
+create index if not exists wall_votes_target on rib.wall_votes(target_work_id);
+create table if not exists rib.selections (
+ term text not null,student_id text not null,version_ids jsonb not null default '[]',
+ revision integer not null default 1,updated_at timestamptz not null default now(),
+ primary key(term,student_id),foreign key(term,student_id) references rib.students
+);
+create table if not exists rib.activity_assets (
+ id text primary key,activity_id text not null references rib.activities,actor text not null,
+ request_id text not null,file jsonb not null,media jsonb not null default '[]',
+ completed boolean not null default false,created_at timestamptz not null default now(),
+ unique(activity_id,request_id)
+);
+create index if not exists activity_assets_activity on rib.activity_assets(activity_id,created_at);
 revoke all on all tables in schema rib from public;
 revoke all on all sequences in schema rib from public;
 

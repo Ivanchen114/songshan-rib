@@ -1,26 +1,7 @@
-(()=>{'use strict';
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let config,loading=false,gallery;const term=s=>/^(\d{3})0([12])$/.test(s)?s.slice(0,3)+' 學年度'+(s.endsWith('1')?'上':'下')+'學期':s||'公開作品';
-const courseNotes={3:'小組文字重建・個人短文作畫',4:'個人圖卡・真人試讀與改留',5:'原作品再讀・小組文字轉圖',7:'同一事件・兩種呈現'};
-const entry=args=>config.workspaceUrl&&[4,5].includes(Number(args.week))?config.workspaceUrl+'?'+new URLSearchParams({week:args.week}):config.gasUrl+'#'+new URLSearchParams(args);const badge=w=>w===15?'W15–W16':w?'W'+w:'作品';
-function render(d){
- const collections=d.collections;const groups=[...new Set(collections.map(c=>c.term))].sort().reverse();
- $('#publicCollections').innerHTML=groups.length?groups.map(t=>`<h3 class="term-heading">${esc(term(t))}</h3><div class="collection-grid">${collections.filter(c=>c.term===t).map(c=>`<a class="collection-entry" href="${esc(entry(c.exhibit?{exhibit:c.id}:{history:c.id}))}" target="_blank" rel="noopener noreferrer"><span class="week-label">${badge(c.week)}</span><div><h3>${esc(c.title)}</h3><p>${c.count} 份匿名作品</p><span class="entry-action">看作品 →</span></div></a>`).join('')}</div>`).join(''):'';
- const rooms=config.courses.map(room=>({...room,...d.courses.find(c=>c.week===room.week),legacyCode:room.code}));
- $('#archiveCollections').hidden=!groups.length;
- $('#courseEntries').innerHTML=rooms.map(c=>{const args={week:c.week};if(c.legacyCode)args.code=c.legacyCode;return `<a class="course-entry" data-course="w${c.week}" href="${esc(entry(args))}" target="_blank" rel="noopener noreferrer"><span class="week-label">${badge(c.week)}</span><span class="entry-copy"><strong>${esc(c.week===5?'小組文字轉圖':c.title.replace(/^W\d+(?:–W\d+)?\s*/,''))}</strong><small>${config.workspaceUrl&&[4,5].includes(c.week)?'新作品區 · 學號＋個人六碼':c.accepting===false?(c.week===5?'尚未開放再讀':'尚未開放上傳'):esc(courseNotes[c.week]||(c.week===15?'五頁作品・跨週接續':'課堂作品與歷程'))}</small></span><span class="entry-arrow" aria-hidden="true">↗</span><span class="sr-only">（另開分頁）</span></a>`;}).join('')+`<a class="course-entry" data-course="w18" href="${esc(entry({week:18}))}" target="_blank" rel="noopener noreferrer"><span class="week-label">W18</span><span class="entry-copy"><strong>自願選期末精選</strong><small>選既有作品・不用重新上傳</small></span><span class="entry-arrow">↗</span></a>`;
-
-}
-async function galleryRequest(action,data){const view={galleryPage:'gallery',galleryPreview:'preview',galleryCheck:'check'}[action],q=new URLSearchParams({view,...data,...(data.ids?{ids:data.ids.join(',')}:{})});const res=await fetch('/api/portfolio?'+q,{cache:'no-store',signal:AbortSignal.timeout(30000)}),r=await res.json();if(!res.ok||!r.ok)throw Error('展覽暫時無法載入，請稍後重試。');return r.data;}
-async function load(){if(loading)return;loading=true;$('#reloadCatalog').disabled=true;
- try{config||=await(await fetch('config.json')).json();const requested=Number(new URLSearchParams(location.search).get('week'));if([16,18].includes(requested)||config.courses.some(c=>c.week===requested)){const section=new URLSearchParams(location.search).get('section');location.replace(entry({week:requested,...(requested===5&&['workshop','reread'].includes(section)?{section}:{})}));return;}render({courses:[],collections:[]});gallery?.destroy();gallery=createArtworkGallery({root:$('#artworkGallery'),request:galleryRequest,open:item=>{window.open(entry({exhibit:item.id}),'_blank','noopener');}});const response=await fetch('/api/portfolio',{cache:'no-store',signal:AbortSignal.timeout(30000)}),r=await response.json();if(!response.ok||!r.ok||!Array.isArray(r.data?.collections)||!Array.isArray(r.data?.courses))throw Error('unavailable');render(r.data);}
- catch{$('#archiveCollections').hidden=false;$('#archiveCollections').open=true;$('#publicCollections').innerHTML='<div class="catalog-status"><strong>先前展覽目錄暫時無法載入</strong>請稍後按「重新整理」。學生仍可使用上方已設定的課堂入口。</div>';}
- finally{loading=false;$('#reloadCatalog').disabled=false;}
-}
-const classroom=$('#upload'),compact=matchMedia('(max-width:700px)');
-function classroomLayout(){classroom.open=!compact.matches||location.hash==='#upload';}
-classroomLayout();compact.addEventListener('change',classroomLayout);
-document.querySelectorAll('a[href="#upload"]').forEach(a=>a.addEventListener('click',()=>{classroom.open=true;}));
-window.addEventListener('hashchange',()=>{if(location.hash==='#upload')classroom.open=true;});
-$('#reloadCatalog').addEventListener('click',load);load();
+(()=>{
+ const params=new URLSearchParams(location.search),week=Number(params.get('week'));
+ if([3,4,5,7,15,16,18].includes(week)){const target=new URL('/workspace/',location.origin);target.searchParams.set('week',week);if(week===3&&params.get('section')==='personal')target.searchParams.set('section','personal');location.replace(target);return;}
+ document.querySelector('#reloadCatalog')?.addEventListener('click',()=>{const frame=document.querySelector('#newGallery');frame.src=frame.src;});
+ const classroom=document.querySelector('#upload'),compact=matchMedia('(max-width:700px)');
+ const layout=()=>{classroom.open=!compact.matches||location.hash==='#upload';};layout();compact.addEventListener('change',layout);document.querySelectorAll('a[href="#upload"]').forEach(a=>a.addEventListener('click',()=>{classroom.open=true;}));
 })();

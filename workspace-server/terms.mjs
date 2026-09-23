@@ -1,3 +1,5 @@
+import {supportedKind} from '../workspace/activities.js';
+import {TABLES} from './backup.mjs';
 import {randomInt} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {demand,sha,json,uid,verifier} from './security.mjs';
@@ -67,7 +69,7 @@ export class TermManager {
    }
    const removed=source.roster.filter(r=>r.active&&!r.is_test&&!students.some(s=>s.studentId===r.student_id)).map(r=>r.student_id);
    const templates=source.activities.filter(a=>!a.archived).map(a=>({sourceId:a.id,week:a.week,title:a.title,kind:a.kind}));demand(templates.length>0,409,'來源學期沒有可沿用的活動設定。');
-   const summary={total:students.length,classes:[...new Set(students.map(s=>s.className))].sort(),added,retained,moved,removed,activityCount:templates.length,unavailable:templates.filter(a=>!['w4','w5-workshop'].includes(a.kind)).map(a=>a.title)};
+   const summary={total:students.length,classes:[...new Set(students.map(s=>s.className))].sort(),added,retained,moved,removed,activityCount:templates.length,unavailable:templates.filter(a=>!supportedKind(a.kind)).map(a=>a.title)};
    const payload={students,teachers,templates,summary};
    const [draft]=await db.query("insert into rib.term_drafts(term,source_term,payload,source_digest,actor) values($1,$2,$3,$4,$5) on conflict(term) do update set payload=excluded.payload,source_digest=excluded.source_digest,actor=excluded.actor,revision=rib.term_drafts.revision+1,updated_at=now() returning *",[term,sourceTerm,json(payload),source.digest,p.email]);
    await this.event(db,p,null,'term-draft',term,{revision:draft.revision,total:students.length});
@@ -89,8 +91,8 @@ export class TermManager {
    const source=await sourceState(db,d.source_term);demand(source.digest===d.source_digest,409,'名單、教師權限、登入碼或活動設定已更新，請重新儲存草稿並核對。');
    demand(!(await db.query('select 1 from rib.students where term=$1 union all select 1 from rib.activities where term=$1 limit 1',[term])).length,409,'新學期已有資料，不能覆蓋。');
    // Preserve all non-ephemeral data before any semester mutation. Existing media are immutable.
-   const tables={};for(const name of ['students','credentials','teachers','activities','works','members','versions','reviews','replies','decisions','uploads','assessments','publications','events','legacy_records','legacy_files','migration_runs','workspace_state','term_drafts','term_changes'])tables[name]=(await db.query(`select to_jsonb(t) as row from rib.${name} t`)).map(x=>x.row);
-   const backup={format:'rib-backup-v2',created:new Date().toISOString(),tables},snapshotHash=sha(json(backup)),jobId=uid();
+   const tables={};for(const name of TABLES)tables[name]=(await db.query(`select to_jsonb(t) as row from rib.${name} t`)).map(x=>x.row);
+   const backup={format:'rib-backup-v3',created:new Date().toISOString(),tables},snapshotHash=sha(json(backup)),jobId=uid();
    const backupKey='backups/terms/'+jobId+'.json.gz',packed=gzipSync(Buffer.from(json({...backup,sha256:snapshotHash})));
    await this.store.put(backupKey,packed,'application/gzip');
    demand(sha(await this.store.get(backupKey,64*1024*1024))===sha(packed),503,'切換前備份讀回核對失敗，學期尚未切換。');
@@ -109,12 +111,14 @@ export class TermManager {
  }
 }
 
-export const activityWrites=['testFeedback','assignReader','reply','ensureWork','invite','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess'];
+export const activityWrites=['testFeedback','assignReader','reply','ensureWork','invite','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize'];
 export async function guardActivityWrite(db,action,input){
- let activityId=['ensureWork','invitation','dispatch','control'].includes(action)?input.activityId:null;
- if(['testFeedback','assignReader','invite','prepare','decision','consent','assess'].includes(action)&&input.workId)activityId=(await db.query('select activity_id from rib.works where id=$1',[input.workId]))[0]?.activity_id;
+ let activityId=['ensureWork','invitation','dispatch','control','referencePrepare'].includes(action)?input.activityId:null;
+ if(['testFeedback','assignReader','invite','prepare','decision','consent','assess','wallComment','wallVote','markCurrent','paperKeep'].includes(action)&&input.workId)activityId=(await db.query('select activity_id from rib.works where id=$1',[input.workId]))[0]?.activity_id;
  if(['review','requestReplacement','replace','reply'].includes(action)&&input.reviewId)activityId=(await db.query('select activity_id from rib.reviews where id=$1',[input.reviewId]))[0]?.activity_id;
  if(action==='finalize'&&input.ticketId)activityId=(await db.query('select w.activity_id from rib.uploads u join rib.works w on w.id=u.work_id where u.id=$1',[input.ticketId]))[0]?.activity_id;
- if(action==='publish'&&input.publicationId)activityId=(await db.query('select w.activity_id from rib.publications p join rib.versions v on v.id=p.version_id join rib.works w on w.id=v.work_id where p.id=$1',[input.publicationId]))[0]?.activity_id;
+ if(['publish','selectionFeature'].includes(action)&&input.publicationId)activityId=(await db.query('select w.activity_id from rib.publications p join rib.versions v on v.id=p.version_id join rib.works w on w.id=v.work_id where p.id=$1',[input.publicationId]))[0]?.activity_id;
+ if(action==='referenceFinalize'&&input.ticketId)activityId=(await db.query('select activity_id from rib.activity_assets where id=$1',[input.ticketId]))[0]?.activity_id;
+ if(action==='moderateComment'&&input.commentId)activityId=(await db.query('select activity_id from rib.wall_comments where id=$1',[input.commentId]))[0]?.activity_id;
  if(activityId){const [a]=await db.query('select archived from rib.activities where id=$1',[activityId]);const withdrawal=(action==='consent'&&input.consent===false)||(action==='publish'&&input.publish===false);demand(!a?.archived||withdrawal,403,'舊學期已封存，只能查閱；不能再交件、配對、評閱或重開活動。');}
 }
