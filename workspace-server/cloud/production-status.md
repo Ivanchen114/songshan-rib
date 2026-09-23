@@ -7,9 +7,13 @@
 - 資料庫追加四張私有表，W3／W7 正規化；建立 W15–W16（先關閉交件）及四個隔離測試活動。W18 使用選件紀錄，不另創活動。早期 W5 短片保留封存。
 - 切換前資料庫備份 weekly-before.json SHA-256：dbd7b337a61afe23bb68ed129e36e3ab37e4d156833cc1ab0e93391cfab61238。
 - 整合後 weekly-after.json SHA-256：87347afa62109466b9404d43a463fd72d214fcd751e1d53dfc37a0b560934be8。逐筆核對學生、驗證、成員、初讀、回覆、改留、評閱、來源紀錄及原媒體未變。其後 W3 課程既有教師原圖另存私人 reference。
-- 41 項測試通過，涵蓋新週次、六種流程換學期、不可跨班／測試隔離、公開同意、精選撤回、完整還原與重跑整合不重複。正式 PostgreSQL 整合亦先交易回滾演練。
+- 42 項測試通過，涵蓋新週次、六種流程換學期、不可跨班／測試隔離、公開同意、精選撤回、完整還原與重跑整合不重複。正式 PostgreSQL 整合亦先交易回滾演練。
 - Supabase advisory 沒有私有表 RLS 漏洞；一般 Auth 密碼外洩檢查未開，本站教師使用 Google OAuth、學生使用自有驗證，不使用 Supabase 密碼登入。參考：https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection 。
 - 本機畫面已驗證 W3 圖文與 W15 五頁保存讀回。瀏覽器外掛檔案權限阻擋自動選檔，以僅限 loopback 的虛構檔案注入驗證後續上傳流程；不把它當成手機相簿實測。
+
+正式發布來源：2b5cc44；Vercel dpl_7HwevmGurWsip5ZsANeHN5oYUqZp 已 Ready，正式網址九個入口／程式／QR 檔案 SHA-256 與來源相同。正式測試帳號已完成 W3 小組、W3 個人、W7 各一張、W15 五張圖片上傳與讀回、W18 三份選件保存，所有測試作品均未進公開展廳。教師 Google 工作階段確認新活動、108／109 班切換；W3 教師原圖另已保存及讀回。W3 兩張 QR 已實際解碼為新系統網址。
+
+教師首頁測試活動另外收在可展開區塊；W18 的測試選件亦獨立查閱，不混入正式選件。操作說明與系統說明已同步更新。
 
 以下保留第一階段發布與復原紀錄。
 
