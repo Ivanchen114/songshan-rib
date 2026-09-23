@@ -18,18 +18,21 @@ export function submissionMetadata(kind,input,previous=[]){
 }
 export class Weekly extends TermManager {
  async classWall(p,input){
-  const a=await this.activity(p,input.activityId);let cls=input.className;
-  if(p.role==='student'){demand(a.phase==='exhibit',403,'老師尚未開放班內展示。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'請進入自己的課堂活動。');cls=p.student.class_name;}else teacherScope(p,a.term,cls);
-  const works=await this.db.query(`select w.id,w.current_version_id from rib.works w where w.activity_id=$1 and w.class_name=$2 and not w.hidden
+  const a=await this.activity(p,input.activityId);
+  const classes=p.role==='teacher'?p.teacher.scopes.filter(s=>s.term===a.term).map(s=>s.className):null;
+  if(p.role==='student'){demand(a.phase==='exhibit',403,'老師尚未開放課程展示。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'請進入自己的課堂活動。');}
+  else demand(p.role==='admin'||classes?.length,403,'沒有此學期權限。');
+  const works=await this.db.query(`select w.id,w.current_version_id,w.class_name from rib.works w where w.activity_id=$1 and ($2::text[] is null or w.class_name=any($2::text[])) and not w.hidden
    and exists(select 1 from rib.members m join rib.students s using(term,student_id) where m.work_id=w.id and m.status='confirmed' and s.is_test=$3)
-   order by w.created_at,w.id`,[a.id,cls,!!a.legacy?.testOnly]);
+   and not exists(select 1 from rib.members m join rib.students s using(term,student_id) where m.work_id=w.id and s.is_test<>$3)
+   order by md5(w.id),w.id`,[a.id,classes,!!a.legacy?.testOnly]);
   const ids=works.map(w=>w.id);
   const [versions,comments,votes]=await Promise.all([
    this.db.query('select id,work_id,ordinal,metadata from rib.versions where work_id=any($1::text[]) order by ordinal',[ids]),
    this.db.query(`select id,target_work_id,actor_work_id,body,hidden,created_at from rib.wall_comments where target_work_id=any($1::text[]) ${p.role==='student'?'and not hidden':''} order by created_at,id`,[ids]),
    this.db.query('select target_work_id,actor_work_id from rib.wall_votes where target_work_id=any($1::text[]) and active',[ids])]);
   const own=p.role==='student'?await one(this.db,"select w.id from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status='confirmed'",[a.id,p.studentId]):null;
-  return {activityId:a.id,title:a.title,week:a.week,term:a.term,className:cls,teacher:p.role!=='student',canComment:p.role==='student'&&!!own,kind:a.kind,interactive:a.accepting&&!a.archived&&a.phase==='exhibit'&&['w3-rebuild','w3-personal','w4'].includes(a.kind),items:works.map((w,i)=>({id:w.id,label:'作品 '+String(i+1).padStart(2,'0'),own:w.id===own?.id,currentVersionId:w.current_version_id,versions:versions.filter(v=>v.work_id===w.id),comments:comments.filter(c=>c.target_work_id===w.id).map(c=>({...c,actor_work_id:undefined,label:c.actor_work_id===own?.id?'我／本組':'同學'})),votes:votes.filter(v=>v.target_work_id===w.id).length,liked:votes.some(v=>v.target_work_id===w.id&&v.actor_work_id===own?.id)})).filter(w=>w.versions.length)};
+  return {activityId:a.id,title:a.title,week:a.week,term:a.term,teacher:p.role!=='student',canComment:p.role==='student'&&!!own,kind:a.kind,interactive:a.accepting&&!a.archived&&a.phase==='exhibit'&&['w3-rebuild','w3-personal','w4'].includes(a.kind),items:works.map((w,i)=>({id:w.id,label:'作品 '+String(i+1).padStart(2,'0'),own:w.id===own?.id,canInteract:p.role==='student'&&!!own&&w.class_name===p.student.class_name,currentVersionId:w.current_version_id,versions:versions.filter(v=>v.work_id===w.id),comments:comments.filter(c=>c.target_work_id===w.id).map(c=>({...c,actor_work_id:undefined,label:c.actor_work_id===own?.id?'我／本組':'同學'})),votes:votes.filter(v=>v.target_work_id===w.id).length,liked:votes.some(v=>v.target_work_id===w.id&&v.actor_work_id===own?.id)})).filter(w=>w.versions.length)};
  }
  async wallContext(p,input,db=this.db){
   demand(p.role==='student',403,'請使用學生帳號。');const w=await this.work(p,input.workId,{db}),a=await this.activity(p,w.activity_id,db);

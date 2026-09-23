@@ -37,7 +37,7 @@ export class Workspace extends Weekly {
     if(write){demand(own&&w.accepting,403,'目前不能保存這份作品。');return {...w,own:true};}
     const review=await one(db,`select * from rib.reviews where target_work_id=$1 and reviewer_id=$2 and term=$3 and status in ('assigned','done')`,[w.id,p.studentId,p.term]);
     const hasTest=await one(db,`select 1 from rib.members m join rib.students s using(term,student_id) where m.work_id=$1 and s.is_test`,[w.id]);
-    demand(own||(!hasTest||w.test_only)&&((review&&w.phase==='review')||(w.phase==='exhibit'&&w.class_name===p.student.class_name)),403,'請查看自己的作品或指定試讀作品。');
+    demand(own||(!hasTest||w.test_only)&&((review&&w.phase==='review')||(w.phase==='exhibit'&&!!p.student.is_test===!!w.test_only)),403,'請查看自己的作品或指定試讀作品。');
     return {...w,own:!!own,review};
   }
   async agreement(p,input){
