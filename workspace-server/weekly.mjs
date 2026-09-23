@@ -1,7 +1,7 @@
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {uid,text,demand,json,sha,teacherScope} from './security.mjs';
 import {currentTerm} from './terms.mjs';
-import {Accounts} from './accounts.mjs';
+import {Roster} from './roster.mjs';
 import {publicFrom,publicWhere} from './publication.mjs';
 import {MAX_IMAGE,commitImage} from './storage.mjs';
 const one=async(db,q,p=[]) => (await db.query(q,p))[0];
@@ -17,7 +17,7 @@ export function submissionMetadata(kind,input,previous=[]){
  demand(Array.isArray(input.files)&&input.files.length===n,400,`本次需要 ${n} 張圖片，請依序選取。`);
  return meta;
 }
-export class Weekly extends Accounts {
+export class Weekly extends Roster {
  async classWall(p,input){
   const a=await this.activity(p,input.activityId);
   const classes=p.role==='teacher'?p.teacher.scopes.filter(s=>s.term===a.term).map(s=>s.className):null;

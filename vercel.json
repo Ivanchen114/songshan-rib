@@ -88,6 +88,10 @@
     "api/workspace.js": {
       "maxDuration": 60,
       "includeFiles": "workspace-server/**"
+    },
+    "api/workspace-backup.js": {
+      "maxDuration": 60,
+      "includeFiles": "workspace-server/**"
     }
   },
   "outputDirectory": "public",
@@ -109,5 +113,11 @@
       ]
     }
   ],
-  "buildCommand": "node workspace-server/scripts/build-site.mjs"
+  "buildCommand": "node workspace-server/scripts/build-site.mjs",
+  "crons": [
+    {
+      "path": "/api/workspace-backup",
+      "schedule": "0 19 * * *"
+    }
+  ]
 }

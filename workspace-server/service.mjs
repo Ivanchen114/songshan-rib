@@ -1,5 +1,6 @@
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
-import {Weekly,submissionMetadata} from './weekly.mjs';
+import {submissionMetadata} from './weekly.mjs';
+import {Journey} from './journey.mjs';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
@@ -10,7 +11,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
 const one = async(db,q,args) => (await db.query(q,args))[0];
-export class Workspace extends Weekly {
+export class Workspace extends Journey {
   constructor(db,store){super();this.db=db;this.store=store;}
   async event(db,p,a,kind,resource,detail={}){await db.query('insert into rib.events(activity_id,actor,kind,resource,detail) values($1,$2,$3,$4,$5)',[a,actor(p),kind,resource,json(detail)]);}
   async login(input,ip) {

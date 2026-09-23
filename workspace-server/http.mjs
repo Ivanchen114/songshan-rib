@@ -1,10 +1,11 @@
+import {dailySnapshot,maintenanceStatus} from './maintenance.mjs';
 import {hasAgreement} from './agreement.mjs';
 import {createClient} from '@supabase/supabase-js';
 import {Workspace} from './service.mjs';
 import {currentTerm} from './terms.mjs';
 import {authenticate,createSession,demand,ipKey,Problem,sha,uid,rate} from './security.mjs';
-const reads=new Set(['studentAccounts','conversation','archive','home','board','classes','roster','media','evidence','gallery','updates','terms','termBackup','classWall','selections','selectionTeacher','original']);
-const writes=new Set(['studentAccountUpdate','testFeedback','assignReader','reply','ensureWork','invitePreview','invite','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','termSave','termActivate','agreement','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize']);
+const reads=new Set(['maintenance','journey','journeyMedia','studentAccounts','conversation','archive','home','board','classes','roster','media','evidence','gallery','updates','terms','termBackup','classWall','selections','selectionTeacher','original']);
+const writes=new Set(['backupRun','rosterPreview','rosterImport','studentProfile','studentAccountUpdate','testFeedback','assignReader','reply','ensureWork','invitePreview','invite','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','termSave','termActivate','agreement','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize']);
 const cookies=req=>Object.fromEntries(String(req.headers.cookie||'').split(';').map(x=>x.trim().split('=')));
 export function handler({db,store,origin,enabled=true,rateSecret,secure=true,authClientFactory=createClient}) {
   const service=new Workspace(db,store);
@@ -53,7 +54,9 @@ export function handler({db,store,origin,enabled=true,rateSecret,secure=true,aut
       demand(reads.has(action)||writes.has(action),404,'找不到此操作。');demand(reads.has(action)?req.method==='GET':req.method==='POST',405,'請使用正確的操作方式。');
       if(writes.has(action))await rate(db,'write:'+sha(token),180,60);
       let data;
-      if(action==='conversation'){const c=await service.conversation(p,input);data={review:c.review,replies:c.replies};}
+      if(action==='maintenance')data=await maintenanceStatus(db,p);
+      else if(action==='backupRun'){demand(p.role==='admin'&&process.env.RIB_ACCEPTANCE_ONLY!=='true',403,'只有正式管理員可建立資料快照。');await rate(db,'backup:'+p.email,3,3600);data=await dailySnapshot(db,store,{force:true,actor:p.email});}
+      else if(action==='conversation'){const c=await service.conversation(p,input);data={review:c.review,replies:c.replies};}
       else if(action==='evidence'){await service.work(p,input.workId,{grading:true});demand(p.role!=='student',403,'請使用教師帳號。');data={key:await service.evidence(input.workId)};}
       else if(action==='updates'){
         const a=await service.activity(p,input.activityId);
