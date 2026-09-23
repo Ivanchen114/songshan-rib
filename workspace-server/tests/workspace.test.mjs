@@ -55,3 +55,44 @@ test('acceptance activity isolates test readers and blocks real-student entry an
  assert.ok((await s.login({term:'11501',studentId:a.studentId,code:'012345'},'test-only')).token);
  await assert.rejects(s.control(f.teacher,{activityId:'w4-demo',expectedRevision:0,phase:'review',accepting:true}),/只能開放測試/);
 });
+
+test('exhibit auto-fills late work using a finished reader and permits feedback, keep and V2',async t=>{
+ const f=await fixture(5);t.after(f.close);const s=new Workspace(f.db,f.store),late=f.people[4];
+ await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:0,absentIds:[late.studentId]});
+ for(const p of f.people.slice(0,4)){const [w]=await f.db.query('select * from rib.works where owner_id=$1',[p.studentId]);await upload(f,s,p,w.id,'early-'+p.studentId);}
+ const old=await f.db.query('select * from rib.reviews');for(const r of old)await s.review(f.people.find(p=>p.studentId===r.reviewer_id),{reviewId:r.id,expectedRevision:r.revision,situation:'測試看見椅子。',meaning:'測試像在讓位。'});
+ await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:1,phase:'exhibit',accepting:true});
+ const w=await s.ensureWork(late,{activityId:'w4-demo'}),v=await upload(f,s,late,w.id,'late');
+ const before=await f.db.query('select * from rib.reviews order by id');
+ const r=await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:2});assert.equal(r.added,1);assert.equal(r.extra,1);assert.equal(r.waiting,0);
+ assert.deepEqual(await f.db.query('select * from rib.reviews where id=any($1) order by id',[before.map(r=>r.id)]),before);
+ assert.equal((await s.activity(f.teacher,'w4-demo')).phase,'exhibit');
+ const [task]=await f.db.query('select * from rib.reviews where target_work_id=$1',[w.id]),reader=f.people.find(p=>p.studentId===task.reviewer_id);await s.media(reader,{versionId:task.version_id});
+ await s.review(reader,{reviewId:task.id,expectedRevision:task.revision,situation:'測試圖中留了一個空位。',meaning:'測試像邀請別人加入。'});
+ await s.decision(late,{workId:w.id,versionId:v.versionId,reason:'讀者有注意到空位，先保留。'});
+ const v2=await upload(f,s,late,w.id,'late-v2',1,{reason:'再把空位位置畫得更清楚。'});assert.ok(v2.versionId);
+ assert.equal((await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:3})).added,0);
+ await assert.rejects(s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:3}),/更新/);
+});
+
+test('busy readers leave named late work unfilled until one completes, without reshuffling',async t=>{
+ const f=await fixture(5);t.after(f.close);const s=new Workspace(f.db,f.store),late=f.people[4];
+ await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:0,absentIds:[late.studentId]});
+ const w=await s.ensureWork(late,{activityId:'w4-demo'});await upload(f,s,late,w.id,'late');await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:1,phase:'exhibit',accepting:true});
+ const original=await f.db.query('select * from rib.reviews order by id'),r=await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:2});assert.equal(r.added,0);assert.equal(r.waiting,1);assert.equal(r.unmatched[0].seat,5);assert.match(r.unmatched[0].reason,/仍有任務/);assert.deepEqual(await f.db.query('select * from rib.reviews order by id'),original);
+ const task=original[0],[target]=await f.db.query('select * from rib.works where id=$1',[task.target_work_id]);await upload(f,s,f.people.find(p=>p.studentId===target.owner_id),target.id,'first-ready');const [ready]=await f.db.query('select * from rib.reviews where id=$1',[task.id]);
+ const reader=f.people.find(p=>p.studentId===ready.reviewer_id),input={reviewId:ready.id,expectedRevision:ready.revision,situation:'看見椅子。',meaning:'像在等待。'};
+ await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:3,phase:'exhibit',accepting:false});await assert.rejects(s.review(reader,input),/暫停/);
+ await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:4,phase:'exhibit',accepting:true});await s.review(reader,input);
+ const filled=await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:5});assert.equal(filled.added,1);assert.equal(filled.extra,1);assert.equal(filled.waiting,0);
+});
+
+test('one click repairs requested reader after another reader finishes, retaining done history',async t=>{
+ const f=await fixture(5);t.after(f.close);const s=new Workspace(f.db,f.store);await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:0});
+ for(const p of f.people){const [w]=await f.db.query('select * from rib.works where owner_id=$1',[p.studentId]);await upload(f,s,p,w.id,'ready-'+p.studentId);}
+ const reviews=await f.db.query('select r.*,w.owner_id from rib.reviews r join rib.works w on w.id=r.target_work_id'),requested=reviews[0],helper=reviews.find(r=>r.reviewer_id!==requested.reviewer_id&&r.reviewer_id!==requested.owner_id);
+ await s.requestReplacement(f.people.find(p=>p.studentId===requested.reviewer_id),{reviewId:requested.id,reason:'已知原意'});await s.review(f.people.find(p=>p.studentId===helper.reviewer_id),{reviewId:helper.id,expectedRevision:helper.revision,situation:'看見測試椅子。',meaning:'推測測試讓位。'});
+ await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:1,phase:'exhibit',accepting:true});const r=await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:2});assert.equal(r.replaced,1);assert.equal(r.extra,1);assert.equal(r.waiting,0);
+ assert.equal((await f.db.query('select status from rib.reviews where id=$1',[requested.id]))[0].status,'cancelled');assert.equal((await f.db.query('select status from rib.reviews where id=$1',[helper.id]))[0].status,'done');
+ const [replacement]=await f.db.query("select * from rib.reviews where target_work_id=$1 and status='assigned'",[requested.target_work_id]);assert.equal(replacement.reviewer_id,helper.reviewer_id);
+});

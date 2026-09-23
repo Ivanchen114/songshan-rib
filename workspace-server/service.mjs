@@ -3,7 +3,7 @@ import {Weekly,submissionMetadata} from './weekly.mjs';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
-import {randomInt} from 'node:crypto';
+import {planReaders} from './reader-allocation.mjs';
 import {TermManager,activityWrites,guardActivityWrite,currentTerm} from './terms.mjs';
 import {uid,sha,demand,text,json,matches,verifier,rate,createSession,teacherScope} from './security.mjs';
 import {MAX_IMAGE,commitImage} from './storage.mjs';
@@ -148,7 +148,7 @@ export class Workspace extends Weekly {
       demand(current.revision===ticket.expected_revision,409,'作品已有新版本，請先核對。已上傳圖片暫存保留。');
       demand(!(await one(db,"select student_id from rib.members where work_id=$1 and status='invited'",[w.id])),409,'請先讓同組同學確認加入。');
       const versions=await db.query('select * from rib.versions where work_id=$1 order by ordinal',[w.id]);
-      if(w.kind==='w4'&&versions.length){demand(versions.length<2&&current.phase==='review',409,'這份圖卡已有 V2 或已展示。');demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
+      if(w.kind==='w4'&&versions.length){demand(versions.length<2&&['review','exhibit'].includes(current.phase),409,'這份圖卡已有 V2，或尚未開放改留。');demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
       demand(versions.length<ACTIVITY[w.kind].maxVersions,409,'本週版本已保存完成。');
       const versionId=uid(),ordinal=versions.length?Math.max(...versions.map(v=>v.ordinal))+1:1;
       await db.query('insert into rib.versions(id,work_id,ordinal,media,metadata,request_id) values($1,$2,$3,$4,$5,$6)',[versionId,w.id,ordinal,json(media),json(ticket.metadata),ticket.request_id]);
@@ -168,28 +168,28 @@ export class Workspace extends Weekly {
     return {images,contextImages,ordinal:v.ordinal,metadata:{...v.metadata,legacyProjectKey:undefined},projectUrl};
   }
   async dispatch(p,input) {
-    const a=await this.activity(p,input.activityId);const cls=text(input.className,20);teacherScope(p,a.term,cls);demand(a.kind==='w4'&&!a.archived&&a.phase!=='exhibit',409,'目前不能分派。');
+    const a=await this.activity(p,input.activityId);const cls=text(input.className,20);teacherScope(p,a.term,cls);demand(a.kind==='w4'&&!a.archived,409,'目前不能分派。');
     return this.db.transaction(async db=>{
       const current=await one(db,'select * from rib.activities where id=$1 for update',[a.id]);demand(current.revision===input.expectedRevision,409,'分派已更新，請重新整理。');
       const students=await db.query('select * from rib.students where term=$1 and class_name=$2 and active and is_test=$3 order by seat',[a.term,cls,a.legacy?.testOnly===true]);
       const absent=Array.isArray(input.absentIds)?input.absentIds:[];demand(absent.every(s=>students.some(x=>x.student_id===s)),400,'缺席名單不正確。');const present=students.filter(s=>!absent.includes(s.student_id));
-      // Create placeholders before uploads: reviewer eligibility never depends on uploading one's own V1.
-      for(const s of present){const workId=uid();await db.query('insert into rib.works(id,activity_id,class_name,owner_id) values($1,$2,$3,$4) on conflict(activity_id,owner_id) do nothing',[workId,a.id,cls,s.student_id]);const w=await one(db,'select id from rib.works where activity_id=$1 and owner_id=$2',[a.id,s.student_id]);await db.query("insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'confirmed') on conflict do nothing",[w.id,a.term,s.student_id]);}
-      const works=await db.query('select * from rib.works where activity_id=$1 and class_name=$2 and not hidden',[a.id,cls]);const existing=await db.query("select * from rib.reviews where activity_id=$1 and status<>'cancelled'",[a.id]);
-      const history=await db.query("select * from rib.reviews where activity_id=$1 and status in ('cancelled','requested')",[a.id]);
-      const targets=works.filter(w=>present.some(s=>s.student_id===w.owner_id)&&!existing.some(r=>r.target_work_id===w.id));
-      const readers=present.map(s=>s.student_id).filter(s=>!existing.some(r=>r.reviewer_id===s));
-      const shuffle=x=>{const v=[...x];for(let i=v.length-1;i>0;i--){const j=randomInt(i+1);[v[i],v[j]]=[v[j],v[i]];}return v;};
-      const edges=new Map(readers.map(r=>[r,shuffle(targets.filter(w=>w.owner_id!==r&&!history.some(h=>h.reviewer_id===r&&h.target_work_id===w.id)))]));const matched=new Map();
-      const assign=(r,seen)=>{for(const w of edges.get(r)){if(seen.has(w.id))continue;seen.add(w.id);if(!matched.has(w.id)||assign(matched.get(w.id),seen)){matched.set(w.id,r);return true;}}return false;};shuffle(readers).forEach(r=>assign(r,new Set()));
-      for(const [workId,reader] of matched){const v=await one(db,'select id from rib.versions where work_id=$1 order by ordinal limit 1',[workId]);await db.query('insert into rib.reviews(id,activity_id,target_work_id,reviewer_id,term,version_id,status) values($1,$2,$3,$4,$5,$6,$7)',[uid(),a.id,workId,reader,a.term,v?.id||null,v?'assigned':'waiting']);}
-      await db.query('update rib.activities set revision=revision+1 where id=$1',[a.id]);await this.event(db,p,a.id,'dispatch',a.id,{className:cls,added:matched.size});return {added:matched.size,waiting:targets.length-matched.size};
+      for(const student of present){await db.query('insert into rib.works(id,activity_id,class_name,owner_id) values($1,$2,$3,$4) on conflict(activity_id,owner_id) do nothing',[uid(),a.id,cls,student.student_id]);const w=await one(db,'select id from rib.works where activity_id=$1 and owner_id=$2',[a.id,student.student_id]);await db.query("insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'confirmed') on conflict do nothing",[w.id,a.term,student.student_id]);}
+      // Match the upload lock order, so a just-finished V1 cannot be left waiting.
+      const works=await db.query('select * from rib.works where activity_id=$1 and class_name=$2 and not hidden order by id for update',[a.id,cls]);
+      const reviews=await db.query('select r.* from rib.reviews r join rib.works w on w.id=r.target_work_id where r.activity_id=$1 and w.class_name=$2 for update of r',[a.id,cls]);
+      const firstVersions=new Map((await db.query('select v.work_id,v.id from rib.versions v join rib.works w on w.id=v.work_id where w.activity_id=$1 and w.class_name=$2 and v.ordinal=1',[a.id,cls])).map(v=>[v.work_id,v.id]));
+      const plan=planReaders(students,works,reviews,firstVersions,absent);let replaced=0;
+      for(const [workId,reader] of plan.matches){
+        for(const r of plan.releasing.filter(r=>r.target_work_id===workId)){await db.query("update rib.reviews set status='cancelled',revision=revision+1 where id=$1",[r.id]);replaced++;}
+        const versionId=firstVersions.get(workId);await db.query('insert into rib.reviews(id,activity_id,target_work_id,reviewer_id,term,version_id,status) values($1,$2,$3,$4,$5,$6,$7)',[uid(),a.id,workId,reader,a.term,versionId||null,versionId?'assigned':'waiting']);
+      }
+      await db.query('update rib.activities set revision=revision+1 where id=$1',[a.id]);await this.event(db,p,a.id,'dispatch',a.id,{className:cls,added:plan.matches.size,extra:plan.extra,replaced,waiting:plan.unmatched.length});return {added:plan.matches.size,extra:plan.extra,replaced,waiting:plan.unmatched.length,unmatched:plan.unmatched};
     });
   }
   async review(p,input) {
     demand(p.role==='student',403,'請使用學生帳號。');
     return this.db.transaction(async db=>{const lookup=await one(db,'select target_work_id from rib.reviews where id=$1',[id(input.reviewId)]);demand(lookup,404,'找不到試讀任務。');await db.query('select id from rib.works where id=$1 for update',[lookup.target_work_id]);const r=await one(db,'select * from rib.reviews where id=$1 for update',[id(input.reviewId)]);demand(r&&r.reviewer_id===p.studentId&&r.term===p.term,403,'這不是你的試讀任務。');
-      const a=await this.activity(p,r.activity_id,db);demand(!p.student.is_test||a.legacy?.testOnly,403,'測試帳號不能參與正式初讀。');demand(a.accepting&&a.phase==='review',409,'目前已暫停初讀。');
+      const a=await this.activity(p,r.activity_id,db);demand(!p.student.is_test||a.legacy?.testOnly,403,'測試帳號不能參與正式初讀。');demand(a.accepting&&['review','exhibit'].includes(a.phase),409,'目前已暫停初讀。');
       const situation=text(input.situation),meaning=text(input.meaning);
       if(r.status==='done'){demand(r.situation===situation&&r.meaning===meaning,409,'這份初讀已送出，不能覆蓋原紀錄。');return {saved:true};}
       demand(r.status==='assigned'&&r.revision===input.expectedRevision,409,'任務已更新，請重新整理。');
@@ -204,14 +204,14 @@ export class Workspace extends Weekly {
     await this.review({role:'student',studentId:student.student_id,term:student.term,student},{reviewId:r.id,expectedRevision:r.revision,situation:'【系統測試回饋】這是用來測試保存與回覆的示範文字，不代表真人判讀。',meaning:'【系統測試回饋】請用作者帳號回覆，再測試有理由保留或另存 V2。'});
     await this.event(this.db,p,w.activity_id,'synthetic-test-feedback',r.id);return {saved:true};
   }
-  async replace(p,input){return this.db.transaction(async db=>{const r=await one(db,'select * from rib.reviews where id=$1 for update',[id(input.reviewId)]);demand(r,404,'找不到分派。');const w=await this.work(p,r.target_work_id,{db});teacherScope(p,w.term,w.class_name);demand(['assigned','waiting','requested'].includes(r.status),409,'已完成的回饋保留，不重抽。');
+  async replace(p,input){return this.db.transaction(async db=>{const lookup=await one(db,'select activity_id,target_work_id from rib.reviews where id=$1',[id(input.reviewId)]);demand(lookup,404,'找不到分派。');await db.query('select id from rib.activities where id=$1 for update',[lookup.activity_id]);await db.query('select id from rib.works where id=$1 for update',[lookup.target_work_id]);const r=await one(db,'select * from rib.reviews where id=$1 for update',[id(input.reviewId)]);demand(r,404,'找不到分派。');const w=await this.work(p,r.target_work_id,{db});teacherScope(p,w.term,w.class_name);demand(['assigned','waiting','requested'].includes(r.status),409,'已完成的回饋保留，不重抽。');
     const s=await one(db,'select * from rib.students where term=$1 and student_id=$2 and active and is_test=$3',[w.term,input.studentId,w.test_only]);demand(s&&s.class_name===w.class_name&&s.student_id!==w.owner_id&&s.student_id!==r.reviewer_id,400,'請選其他同班讀者。');
     demand(!(await one(db,"select id from rib.reviews where target_work_id=$1 and reviewer_id=$2",[w.id,s.student_id])),400,'這位讀者已有此作品的試讀紀錄。');
     const busy=await db.query("select status from rib.reviews where activity_id=$1 and reviewer_id=$2 and status<>'cancelled'",[w.activity_id,s.student_id]);demand(!busy.some(x=>x.status!=='done'),409,'這位讀者仍有待完成任務。');demand(!busy.length||input.confirmExtra===true,400,'請確認已安排這位同學補位。');
     await db.query("update rib.reviews set status='cancelled',revision=revision+1 where id=$1",[r.id]);await db.query('insert into rib.reviews(id,activity_id,target_work_id,reviewer_id,term,version_id,status) values($1,$2,$3,$4,$5,$6,$7)',[uid(),w.activity_id,w.id,s.student_id,w.term,r.version_id,r.version_id?'assigned':'waiting']);await this.event(db,p,w.activity_id,'replace-reader',w.id);return {saved:true};});}
   async assignReader(p,input){return this.db.transaction(async db=>{
-    const w=await this.work(p,input.workId,{db});teacherScope(p,w.term,w.class_name);demand(w.kind==='w4'&&!w.archived&&w.phase!=='exhibit',409,'目前不能分派。');
-    await db.query('select id from rib.activities where id=$1 for update',[w.activity_id]);
+    const w=await this.work(p,input.workId,{db});teacherScope(p,w.term,w.class_name);demand(w.kind==='w4'&&!w.archived,409,'目前不能分派。');
+    await db.query('select id from rib.activities where id=$1 for update',[w.activity_id]);await db.query('select id from rib.works where id=$1 for update',[w.id]);
     demand(!(await one(db,"select id from rib.reviews where target_work_id=$1 and status<>'cancelled'",[w.id])),409,'此作品已有讀者，請使用換讀者。');
     const reader=await one(db,'select * from rib.students where term=$1 and student_id=$2 and active and is_test=$3',[w.term,input.studentId,w.test_only]);demand(reader&&reader.class_name===w.class_name&&reader.student_id!==w.owner_id,400,'請選其他同班讀者。');
     const previous=await db.query('select * from rib.reviews where activity_id=$1 and reviewer_id=$2',[w.activity_id,reader.student_id]);demand(!previous.some(r=>r.target_work_id===w.id),409,'這位讀者曾看過此作品，請選另一位。');demand(!previous.some(r=>!['done','cancelled'].includes(r.status)),409,'這位讀者仍有待完成任務。');demand(!previous.some(r=>r.status==='done')||input.confirmExtra===true,400,'請確認已安排這位同學補位。');
@@ -224,7 +224,7 @@ export class Workspace extends Weekly {
     await db.query('insert into rib.replies(id,review_id,actor,label,body,request_id) values($1,$2,$3,$4,$5,$6)',[uid(),c.review.id,actor(p),label,body,requestId]);await this.event(db,p,c.work.activity_id,'reply',c.review.id);return {saved:true};});}
   async decision(p,input){return this.db.transaction(async db=>{
     await db.query('select id from rib.works where id=$1 for update',[id(input.workId)]);
-    const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w4'&&w.phase==='review',403,'請在初讀階段回應自己的圖卡。');
+    const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w4'&&['review','exhibit'].includes(w.phase),403,'請在初讀或展示階段回應自己的圖卡。');
     demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人初讀。');
     const v=await one(db,'select * from rib.versions where work_id=$1 order by ordinal desc limit 1',[w.id]);demand(v&&input.versionId===v.id,409,'版本已更新，請先核對。');const reason=text(input.reason);
     const last=await one(db,'select * from rib.decisions where work_id=$1 and student_id=$2 order by created_at desc limit 1',[w.id,p.studentId]);

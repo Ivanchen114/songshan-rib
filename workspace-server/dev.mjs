@@ -21,6 +21,13 @@ if(process.env.RIB_DEMO_GALLERY==='true'){
  const [ticket]=await f.db.query('select files from rib.uploads where id=$1',[u.ticketId]);f.store.objects.set(ticket.files[0].key,bytes);await s.finalize(p,{ticketId:u.ticketId});
  if(process.env.RIB_DEMO_UI==='true')await s.assignReader(f.teacher,{workId:w.id,studentId:'11500002'});
 }
+if(process.env.RIB_DEMO_LATE==='true'){
+ const s=new Workspace(f.db,f.store),bytes=await readFile(demoPath);
+ await s.dispatch(f.teacher,{activityId:'w4-demo',className:'101',expectedRevision:0,absentIds:[f.people[4].studentId]});
+ for(const p of f.people){const w=await s.ensureWork(p,{activityId:'w4-demo'}),u=await s.prepare(p,{workId:w.id,requestId:'late-demo-'+p.studentId,expectedRevision:0,files:[{bytes:bytes.length,mime:'image/png',sha256:sha(bytes)}]});const [ticket]=await f.db.query('select files from rib.uploads where id=$1',[u.ticketId]);f.store.objects.set(ticket.files[0].key,bytes);await s.finalize(p,{ticketId:u.ticketId});}
+ for(const r of await f.db.query('select * from rib.reviews'))await s.review(f.people.find(p=>p.studentId===r.reviewer_id),{reviewId:r.id,expectedRevision:r.revision,situation:'【本機測試】看見一個空位。',meaning:'【本機測試】像在等人加入。'});
+ await s.control(f.teacher,{activityId:'w4-demo',expectedRevision:1,phase:'exhibit',accepting:true});
+}
 http.createServer(async(req,res)=>{try{
   const url=new URL(req.url,origin);
   if(url.pathname==='/__demo/teacher'&&req.method==='GET'){const s=await createSession(f.db,{role:'admin',email:f.teacher.email});res.setHeader('Set-Cookie',`rib_session=${s.token}; HttpOnly; SameSite=Lax; Path=/`);res.writeHead(302,{Location:'/workspace/'});return res.end();}

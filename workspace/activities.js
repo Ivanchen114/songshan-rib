@@ -9,4 +9,4 @@ export const ACTIVITY = Object.freeze({
 });
 export const supportedKind = kind => !!ACTIVITY[kind];
 export const isGroup = kind => ACTIVITY[kind]?.group===true;
-export const canUpload = (a,w) => supportedKind(a.kind)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||w.feedback.length&&a.phase==='review');
+export const canUpload = (a,w) => supportedKind(a.kind)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||w.feedback.length&&['review','exhibit'].includes(a.phase));
