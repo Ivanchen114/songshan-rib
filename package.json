@@ -1,0 +1,24 @@
+{
+  "name": "songshan-rib",
+  "private": true,
+  "scripts": {
+    "test:workspace": "node --test workspace-server/tests/*.test.mjs",
+    "dev:workspace": "node workspace-server/dev.mjs",
+    "check:workspace": "node workspace-server/scripts/preflight.mjs",
+    "migrate:workspace": "node workspace-server/scripts/migrate.mjs",
+    "build:site": "node workspace-server/scripts/build-site.mjs"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1138.0",
+    "@aws-sdk/s3-request-presigner": "3.1138.0",
+    "@supabase/supabase-js": "2.117.0",
+    "postgres": "3.4.9",
+    "sharp": "0.35.4"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8"
+  }
+}

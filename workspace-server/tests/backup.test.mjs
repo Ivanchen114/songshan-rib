@@ -1,0 +1,6 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {PGlite} from '@electric-sql/pglite';import {fixture} from './support.mjs';import {snapshot,restoreEmpty} from '../backup.mjs';
+test('backup restores exact account data into an empty database, rejects corruption and refuses overwrite',async t=>{
+ const f=await fixture(2);t.after(f.close);const backup=await snapshot(f.db);const pg=new PGlite();t.after(()=>pg.close());await pg.exec(await readFile(new URL('../schema.sql',import.meta.url),'utf8'));const wrap=c=>({query:async(q,p=[])=> (await c.query(q,p)).rows,transaction:fn=>c.transaction(x=>fn(wrap(x)))}),db=wrap(pg);
+ const corrupted=structuredClone(backup);corrupted.tables.students[0].name='changed';await assert.rejects(restoreEmpty(db,corrupted),/雜湊/);
+ assert.equal((await restoreEmpty(db,backup)).students,2);assert.deepEqual(await db.query('select * from rib.credentials order by student_id'),await f.db.query('select * from rib.credentials order by student_id'));assert.equal((await db.query('select count(*)::int as n from rib.activities where accepting'))[0].n,0);await assert.rejects(restoreEmpty(db,backup),/空白/);
+});

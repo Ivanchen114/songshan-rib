@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';import sharp from 'sharp';import {sha} from '../security.mjs';
+const origin='https://rib-workspace-test.vercel.app',creds=JSON.parse(await readFile('/Users/Ivan/.codex/private/rib-staging/acceptance-helper.json'));let cookie='';const timings={};
+async function api(action,data={},write=false){const start=performance.now();const r=await fetch(origin+'/api/workspace'+(write?'':'?'+new URLSearchParams({action,...data})),{method:write?'POST':'GET',headers:{Cookie:cookie,...(write?{Origin:origin,'Content-Type':'application/json'}:{})},...(write?{body:JSON.stringify({action,...data})}:{})});if(r.headers.get('set-cookie'))cookie=r.headers.get('set-cookie').split(';')[0];const payload=await r.json();assert.equal(payload.ok,true,`${action}: ${payload.error||r.status}`);timings[action+'Ms']=Math.round(performance.now()-start);return payload.data;}
+const anon=await fetch(origin+'/api/workspace?action=home');assert.equal(anon.status,401);
+const badOrigin=await fetch(origin+'/api/workspace',{method:'POST',headers:{Origin:'https://invalid.example','Content-Type':'application/json'},body:JSON.stringify({action:'login',...creds})});assert.equal(badOrigin.status,403);
+await api('login',creds,true);const home=await api('home');assert.equal(home.person.studentId,creds.studentId);assert.ok(home.activities.some(a=>a.id==='rib-acceptance-w4'));
+const board=await api('board',{activityId:'rib-acceptance-w4'}),work=board.works[0];assert.ok(work);let versionId=work.versions[0]?.id;
+if(!versionId){
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><rect width="1600" height="1000" fill="#f5eedc"/><rect x="240" y="600" width="900" height="35" fill="#547a69"/><path d="M310 635v200m730-200v200" stroke="#547a69" stroke-width="35"/><circle cx="550" cy="330" r="75" fill="#d48b60"/><path d="M550 420v220m0-140 270 50m-270 90-130 180m130-180 130 180" stroke="#476774" stroke-width="45" fill="none"/><rect x="970" y="450" width="170" height="190" rx="15" fill="#d2b568"/><path d="M985 640v180m135-180v180" stroke="#d2b568" stroke-width="25"/></svg>';
+ const bytes=await sharp(Buffer.from(svg)).jpeg({quality:90}).toBuffer();await writeFile('/Users/Ivan/.codex/private/rib-staging/acceptance-picture.jpg',bytes,{mode:0o600});
+ const p=await api('prepare',{workId:work.id,requestId:'acceptance-fixture-v1',expectedRevision:work.revision,files:[{bytes:bytes.length,mime:'image/jpeg',sha256:sha(bytes)}]},true);
+ const options=await fetch(p.files[0].url,{method:'OPTIONS',headers:{Origin:origin,'Access-Control-Request-Method':'PUT','Access-Control-Request-Headers':'content-type'}});assert.equal(options.headers.get('access-control-allow-origin'),origin);
+ const start=performance.now();const upload=await fetch(p.files[0].url,{method:'PUT',headers:{Origin:origin,'Content-Type':'image/jpeg'},body:bytes});assert.equal(upload.status,200);timings.uploadMs=Math.round(performance.now()-start);
+ versionId=(await api('finalize',{ticketId:p.ticketId},true)).versionId;
+}
+const media=await api('media',{versionId});const image=await fetch(media.images[0].url);assert.equal(image.status,200);const bytes=Buffer.from(await image.arrayBuffer());assert.ok((await sharp(bytes).metadata()).width>0);
+assert.equal((await api('gallery')).items.length,0);await api('logout',{},true);
+console.log(JSON.stringify({cloudDatabase:true,cloudR2:true,deployedApi:true,isolatedTestStudent:true,studentLogin:true,imageSavedAndRead:true,crossOriginDenied:true,anonymousDenied:true,publicGalleryExcludesTest:true,timings,teacherGoogleLogin:false}));

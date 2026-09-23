@@ -1,0 +1,4 @@
+import {database} from '../db.mjs';
+const required=['RIB_DATABASE_URL','RIB_ORIGIN','RIB_R2_ACCOUNT_ID','RIB_R2_ACCESS_KEY_ID','RIB_R2_SECRET_ACCESS_KEY','RIB_R2_BUCKET','RIB_SUPABASE_URL','RIB_SUPABASE_PUBLISHABLE_KEY','RIB_RATE_SECRET'];
+const missing=required.filter(k=>!process.env[k]);console.log(JSON.stringify({configured:!missing.length,missing,enabled:process.env.RIB_ENABLED==='true'}));
+if(missing.length){process.exitCode=1;}else{const db=database();try{const [r]=await db.query('select count(*)::int as tables from information_schema.tables where table_schema=\'rib\'');const [m]=await db.query('select count(*)::int as runs from rib.migration_runs');console.log(JSON.stringify({schemaTables:r.tables,migrationRuns:m.runs,note:'This checks configuration only. It is not a classroom or migration acceptance.'}));}finally{await db.close();}}

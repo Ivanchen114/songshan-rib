@@ -25,3 +25,11 @@ screenshot_*.py
 
 # OS misc
 Thumbs.db
+
+# Generated website output and local deployment settings
+/public/
+.vercel/
+node_modules/
+.env
+.env.*
+!.env.example

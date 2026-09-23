@@ -84,6 +84,30 @@
   "functions": {
     "api/portfolio.js": {
       "maxDuration": 30
+    },
+    "api/workspace.js": {
+      "maxDuration": 60,
+      "includeFiles": "workspace-server/**"
     }
-  }
+  },
+  "outputDirectory": "public",
+  "regions": [
+    "icn1"
+  ],
+  "headers": [
+    {
+      "source": "/workspace/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "buildCommand": "node workspace-server/scripts/build-site.mjs"
 }
