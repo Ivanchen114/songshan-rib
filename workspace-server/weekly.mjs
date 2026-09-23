@@ -39,7 +39,7 @@ export class Weekly extends Roster {
   demand(p.role==='student',403,'請使用學生帳號。');const w=await this.work(p,input.workId,{db}),a=await this.activity(p,w.activity_id,db);
   demand(a.accepting&&!a.archived&&a.phase==='exhibit'&&['w3-rebuild','w3-personal','w4'].includes(a.kind),403,'老師尚未開放班內交流。');
   demand(!!p.student.is_test===!!a.legacy?.testOnly&&w.class_name===p.student.class_name,403,'請在同班課堂交流。');
-  const own=await one(db,"select w.id from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status='confirmed'",[a.id,p.studentId]);demand(own,403,'請先建立自己的作品或確認加入小組。');
+  const own=await one(db,"select w.id from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status='confirmed'",[a.id,p.studentId]);demand(own,403,'請先建立自己的作品或由代表加入小組。');
   demand(await one(db,'select id from rib.versions where work_id=$1',[w.id]),409,'作品尚未交件。');return {w,a,own};
  }
  async wallComment(p,input){return this.db.transaction(async db=>{

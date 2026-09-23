@@ -1,6 +1,6 @@
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
-import {Journey} from './journey.mjs';
+import {GroupMembership} from './group-membership.mjs';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
@@ -11,7 +11,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
 const one = async(db,q,args) => (await db.query(q,args))[0];
-export class Workspace extends Journey {
+export class Workspace extends GroupMembership {
   constructor(db,store){super();this.db=db;this.store=store;}
   async event(db,p,a,kind,resource,detail={}){await db.query('insert into rib.events(activity_id,actor,kind,resource,detail) values($1,$2,$3,$4,$5)',[a,actor(p),kind,resource,json(detail)]);}
   async login(input,ip) {
@@ -65,7 +65,7 @@ export class Workspace extends Journey {
       reviews=await this.db.query(`select id,target_work_id,version_id,status,revision,reason from rib.reviews where activity_id=$1 and reviewer_id=$2 and term=$3 and status<>'cancelled' order by created_at`,[a.id,p.studentId,p.term]);
     }else{
       const cls=text(input.className,20);teacherScope(p,a.term,cls);
-      works=await this.db.query('select * from rib.works where activity_id=$1 and class_name=$2 order by created_at',[a.id,cls]);
+      works=await this.db.query("select * from rib.works w where activity_id=$1 and class_name=$2 and (exists(select 1 from rib.members m where m.work_id=w.id and m.status in ('confirmed','invited')) or exists(select 1 from rib.versions v where v.work_id=w.id)) order by created_at",[a.id,cls]);
       reviews=await this.db.query(`select r.* from rib.reviews r join rib.works w on w.id=r.target_work_id where r.activity_id=$1 and w.class_name=$2 and r.status<>'cancelled'`,[a.id,cls]);
     }
     // Six bounded queries for the whole class, rather than six additional requests per work.
@@ -92,39 +92,6 @@ export class Workspace extends Journey {
       return {id:workId,revision:0};
     });
   }
-  async inviteSeats(p,w,seats,db=this.db) {
-    demand(p.role==='student'&&isGroup(w.kind)&&w.class_name===p.student.class_name&&p.student.is_test===w.test_only,403,'請在自己的同班小組邀請。');
-    demand(Array.isArray(seats)&&seats.length>0&&seats.length<=3&&seats.every(n=>Number.isInteger(n)&&n>0&&n<=999)&&new Set(seats).size===seats.length,400,'請填一至三位不重複的同班座號。');
-    const rows=await db.query('select student_id,name,seat from rib.students where term=$1 and class_name=$2 and seat=any($3::int[]) and active and is_test=$4 for share',[w.term,w.class_name,seats,w.test_only]);
-    const students=seats.map(seat=>{const found=rows.filter(s=>s.seat===seat);demand(found.length===1,400,`${seat} 號無法唯一對應到可邀請的同班同學，請核對座號或洽老師。`);demand(found[0].student_id!==p.studentId,400,'不用邀請自己，請只填其他組員的座號。');return found[0];});
-    demand(!(await one(db,'select id from rib.versions where work_id=$1',[w.id])),409,'已有共同作品，請老師核對作者後再調整。');
-    const count=await one(db,"select count(*)::int as n from rib.members where work_id=$1 and status<>'declined'",[w.id]);demand(count.n+students.length<=4,400,'每組最多四人（含自己）。');
-    const occupied=await one(db,`select m.student_id from rib.members m join rib.works x on x.id=m.work_id where x.activity_id=$1 and m.student_id=any($2::text[]) and m.status in ('confirmed','invited')`,[w.activity_id,students.map(s=>s.student_id)]);
-    demand(!occupied,409,'選擇的同學已有小組或待確認邀請，請重新核對。');
-    return students;
-  }
-  async invitePreview(p,input) {
-    const w=await this.work(p,input.workId,{write:true});
-    const students=await this.inviteSeats(p,w,input.seats);
-    return {className:w.class_name,students:students.map(s=>({studentId:s.student_id,name:s.name,seat:s.seat}))};
-  }
-  async invite(p,input) {
-    const w=await this.work(p,input.workId,{write:true});demand(p.role==='student'&&isGroup(w.kind)&&p.student.is_test===w.test_only,403,'此區不使用小組邀請。');
-    let ids=input.studentIds;if(input.seats===undefined)demand(Array.isArray(ids)&&ids.length>0&&ids.length<=3&&new Set(ids).size===ids.length,400,'請填一至三位不重複的同組學號。');
-    return this.db.transaction(async db=>{
-      await db.query('select id from rib.activities where id=$1 for update',[w.activity_id]);
-      await db.query('select id from rib.works where id=$1 for update',[w.id]);
-      if(input.seats!==undefined){demand(input.studentIds===undefined,400,'請使用同一種邀請方式。');const students=await this.inviteSeats(p,w,input.seats,db);ids=students.map(s=>s.student_id);demand(isDeepStrictEqual(ids,input.expectedStudentIds),409,'座號名單已變更，請重新核對姓名後再邀請。');}
-      demand(!(await one(db,'select id from rib.versions where work_id=$1',[w.id])),409,'已有共同作品，請老師核對作者後再調整。');
-      const count=await one(db,"select count(*)::int as n from rib.members where work_id=$1 and status<>'declined'",[w.id]);demand(count.n+ids.length<=4,400,'每組最多四人。');
-      for(const sid of ids){demand(/^\d{8}$/.test(sid)&&sid!==p.studentId,400,'請核對組員學號。');const s=await one(db,'select * from rib.students where term=$1 and student_id=$2 and active and is_test=$3',[w.term,sid,w.test_only]);demand(s&&s.class_name===w.class_name,400,'請邀請同班有效學生。');
-        const occupied=await one(db,`select m.work_id from rib.members m join rib.works x on x.id=m.work_id where x.activity_id=$1 and m.student_id=$2 and m.status in ('confirmed','invited')`,[w.activity_id,sid]);demand(!occupied,409,'這位同學已有小組或待確認邀請。');
-        await db.query(`insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'invited') on conflict(work_id,student_id) do update set status='invited'`,[w.id,w.term,sid]);}
-      await this.event(db,p,w.activity_id,'invite',w.id,{studentIds:ids});return {saved:true};
-    });
-  }
-  async invitation(p,input){demand(p.role==='student',403,'請使用學生帳號。');const a=await this.activity(p,input.activityId);demand(a.accepting,403,'目前暫停分組。');const choice=input.accept===true?'confirmed':'declined';
-    const rows=await this.db.query(`update rib.members set status=$1 where work_id=$2 and term=$3 and student_id=$4 and status='invited' and exists(select 1 from rib.works where id=$2 and activity_id=$5) returning work_id`,[choice,id(input.workId),p.term,p.studentId,a.id]);demand(rows.length,409,'邀請已更新，請重新整理。');await this.event(this.db,p,a.id,'invitation',input.workId,{choice});return {saved:true};}
   async prepare(p,input) {
     demand(p.role==='student',403,'請使用學生交件入口。');const w=await this.work(p,input.workId,{write:true});
     demand(supportedKind(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');

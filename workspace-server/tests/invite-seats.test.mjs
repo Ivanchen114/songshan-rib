@@ -5,7 +5,7 @@ import {Workspace} from '../service.mjs';
 import {handler} from '../http.mjs';
 import {createSession} from '../security.mjs';
 
-test('seat preview is read-only, bounded to own class and invite requires matching preview before own confirmation',async t=>{
+test('seat preview is read-only, bounded to own class and invite requires matching preview for direct membership',async t=>{
  const f=await fixture(6);t.after(f.close);const s=new Workspace(f.db,f.store),[a,b,c]=f.people,w=await s.ensureWork(a,{activityId:'w5-demo'});
  await f.db.query("update rib.students set class_name='102',seat=2 where student_id=$1",[f.people[5].studentId]);
  const preview=await s.invitePreview(a,{workId:w.id,seats:[2,3],className:'102'});
@@ -15,9 +15,8 @@ test('seat preview is read-only, bounded to own class and invite requires matchi
  await assert.rejects(s.invitePreview(b,{workId:w.id,seats:[3]}),/不能保存/);
  await assert.rejects(s.invitePreview(f.teacher,{workId:w.id,seats:[2]}),/自己的同班/);
  await s.invite(a,{workId:w.id,seats:[2,3],expectedStudentIds:preview.students.map(s=>s.studentId)});
- assert.equal((await f.db.query("select * from rib.members where work_id=$1 and status='invited'",[w.id])).length,2);
- await assert.rejects(s.work(b,w.id,{write:true}),/不能保存/);
- await s.invitation(b,{activityId:'w5-demo',workId:w.id,accept:true});assert.equal((await s.work(b,w.id,{write:true})).own,true);
+ assert.equal((await f.db.query("select * from rib.members where work_id=$1 and status='confirmed'",[w.id])).length,3);
+ assert.equal((await s.work(b,w.id,{write:true})).own,true);
 });
 test('seat invitations reject self, duplicates, inactive/test peers, missing or ambiguous seats, occupied group, changed roster and capacity',async t=>{
  const f=await fixture(6);t.after(f.close);const s=new Workspace(f.db,f.store),[a,b,c,d,e,g]=f.people,w=await s.ensureWork(a,{activityId:'w5-demo'});
@@ -29,7 +28,7 @@ test('seat invitations reject self, duplicates, inactive/test peers, missing or 
  const preview=await s.invitePreview(a,{workId:w.id,seats:[2]});await f.db.query('update rib.students set seat=case when student_id=$1 then 3 else 2 end where student_id=any($2::text[])',[b.studentId,[b.studentId,c.studentId]]);
  await assert.rejects(s.invite(a,{workId:w.id,seats:[2],expectedStudentIds:preview.students.map(s=>s.studentId)}),/名單已變更/);
  assert.equal((await f.db.query('select * from rib.members where work_id=$1',[w.id])).length,1);
- await s.ensureWork(c,{activityId:'w5-demo'});await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[2]}),/已有小組/);
+ await s.ensureWork(c,{activityId:'w5-demo'});await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[2]}),/已在其他小組/);
  await s.invite(a,{workId:w.id,studentIds:[b.studentId,g.studentId]});
  await f.db.query('update rib.students set active=true,is_test=false where student_id=any($1::text[])',[[d.studentId,e.studentId]]);
  await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[4,5]}),/最多四人/);

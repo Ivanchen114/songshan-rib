@@ -32,3 +32,11 @@ h2{font-size:23px;letter-spacing:-.025em;margin:0 0 14px}h3{font-size:18px;line-
 #app button[data-action="home"]{background:#2f6354;color:#fff;border:2px solid #244f43;font-size:16px;font-weight:750;min-height:48px;padding:10px 20px;white-space:nowrap}
 #app button[data-action="home"]:hover{background:#244f43;border-color:#193c32}
 #app button[data-action="home"]:focus-visible{outline:3px solid #a06c24;outline-offset:4px}
+
+/* Keep the way out beside the current roster, including narrow screens. */
+.group-members{margin:1rem 0;padding:1.1rem 1.25rem;background:#f5f1e8;border:1px solid #c9bda4;border-radius:12px}
+.group-members h4{margin:0 0 .65rem;font-size:1rem}.group-members>p{margin:.5rem 0}
+.group-exit{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1rem}.group-exit p{flex:1 1 220px;margin:0;font-size:.95rem}
+button.leave-group{min-height:50px;padding:.8rem 1.25rem;background:#fff8ed;color:#713b16;border:2px solid #8b512c;font-weight:700;font-size:1rem;border-radius:8px}
+button.leave-group:hover{background:#f4dfbf}button.leave-group:focus-visible{outline:3px solid #2b6251;outline-offset:4px}
+@media(max-width:600px){.group-exit{gap:.75rem}.group-exit .leave-group{width:100%}}

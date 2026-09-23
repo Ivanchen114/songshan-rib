@@ -24,10 +24,10 @@ export function studentNext(b,config) {
   if(!supported(a))return ['查閱以前的作品','這個活動保留原系統紀錄；此為早期課程活動，原檔與歷程保留在這裡。'];
   if(migrationReadOnly(a,config))return ['這是搬遷資料，目前僅供查閱',`驗收期間尚未開放這個正式活動交件。要練習上傳與操作，請回「課堂活動」，選擇名稱有「【測試】」的 W${a.kind==='w4'?'4':'5'} 活動。`];
   if(!a.accepting)return ['這個活動尚未開放交件','目前可查閱已有作品與回饋；開放後才能上傳或保存新內容。'];
-  if(b.invitations.length)return ['先確認小組邀請','核對同組同學後，再加入共同作品。'];
+  if(b.invitations.length)return ['小組名單更新中','請稍後更新作品與回饋，不用逐人確認加入。'];
   if(b.reviews.some(r=>r.status==='assigned')&&['review','exhibit'].includes(a.phase))return ['有一份初讀等你完成','切換「我的初讀任務」，先看圖，再寫出你的理解與根據。'];
-  if(a.kind!=='w4'&&a.kind!=='w5-workshop')return [w?.versions.length?'作品與歷程已保存':isGroup(a.kind)?'先確認小組，再保存作品':'先保存我的作品',ACTIVITY[a.kind].description];
-  if(!w?.versions.length)return [a.kind==='w4'?'先保存我的圖卡':'先保存小組的兩張 A3',a.kind==='w4'?'原意留在歷程本，這裡只上傳圖卡。':'同組交一份，組員先確認加入，再上傳 A、B 題照片。'];
+  if(a.kind!=='w4'&&a.kind!=='w5-workshop')return [w?.versions.length?'作品與歷程已保存':isGroup(a.kind)?'先核對本組名單，再保存作品':'先保存我的作品',ACTIVITY[a.kind].description];
+  if(!w?.versions.length)return [a.kind==='w4'?'先保存我的圖卡':'先保存小組的兩張 A3',a.kind==='w4'?'原意留在歷程本，這裡只上傳圖卡。':'代表加入組員後，同組交一份 A、B 題照片。'];
   if(w.feedback.length&&!w.decisions.length&&a.kind==='w4'&&['review','exhibit'].includes(a.phase))return ['同學的初讀回來了','比對原意與畫面，再決定修改，或有理由地保留。'];
   if(!w.feedback.length&&a.kind==='w4')return ['作品已保存，等候同學初讀','你的作品與讀者任務分開進行，可以先查看自己的初讀任務。'];
   return ['作品與歷程已保存','可查看版本、回覆同學，或調整這份作品的公開設定。'];
