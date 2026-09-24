@@ -20,8 +20,10 @@ export async function readingDetail(service,p,input){
  demand(r,404,'找不到這份甲乙留言。');
  const w=await service.work(p,r.work_id);
  demand(p.role!=='student'||w.own&&r.status==='published',403,'只有作品本人可以讀取這份甲乙留言。');
- // Explicit allowlist: no answer keys or source metadata in student responses.
+ // Only the teacher-authorized student record is shared; raw internal notes stay private.
+ const record=r.teacher_notes?.studentRecord;
+ const studentRecord=record?.published===true?Object.fromEntries(['kind','disclosure','aiObservation','teacherReply','result','basis','limit'].map(k=>[k,typeof record[k]==='string'?record[k]:''])):null;
  return {id:r.id,versionId:r.version_id,ordinal:r.ordinal,commentA:r.comment_a,commentB:r.comment_b,taskNote:r.task_note,
- imageUrl:await service.store.signRead(r.image_key),
+ imageUrl:await service.store.signRead(r.image_key),studentRecord,
  ...(p.role!=='student'?{status:r.status,teacherNotes:r.teacher_notes}:{})};
 }
