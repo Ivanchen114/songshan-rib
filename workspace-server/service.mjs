@@ -2,6 +2,7 @@ import {readingList,readingDetail} from './ai-readings.mjs';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
 import {AiJudgment} from './ai-judgment.mjs';
+import {w7Topic} from '../workspace/w7-topics.js';
 import {w5Topic} from '../workspace/w5-topics.js';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
@@ -98,6 +99,7 @@ export class Workspace extends AiJudgment {
   async prepare(p,input) {
     demand(p.role==='student',403,'請使用學生交件入口。');const w=await this.work(p,input.workId,{write:true});
     demand(supportedKind(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');
+    if(w.kind==='w7-news'){demand(w7Topic(w.topic),409,'請先完成本組抽題，再上傳。');demand(!input.topic||input.topic===w.topic,409,'請使用本組已分配的題材。');input={...input,topic:w.topic};}
     const previous=await this.db.query('select id,ordinal,metadata from rib.versions where work_id=$1 order by ordinal',[w.id]);const extra=submissionMetadata(w.kind,input,previous);const files=input.files;
     for(const f of files)demand(Number.isInteger(f.bytes)&&f.bytes>0&&f.bytes<=MAX_IMAGE&&/^[a-f0-9]{64}$/.test(f.sha256)&&['image/jpeg','image/png','image/webp'].includes(f.mime),400,'圖片需為 JPG、PNG 或 WebP，每張最多 8 MB。');
     const [student]=await this.db.query('select sharing_agreement from rib.students where term=$1 and student_id=$2',[p.term,p.studentId]);demand(hasAgreement(student),403,'請先閱讀登入後的匿名展示說明。');const metadata={publicDisplay:true,sharingAgreementVersion:AGREEMENT_VERSION,...extra};if(w.kind==='w5-personal'){demand(w5Topic(w.topic),409,'請先選定題目，再上傳作品。');demand(!input.topic||input.topic===w.topic,409,'題目已更新，請重新整理後再上傳。');metadata.topic=w.topic;metadata.topics=[w.topic];}if(w.kind==='w5-workshop'){demand(/^A0[2-5]$/.test(input.topics?.[0])&&/^B(?:0[2356789]|10)$/.test(input.topics?.[1]),400,'請選 A、B 區各一題。');metadata.topics=input.topics;}
@@ -135,7 +137,7 @@ export class Workspace extends AiJudgment {
     if(p.role==='student'&&!w.own&&w.phase!=='exhibit')demand(w.review?.version_id===v.id,403,'請查看指定的初讀版本。');
     const images=[];for(const m of v.media){demand(m.fullKey,409,'此媒體尚未完成搬遷，請使用原入口。');images.push({url:await this.store.signRead(input.size==='thumb'?m.thumbKey:m.fullKey)});}
     const projectUrl=v.metadata.legacyProjectKey&&(p.role!=='student'||w.own)?await this.store.signRead(v.metadata.legacyProjectKey):null;
-    const contextImages=[];if(w.kind==='w7'&&v.ordinal===2){const first=await one(this.db,'select media from rib.versions where work_id=$1 and ordinal=1',[w.id]);for(const m of first?.media||[])contextImages.push({url:await this.store.signRead(m.fullKey)});}
+    const contextImages=[];if(['w7','w7-news'].includes(w.kind)&&v.ordinal===2){const first=await one(this.db,'select media from rib.versions where work_id=$1 and ordinal=1',[w.id]);for(const m of first?.media||[])contextImages.push({url:await this.store.signRead(m.fullKey)});}
     return {images,contextImages,ordinal:v.ordinal,metadata:{...v.metadata,legacyProjectKey:undefined},projectUrl};
   }
   async dispatch(p,input) {

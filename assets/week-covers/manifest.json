@@ -128,22 +128,22 @@
     },
     {
       "week": 7,
-      "title": "兩種說法，真的衝突嗎？",
+      "title": "兩種說法，\n真的衝突嗎？",
       "source": "W7/index.html",
       "images": [
         {
           "path": "assets/week-covers/W7.webp",
           "width": 768,
           "height": 432,
-          "sha256": "14bb17ace04e03a08f73a0bc2ad48f2d3ee456e44e8134618b0287535d8df61e",
-          "bytes": 69708
+          "sha256": "a98da327ae4c1e51f63fdb010303965ac7ea10903a2a685f8bf907f36ff9a3d0",
+          "bytes": 58822
         },
         {
           "path": "assets/week-covers/W7-small.webp",
           "width": 384,
           "height": 216,
-          "sha256": "a5ce9caf23a103a4b3f7d35763b678bce1339a202a3b5783fc1a01f133acf1c8",
-          "bytes": 20520
+          "sha256": "ae728b90a3b305837f734c1658fd7ae7998a4096ad34b7127003cd5713d641cb",
+          "bytes": 19648
         }
       ]
     },
@@ -496,7 +496,7 @@
     "W6/index.html": "5f5339dac69201d87cc50e556a5abb619e8e3002c49cfc627d60f08b03e420df",
     "W7/assets/deck-media/10b0f13f6bc6706a8626.png": "10b0f13f6bc6706a8626cfd24cae0c6992d093d839c657d92c4b40b8b4095220",
     "W7/assets/deck-media/602e719fa31987aaa283.png": "602e719fa31987aaa2836eb6eae6875c14e7208ee225e65c173efdcd2932a54e",
-    "W7/index.html": "ec72c8fb8bde7b8ff6f07a00a7179dc00eb6cf836419c4a532dca270db989b2a",
+    "W7/index.html": "e652097ccd6610dcfe1fc36c2704de289bed4c7161779ca5f95045f8d9a2abe7",
     "W8/assets/deck-media/5d5bcaac65dbdfc976b1.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
     "W8/index.html": "01424f30027945b1bf0e4c1be46ab3e15932f90d9e3197a38025b2420130204b",
     "W9/assets/deck-media/01fdd6a88ccc95679213.jpg": "01fdd6a88ccc9567921325101ec8cf97f323b18d8cb6703e90e4043284002d05",
@@ -522,9 +522,27 @@
     "assets/weekly-watercolor/W6.webp": "7615dae301ae96e0854dda8367c95c76ff0025de13830feddcd471fe2b03efec",
     "assets/weekly-watercolor/W7.webp": "4e8c299a19daae45f588bb943c16e27e1e91c9781274739d3de325cd97e4c67f",
     "assets/weekly-watercolor/W8.webp": "5d5bcaac65dbdfc976b1c7bf0666dbde4b787d5056fcbb47fae9a415989159b6",
-    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634"
+    "assets/weekly-watercolor/W9.webp": "e52f912c28702b959910ce4a99e556eed0b0ca282b0716dd0052dd03e8f6d634",
+    "W7/assets/cna-youbike-source.png": "116e0ca83989264c6e3b6e587872628ef0d18cd95b0a1f8e1165c477bf7ec384",
+    "W7/assets/deck-media/445d89786ebdb3f0f28c.png": "445d89786ebdb3f0f28c89eb335ef05cd212e2a58aabfb6c763441f381a9359f",
+    "W7/assets/deck-media/508b5f0fff4a5e84e02b.webp": "508b5f0fff4a5e84e02ba8a89ed10cbdf440e4c4b524df1d7295fcf538162b14",
+    "W7/assets/deck-media/75fad3644830c2f1eaf2.png": "75fad3644830c2f1eaf2eb5244251b31100a07898ca707601b6b8e1168ec08cc",
+    "W7/assets/deck-media/cca6e781d021258f6951.webp": "cca6e781d021258f6951d1971035d1b7bb8de970ff842b199039aa336e883127",
+    "W7/assets/google-2025-concerts.webp": "0e92a0dc1bf78241aa080fb30c4f36f64f3b1ef97721322c040fd07da3cf4d61",
+    "W7/assets/group-cooperation-songshan.png": "b2b294670eed65650c59b80bb7a3fe197d4541960ae7e20b3e436c40ecb53490",
+    "W7/assets/gsat115-social-q8-table.png": "e1da796f37ca4bbad81cc73eae625a967a9e85a337f4312f08301caf333133d0",
+    "W7/assets/life-babbel-page.png": "27fb71fa18ab72723720e4d5715da27cd522a86aee915339e11dc0c74f635cea",
+    "W7/assets/life-google-page.png": "7c9f3f4a81e92a4754466bf2d26f215a58b75525d34a3a77b4095e8ff55ee650",
+    "W7/assets/life-tibame-page.png": "5a8b0531e04bb4a49dcd84ba7ee5e263269c43f7e1b76fc9e4c140b50209e2d7",
+    "W7/assets/phone-study-illustrations.png": "9f4c39d3a93a80982f8850ca66c3dcfb8c5e80fb8b797e4209177ec71da54291",
+    "W7/assets/phone-study-news-check-handwritten.png": "c9d5be0517f044b7bdd4caa1512fbc776edabd682c6f82f221fec69af64e7e8c",
+    "W7/assets/same-topic-room-watercolor.png": "dae1dbb4540e33273246293a06e2025f6bd9a07407264cf723dc2994c4a213f8",
+    "W7/assets/tainan-youbike-source.png": "55d41216fbaf00d44c6261e6d06889a7663701fcfdd7ce058fbafac301b56333",
+    "W7/assets/youbike-handwritten-bars.png": "039f13327b0a71d7ebd51ebb7b141810a094d4c45d9d2d168d2db6efefe86479",
+    "W7/assets/youbike-handwritten-source-check.png": "f2753b0aed8033895a9399642e0bac3bb99450533965b65e0fdcf87cace900a0"
   },
   "generatedAt": "2026-09-21T15:20:40.006Z",
   "method": "Actual 1600x900 first slide; player controls hidden; resized to WebP",
-  "w5UpdatedAt": "2026-09-21"
+  "w5UpdatedAt": "2026-09-21",
+  "w7UpdatedAt": "2026-09-24"
 }

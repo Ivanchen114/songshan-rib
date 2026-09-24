@@ -26,6 +26,7 @@ export function studentNext(b,config) {
   if(!a.accepting)return ['這個活動尚未開放交件','目前可查閱已有作品與回饋；開放後才能上傳或保存新內容。'];
   if(a.kind==='w5-personal'&&b.aiReadings?.some(r=>r.has_pair)&&b.aiJudgments&&!b.aiJudgments.some(r=>r.status==='submitted'))return ['先留下自己的 AI 留言判讀','對照老師提供的圖卡與甲乙留言，在下方找一句黃或紅的留言，保存判讀與改寫，再接文轉圖。'];
   if(a.kind==='w5-personal')return !w?.topic?['先選這次要畫的題目','先讀題目與原文，從 A、B 兩區選一題；每人完成自己的一張圖。']:!w.versions.length?['題目已選好，接著完成並上傳一張圖','在歷程本第3頁大框完成作品，回原文核對，再拍圖上傳。']:['作品已保存，看看同題的不同表達','到課程展廳選同一題，欣賞大家的畫法；歷程本第3頁只記一個注意到的畫法或差異。'];
+  if(a.kind==='w7-news')return !w?.topic?['先核對本組名單，再抽一份材料','代表建立小組、加入組員後抽題；每組一題，分配結果會保存。']:!w.versions.length?['一起讀新聞與研究，畫一張圖卡','題材已分配。一起選主張、分工核對並畫圖；同題組交流後，由代表上傳最後圖卡與一則ORID交流紀錄。']:['到展廳比較同題作品','篩選本組題材，看看別組選了哪些依據、結論說到哪裡、怎麼畫；本組的ORID交流紀錄已隨作品保存。'];
   if(b.invitations.length)return ['小組名單更新中','請稍後更新作品與回饋，不用逐人確認加入。'];
   if(b.reviews.some(r=>r.status==='assigned')&&['review','exhibit'].includes(a.phase))return ['有一份初讀等你完成','切換「我的初讀任務」，先看圖，再寫出你的理解與根據。'];
   if(a.kind!=='w4'&&a.kind!=='w5-workshop')return [w?.versions.length?'作品與歷程已保存':isGroup(a.kind)?'先核對本組名單，再保存作品':'先保存我的作品',ACTIVITY[a.kind].description];

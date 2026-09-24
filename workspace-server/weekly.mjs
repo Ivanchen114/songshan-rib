@@ -1,3 +1,4 @@
+import {w7Topic} from '../workspace/w7-topics.js';
 import {w5Topic} from '../workspace/w5-topics.js';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {uid,text,demand,json,sha,teacherScope} from './security.mjs';
@@ -10,6 +11,7 @@ export function submissionMetadata(kind,input,previous=[]){
  const meta={};
  if(kind==='w5-personal'){demand(w5Topic(input.topic),400,'請從題庫選一題，標明自己的題號。');meta.topic=input.topic;}
  if(['w3-rebuild','w3-personal'].includes(kind))meta.text=text(input.text,3000);
+ if(kind==='w7-news'){demand(w7Topic(input.topic),409,'請先完成本組抽題。');meta.topic=input.topic;meta.text=text(input.text,1200);}
  if(kind==='w7'){const topic=previous[0]?.metadata.topic||input.topic;demand(['Z','M'].includes(topic),400,'請選動物園或校園手機。');meta.topic=topic;}
  if(kind==='w15-deck'){
   demand(['slides','paper'].includes(input.layout),400,'請選五張投影片或一張完整 A3。');
@@ -55,7 +57,7 @@ export class Weekly extends Roster {
  async markCurrent(p,input){return this.db.transaction(async db=>{
   await db.query('select id from rib.works where id=$1 for update',[String(input.workId)]);const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w15-deck',403,'請在自己的公共說明作品選用版本。');demand(w.revision===input.expectedRevision,409,'組員已更新，請重新核對。');
   demand(await one(db,'select id from rib.versions where id=$1 and work_id=$2',[String(input.versionId),w.id]),400,'只能沿用本組既有版本。');await db.query('update rib.works set current_version_id=$1,revision=revision+1 where id=$2',[input.versionId,w.id]);await this.event(db,p,w.activity_id,'current-version',w.id,{versionId:input.versionId});return {saved:true};});}
- async paperKeep(p,input){return this.db.transaction(async db=>{const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w7',403,'請在本人的 W7 作品操作。');await db.query('select id from rib.works where id=$1 for update',[w.id]);const v=await one(db,'select id from rib.versions where work_id=$1 order by ordinal desc limit 1',[w.id]);demand(v&&v.id===input.versionId,409,'請先保存並核對版本。');const old=await one(db,"select id from rib.decisions where work_id=$1 and version_id=$2 and choice='keep'",[w.id,v.id]);if(!old)await db.query("insert into rib.decisions(id,work_id,student_id,choice,reason,version_id) values($1,$2,$3,'keep','保留依據記在歷程本。',$4)",[uid(),w.id,p.studentId,v.id]);await this.event(db,p,w.activity_id,'paper-keep',w.id);return {saved:true};});}
+ async paperKeep(p,input){return this.db.transaction(async db=>{const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&['w7','w7-news'].includes(w.kind),403,'請在本人的 W7 作品操作。');await db.query('select id from rib.works where id=$1 for update',[w.id]);const v=await one(db,'select id from rib.versions where work_id=$1 order by ordinal desc limit 1',[w.id]);demand(v&&v.id===input.versionId,409,'請先保存並核對版本。');const old=await one(db,"select id from rib.decisions where work_id=$1 and version_id=$2 and choice='keep'",[w.id,v.id]);if(!old)await db.query("insert into rib.decisions(id,work_id,student_id,choice,reason,version_id) values($1,$2,$3,'keep','保留依據記在歷程本。',$4)",[uid(),w.id,p.studentId,v.id]);await this.event(db,p,w.activity_id,'paper-keep',w.id);return {saved:true};});}
  async selections(p,input={}){
   demand(p.role==='student',403,'請使用本人帳號。');const rows=await this.db.query(`select v.id,v.ordinal,v.metadata,a.week,a.title,w.id as work_id from rib.versions v join rib.works w on w.id=v.work_id join rib.activities a on a.id=w.activity_id join rib.members m on m.work_id=w.id where m.term=$1 and m.student_id=$2 and m.status='confirmed' and not w.hidden and coalesce((a.legacy->>'testOnly')::boolean,false)=$3 order by a.week,w.id,v.ordinal`,[p.term,p.studentId,!!p.student.is_test]);
   const s=await one(this.db,'select * from rib.selections where term=$1 and student_id=$2',[p.term,p.studentId]);return {term:p.term,candidates:rows,selected:s?.version_ids||[],revision:s?.revision||0,readOnly:await currentTerm(this.db)!==p.term};
