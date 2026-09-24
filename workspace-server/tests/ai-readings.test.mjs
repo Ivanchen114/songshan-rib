@@ -10,4 +10,23 @@ test('reading stays bound to V1 after new submission and enters private backup, 
 
 test('unclear drawing can show a task note without fabricating a pair',async t=>{const f=await fixture();t.after(f.close);const {service}=await seed(f);await f.db.query("update rib.ai_readings set comment_a='',comment_b='',task_note='請補成三格並釐清動作'");const r=await service.aiReading(f.people[0],{readingId:'reading1'});assert.equal(r.commentA,'');assert.equal(r.commentB,'');assert.equal(r.taskNote,'請補成三格並釐清動作');assert.equal((await service.board(f.people[0],{activityId:'w4-demo'})).aiReadings[0].has_pair,false);await assert.rejects(f.db.query("update rib.ai_readings set task_note=''"));});
 
-test('teacher-authorized record is visible only to owner; internal notes remain private',async t=>{const f=await fixture();t.after(f.close);const {service}=await seed(f);const record={published:true,kind:'joint',disclosure:'共同判讀摘要',teacherReply:'老師說仍不確定',basis:'證據不足',internalSecret:'不可公開'};await f.db.query("update rib.ai_readings set teacher_notes=teacher_notes || $1::jsonb",[JSON.stringify({studentRecord:record})]);const own=await service.aiReading(f.people[0],{readingId:'reading1'});assert.equal(own.studentRecord.kind,'joint');assert.equal(own.studentRecord.teacherReply,'老師說仍不確定');assert.equal(own.studentRecord.basis,'證據不足');assert.equal(own.studentRecord.internalSecret,undefined);assert.equal(own.teacherNotes,undefined);await assert.rejects(service.aiReading(f.people[1],{readingId:'reading1'}),e=>e.status===403);await f.db.query("update rib.ai_readings set teacher_notes=jsonb_set(teacher_notes,'{studentRecord,published}','false')");assert.equal((await service.aiReading(f.people[0],{readingId:'reading1'})).studentRecord,null);});
+const responseAnswers={sourceReference:'reading1 / W4 V1',comment:'甲',quote:'甲內容',color:'yellow',evidence:'圖上不足以判定',rewritten:'目前還不能確定'};
+test('student records unlock only after own matching submission; teacher access and task warnings remain',async t=>{
+ const f=await fixture();t.after(f.close);const {service}=await seed(f);
+ await f.db.query("update rib.activities set kind='w5-personal' where id='w5-demo'");
+ const record={published:true,kind:'joint',disclosure:'共同判讀摘要',aiObservation:'AI觀察',teacherReply:'老師說仍不確定',basis:'證據不足',internalSecret:'不可公開'};
+ await f.db.query("update rib.ai_readings set task_note='請保留三格要求提醒',teacher_notes=teacher_notes || $1::jsonb",[JSON.stringify({studentRecord:record})]);
+ const read=()=>service.aiReading(f.people[0],{readingId:'reading1'});
+ let own=await read();assert.equal(own.studentRecord,null);assert.equal(own.recordLocked,true);assert.equal(own.commentA,'甲內容');assert.equal(own.taskNote,'請保留三格要求提醒');assert.ok(!JSON.stringify(own).includes('老師說仍不確定'));
+ assert.equal((await service.aiReading(f.teacher,{readingId:'reading1'})).studentRecord.basis,'證據不足');
+ const save=(status,revision,answers=responseAnswers)=>service.saveAiJudgment(f.people[0],{activityId:'w5-demo',status,expectedRevision:revision,answers});
+ await save('draft',0);assert.equal((await read()).studentRecord,null);
+ await save('submitted',1,{...responseAnswers,sourceReference:'different-reading / W4 V1'});assert.equal((await read()).studentRecord,null);
+ await save('submitted',2);own=await read();assert.equal(own.recordLocked,false);assert.equal(own.studentRecord.teacherReply,'老師說仍不確定');assert.equal(own.studentRecord.basis,'證據不足');assert.equal(own.studentRecord.internalSecret,undefined);assert.equal(own.teacherNotes,undefined);
+ await assert.rejects(service.aiReading(f.people[1],{readingId:'reading1'}),e=>e.status===403);
+ await f.db.query("update rib.activities set legacy='{\"testOnly\":true}' where id='w5-demo'");assert.equal((await read()).studentRecord,null);
+ await f.db.query("update rib.activities set legacy='{}',term='other-term' where id='w5-demo'");assert.equal((await read()).studentRecord,null);
+ await f.db.query("update rib.activities set term='11501' where id='w5-demo'");assert.ok((await read()).studentRecord);
+ await save('draft',3);assert.equal((await read()).studentRecord,null);
+ await save('submitted',4);await f.db.query("update rib.ai_readings set teacher_notes=jsonb_set(teacher_notes,'{studentRecord,published}','false')");assert.equal((await read()).studentRecord,null);
+});

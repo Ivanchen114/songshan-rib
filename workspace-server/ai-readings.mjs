@@ -22,8 +22,17 @@ export async function readingDetail(service,p,input){
  demand(p.role!=='student'||w.own&&r.status==='published',403,'只有作品本人可以讀取這份甲乙留言。');
  // Only the teacher-authorized student record is shared; raw internal notes stay private.
  const record=r.teacher_notes?.studentRecord;
- const studentRecord=record?.published===true?Object.fromEntries(['kind','disclosure','aiObservation','teacherReply','result','basis','limit'].map(k=>[k,typeof record[k]==='string'?record[k]:''])):null;
+ let canReadRecord=p.role!=='student';
+ if(!canReadRecord&&record?.published===true){
+  const [submitted]=await service.db.query(`select 1 from rib.ai_judgments j join rib.activities a on a.id=j.activity_id
+   where j.term=$1 and j.student_id=$2 and j.status='submitted' and a.kind='w5-personal'
+   and a.term=$1 and coalesce((a.legacy->>'testOnly')::boolean,false)=$3
+   and j.answers->>'sourceReference'=$4 limit 1`,[w.term,p.studentId,!!w.test_only,`${r.id} / W4 V${r.ordinal}`]);
+  canReadRecord=!!submitted;
+ }
+ const studentRecord=canReadRecord&&record?.published===true?Object.fromEntries(['kind','disclosure','aiObservation','teacherReply','result','basis','limit'].map(k=>[k,typeof record[k]==='string'?record[k]:''])):null;
  return {id:r.id,versionId:r.version_id,ordinal:r.ordinal,commentA:r.comment_a,commentB:r.comment_b,taskNote:r.task_note,
  imageUrl:await service.store.signRead(r.image_key),studentRecord,
+ recordLocked:p.role==='student'&&record?.published===true&&!canReadRecord,
  ...(p.role!=='student'?{status:r.status,teacherNotes:r.teacher_notes}:{})};
 }
