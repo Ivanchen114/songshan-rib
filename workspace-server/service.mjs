@@ -1,3 +1,4 @@
+import {readingList,readingDetail} from './ai-readings.mjs';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
 import {TopicSelection} from './topic-selection.mjs';
@@ -80,8 +81,9 @@ export class Workspace extends TopicSelection {
       this.db.query(`select * from rib.assessments where work_id=any($1::text[]) ${p.role==='student'?"and student_id=$2 and status='graded'":''}`,p.role==='student'?[workIds,p.studentId]:[workIds])]);
     const items=works.map(w=>({...w,versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
     const invitations=p.role==='student'?await this.db.query(`select w.id from rib.members m join rib.works w on w.id=m.work_id where w.activity_id=$1 and m.student_id=$2 and m.status='invited'`,[a.id,p.studentId]):[];
-    return {activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations};
+    return {activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
   }
+  async aiReading(p,input){return readingDetail(this,p,input);}
   async ensureWork(p,input) {
     demand(p.role==='student',403,'請使用學生帳號。');const a=await this.activity(p,input.activityId);demand(supportedKind(a.kind),409,'此歷史活動僅供查閱。');demand(a.accepting&&!a.archived,403,'老師尚未開放交件。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'測試帳號請使用測試活動，正式帳號請使用課堂活動。');
     return this.db.transaction(async db=>{

@@ -140,6 +140,18 @@ create table if not exists rib.activity_assets (
  unique(activity_id,request_id)
 );
 create index if not exists activity_assets_activity on rib.activity_assets(activity_id,created_at);
+-- Private W5 exercise; comments and teacher notes never enter the public gallery.
+create table if not exists rib.ai_readings (
+ id text primary key, version_id text not null unique references rib.versions,
+ comment_a text not null check(length(comment_a)<=300),
+ comment_b text not null check(length(comment_b)<=300),
+ source_hash text not null, image_key text not null, task_note text not null default '',
+ teacher_notes jsonb not null default '{}',
+ status text not null default 'draft' check(status in ('draft','published','withdrawn')),
+ created_by text not null, created_at timestamptz not null default now(), published_at timestamptz,
+ check(status <> 'published' or published_at is not null),
+ check((comment_a<>'' and comment_b<>'') or (comment_a='' and comment_b='' and task_note<>''))
+);
 revoke all on all tables in schema rib from public;
 revoke all on all sequences in schema rib from public;
 

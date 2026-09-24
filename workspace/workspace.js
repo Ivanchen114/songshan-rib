@@ -59,10 +59,18 @@ async function board(){
  const expanded=[...document.querySelectorAll('[data-work-details][open]')].map(el=>el.dataset.workDetails),queues=[...document.querySelectorAll('.queue')].map(el=>el.open),focusId=document.activeElement?.id,scroll=window.scrollY;
  const b=await api('board',{activityId:state.activity,...(state.className?{className:state.className}:{})});state.board=b;const teacher=state.home.person.role!=='student',a=b.activity;
  heading(activityTitle(a),teacher?'查看班級交件、作品版本與需要協助的同學。':ACTIVITY[a.kind]?.description||'查閱原件與歷程。',a.kind);
- app.innerHTML=`<div class="board-toolbar"><div class="row">${button('← 課堂活動','home','',true)}<span class="tag">${esc(phaseLabel(a,state.config))}</span>${a.testOnly?'<span class="tag test-tag">測試活動</span>':''}</div><button class="secondary refresh-button" data-action="refresh" aria-label="更新作品與回饋"><span class="refresh-long">更新作品與回饋</span><span class="refresh-short">更新</span></button></div>${a.archived?'<p class="notice">此學期已封存，作品、回饋與評閱保留查閱。</p>':''}${teacher?teacherPanel(b):studentPanel(b)}`;
+ app.innerHTML=`<div class="board-toolbar"><div class="row">${button('← 課堂活動','home','',true)}<span class="tag">${esc(phaseLabel(a,state.config))}</span>${a.testOnly?'<span class="tag test-tag">測試活動</span>':''}</div><button class="secondary refresh-button" data-action="refresh" aria-label="更新作品與回饋"><span class="refresh-long">更新作品與回饋</span><span class="refresh-short">更新</span></button></div>${a.archived?'<p class="notice">此學期已封存，作品、回饋與評閱保留查閱。</p>':''}${teacher?teacherPanel(b):studentPanel(b)}${readingPanel(b,teacher)}`;
  if(!teacher&&a.kind!=='w4'&&!b.reviews.length)state.studentView='work';
  if(teacher){renderWorks();for(const el of document.querySelectorAll('[data-work-details]'))el.open=expanded.includes(el.dataset.workDetails);document.querySelectorAll('.queue').forEach((el,i)=>{if(queues[i])el.open=true;});}else setStudentView(state.studentView);
  if(['classChoice','workFilter','workSearch'].includes(focusId))document.getElementById(focusId)?.focus({preventScroll:true});window.scrollTo(0,scroll);
+}
+function readingPanel(b,teacher){
+ const rows=b.aiReadings||[];if(!rows.length)return '';
+ return `<section class="panel ai-reading-panel"><p class="eyebrow">W5 · 回到自己的圖卡</p><h2>甲乙兩種讀法</h2><p>讀圖，再逐句檢查留言的根據。請依課堂指示，在歷程本標出綠、紅、黃，寫下理由。</p><div class="row">${rows.map(r=>button((teacher?r.seat+' 號 · ':'')+'W4 V'+r.ordinal+(r.has_pair?' 的甲乙留言':' 的圖卡提醒')+(teacher&&r.status!=='published'?'（'+({draft:'草稿',withdrawn:'已收回'}[r.status])+ '）':''),'aiReading',`data-id="${esc(r.id)}"`,true)).join('')}</div><p class="muted">AI 模擬留言，供核對畫面證據使用。</p></section>`;
+}
+async function openReading(id){
+ const r=await api('aiReading',{readingId:id});
+ show(`<h2>${r.commentA?'甲乙兩種讀法':'圖卡提醒'}</h2><p>對照你的 W4 V${r.ordinal} 圖卡${r.commentA?'，逐句找根據':''}。</p>${r.taskNote?`<section class="notice"><h3>圖卡要求與提醒</h3><p>${esc(r.taskNote)}</p></section>`:''}<div class="ai-reading-image"><img src="${esc(r.imageUrl)}" alt="這份甲乙留言所對照的 W4 圖卡"></div>${r.commentA?`<div class="ai-reading-comments"><section><h3>甲</h3><p>${esc(r.commentA)}</p></section><section><h3>乙</h3><p>${esc(r.commentB)}</p></section></div><p class="notice">綠：畫面支持；紅：畫面直接反駁；黃：目前證據不足。先在歷程本標記，再指出線索或說明還缺什麼。</p>`:''}${r.teacherNotes?`<details><summary>教師判讀依據（僅教師可見）</summary><p>${esc(r.teacherNotes.evidence||'')}</p><p>${esc(r.teacherNotes.judgment||'')}</p><p>${esc(r.teacherNotes.limit||'')}</p></details>`:''}`);
 }
 function studentPanel(b){
  const a=b.activity,[title,description]=studentNext(b,state.config),w=b.works[0],invites=b.invitations.length?'<p class="notice">小組名單正在更新，請稍後按「更新作品與回饋」。不用逐人確認加入。</p>':'';
@@ -104,6 +112,7 @@ async function action(el){const a=el.dataset.action,id=el.dataset.id;if(a==='mai
   if(a==='ensureWork'){await api(a,{activityId:state.activity},true);return board();}
   if(a==='leaveGroup'){const w=workById(id);show(`<h2>離開這個小組？</h2><p>離開後，你不再列為本組成員，也不能編輯或選錄本組作品。之後請正確小組的代表用座號加入你。</p>${w.versions.length?'<p class="notice">已有作品與操作紀錄會保留給原組與老師；對外展示暫停，請老師核對後恢復。</p>':'<p>若只是自己誤建空白小組，也可以在這裡離開。</p>'}<form id="leaveGroup" data-id="${esc(id)}" data-revision="${w.revision}"><p id="formStatus" role="status"></p><div class="row"><button class="leave-group">確認離開這個小組</button><button type="button" class="secondary" data-action="cancelGroupLeave">留在小組</button></div></form>`);return;}
   if(a==='cancelGroupLeave'){dialog.close();return;}
+  if(a==='aiReading')return openReading(id);
   if(a==='view'){show('<h2>作品版本</h2><div id="media"></div>');return images(id,$('#media'));}
   if(a==='upload'){weekly.uploadForm(workById(id));return;}
   if(a==='read'){const r=state.board.reviews.find(x=>x.id===id);show(`<h2>先看圖，再說理解</h2><div id="media"></div><form id="review" data-id="${esc(id)}"><label>① 發生什麼事？指出畫面根據。<textarea name="situation" required maxlength="1200"></textarea></label><label>② 讀到什麼關係、心情或意味？根據在哪裡？<textarea name="meaning" required maxlength="1200"></textarea></label><p class="muted">拿不準可以說明。送出後保留這次獨立初讀，不用猜作者的標準答案。</p><p id="formStatus" role="status"></p><label><input type="checkbox" required>我還不知道作者原意，這是我看圖後的獨立理解。</label><button>送出我的初讀</button></form>`);return images(r.version_id,$('#media'));}
