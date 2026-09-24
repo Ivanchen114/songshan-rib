@@ -1,5 +1,4 @@
-// Student-facing source only; excludes teacher checks and taught examples.
-// Source: build_tools/w45_unit/workshop_materials.py CARDS excluding TAUGHT.
+// Generated student-facing bank; teacher checks are excluded.
 export const W5_TOPICS=Object.freeze([
   {
     "id": "A02",

@@ -1,7 +1,7 @@
 import {readingList,readingDetail} from './ai-readings.mjs';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
-import {TopicSelection} from './topic-selection.mjs';
+import {AiJudgment} from './ai-judgment.mjs';
 import {w5Topic} from '../workspace/w5-topics.js';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
@@ -13,7 +13,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
 const one = async(db,q,args) => (await db.query(q,args))[0];
-export class Workspace extends TopicSelection {
+export class Workspace extends AiJudgment {
   constructor(db,store){super();this.db=db;this.store=store;}
   async event(db,p,a,kind,resource,detail={}){await db.query('insert into rib.events(activity_id,actor,kind,resource,detail) values($1,$2,$3,$4,$5)',[a,actor(p),kind,resource,json(detail)]);}
   async login(input,ip) {
@@ -227,7 +227,7 @@ export class Workspace extends TopicSelection {
     await db.query('update rib.publications set status=$1,title=$2,reviewed_by=$3,reviewed_at=now() where id=$4',[input.publish===true?'published':'withdrawn',text(input.title||'匿名作品',80),p.email,pub.id]);await this.event(db,p,w.activity_id,'publication',pub.id,{publish:input.publish===true});return {saved:true};});}
   async gallery(input={}){return galleryList(this.db,this.store,input);}
   async galleryItem(input){return galleryDetail(this.db,this.store,input);}
-  async evidence(workId,db=this.db){const versions=await db.query('select id,media from rib.versions where work_id=$1 order by ordinal',[workId]);const reviews=await db.query("select id,revision from rib.reviews where target_work_id=$1 and status='done' order by id",[workId]);const decisions=await db.query('select id from rib.decisions where work_id=$1 order by created_at',[workId]);return sha(json({versions,reviews,decisions}));}
+  async evidence(workId,db=this.db){const versions=await db.query('select id,media from rib.versions where work_id=$1 order by ordinal',[workId]);const reviews=await db.query("select id,revision from rib.reviews where target_work_id=$1 and status='done' order by id",[workId]);const decisions=await db.query('select id from rib.decisions where work_id=$1 order by created_at',[workId]);const judgments=await this.judgmentsForWork(workId,db);return sha(json({versions,reviews,decisions,judgments}));}
   async assess(p,input){const w=await this.work(p,input.workId,{grading:true});demand(p.role!=='student'&&w.kind==='w4',403,'此區不另評分。');const criteria=input.criteria;demand(Array.isArray(criteria)&&criteria.length===4&&criteria.every(x=>x===null||Number.isInteger(x)&&x>=0&&x<=3),400,'四項規準各為 0–3 分或尚未評定。');demand(['draft','needs-evidence','graded'].includes(input.status),400,'評閱狀態不正確。');demand(input.status==='draft'||typeof input.comment==='string'&&input.comment.trim(),400,'請填寫評閱依據或補件說明。');demand(input.status!=='graded'||criteria.every(x=>x!==null)&&input.evidenceReviewed===true,400,'正式判分前，請確認已合看兩週本人證據。');
     const member=await one(this.db,"select student_id from rib.members where work_id=$1 and student_id=$2 and status='confirmed'",[w.id,input.studentId]);demand(member,400,'這位學生不是作品作者。');
     return this.db.transaction(async db=>{await db.query('select id from rib.works where id=$1 for update',[w.id]);demand(input.evidenceKey===await this.evidence(w.id,db),409,'作品或回饋已更新，請先重新核對。');const old=await one(db,"select revision from rib.assessments where work_id=$1 and student_id=$2 and rubric='w45-v104'",[w.id,input.studentId]);demand((old?.revision||0)===input.expectedRevision,409,'另一位老師已更新評閱。');await db.query(`insert into rib.assessments(work_id,student_id,rubric,criteria,comment,status,evidence_key,teacher,revision) values($1,$2,'w45-v104',$3,$4,$5,$6,$7,1) on conflict(work_id,student_id,rubric) do update set legacy_score=null,legacy_max=null,legacy_payload=null,criteria=excluded.criteria,comment=excluded.comment,status=excluded.status,evidence_key=excluded.evidence_key,teacher=excluded.teacher,revision=rib.assessments.revision+1,updated_at=now()`,[w.id,input.studentId,json(criteria),String(input.comment||'').slice(0,2000),input.status,input.evidenceKey,p.email]);await this.event(db,p,w.activity_id,'assessment',w.id,{studentId:input.studentId,status:input.status});return {saved:true};});}

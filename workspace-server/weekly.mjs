@@ -1,3 +1,4 @@
+import {w5Topic} from '../workspace/w5-topics.js';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {uid,text,demand,json,sha,teacherScope} from './security.mjs';
 import {currentTerm} from './terms.mjs';
@@ -7,6 +8,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const one=async(db,q,p=[]) => (await db.query(q,p))[0];
 export function submissionMetadata(kind,input,previous=[]){
  const meta={};
+ if(kind==='w5-personal'){demand(w5Topic(input.topic),400,'請從題庫選一題，標明自己的題號。');meta.topic=input.topic;}
  if(['w3-rebuild','w3-personal'].includes(kind))meta.text=text(input.text,3000);
  if(kind==='w7'){const topic=previous[0]?.metadata.topic||input.topic;demand(['Z','M'].includes(topic),400,'請選動物園或校園手機。');meta.topic=topic;}
  if(kind==='w15-deck'){

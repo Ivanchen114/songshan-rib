@@ -140,6 +140,13 @@ create table if not exists rib.activity_assets (
  unique(activity_id,request_id)
 );
 create index if not exists activity_assets_activity on rib.activity_assets(activity_id,created_at);
+-- Private W5 responses are independent of the later diagram submission.
+create table if not exists rib.ai_judgments (
+ activity_id text not null references rib.activities, term text not null, student_id text not null,
+ answers jsonb not null, status text not null check(status in ('draft','submitted')),
+ revision integer not null default 1, updated_at timestamptz not null default now(),
+ primary key(activity_id,student_id), foreign key(term,student_id) references rib.students
+);
 -- Private W5 exercise; comments and teacher notes never enter the public gallery.
 create table if not exists rib.ai_readings (
  id text primary key, version_id text not null unique references rib.versions,

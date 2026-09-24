@@ -1,17 +1,18 @@
 import {sha,demand} from './security.mjs';
-export const TABLES=['students','credentials','teachers','activities','works','members','versions','reviews','replies','decisions','uploads','assessments','publications','events','legacy_records','legacy_files','migration_runs','workspace_state','term_drafts','term_changes','wall_comments','wall_votes','selections','activity_assets','ai_readings'];
+export const TABLES=['students','credentials','teachers','activities','works','members','versions','reviews','replies','decisions','uploads','assessments','publications','events','legacy_records','legacy_files','migration_runs','workspace_state','term_drafts','term_changes','wall_comments','wall_votes','selections','activity_assets','ai_readings','ai_judgments'];
 // Sessions and rate limits are ephemeral; restored users sign in again.
 export async function snapshot(db){return db.transaction(async tx=>{
  await tx.query('set transaction isolation level repeatable read read only');
  const tables={};for(const name of TABLES)tables[name]=await tx.query(`select to_jsonb(t) as row from rib.${name} t`);
  for(const name of TABLES)tables[name]=tables[name].map(x=>x.row);
- const payload={format:'rib-backup-v4',created:new Date().toISOString(),tables};return {...payload,sha256:sha(JSON.stringify(payload))};
+ const payload={format:'rib-backup-v5',created:new Date().toISOString(),tables};return {...payload,sha256:sha(JSON.stringify(payload))};
 });}
 export async function restoreEmpty(db,backup){
- const {sha256,...payload}=backup;demand(['rib-backup-v1','rib-backup-v2','rib-backup-v3','rib-backup-v4'].includes(payload.format)&&sha(JSON.stringify(payload))===sha256,409,'備份雜湊不一致。');
+ const {sha256,...payload}=backup;demand(['rib-backup-v1','rib-backup-v2','rib-backup-v3','rib-backup-v4','rib-backup-v5'].includes(payload.format)&&sha(JSON.stringify(payload))===sha256,409,'備份雜湊不一致。');
  if(payload.format==='rib-backup-v1'){payload.tables.workspace_state=[];payload.tables.term_drafts=[];payload.tables.term_changes=[];}
  if(['rib-backup-v1','rib-backup-v2'].includes(payload.format))for(const name of ['wall_comments','wall_votes','selections','activity_assets'])payload.tables[name]=[];
- if(payload.format!=='rib-backup-v4')payload.tables.ai_readings=[];
+ // V4 existed separately for published readings and local judgments; preserve either.
+ if(payload.format!=='rib-backup-v5')for(const name of ['ai_readings','ai_judgments'])if(!(name in payload.tables))payload.tables[name]=[];
  demand(TABLES.every(t=>Array.isArray(payload.tables[t]))&&Object.keys(payload.tables).length===TABLES.length,400,'備份資料表不完整。');
  return db.transaction(async tx=>{
  for(const name of TABLES){if(name==='workspace_state'){const [state]=await tx.query('select * from rib.workspace_state where id=1');demand(!state?.current_term&&!state?.revision,409,'只能還原到獨立空白資料庫。');continue;}const [r]=await tx.query(`select count(*)::int as n from rib.${name}`);demand(r.n===0,409,'只能還原到獨立空白資料庫。');}

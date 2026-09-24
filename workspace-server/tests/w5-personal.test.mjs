@@ -12,3 +12,10 @@ test('topic filtering keeps class and public privacy gates and supports paginati
 test('migration preserves existing group works and members, makes a new personal activity, and is idempotent',async t=>{const f=await fixture();t.after(f.close);const s=new Workspace(f.db,f.store),p=f.people[0],w=await s.ensureWork(p,{activityId:'w5-demo'});await s.invite(p,{workId:w.id,studentIds:[f.people[1].studentId]});const members=await f.db.query('select * from rib.members order by student_id');assert.equal((await upgradeW5Personal(f.db)).preserveHistory,1);await upgradeW5Personal(f.db,{apply:true});assert.deepEqual(await f.db.query('select * from rib.members order by student_id'),members);assert.equal((await f.db.query("select archived from rib.activities where id='w5-demo'"))[0].archived,true);assert.equal((await f.db.query("select * from rib.activities where kind='w5-personal'")).length,1);assert.equal((await upgradeW5Personal(f.db,{apply:true})).activities,0);
 });
 test('weekly steps respect individual/group flows without claiming classroom completion',()=>{const b={activity:{kind:'w5-personal',accepting:true},works:[],invitations:[],reviews:[]};assert.match(activityFlow(b),/選一題/);assert.doesNotMatch(activityFlow(b),/組員/);assert.match(studentNext(b)[0],/先選/);b.works=[{topic:'A02',versions:[]}];assert.match(studentNext(b)[0],/上傳/);b.works[0].versions=[{}];assert.match(studentNext(b)[0],/同題/);for(const kind of ['w3-rebuild','w3-personal','w4','w7','w15-deck'])assert.match(activityFlow({...b,activity:{kind}}),/本週操作步驟/);});
+
+// Topic selection and image upload must accept the same complete bank.
+test('all 16 selectable topics upload; teacher practice examples remain excluded',async()=>{
+ const {submissionMetadata}=await import('../weekly.mjs');
+ for(const topic of W5_TOPICS)assert.equal(submissionMetadata('w5-personal',{topic:topic.id,files:[{}]}).topic,topic.id);
+ for(const topic of ['A01','B01','B03','B04','unknown'])assert.throws(()=>submissionMetadata('w5-personal',{topic,files:[{}]}));
+});
