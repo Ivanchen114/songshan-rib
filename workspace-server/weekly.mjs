@@ -1,7 +1,7 @@
 import {namedClassroom,classroomClasses,classroomLabel} from './classroom-audience.mjs';
-import {w8Topic} from '../workspace/w8-topics.js';
 import {w7Topic} from '../workspace/w7-topics.js';
 import {w5Topic} from '../workspace/w5-topics.js';
+import {w8Topic} from '../workspace/w8-topics.js';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {uid,text,demand,json,sha,teacherScope} from './security.mjs';
 import {currentTerm} from './terms.mjs';
@@ -17,7 +17,6 @@ export function submissionMetadata(kind,input,previous=[]){
   // Full paper includes author/questioner names. Keep it in the logged-in course.
   meta.publicDisplay=false;
  }
-
  if(kind==='w5-personal'){demand(w5Topic(input.topic),400,'請從題庫選一題，標明自己的題號。');meta.topic=input.topic;}
  if(['w3-rebuild','w3-personal'].includes(kind))meta.text=text(input.text,3000);
  if(kind==='w7-news'){demand(w7Topic(input.topic),409,'請先完成本組抽題。');meta.topic=input.topic;meta.text=text(input.text,1200);}
@@ -33,25 +32,34 @@ export function submissionMetadata(kind,input,previous=[]){
 export class Weekly extends Roster {
  async classWall(p,input){
   const a=await this.activity(p,input.activityId);
-  const named=namedClassroom(a);
-  const classes=p.role==='teacher'?p.teacher.scopes.filter(s=>s.term===a.term).map(s=>s.className):named?classroomClasses(a,p.student.class_name):null;
+  const scoped=namedClassroom(a),named=scoped&&(a.kind!=='w3-rebuild'||a.legacy?.authorsRevealed===true);
+  const classes=p.role==='teacher'?p.teacher.scopes.filter(s=>s.term===a.term).map(s=>s.className):p.role==='student'&&scoped?classroomClasses(a,p.student.class_name):null;
   if(p.role==='student'){demand(a.phase==='exhibit',403,'老師尚未開放課程展示。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'請進入自己的課堂活動。');}
   else demand(p.role==='admin'||classes?.length,403,'沒有此學期權限。');
-  const works=await this.db.query(`select w.id,w.current_version_id,w.class_name from rib.works w where w.activity_id=$1 and ($2::text[] is null or w.class_name=any($2::text[])) and not w.hidden
+  const works=await this.db.query(`select w.id,w.current_version_id,w.class_name,w.topic,w.reflection from rib.works w where w.activity_id=$1 and ($2::text[] is null or w.class_name=any($2::text[])) and not w.hidden
    and exists(select 1 from rib.members m join rib.students s using(term,student_id) where m.work_id=w.id and m.status='confirmed' and s.is_test=$3)
    and not exists(select 1 from rib.members m join rib.students s using(term,student_id) where m.work_id=w.id and s.is_test<>$3)
    order by md5(w.id),w.id`,[a.id,classes,!!a.legacy?.testOnly]);
   const ids=works.map(w=>w.id);
   const authors=named?await this.db.query("select m.work_id,s.name,s.class_name from rib.members m join rib.students s using(term,student_id) where m.work_id=any($1::text[]) and m.status='confirmed' order by s.class_name,s.seat",[ids]):[];
+
   const [versions,comments,votes]=await Promise.all([
    this.db.query('select id,work_id,ordinal,metadata from rib.versions where work_id=any($1::text[]) order by ordinal',[ids]),
    this.db.query(`select id,target_work_id,actor_work_id,body,hidden,created_at from rib.wall_comments where target_work_id=any($1::text[]) ${p.role==='student'?'and not hidden':''} order by created_at,id`,[ids]),
    this.db.query('select target_work_id,actor_work_id from rib.wall_votes where target_work_id=any($1::text[]) and active',[ids])]);
   const own=p.role==='student'?await one(this.db,"select w.id from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status='confirmed'",[a.id,p.studentId]):null;
-  return {activityId:a.id,title:a.title,week:a.week,term:a.term,teacher:p.role!=='student',canComment:p.role==='student'&&!!own,kind:a.kind,interactive:a.accepting&&!a.archived&&a.phase==='exhibit'&&['w3-rebuild','w3-personal','w4'].includes(a.kind),items:works.map((w,i)=>({id:w.id,label:named?classroomLabel(authors.filter(m=>m.work_id===w.id))||'作品 '+String(i+1).padStart(2,'0'):'作品 '+String(i+1).padStart(2,'0'),own:w.id===own?.id,canInteract:p.role==='student'&&!!own&&w.class_name===p.student.class_name,currentVersionId:w.current_version_id,versions:versions.filter(v=>v.work_id===w.id),comments:comments.filter(c=>c.target_work_id===w.id).map(c=>({...c,actor_work_id:undefined,label:c.actor_work_id===own?.id?'我／本組':'同學'})),votes:votes.filter(v=>v.target_work_id===w.id).length,liked:votes.some(v=>v.target_work_id===w.id&&v.actor_work_id===own?.id)})).filter(w=>w.versions.length)};
+  return {named,ownTopic:works.find(w=>w.id===own?.id)?.topic||null,votingOpen:a.kind==='w3-rebuild'&&a.legacy?.authorsRevealed!==true,ownWorkId:own?.id||null,canReflect:p.role==='student'&&!!works.find(w=>w.id===own?.id)?.current_version_id&&a.accepting&&!a.archived&&a.kind==='w5-personal',activityId:a.id,title:a.title,week:a.week,term:a.term,teacher:p.role!=='student',canComment:p.role==='student'&&!!own,kind:a.kind,interactive:a.accepting&&!a.archived&&a.phase==='exhibit'&&['w3-rebuild','w3-personal','w4'].includes(a.kind),items:works.map((w,i)=>({id:w.id,label:named?classroomLabel(authors.filter(m=>m.work_id===w.id))||'作品 '+String(i+1).padStart(2,'0'):'作品 '+String(i+1).padStart(2,'0'),reflection:w.reflection?.status==='submitted'?{answers:w.reflection.answers,referenceLabel:works.some(x=>x.id===w.reflection.referenceWorkId)?classroomLabel(authors.filter(m=>m.work_id===w.reflection.referenceWorkId)):'參考作品（目前不開放）'}:null,own:w.id===own?.id,canInteract:p.role==='student'&&!!own&&w.class_name===p.student.class_name,currentVersionId:w.current_version_id,versions:versions.filter(v=>v.work_id===w.id),comments:comments.filter(c=>c.target_work_id===w.id).map(c=>({...c,actor_work_id:undefined,label:c.actor_work_id===own?.id?'我／本組':'同學'})),votes:votes.filter(v=>v.target_work_id===w.id).length,liked:votes.some(v=>v.target_work_id===w.id&&v.actor_work_id===own?.id)})).filter(w=>w.versions.length)};
+ }
+ async revealAuthors(p,input){
+  demand(p.role==='admin',403,'由管理教師結束全班投票。');
+  const a=await this.activity(p,input.activityId);
+  demand(a.kind==='w3-rebuild'&&a.phase==='exhibit'&&!a.archived,403,'請先開放文字重建展廳。');
+  demand(input.confirm===true,400,'請確認投票完成再公布。');
+  const rows=await this.db.query("update rib.activities set legacy=coalesce(legacy,'{}'::jsonb)||'{\"authorsRevealed\":true}'::jsonb,revision=revision+1 where id=$1 and revision=$2 returning id",[a.id,input.expectedRevision]);
+  demand(rows.length,409,'活動已更新，請重新整理。');await this.event(this.db,p,a.id,'reveal-authors',a.id);return {saved:true};
  }
  async wallContext(p,input,db=this.db){
-  demand(p.role==='student',403,'請使用學生帳號。');const w=await this.work(p,input.workId,{db}),a=await this.activity(p,w.activity_id,db);
+  demand(p.role==='student',403,'請使用學生帳號。');const w=await this.work(p,input.workId,{db});await db.query('select id from rib.activities where id=$1 for update',[w.activity_id]);const a=await this.activity(p,w.activity_id,db);
   demand(a.accepting&&!a.archived&&a.phase==='exhibit'&&['w3-rebuild','w3-personal','w4'].includes(a.kind),403,'老師尚未開放班內交流。');
   demand(!!p.student.is_test===!!a.legacy?.testOnly&&w.class_name===p.student.class_name,403,'請在同班課堂交流。');
   const own=await one(db,"select w.id from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status='confirmed'",[a.id,p.studentId]);demand(own,403,'請先建立自己的作品或由代表加入小組。');
@@ -63,7 +71,7 @@ export class Weekly extends Roster {
   const old=await one(db,'select body from rib.wall_comments where actor_work_id=$1 and request_id=$2',[own.id,requestId]);if(old){demand(old.body===body,409,'重送內容不同。');return {saved:true};}
   const count=await one(db,'select count(*)::int as n from rib.wall_comments where actor_work_id=$1 and target_work_id=$2',[own.id,w.id]);demand(count.n<10,409,'本組在這份作品的留言已達十則。');
   await db.query('insert into rib.wall_comments(id,activity_id,target_work_id,actor_work_id,body,request_id) values($1,$2,$3,$4,$5,$6)',[uid(),a.id,w.id,own.id,body,requestId]);await this.event(db,p,a.id,'wall-comment',w.id);return {saved:true};});}
- async wallVote(p,input){return this.db.transaction(async db=>{const {w,a,own}=await this.wallContext(p,input,db);demand(a.kind==='w3-rebuild'&&own.id!==w.id,403,'欣賞票只留給其他小組的文字重建作品。');demand(typeof input.active==='boolean',400,'請重新選擇。');await db.query('insert into rib.wall_votes(activity_id,actor_work_id,target_work_id,active) values($1,$2,$3,$4) on conflict(actor_work_id,target_work_id) do update set active=excluded.active',[a.id,own.id,w.id,input.active]);await this.event(db,p,a.id,'wall-vote',w.id);return {saved:true};});}
+ async wallVote(p,input){return this.db.transaction(async db=>{const {w,a,own}=await this.wallContext(p,input,db);demand(a.legacy?.authorsRevealed!==true,403,'投票已結束，作者已公布。');demand(a.kind==='w3-rebuild'&&own.id!==w.id,403,'欣賞票只留給其他小組的文字重建作品。');demand(typeof input.active==='boolean',400,'請重新選擇。');await db.query('insert into rib.wall_votes(activity_id,actor_work_id,target_work_id,active) values($1,$2,$3,$4) on conflict(actor_work_id,target_work_id) do update set active=excluded.active',[a.id,own.id,w.id,input.active]);await this.event(db,p,a.id,'wall-vote',w.id);return {saved:true};});}
  async moderateComment(p,input){demand(p.role!=='student',403,'請使用教師帳號。');const c=await one(this.db,'select * from rib.wall_comments where id=$1',[String(input.commentId)]);demand(c,404,'找不到留言。');const w=await this.work(p,c.target_work_id);teacherScope(p,w.term,w.class_name);demand(typeof input.hidden==='boolean',400,'請選擇留言狀態。');await this.db.query('update rib.wall_comments set hidden=$1 where id=$2',[input.hidden,c.id]);await this.event(this.db,p,w.activity_id,'moderate-comment',c.id,{hidden:input.hidden});return {saved:true};}
  async markCurrent(p,input){return this.db.transaction(async db=>{
   await db.query('select id from rib.works where id=$1 for update',[String(input.workId)]);const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w15-deck',403,'請在自己的公共說明作品選用版本。');demand(w.revision===input.expectedRevision,409,'組員已更新，請重新核對。');

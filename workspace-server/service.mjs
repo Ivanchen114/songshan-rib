@@ -1,10 +1,10 @@
 import {readingList,readingDetail} from './ai-readings.mjs';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
-import {AiJudgment} from './ai-judgment.mjs';
+import {Reflection} from './reflection.mjs';
+import {namedClassroom,classroomClasses} from './classroom-audience.mjs';
 import {w7Topic} from '../workspace/w7-topics.js';
 import {w5Topic} from '../workspace/w5-topics.js';
-import {namedClassroom,classroomClasses} from './classroom-audience.mjs';
 import {proposalSource} from './w8-proposal.mjs';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
@@ -16,7 +16,7 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
 const one = async(db,q,args) => (await db.query(q,args))[0];
-export class Workspace extends AiJudgment {
+export class Workspace extends Reflection {
   constructor(db,store){super();this.db=db;this.store=store;}
   async event(db,p,a,kind,resource,detail={}){await db.query('insert into rib.events(activity_id,actor,kind,resource,detail) values($1,$2,$3,$4,$5)',[a,actor(p),kind,resource,json(detail)]);}
   async login(input,ip) {
@@ -86,7 +86,7 @@ export class Workspace extends AiJudgment {
     const items=works.map(w=>({...w,versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
     const invitations=p.role==='student'?await this.db.query(`select w.id from rib.members m join rib.works w on w.id=m.work_id where w.activity_id=$1 and m.student_id=$2 and m.status='invited'`,[a.id,p.studentId]):[];
     const related=a.kind==='w8-materials'?await one(this.db,"select id from rib.activities where term=$1 and kind='w8-proposal' and not archived and legacy->>'materialsActivityId'=$2 and coalesce((legacy->>'testOnly')::boolean,false)=$3",[a.term,a.id,a.legacy?.testOnly===true]):null;
-    return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
+    return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,authorsRevealed:a.legacy?.authorsRevealed===true,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
   }
   async aiReading(p,input){return readingDetail(this,p,input);}
   async ensureWork(p,input) {
