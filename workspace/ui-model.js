@@ -1,7 +1,7 @@
 import {ACTIVITY,supportedKind,isGroup} from './activities.js';
 // Presentation only. Authorization and learning transitions remain server-owned.
 const migrationReadOnly = (a,config) => config?.acceptanceOnly && !a.accepting && !(a.testOnly ?? a.test_only);
-export const phaseLabel = (a,config) => a.archived ? '已封存' : !a.accepting ? (migrationReadOnly(a,config)?'搬遷資料・僅供查閱':'尚未開放交件') : ({production:'製作與上傳',review:'初讀與改留',exhibit:'課程展示'}[a.phase] || '查閱作品');
+export const phaseLabel = (a,config) => a.kind==='w8-materials'?(a.archived?'已封存':a.accepting?'本組題材分配':'題材分配尚未開放'): a.archived ? '已封存' : !a.accepting ? (migrationReadOnly(a,config)?'搬遷資料・僅供查閱':'尚未開放交件') : ({production:'製作與上傳',review:'初讀與改留',exhibit:'課程展示'}[a.phase] || '查閱作品');
 export const supported = a => supportedKind(a.kind);
 export function workFlags(w,b) {
   return {uploaded:!!w.versions.length, feedback:!!w.feedback.length,
@@ -23,6 +23,8 @@ export function studentNext(b,config) {
   if(a.archived)return ['本週已封存','作品與回饋保留在這裡，現在可以查閱。'];
   if(!supported(a))return ['查閱以前的作品','這個活動保留原系統紀錄；此為早期課程活動，原檔與歷程保留在這裡。'];
   if(migrationReadOnly(a,config))return ['這是搬遷資料，目前僅供查閱',`驗收期間尚未開放這個正式活動交件。要練習上傳與操作，請回「課堂活動」，選擇名稱有「【測試】」的 W${a.kind==='w4'?'4':'5'} 活動。`];
+  if(a.kind==='w8-proposal')return w?.versions.length?['提案已保存，打開照片最後確認','原稿、真實問句與改留理由都要清楚；不用再傳 Classroom，也不必另填反思。']:['交流後，交自己的提案書','先在紙本 p.2 留下真實問句與自己的改留理由，再拍完整一頁上傳；題材自動沿用本組抽題。'];
+  if(a.kind==='w8-materials')return w?.topic?['本組題材已保存，每人開始讀原文','先自己完成 p.1 的 01–03，再組內分享並補記 04；接著每人寫 p.2 提案，完成後跨題交流。']:a.accepting?['先核對組員，再抽題','六題均衡隨機分配；同組共用材料，重整不會換題。']:['題材分配尚未開放','老師開放後，由代表建立小組並核對姓名。'];
   if(!a.accepting)return ['這個活動尚未開放交件','目前可查閱已有作品與回饋；開放後才能上傳或保存新內容。'];
   if(a.kind==='w5-personal'&&b.aiReadings?.some(r=>r.has_pair)&&b.aiJudgments&&!b.aiJudgments.some(r=>r.status==='submitted'))return ['先留下自己的 AI 留言判讀','對照老師提供的圖卡與甲乙留言，在下方找一句黃或紅的留言，保存判讀與改寫，再接文轉圖。'];
   if(a.kind==='w5-personal')return !w?.topic?['先選這次要畫的題目','先讀題目與原文，從 A、B 兩區選一題；每人完成自己的一張圖。']:!w.versions.length?['題目已選好，接著完成並上傳一張圖','在歷程本第3頁大框完成作品，回原文核對，再拍圖上傳。']:['作品已保存，看看同題的不同表達','到課程展廳選同一題，欣賞大家的畫法；歷程本第3頁只記一個注意到的畫法或差異。'];

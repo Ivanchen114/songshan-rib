@@ -4,6 +4,8 @@ import {submissionMetadata} from './weekly.mjs';
 import {AiJudgment} from './ai-judgment.mjs';
 import {w7Topic} from '../workspace/w7-topics.js';
 import {w5Topic} from '../workspace/w5-topics.js';
+import {namedClassroom,classroomClasses} from './classroom-audience.mjs';
+import {proposalSource} from './w8-proposal.mjs';
 import {SHARING_AGREEMENT,AGREEMENT_VERSION,AGREEMENT_HASH,hasAgreement} from './agreement.mjs';
 import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
@@ -39,6 +41,7 @@ export class Workspace extends AiJudgment {
     demand(p.term===w.term&&!w.archived&&!w.hidden&&(!w.test_only||p.student.is_test),403,'目前無法查看這份作品。');
     const own=await one(db,`select * from rib.members where work_id=$1 and student_id=$2 and status='confirmed'`,[w.id,p.studentId]);
     if(write){demand(own&&w.accepting,403,'目前不能保存這份作品。');return {...w,own:true};}
+    if(!own&&namedClassroom(w)){const a=await this.activity(p,w.activity_id,db);demand(classroomClasses(a,p.student.class_name).includes(w.class_name),403,'這份作品不在共同上課的班級範圍。');}
     const review=await one(db,`select * from rib.reviews where target_work_id=$1 and reviewer_id=$2 and term=$3 and status in ('assigned','done')`,[w.id,p.studentId,p.term]);
     const hasTest=await one(db,`select 1 from rib.members m join rib.students s using(term,student_id) where m.work_id=$1 and s.is_test`,[w.id]);
     demand(own||(!hasTest||w.test_only)&&((review&&w.phase==='review')||(w.phase==='exhibit'&&!!p.student.is_test===!!w.test_only)),403,'請查看自己的作品或指定試讀作品。');
@@ -82,7 +85,8 @@ export class Workspace extends AiJudgment {
       this.db.query(`select * from rib.assessments where work_id=any($1::text[]) ${p.role==='student'?"and student_id=$2 and status='graded'":''}`,p.role==='student'?[workIds,p.studentId]:[workIds])]);
     const items=works.map(w=>({...w,versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
     const invitations=p.role==='student'?await this.db.query(`select w.id from rib.members m join rib.works w on w.id=m.work_id where w.activity_id=$1 and m.student_id=$2 and m.status='invited'`,[a.id,p.studentId]):[];
-    return {activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
+    const related=a.kind==='w8-materials'?await one(this.db,"select id from rib.activities where term=$1 and kind='w8-proposal' and not archived and legacy->>'materialsActivityId'=$2 and coalesce((legacy->>'testOnly')::boolean,false)=$3",[a.term,a.id,a.legacy?.testOnly===true]):null;
+    return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
   }
   async aiReading(p,input){return readingDetail(this,p,input);}
   async ensureWork(p,input) {
@@ -91,7 +95,9 @@ export class Workspace extends AiJudgment {
       await db.query('select id from rib.activities where id=$1 for update',[a.id]);
       const existing=await one(db,`select w.* from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status in ('confirmed','invited')`,[a.id,p.studentId]);
       if(existing)return existing;
+      const source=a.kind==='w8-proposal'?await proposalSource(db,p,a):null;
       const workId=uid();await db.query(`insert into rib.works(id,activity_id,class_name,owner_id) values($1,$2,$3,$4)`,[workId,a.id,p.student.class_name,isGroup(a.kind)?null:p.studentId]);
+      if(source)await db.query('update rib.works set topic=$2 where id=$1',[workId,source.topic]);
       await db.query(`insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'confirmed')`,[workId,p.term,p.studentId]);
       return {id:workId,revision:0};
     });
@@ -99,6 +105,13 @@ export class Workspace extends AiJudgment {
   async prepare(p,input) {
     demand(p.role==='student',403,'請使用學生交件入口。');const w=await this.work(p,input.workId,{write:true});
     demand(supportedKind(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');
+    demand(w.kind!=='w8-materials',409,'W8 此處只分配材料；每人完成紙本提案，依課堂安排交回。');
+    if(w.kind==='w8-proposal'){
+      const a=await this.activity(p,w.activity_id),source=await proposalSource(this.db,p,a);
+      demand(source.topic===w.topic,409,'本組題材與個人作品不一致，請老師確認。');
+      demand(!input.topic||input.topic===source.topic,409,'請使用本組已分配的題材。');
+      input={...input,topic:source.topic,sourceGroupId:source.id};
+    }
     if(w.kind==='w7-news'){demand(w7Topic(w.topic),409,'請先完成本組抽題，再上傳。');demand(!input.topic||input.topic===w.topic,409,'請使用本組已分配的題材。');input={...input,topic:w.topic};}
     const previous=await this.db.query('select id,ordinal,metadata from rib.versions where work_id=$1 order by ordinal',[w.id]);const extra=submissionMetadata(w.kind,input,previous);const files=input.files;
     for(const f of files)demand(Number.isInteger(f.bytes)&&f.bytes>0&&f.bytes<=MAX_IMAGE&&/^[a-f0-9]{64}$/.test(f.sha256)&&['image/jpeg','image/png','image/webp'].includes(f.mime),400,'圖片需為 JPG、PNG 或 WebP，每張最多 8 MB。');
