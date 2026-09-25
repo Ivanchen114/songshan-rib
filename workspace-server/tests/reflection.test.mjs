@@ -1,5 +1,20 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';
 import {fixture} from './support.mjs';import {Workspace} from '../service.mjs';import {snapshot,restoreEmpty} from '../backup.mjs';
+import {studentNext} from '../../workspace/ui-model.js';
+
+test('new drawings preserve the original ORID version and prompt a check before reuse',async t=>{
+ const f=await setup(t),p=f.people[0],input=payload(f);await f.s.saveReflection(p,input);
+ await f.db.query("insert into rib.versions(id,work_id,ordinal,metadata,media,request_id) values('v0-new',$1,2,'{}','[]','new-drawing')",[input.workId]);
+ await f.db.query("update rib.works set current_version_id='v0-new' where id=$1",[input.workId]);
+ let board=await f.s.board(p,{activityId:'w5-demo'});assert.match(studentNext(board,{})[0],/回看原 ORID/);
+ let item=(await f.s.classWall(f.people[1],{activityId:'w5-demo'})).items.find(x=>x.id===input.workId);
+ assert.equal(item.reflection.versionId,'v0');assert.equal(item.reflection.ordinal,1);assert.notEqual(item.reflection.versionId,item.currentVersionId);
+ assert.deepEqual((await f.s.reflection(p,{workId:input.workId})).reflection.answers,input.answers);
+ await assert.rejects(f.s.reviewReflection(f.teacher,{workId:input.workId,expectedRevision:1,reviewed:true,answers:input.answers}),/目前作品版本/);
+ await f.s.saveReflection(p,{...input,versionId:'v0-new',expectedRevision:1,requestId:'reuse-after-check'});
+ board=await f.s.board(p,{activityId:'w5-demo'});assert.match(studentNext(board,{})[0],/作品與 ORID 已保存/);
+ item=(await f.s.classWall(f.people[1],{activityId:'w5-demo'})).items.find(x=>x.id===input.workId);assert.equal(item.reflection.versionId,item.currentVersionId);assert.equal(item.reflection.ordinal,2);
+});
 async function setup(t){const f=await fixture(6);t.after(f.close);await f.db.query("update rib.workspace_state set current_term='11501'");await f.db.query("update rib.activities set kind='w5-personal',phase='exhibit' where id='w5-demo'");
  const s=new Workspace(f.db,f.store),works=[];
  for(const [i,p]of f.people.entries()){p.student.class_name=['108','109','110','108','108','108'][i];p.student.is_test=i===4;await f.db.query('update rib.students set class_name=$1,is_test=$2 where student_id=$3',[p.student.class_name,p.student.is_test,p.studentId]);if(i===4)continue;

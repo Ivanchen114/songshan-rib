@@ -1,4 +1,10 @@
 const colors={yellow:'黃｜待確認',red:'紅｜有反證'};
+export function judgmentStatus(cards=[],response){
+ if(response)return response.status==='submitted'?'已送出':'草稿';
+ if(cards.some(c=>c.status==='published'&&c.has_pair))return '尚未保存';
+ if(cards.some(c=>c.status==='published'))return '先處理圖卡提醒';
+ return '尚無已發布的甲乙留言';
+}
 export function createAiJudgmentUI(ctx){
  const {state,api,show,esc,board,say,dialog}=ctx;
  const select=(name,options,value)=>`<select name="${name}"><option value="">請選擇</option>${Object.entries(options).map(([key,label])=>`<option value="${key}" ${value===key?'selected':''}>${label}</option>`).join('')}</select>`;
@@ -8,7 +14,7 @@ export function createAiJudgmentUI(ctx){
  function panel(){
   if(state.board.activity.kind!=='w5-personal')return '';
   const students=(state.roster||[]).filter(s=>s.active&&s.is_test===state.board.activity.testOnly),rows=(state.aiJudgments||[]).filter(r=>state.home.person.role==='student'||students.some(s=>s.student_id===r.student_id)),teacher=state.home.person.role!=='student';
-  if(teacher)return `<section class="panel" aria-label="W5 AI 留言判讀"><h2>AI 留言判讀</h2><p>與文轉圖交件分開保存，僅本人及授課教師可查閱。</p><p>${rows.filter(r=>r.status==='submitted').length} 人已送出 · ${rows.filter(r=>r.status==='draft').length} 人有草稿；送出不等於達標。</p>${students.map(s=>{const r=rows.find(r=>r.student_id===s.student_id);return `<details><summary>${esc(s.seat+' 號 '+s.name)} · ${r?(r.status==='submitted'?'已送出':'草稿'):'尚未保存'}</summary>${r?reading(r):'<p>尚無線上判讀紀錄。</p>'}</details>`;}).join('')}</section>`;
+  if(teacher)return `<section class="panel" aria-label="W5 AI 留言判讀"><h2>AI 留言判讀</h2><p>與文轉圖交件分開保存，僅本人及授課教師可查閱。</p><p>${rows.filter(r=>r.status==='submitted').length} 人已送出 · ${rows.filter(r=>r.status==='draft').length} 人有草稿；送出不等於達標。</p>${students.map(s=>{const r=rows.find(r=>r.student_id===s.student_id),cards=(state.board.aiReadings||[]).filter(c=>c.seat===s.seat),status=judgmentStatus(cards,r);return `<details><summary>${esc(s.seat+' 號 '+s.name)} · ${status}</summary>${r?reading(r):'<p>'+status+'。'+(status==='尚未保存'?'請學生完成本人判讀。':'先依實際圖卡安排補件；不要求學生自行編甲乙留言，可接著做文轉圖。')+'</p>'}</details>`;}).join('')}</section>`;
   const r=rows[0],submittedCard=r?.status==='submitted'?(state.board.aiReadings||[]).find(c=>r.answers.sourceReference===`${c.id} / W4 V${c.ordinal}`):null,editable=state.board.activity.accepting&&!state.board.activity.archived;
   return `<section class="panel" aria-label="AI 留言判讀"><p class="eyebrow">先回看 W4 作品</p><h2>AI 留言判讀</h2><p>對照自己的圖卡與甲乙留言，找出一句黃或紅的留言，再改寫這一句。</p><p>${r?(r.status==='submitted'?'已送出判讀':'已保存草稿')+' · 第 '+r.revision+' 版':'尚未保存'}</p><button data-action="aiJudgment">${editable?(r?'查看／繼續填寫':'看圖卡並開始判讀'):'查看我的判讀'}</button>${submittedCard?`<button class="secondary" data-action="aiReading" data-id="${esc(submittedCard.id)}">查看判讀紀錄與依據</button>`:''}<p class="muted small-text">只供本人及授課教師查閱；不用抄進歷程本，也不用另拍照上傳。</p></section>`;
  }
