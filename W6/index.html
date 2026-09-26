@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html data-semester-theme="light-20260905" lang="zh-Hant"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>W6｜讀懂、寫清、畫出關係｜閱讀理解與表達</title><style>:root { --ink: #183b4c; --sub: #536b71; --cyan: #176b63; --gold: #956316; --bg: #faf7ee; --panel: #faf7ee; --line: #176b63; }
+<html data-rib-week="6" data-semester-theme="light-20260905" lang="zh-Hant"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>W6｜讀懂、寫清、畫出關係｜閱讀理解與表達</title><style>:root { --ink: #183b4c; --sub: #536b71; --cyan: #176b63; --gold: #956316; --bg: #faf7ee; --panel: #faf7ee; --line: #176b63; }
 * { box-sizing: border-box; }
 html, body { margin: 0px; width: 100%; height: 100%; overflow: hidden; }
 body { font-family: "Noto Sans TC", "PingFang TC", "Arial Unicode MS", sans-serif; color: var(--ink); }
@@ -288,6 +288,14 @@ html.rib-reading .plain-slide .plain-part{padding-top:10px!important}
 html.rib-reading .plain-slide .plain-prompt{font-size:inherit!important}
 </style>
 <style id="rib-projection-style">/* Fit the full desktop canvas; phones add no separate navigation chrome. */
+/* Desktop uses native CSS pixels so browser zoom can enlarge the content.
+   Keep overflow reachable instead of shrinking the slide back into the window. */
+html.rib-desktop #stage{width:100%!important;height:100%!important;left:0!important;top:0!important;transform:none!important}
+html.rib-desktop .slide{overflow:auto!important}
+html.rib-desktop .slide>*{flex-shrink:0}
+html.rib-desktop body.compact-deck .slide{width:100%!important;height:100%!important;transform:none!important}
+html.rib-desktop .unit-slide .unit-inner{height:auto;min-height:100%}
+html.rib-desktop .unit-slide .unit-body{flex:1 0 auto;min-height:auto}
 html.rib-phone,html.rib-phone body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#faf6ed!important;color:#193b31!important;font-family:system-ui,-apple-system,"PingFang TC",sans-serif!important;font-size:16px!important;-webkit-text-size-adjust:100%}
 .rib-phone *{box-sizing:border-box}
 #rib-shell{position:fixed;inset:0;display:flex;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:#faf6ed}
@@ -553,9 +561,268 @@ body .slide .page-footer.task-essential>span:last-child{display:none!important;}
 .v11-aside{display:grid;grid-template-columns:440px 1fr;gap:36px;align-items:center}.v11-aside img{width:100%;height:390px;object-fit:contain}.v11-aside .v11-diagram{max-height:440px}.v11-caption{font:400 25px/1.45 "Noto Sans TC",sans-serif!important;margin:0!important;color:#50695e!important}.v11-statement{font:700 35px/1.5 "Noto Sans TC",sans-serif!important;margin:0!important;color:#235e52!important}
 .slide.v11-paper,.slide.unit-slide.v11-paper{background:#faf8f1!important;color:#203e3c!important}.v11-paper.unit-focus h2,.v11-paper.unit-focus h3,.v11-paper.unit-focus .unit-kicker,.v11-paper.unit-focus .unit-flow b{color:#235e52!important}.v11-paper.unit-focus .unit-foot,.v11-paper.unit-focus .unit-clock,.v11-paper.unit-focus .unit-locator{color:#50645d!important}.v11-paper.unit-focus .unit-cols>div,.v11-paper.unit-focus .unit-flow>div{border-color:#9bb5a4}
 .unit-slide .v11-diagram{max-height:420px}.unit-slide .v11-statement{font-size:31px!important}.unit-slide .v11-caption{font-size:25px!important}
-</style><style id="w6-relations-20260921">.w6-roadmap{display:grid;grid-template-columns:1fr 1fr;gap:30px 48px}.w6-roadmap>div{border-left:4px solid #497b68;padding-left:22px}.w6-roadmap b{font-size:35px;color:#235e52}.w6-roadmap p{font-size:31px;margin:8px 0}.w6-roadmap small{font-size:18px;color:#60776d}.unit-slide .w6-roadmap{margin:0}</style><style id="w6-v13-clock-style">.w6-exam-clock{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:0 0 30px}.w6-exam-clock output{font-size:78px;line-height:1.1;font-variant-numeric:tabular-nums;color:#245b50}.w6-exam-clock button{font:700 24px/1.3 inherit;font-size:24px;padding:14px 20px;border:1px solid #477466;border-radius:10px;background:#fffdf7;color:#254c43;cursor:pointer}.w6-exam-clock button:disabled{opacity:.65;cursor:default}.w6-exam-phase{flex-basis:100%;font-size:28px;color:#496858}</style></head><body><main id="stage"><div id="progress"></div><nav class="nav"><a href="../index.html">← 課程首頁</a><button id="fullscreenButton">全螢幕 F</button></nav><div class="section" id="section"></div><footer class="footer"><span id="help">←→ 逐步／換頁・P 當頁全顯</span><span class="middle" id="revealInfo"></span><div><button id="prevButton">←</button> <button id="nextButton">→</button> <button id="allButton"></button> <span id="page"></span></div></footer>
+</style><style id="w6-relations-20260921">.w6-roadmap{display:grid;grid-template-columns:1fr 1fr;gap:30px 48px}.w6-roadmap>div{border-left:4px solid #497b68;padding-left:22px}.w6-roadmap b{font-size:35px;color:#235e52}.w6-roadmap p{font-size:31px;margin:8px 0}.w6-roadmap small{font-size:18px;color:#60776d}.unit-slide .w6-roadmap{margin:0}</style><style id="w6-v13-clock-style">.w6-exam-clock{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:0 0 30px}.w6-exam-clock output{font-size:78px;line-height:1.1;font-variant-numeric:tabular-nums;color:#245b50}.w6-exam-clock button{font:700 24px/1.3 inherit;font-size:24px;padding:14px 20px;border:1px solid #477466;border-radius:10px;background:#fffdf7;color:#254c43;cursor:pointer}.w6-exam-clock button:disabled{opacity:.65;cursor:default}.w6-exam-phase{flex-basis:100%;font-size:28px;color:#496858}</style><style id="rib-aligned-chrome">/* W5-approved hierarchy: stage left, timer right, progress below timer. */
+.slide > .rib-timer-dock {
+  position:absolute!important; inset:48px 90px auto auto!important;
+  display:flex; align-items:center; justify-content:flex-end; gap:10px!important;
+  width:max-content!important; max-width:600px; min-height:0!important;
+  margin:0!important; padding:0!important; border:0!important;
+  background:transparent!important; box-shadow:none!important; z-index:45;
+  color:#29433c!important;
+}
+.slide .rib-timer-dock [data-timer],
+.slide .rib-timer-dock button,
+.slide.rib-chrome .rib-timer-dock .clock {
+  position:static!important; inset:auto!important; transform:none!important;
+  flex:none!important; width:auto!important; min-width:0!important;
+  margin:0!important; font:700 22px/1.3 "Noto Sans TC",sans-serif!important;
+  font-variant-numeric:tabular-nums!important; letter-spacing:0!important;
+  color:#29433c!important; white-space:nowrap!important;
+}
+.slide .rib-timer-dock [data-timer],.slide .rib-timer-dock button {
+  padding:7px 14px!important; border:1px solid #71887d!important;
+  border-radius:7px!important; background:#fafbf7!important;
+  box-shadow:none!important; min-height:0!important;
+}
+.slide > .rib-timer-dock.timer {
+  padding:0!important; border:0!important; background:transparent!important;
+}
+.slide.rib-chrome > .rib-stage-label {
+  position:absolute!important; top:76px!important; left:90px!important; right:auto!important;
+  max-width:850px!important; width:max-content!important;
+  font:400 20px/1.3 "Noto Sans TC",sans-serif!important;
+  color:#61746c!important; background:transparent!important;
+  border:0!important; padding:0!important; margin:0!important; z-index:35;
+  letter-spacing:0!important;
+}
+.rib-stage-label svg {width:20px!important;height:20px!important}
+.slide.rib-chrome > .rib-progress {
+  position:absolute!important; top:80px!important; right:90px!important;
+  left:auto!important; bottom:auto!important; max-width:600px;
+  font:400 17px/1.3 "Noto Sans TC",sans-serif!important;
+  color:#65756e!important; background:transparent!important;
+  border:0!important; padding:0!important; margin:0!important; z-index:35;
+  text-align:right; letter-spacing:0!important;
+}
+.slide.rib-chrome:has(.rib-timer-dock) > .rib-progress{top:104px!important}
+.slide.rib-chrome.unit-slide {padding:150px 90px 70px!important}
+.slide.rib-chrome .unit-bottom {justify-content:flex-end}
+/* Older direct-heading slides need a header lane above their in-flow kicker. */
+html[data-rib-week="8"] .slide.rib-chrome:has(> h1){padding-top:130px!important}
+.slide .w6-exam-clock output{font:700 22px/1.3 "Noto Sans TC",sans-serif!important;color:#29433c!important}
+.slide .w6-exam-clock .w6-exam-phase{position:absolute;top:86px;right:0;font:400 17px/1.3 "Noto Sans TC",sans-serif!important;white-space:nowrap}
+.slide.rib-chrome.scenario-slide{padding-top:130px!important}
+
+/* Academic extensions use an absolute inner canvas, independent of slide padding. */
+.slide.rib-chrome:has(> .rib-stage-label) > .sem-inner{top:130px!important}
+/* Recover space from metadata and gaps before allowing an evidence diagram to shrink. */
+.slide.rib-chrome > .sem-inner:has(> .sem-figure){gap:10px}
+.slide.rib-chrome > .sem-inner:has(> .sem-figure) > .sem-kicker{font-size:20px;line-height:1.3}
+.slide.rib-chrome > .sem-inner:has(> .sem-figure) > .sem-small{margin:0}
+.slide.rib-chrome > .sem-inner:has(> .sem-figure) > .sem-answer{gap:10px}
+.slide.rib-chrome > .sem-inner > .sem-figure{min-height:200px;flex-shrink:0}
+/* Legacy activity-duration badges share the teacher lane, below progress. */
+.slide.rib-chrome > .activity-duration{top:104px!important;right:90px!important;left:auto!important;bottom:auto!important;max-width:420px!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;font:400 17px/1.3 "Noto Sans TC",sans-serif!important;letter-spacing:0!important;color:#65756e!important;text-align:right!important}
+.slide.rib-chrome > .activity-duration .duration-detail{font:inherit!important;color:inherit!important}
+.slide.rib-chrome:has(> .rib-timer-dock) > .activity-duration{top:132px!important}
+</style>
+<style id="w6-refine-20260923">
+.w6-exam-parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 70px}
+.w6-exam-parts>div{border-left:4px solid #6c9683;padding:8px 0 8px 24px}
+.w6-exam-parts span{font-size:24px;color:#5b7368}.w6-exam-parts h3{margin:6px 0!important}
+.w6-exam-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:54px}
+.w6-exam-phases>div{border-top:3px solid #83a797;padding-top:20px;position:relative}
+.w6-exam-phases>div+div:before{display:none;content:'→';position:absolute;left:-46px;top:84px;font-size:36px;color:#567d70}
+.w6-exam-phases>div>span{font-size:32px;font-weight:700}.w6-exam-phases strong{display:block;font-size:92px;line-height:1.4;color:#23685d;font-variant-numeric:tabular-nums}
+.w6-exam-phases strong span{font-size:32px;margin-left:10px}.w6-exam-phases p{font-size:29px!important}
+.w6-exam-rules{display:flex;flex-direction:column;gap:28px}
+.slide[data-slide="5"] .w6-exam-clock{gap:12px!important}
+.slide[data-slide="5"] .w6-exam-clock output{font-size:36px!important;line-height:1.2!important}
+.slide[data-slide="5"] .w6-exam-clock .w6-exam-phase{top:52px!important}
+.slide[data-slide="5"]>.rib-progress{display:none!important}
+.slide[data-slide="11"] .unit-cols p+p,.slide[data-slide="18"] .unit-cols p+p{margin-top:22px!important}
+</style>
+
+<style id="w6-compact-review-20260923">
+@media(min-width:901px) and (max-height:760px){
+.slide.rib-chrome.unit-slide{padding:112px 56px 46px!important}
+.unit-slide .unit-inner{gap:14px!important}
+.unit-slide h2{font-size:44px!important;line-height:1.2!important}
+.unit-slide h3{font-size:30px!important;margin-bottom:10px!important}
+.unit-slide p,.unit-slide li{font-size:28px!important;line-height:1.45!important}
+.unit-slide .unit-foot{font-size:21px!important;line-height:1.4!important;padding-top:9px!important}
+.unit-slide .unit-body{gap:12px!important}
+.unit-slide .unit-cols{gap:30px!important}.unit-slide .unit-cols>div{padding:14px 0!important}
+.slide[data-slide="11"] .unit-cols p+p,.slide[data-slide="18"] .unit-cols p+p{margin-top:12px!important}
+.w6-exam-parts{gap:18px 40px}.w6-exam-parts>div{padding:5px 0 5px 18px}.w6-exam-parts span{font-size:20px}
+.slide.rib-chrome>.rib-stage-label{top:73px!important;left:56px!important;font-size:17px!important}
+.slide>.rib-timer-dock{top:30px!important;right:56px!important}
+.slide.rib-chrome>.rib-progress{top:74px!important;right:56px!important;font-size:15px!important}
+.slide.rib-chrome:has(.rib-timer-dock)>.rib-progress{top:79px!important}
+.w6-exam-phases{gap:38px}.w6-exam-phases>div>span{font-size:28px}.w6-exam-phases strong{font-size:72px}.w6-exam-phases p{font-size:26px!important}.w6-exam-phases>div+div:before{left:-33px}
+.unit-slide .source-text{font-size:28px!important}
+}
+</style>
+<style id="w6-peer-review-20260923">
+.slide.peer-review{padding:136px 80px 54px!important}.peer-review .unit-inner{padding-top:0!important;min-height:0!important;height:100%!important;gap:24px!important}.peer-review h2{font-size:clamp(36px,3.6vw,58px)!important;line-height:1.22!important;margin:0!important}.peer-review .unit-body{gap:22px!important;display:flex;flex-direction:column;flex:1 1 auto!important;min-height:0!important}.peer-review .unit-body p{font-size:30px!important;line-height:1.55!important;margin:0!important}.peer-review .peer-source{color:#456360}.peer-review .peer-answer{font-size:31px;line-height:1.55;padding:20px 24px;background:#e6eee5;border-left:5px solid #477662}.peer-review .peer-check{font-size:27px!important;line-height:1.5!important;color:#315e4f;border-top:1px solid #aabeb2;padding-top:15px}.peer-three{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.peer-three>div{border-top:4px solid #8eab9a;padding-top:22px}.peer-three b{font-size:36px}.peer-three p{margin-top:24px!important}.peer-rubric{display:grid;gap:12px}.peer-rubric>div{display:grid;grid-template-columns:100px 1fr;gap:22px;align-items:center;padding:16px 20px;background:#f0f1e9}.peer-rubric>div:first-child{background:#dce9de}.peer-rubric b{font-size:34px;color:#23675b}.peer-rubric p{font-size:28px!important}.peer-pair{display:grid;grid-template-columns:1fr 1fr;gap:40px}.peer-review svg{display:block;width:100%;max-height:340px}.peer-review svg text{font-family:"Noto Sans TC",sans-serif;fill:#203e3c;font-size:28px}.peer-review svg .small{font-size:23px}.peer-review svg .key{fill:#23685d;font-weight:700}.peer-flow svg{height:390px;max-height:390px}.peer-figure{height:300px;width:100%;object-fit:contain}.peer-review .rib-stage-label{font-size:18px!important}.peer-review .timer-box{position:absolute!important;top:23px!important;right:35px!important;margin:0!important;width:auto!important}.peer-review .timer-box button{font-size:22px!important}.peer-review.w6-work-check .rib-progress{top:94px!important}.peer-review .timer-box:before{display:none!important}
+@media(min-width:901px) and (max-height:760px){.slide.peer-review{padding:118px 56px 40px!important}.peer-review .unit-inner{padding-top:0!important;gap:20px!important}.peer-review .unit-body{gap:18px!important}.peer-review .unit-body p,.peer-review .peer-answer{font-size:24px!important;line-height:1.45!important}.peer-review .peer-check{font-size:22px!important;padding-top:10px}.peer-review .peer-answer{padding:12px 18px}.peer-three b{font-size:29px}.peer-rubric{gap:8px}.peer-rubric>div{padding:10px 16px;grid-template-columns:80px 1fr}.peer-rubric b{font-size:28px}.peer-rubric p{font-size:23px!important}.peer-figure{height:220px}.peer-flow svg{height:295px;max-height:295px}.peer-review svg{max-height:260px}}
+</style><style id="w6-version-date-diagram">
+.peer-review.version-page .unit-body{gap:20px!important;justify-content:center}
+.peer-review .version-claim{font-size:28px!important;line-height:1.5!important;color:#4a6659}
+.peer-review svg.version-timeline{display:block;width:100%;height:auto;max-height:none!important;flex-shrink:0}
+.peer-review svg.version-timeline text{font-size:29px;fill:#203e3c;font-family:"Noto Sans TC","PingFang TC",sans-serif}
+.peer-review svg.version-timeline .version-date{font-size:36px;font-weight:800}
+.peer-review svg.version-timeline .version-small{font-size:25px;fill:#526b5d}
+.peer-review svg.version-timeline .version-key{fill:#28684e;font-weight:700}
+.peer-review svg.version-timeline .version-repost{font-size:27px;fill:#875821;font-weight:700}
+.version-answer{display:grid;grid-template-columns:.7fr 3.8fr;gap:24px;border-top:2px solid #a4b9aa;padding-top:18px}
+.version-answer>div+div{border-left:1px solid #bacabd;padding-left:24px}
+.peer-review .version-answer p{font-size:29px!important;line-height:1.5!important}
+.peer-review .version-answer .version-label{font-size:24px!important;color:#35644f;margin-bottom:9px!important}
+@media(min-width:901px) and (max-height:760px){
+.peer-review.version-page .unit-body{gap:14px!important}.peer-review .version-claim{font-size:22px!important}
+.version-answer{gap:18px;padding-top:12px}.version-answer>div+div{padding-left:18px}.peer-review .version-answer p{font-size:23px!important;line-height:1.4!important}.peer-review .version-answer .version-label{font-size:20px!important;margin-bottom:6px!important}
+}
+</style><style id="w6-single-annotated-answers">
+.peer-review.single-answer .unit-body{gap:22px!important;justify-content:center}
+.peer-review .answer-source{font-size:27px!important;line-height:1.5!important;color:#4a6459}
+.answer-part{min-width:0}.answer-tag{display:block;font-size:24px;line-height:1.35;color:#386750;margin-bottom:10px}
+.answer-text{font-size:32px;line-height:1.5;color:#203e3c}.answer-text small{font-size:26px;color:#526b5d}.answer-text strong{color:#246653}
+.answer-strip{display:grid;grid-template-columns:.85fr 3.6fr;gap:28px;padding:28px 0;border-top:2px solid #9eb4a6;border-bottom:1px solid #bacabc}
+.answer-strip .answer-part+div{border-left:1px solid #bacabc;padding-left:28px}
+.peer-review .answer-note{font-size:25px!important;line-height:1.45!important;color:#526b5d;margin-top:8px!important}
+.annotated-letter{display:flex;flex-direction:column;gap:20px;border-left:5px solid #719985;padding:6px 28px}
+.annotated-letter .answer-part{display:grid;grid-template-columns:220px 1fr;gap:22px}.annotated-letter .answer-tag{margin:6px 0 0}
+.meaning-flow{display:flex;gap:32px;align-items:center;justify-content:center;padding:20px 0}.meaning-arrow{font-size:45px;color:#527b67}
+.meaning-node{padding:24px 38px;background:#e3ede2;border-radius:15px;min-width:300px;text-align:center}.meaning-node small{display:block;font-size:25px;color:#526b5d;margin-bottom:10px}.meaning-node b{font-size:36px}.meaning-node.uncertain{background:#f1e5cc}
+.condition-join{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;text-align:center}.condition-join .answer-part{background:#e5eee2;padding:24px}.join-plus{font-size:48px;color:#527b67}.joined-result{text-align:center;font-size:36px;line-height:1.45}.joined-result .answer-tag{margin:4px}
+.circled-detail{display:inline-block;white-space:nowrap;border:2px solid #678f73;border-radius:45%;padding:2px 7px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.weak-answer{font-size:30px;color:#657469}.weak-answer small{display:block;font-size:24px;margin-top:8px}
+.peer-review.single-answer .large-story svg{width:100%;max-height:350px;height:auto}.inline-checks{display:flex;gap:28px;flex-wrap:wrap;font-size:26px;color:#386750}
+.peer-review.single-answer svg.annotated-flow{max-height:none!important;width:100%;height:auto}.annotated-flow .flow-annotations text{font-size:28px;fill:#386750}
+.time-work{padding:18px 0;border-bottom:1px solid #b9c9bc}.time-steps{display:flex;align-items:center;gap:22px;font-size:31px;padding:12px 0}.time-steps b,.time-steps strong{font-size:38px}.time-steps span{color:#4a6758}.missing-leg{background:#f1e5cc;padding:12px;border-radius:8px}.missing-label{font-size:27px;color:#805c28;margin-top:10px}
+.ability-table{border-collapse:collapse;width:100%;font-size:32px;text-align:center}.ability-table th,.ability-table td{padding:13px 24px;border-bottom:1px solid #b6c8b9}.ability-table th{font-size:25px;color:#526b5d}.ability-table .support-cell{background:#e3ede0;font-size:25px}.ability-table tfoot td{border:0}
+.reading-pairs,.revision-options{display:grid;grid-template-columns:1fr 1fr;gap:40px}.reading-pairs>div+div,.revision-options>div+div{border-left:1px solid #b6c8b9;padding-left:35px}
+.evidence-vs{display:grid;grid-template-columns:1fr 1.6fr;gap:60px}.evidence-vs>div+div{border-left:1px solid #b6c8b9;padding-left:40px}.meaning-stack{display:flex;flex-direction:column;align-items:center;gap:9px;font-size:35px}.meaning-stack span{font-size:28px;color:#7d9685}.inference-row{font-size:32px;padding:18px 0}.inference-row p{margin:12px 0 0!important}
+.reader-question{background:#e4ece1;padding:24px 34px;border-radius:20px}.evidence-target{text-align:center}.evidence-target .answer-part{text-align:left;padding:10px 34px}
+@media(min-width:901px) and (max-height:760px){
+.peer-review.single-answer .unit-body{gap:16px!important}.peer-review .answer-source{font-size:22px!important;line-height:1.4!important}.answer-tag{font-size:20px;margin-bottom:7px}.answer-text{font-size:25px;line-height:1.45}.answer-text small{font-size:22px}.answer-strip{gap:20px;padding:22px 0}.answer-strip .answer-part+div{padding-left:20px}.peer-review .answer-note{font-size:21px!important}
+.annotated-letter{gap:14px;padding:4px 20px}.annotated-letter .answer-part{grid-template-columns:170px 1fr;gap:18px}.meaning-flow{gap:24px;padding:12px 0}.meaning-node{padding:18px 28px;min-width:260px}.meaning-node b{font-size:29px}.meaning-node small{font-size:21px}.meaning-arrow{font-size:35px}.condition-join .answer-part{padding:18px}.joined-result{font-size:29px}.weak-answer{font-size:24px}.weak-answer small{font-size:20px}
+.peer-review.single-answer .large-story svg{max-height:250px}.inline-checks{font-size:22px;gap:18px}.time-work{padding:10px 0}.time-steps{font-size:24px;gap:16px}.time-steps b,.time-steps strong{font-size:30px}.missing-leg{padding:8px}.missing-label{font-size:22px}.ability-table{font-size:25px}.ability-table td,.ability-table th{padding:9px 18px}.ability-table th,.ability-table .support-cell{font-size:21px}
+.reading-pairs,.revision-options{gap:28px}.reading-pairs>div+div,.revision-options>div+div{padding-left:24px}.evidence-vs{gap:35px}.evidence-vs>div+div{padding-left:28px}.meaning-stack{font-size:28px;gap:6px}.inference-row{font-size:25px;padding:12px 0}.reader-question{padding:20px 26px}.evidence-target .answer-part{padding:8px 26px}
+}
+</style><style id="w6-forty-points">
+.point-chip{display:inline-flex;gap:12px;align-items:center;font-size:24px;line-height:1.4;color:#386750}.point-chip b{background:#dce9dd;color:#1f5c45;border-radius:6px;padding:1px 10px;white-space:nowrap}.point-pair{display:flex;gap:30px;margin-bottom:14px;flex-wrap:wrap}.single-answer .inline-checks{display:grid;grid-template-columns:1fr 1fr;gap:14px 30px}.score-total-flow{display:flex;gap:15px;align-items:center;justify-content:center;flex-wrap:wrap}.score-total-node{min-width:110px;text-align:center;padding:20px 18px;background:#e5ecdf;border-radius:12px}.score-total-node small{display:block;font-size:25px;color:#536b5d}.score-total-node strong{display:block;font-size:43px;color:#25654f}.score-plus{font-size:32px;color:#587463}.score-total-node.result{background:#d5e4d8}.score-subtotal .unit-body{justify-content:center}.score-subtotal .peer-check{margin-top:25px!important}.peer-review .version-answer .point-chip{font-size:24px}.point-note{color:#64786c;font-size:25px!important}
+@media(min-width:901px) and (max-height:760px){.point-chip,.peer-review .version-answer .point-chip{font-size:20px;gap:7px}.point-chip b{padding:1px 7px}.point-pair{gap:20px;margin-bottom:10px}.score-total-node{min-width:95px;padding:15px 12px}.score-total-node small{font-size:21px}.score-total-node strong{font-size:34px}.score-total-flow{gap:12px}.score-plus{font-size:26px}.point-note{font-size:21px!important}.single-answer .inline-checks{gap:9px 22px}}
+</style><style id="w6-visible-question-numbers">
+.peer-review.peer-question .rib-stage-label{top:76px!important;left:80px!important;display:flex!important;align-items:baseline;gap:24px;max-width:calc(100% - 400px);margin:0!important;line-height:1.2!important;color:#23685d!important}
+.peer-question .question-number{font-size:36px!important;font-weight:800;white-space:nowrap}
+.peer-question .question-caption{font-size:21px!important;font-weight:400;color:#5c736b;white-space:nowrap}
+@media(min-width:901px) and (max-height:760px){.peer-review.peer-question .rib-stage-label{top:70px!important;left:56px!important;gap:18px;max-width:calc(100% - 300px)}.peer-question .question-number{font-size:30px!important}.peer-question .question-caption{font-size:18px!important}}
+</style><style id="w6-marking-diagrams">
+.peer-review.visual-procedure .unit-body{justify-content:center;gap:0!important}
+.peer-review svg.marking-visual{width:100%;height:auto;max-height:none!important;overflow:visible;flex:0 0 auto}
+.peer-review svg.marking-visual text{font-family:"Noto Sans TC","PingFang TC",sans-serif;font-size:32px;fill:#203e3c}
+.peer-review svg.marking-visual .v-small{font-size:28px}
+.peer-review svg.marking-visual .v-bold{font-weight:700}
+.peer-review svg.marking-visual .v-blue{fill:#285bab}
+.peer-review svg.marking-visual .v-green{fill:#28634c}
+.peer-review svg.marking-visual .v-amber{fill:#805716}
+.v-arrow{fill:none;stroke:#52766b;stroke-width:3;marker-end:url(#mark-arrow)}
+.v-callout{fill:none;stroke:#7d9289;stroke-width:2;stroke-dasharray:6 5}
+</style><style id="cover-art-source-20260924">.cover-art-source{position:absolute;right:36px;bottom:66px;font:16px "Noto Sans TC",sans-serif;color:#52685e;background:#faf7eee8;padding:4px 8px;border-radius:3px}</style><style id="life-transition-20260924">
+.slide.life-entry{isolation:isolate}
+.slide.life-entry>.lt-stage{position:absolute!important;inset:0!important;z-index:25!important;background:#faf7ee!important;color:#183b4c!important;margin:0!important;padding:0!important;overflow:hidden;pointer-events:none;opacity:1;visibility:visible;transition:none!important}
+.slide.life-entry>.lt-stage>.lt-art{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;margin:0!important;transform:none!important}
+.slide.life-entry>.lt-stage>.lt-copy{position:absolute!important;left:5.6%!important;top:27%!important;width:36%!important;text-align:left!important;display:block!important;color:#183b4c!important}
+.slide.life-entry>.lt-stage .lt-kicker{font:500 23px/1.5 "Noto Sans TC",sans-serif!important;letter-spacing:.08em!important;color:#57786d!important;margin:0 0 24px!important}
+.slide.life-entry>.lt-stage h2.lt-title{font:700 70px/1.26 "Noto Sans TC",sans-serif!important;color:#183b4c!important;letter-spacing:0!important;margin:0 0 30px!important;max-width:100%!important;padding:0!important}
+.slide.life-entry>.lt-stage .lt-subtitle{font:400 34px/1.65 "Noto Sans TC",sans-serif!important;color:#355b57!important;margin:0!important;padding:0!important}
+.slide.life-entry>.lt-stage .lt-action{font:400 25px/1.65 "Noto Sans TC",sans-serif!important;color:#526f64!important;margin:45px 0 0!important;padding:0!important}
+.slide.life-entry>.lt-stage .lt-source{position:absolute!important;left:5.6%!important;bottom:7%!important;font:400 17px/1.5 "Noto Sans TC",sans-serif!important;color:#61756b!important;letter-spacing:0!important}
+.slide.life-entry:has(>[data-life-root].revealed)>.lt-stage,body.reveal-all .slide.life-entry:not(.life-standalone)>.lt-stage{visibility:hidden!important;opacity:0!important}
+.slide.life-entry:not(:has(>[data-life-root].revealed))>:not(.lt-stage){visibility:hidden!important}
+.slide.life-standalone>.lt-stage{visibility:visible!important;opacity:1!important}
+@media(max-height:760px){.slide.life-entry>.lt-stage h2.lt-title{font-size:54px!important;margin-bottom:20px!important}.slide.life-entry>.lt-stage .lt-subtitle{font-size:28px!important}.slide.life-entry>.lt-stage .lt-action{font-size:22px!important;margin-top:30px!important}.slide.life-entry>.lt-stage .lt-kicker{font-size:20px!important;margin-bottom:18px!important}.slide.life-entry>.lt-stage .lt-copy{top:25%!important}}
+</style></head><body><main id="stage"><div id="progress"></div><nav class="nav"><a href="../index.html">← 課程首頁</a><button id="fullscreenButton">全螢幕 F</button></nav><div class="section" id="section"></div><footer class="footer"><span id="help">←→ 逐步／換頁・P 當頁全顯</span><span class="middle" id="revealInfo"></span><div><button id="prevButton">←</button> <button id="nextButton">→</button> <button id="allButton"></button> <span id="page"></span></div></footer>
 <!-- /disciplinary-end-20260905 -->
-<section class="slide semester-cover" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="1" style="background-image:url(./assets/deck-media/7615dae301ae96e0854d.webp)!important"><div aria-hidden="true" class="cover-reading"></div><div class="cover-copy"><p class="cover-kicker">閱讀理解與表達 · 第 6 週</p><h1>讀懂、寫清、畫出關係</h1><p class="cover-subtitle">先獨立驗收，再回自己的作品補齊證據。</p></div><div class="cover-meta">兩節各 50 分鐘 · 休息另計</div></section><section class="slide unit-slide unit-focus v11-paper" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="2"><div class="unit-inner"><p class="unit-kicker">W6 · 01 獨立能力考</p><h2>先獨立作答，再回作品</h2><div class="unit-body"><div class="w6-roadmap"><div><b>01 獨立能力考</b><p>發卷3分、作答43分、收卷4分</p><small>課堂進度｜00–50 分</small></div><div><b>02 補齊與交流</b><p>回自己作品；比較公開圖法</p><small>課堂進度｜50–84 分</small></div><div><b>03 學科運用</b><p>走法、時間、換條件回查</p><small>課堂進度｜84–96 分</small></div><div><b>04 保存與下一步</b><p>核對保存位置、交回練習本</p><small>課堂進度｜96–100 分</small></div></div></div><p class="unit-foot">第一次能力考 10 分；W4–W5 個人作品 20 分，兩筆不同證據。考卷另發、另收。</p><div class="unit-bottom"><span class="unit-clock">考前總覽／程序內查看</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-slide="3" data-mode="完整閱讀" data-export-reveal="all" data-section="01 獨立能力考"><div class="unit-inner"><p class="unit-kicker">W6 · 01 獨立能力考</p><h2>W1–W5：讀懂、寫清、畫出關係</h2><div class="unit-body"><div class="unit-cols"><div><h3>A／B</h3><p>來源與判斷：建議 9 分鐘<br>短寫與兩格：建議 11 分鐘</p></div><div><h3>C／D</h3><p>關係圖與核對：建議 13 分鐘<br>回報與改留：建議 7 分鐘</p></div></div></div><p class="unit-foot">四區共40分鐘，另留3分鐘回查。全卷4頁一次發放，可自行調整順序。</p><div class="unit-bottom"><span class="unit-clock">考前公告／施測程序內查看</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-slide="4" data-mode="完整閱讀" data-export-reveal="all" data-section="01 獨立能力考"><div class="unit-inner"><p class="unit-kicker">W6 · 01 獨立能力考</p><h2>先核對4頁與姓名</h2><div class="unit-body"><p>桌面只留核准文具。<br>不使用 AI、網路或討論。<br>短語、必要標籤與簡圖都可以，不用填滿。</p></div><p class="unit-foot">開始發卷與說明前，先到下一頁啟動50分鐘總計時。只問程序，教師不提示答案。</p><div class="unit-bottom"><span class="unit-clock">說明與發卷包含在本節50分鐘內</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-slide="5" data-mode="完整閱讀" data-export-reveal="all" data-section="01 獨立能力考"><div class="unit-inner"><p class="unit-kicker">W6 · 01 獨立能力考</p><h2>本節最多50分鐘</h2><div class="unit-body"><div class="w6-exam-clock" aria-label="含發卷與收卷的50分鐘總計時"><output aria-live="off">50:00</output><button type="button" data-w6-action="start">開始本節50分鐘</button><button type="button" data-w6-action="reset">重設下一班</button><strong class="w6-exam-phase">尚未開始</strong></div><div class="unit-cols"><div><h3>剩 47:00</h3><p>開始作答43分鐘<br>最後3分鐘回查</p></div><div><h3>剩 04:00</h3><p>全班停筆<br>收卷、清點4頁</p></div></div></div><p class="unit-foot">3分鐘發卷說明＋43分鐘作答＋4分鐘收卷。一次發放、最後整份交回。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜00–50 分（含全部程序）</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-slide="6" data-mode="完整閱讀" data-export-reveal="all" data-section="01 獨立能力考"><div class="unit-inner"><p class="unit-kicker">W6 · 01 獨立能力考</p><h2>剩4分鐘：停筆，全部交回</h2><div class="unit-body"><p>依老師指示交回整份4頁題本。<br>正式題本與答案由教師保管。<br>不拍照、不上傳作品牆。</p></div><p class="unit-foot">四項0–3換算學期10分；細部能力另外回饋，不加配分。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜46–50 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-slide="7" data-mode="完整閱讀" data-export-reveal="all" data-section="01 獨立能力考"><div class="unit-inner"><p class="unit-kicker">W6 · 01 獨立能力考</p><h2>下一節，回自己的作品補齊</h2><div class="unit-body"><p>正式卷與公開練習本分開。<br>第二節使用4頁公開練習材料。<br>回看本人作品，補齊已有規準要求的證據。</p></div><p class="unit-foot">不公布正式題目與答案。W4–W5個人作品20分，依原公告於W6下課截止。</p><div class="unit-bottom"><span class="unit-clock">收齊正式卷後；休息另計</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide" data-export-reveal="all" data-mode="完整閱讀" data-section="02 補齊與交流" data-slide="8"><div class="unit-inner"><p class="unit-kicker">W6 · 02 補齊與交流</p><h2>兩種檢查：看懂了，忠實嗎？</h2><div class="unit-body"><p><span class="source-text">成果展有主持、海報與拍攝三個工作組，總共四位成員。小柏與小寧主持，小寧與小哲做海報，小哲與小昕拍攝。小寧與小哲各參加兩組，其餘各參加一組。</span></p></div><p class="unit-foot">本課原創虛構材料，與正式卷不同｜歷程本第 1 頁。自己先讀 1 分鐘，再看下一頁的例圖。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜50–53 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide" data-export-reveal="all" data-mode="完整閱讀" data-section="02 補齊與交流" data-slide="9"><div class="unit-inner"><p class="unit-kicker">W6 · 02 補齊與交流</p><h2>讀者讀懂了這張圖，夠嗎？</h2><div class="unit-body"><svg aria-label="待核對圖：主持組小柏小寧，海報組小哲，拍攝組小哲小昕" class="diagram" role="img" viewbox="0 0 1360 380"><g fill="#e4ece1"><rect height="235" rx="12" width="400" x="20" y="50"></rect><rect height="235" rx="12" width="400" x="480" y="50"></rect><rect height="235" rx="12" width="400" x="940" y="50"></rect></g><g text-anchor="middle"><text x="220" y="105">主持</text><text x="680" y="105">海報</text><text x="1140" y="105">拍攝</text><text x="220" y="190">小柏・小寧</text><text x="680" y="190">小哲</text><text x="1140" y="190">小哲・小昕</text><text style="font-size:27px" x="680" y="340">重複出現的小哲是同一人；這是待核對的教師例圖。</text></g></svg><div class="unit-timer"><button data-timer="180" data-timer-start="manual"></button><button class="reset">重設</button></div></div><p class="unit-foot">先自己核對 45 秒 → 搭檔各說 30 秒 → 抽個人指依據 1 分鐘 → 補記 15 秒。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜53–56 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide" data-export-reveal="all" data-mode="逐步講解" data-section="02 補齊與交流" data-slide="10"><div class="unit-inner"><p class="unit-kicker">W6 · 02 補齊與交流</p><h2>總數對了，還要核誰與誰</h2><div class="unit-body"><svg aria-label="工作組歸屬對照：主持與拍攝成員相同；原圖海報漏小寧。名字總數相同不代表每個歸屬正確。" class="v11-diagram" role="img" viewbox="0 0 1400 405"><text class="strong" text-anchor="start" x="140" y="42">工作組</text><text class="strong" text-anchor="middle" x="525" y="42">待核對圖</text><text class="strong" text-anchor="middle" x="1060" y="42">回原文核對</text><text class="" text-anchor="start" x="140" y="112">主持</text><text class="" text-anchor="middle" x="525" y="112">小柏、小寧</text><path d="M100 137 H1340" fill="none" stroke="#497b68" stroke-width="3"></path><g data-reveal="1"><text class="" text-anchor="middle" x="1060" y="112">小柏、小寧</text></g><text class="" text-anchor="start" x="140" y="201">海報</text><text class="" text-anchor="middle" x="525" y="201">小哲</text><path d="M100 226 H1340" fill="none" stroke="#497b68" stroke-width="3"></path><g data-reveal="1"><text class="strong" text-anchor="middle" x="1060" y="201">小寧、小哲</text></g><text class="" text-anchor="start" x="140" y="290">拍攝</text><text class="" text-anchor="middle" x="525" y="290">小哲、小昕</text><path d="M100 315 H1340" fill="none" stroke="#497b68" stroke-width="3"></path><g data-reveal="1"><text class="" text-anchor="middle" x="1060" y="290">小哲、小昕</text></g><g data-reveal="1"><text class="minor" text-anchor="middle" x="700" y="374">四個名字都在，仍漏了一條「小寧參加海報組」的關係。</text></g></svg></div><p class="unit-foot"><span>讀圖是否清楚，與圖是否忠於原文，分別核對。</span></p><div class="unit-bottom"><span class="unit-clock">課堂進度｜56–58 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-export-reveal="all" data-mode="完整閱讀" data-section="02 補齊與交流" data-slide="11"><div class="unit-inner"><p class="unit-kicker">W6 · 02 補齊與交流</p><h2>20 分鐘：補自己缺的證據</h2><div class="unit-body"><div class="unit-cols"><div><h3>尚未完整</h3><p>找一項缺口 → 補本人工作或真人回報。<br/>核對原意、版本、真人初讀與改留依據。</p></div><div><h3>已完整</h3><p>同一份公開材料，試另一種圖法。<br/>比較哪種關係更容易看出。</p></div></div><div class="unit-timer"><button data-timer="1200" data-timer-start="manual"></button><button class="reset">重設</button></div></div><p class="unit-foot">歷程本第 2 頁只記補哪項與保存位置，不重抄平台。真人回報由真人填；AI 不代填。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜58–78 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide" data-export-reveal="all" data-mode="完整閱讀" data-section="02 補齊與交流" data-slide="12"><div class="unit-inner"><p class="unit-kicker">W6 · 02 補齊與交流</p><h2>換一種圖法，什麼變容易看？</h2><div class="unit-body"><div class="unit-cols"><div><h3>看得到的關係</h3><p>同一人跨組，怎麼標？<br/>從人出發，或從工作組出發？</p></div><div><h3>說一個取捨</h3><p>保留什麼、略去什麼？<br/>會不會讓讀者多推一步？</p></div></div></div><p class="unit-foot">自己挑 1 分鐘 → 搭檔各 1 分鐘 → 抽 2 位共 2 分鐘 → 自己補記 1 分鐘。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜78–84 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide" data-export-reveal="all" data-mode="完整閱讀" data-section="03 學科運用" data-slide="13"><div class="unit-inner"><p class="unit-kicker">W6 · 03 學科運用｜學科遷移練習・數學</p><h2>去科教館：不能只比行車時間</h2><div class="unit-body"><p><span class="source-text" style="font-size:34px">本課虛構情境：你在上午 8:55 抵達學校門口，要在 9:30 前到科教館入口集合。從校門直接走到科教館入口，步道長 1200 公尺。接駁車 9:00、9:15 各發一班，行車均需 12 分鐘，從下車處再走 300 公尺才到科教館入口。假設全程步行速率固定為每分鐘 60 公尺，車輛準時，沒有其他等候或停留。</span></p></div><p class="unit-foot">數學｜本課原創虛構情境，非真實時刻表。資料也在歷程本第 3 頁。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜84–85 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-export-reveal="all" data-mode="完整閱讀" data-section="03 學科運用" data-slide="14"><div class="unit-inner"><p class="unit-kicker">W6 · 03 學科運用</p><h2>把三種走法畫成時間線</h2><div class="unit-body"><p>哪些走法能在 9:30 前到？畫出路徑與各段時間，說明為何不能只比「12 分鐘」和「20 分鐘」。</p><div class="unit-timer"><button data-timer="240" data-timer-start="manual"></button><button class="reset">重設</button></div></div><p class="unit-foot">第 3 頁獨立作答，不使用 AI。標時刻與每段所需時間；先保留自己的算式。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜85–89 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-export-reveal="all" data-mode="完整閱讀" data-section="03 學科運用" data-slide="15"><div class="unit-inner"><p class="unit-kicker">W6 · 03 學科運用</p><h2>搭檔照圖走，再查一個變動</h2><div class="unit-body"><div class="unit-cols"><div><h3>各說一次｜各 1 分鐘</h3><p>照對方的線：哪時出發、哪時到？<br/>哪段等候或步行可能漏掉？</p></div><div><h3>自己核對｜1 分鐘</h3><p>若改在 9:08 抵達校門，<br/>哪些走法仍能準時？</p></div></div><div class="unit-timer"><button data-timer="180" data-timer-start="manual"></button><button class="reset">重設</button></div></div><p class="unit-foot">第 4 頁記真人回報；先回原條件，再決定修訂或保留。</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜89–92 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide v11-slide" data-export-reveal="all" data-mode="逐步講解" data-section="03 學科運用" data-slide="16" data-v11="authored"><p class="v11-kicker">學科遷移練習｜數學 · 回到第3頁初答</p><h2>等待與步行，都算進去</h2><div class="v11-main"><svg aria-label="三條路線共同8點55起算，同尺度畫等待、行車與步行；9點30前到達的有前兩條" class="v11-diagram" role="img" viewbox="0 0 1400 430"><path d="M1125 15 V365" fill="none" stroke="#497b68" stroke-dasharray="9 7" stroke-width="3"></path><text class="minor" text-anchor="middle" x="1125" y="400">9:30 前</text><text class="" text-anchor="start" x="30" y="90">直接走</text><rect fill="#c8ddcc" height="63" stroke="#497b68" stroke-width="2" width="500" x="250" y="48"></rect><text class="" text-anchor="middle" x="500.0" y="91">走20</text><text class="" text-anchor="start" x="766" y="91">9:15</text><g data-reveal="1"><text class="" text-anchor="start" x="30" y="201">9:00 車</text><rect fill="#e5dfc9" height="63" stroke="#497b68" stroke-width="2" width="125" x="250" y="159"></rect><text class="" text-anchor="middle" x="312.5" y="202">等5</text><rect fill="#b9d7d4" height="63" stroke="#497b68" stroke-width="2" width="300" x="375" y="159"></rect><text class="" text-anchor="middle" x="525.0" y="202">車12</text><rect fill="#c8ddcc" height="63" stroke="#497b68" stroke-width="2" width="125" x="675" y="159"></rect><text class="" text-anchor="middle" x="737.5" y="202">走5</text><text class="" text-anchor="start" x="816" y="202">9:17</text></g><g data-reveal="2"><text class="" text-anchor="start" x="30" y="312">9:15 車</text><rect fill="#e5dfc9" height="63" stroke="#497b68" stroke-width="2" width="500" x="250" y="270"></rect><text class="" text-anchor="middle" x="500.0" y="313">等20</text><rect fill="#b9d7d4" height="63" stroke="#497b68" stroke-width="2" width="300" x="750" y="270"></rect><text class="" text-anchor="middle" x="900.0" y="313">車12</text><rect fill="#c8ddcc" height="63" stroke="#497b68" stroke-width="2" width="125" x="1050" y="270"></rect><text class="" text-anchor="middle" x="1112.5" y="313">走5</text><text class="" text-anchor="start" x="1191" y="313">9:32</text></g><text class="minor" text-anchor="start" x="250" y="400">共同起點 8:55</text></svg></div><p class="v11-foot">各段長度按分鐘等比例。<span data-reveal="3">前兩條在 9:30 前到；車程短，不代表全程短。</span></p><p class="v11-clock">課堂進度｜92–94 分</p></section><section class="slide unit-slide" data-export-reveal="all" data-mode="逐步講解" data-section="03 學科運用" data-slide="17"><div class="unit-inner"><p class="unit-kicker">W6 · 03 學科運用</p><h2>9:08 才到校門，怎麼選？</h2><div class="unit-body"><svg aria-label="9點08到校門：直接走20分在9點28到；等7分搭9點15車加12分車程與5分步行，9點32到。9點00車已開走。" class="v11-diagram" role="img" viewbox="0 0 1400 365"><text class="minor" text-anchor="start" x="280" y="40">共同起點 9:08</text><path d="M1072 65 V290" fill="none" stroke="#497b68" stroke-dasharray="9 7" stroke-width="3"></path><text class="minor" text-anchor="middle" x="1072" y="337">9:30 前</text><text class="" text-anchor="start" x="30" y="121">直接走</text><rect fill="#c8ddcc" height="65" stroke="#497b68" stroke-width="2" width="720" x="280" y="80"></rect><text class="" text-anchor="middle" x="640.0" y="122">走20</text><text class="" text-anchor="end" x="1000" y="65">9:28</text><g data-reveal="1"><text class="" text-anchor="start" x="30" y="249">9:15 車</text><rect fill="#e5dfc9" height="65" stroke="#497b68" stroke-width="2" width="252" x="280" y="208"></rect><text class="" text-anchor="middle" x="406.0" y="250">等7</text><rect fill="#b9d7d4" height="65" stroke="#497b68" stroke-width="2" width="432" x="532" y="208"></rect><text class="" text-anchor="middle" x="748.0" y="250">車12</text><rect fill="#c8ddcc" height="65" stroke="#497b68" stroke-width="2" width="180" x="964" y="208"></rect><text class="" text-anchor="middle" x="1054.0" y="250">走5</text><text class="" text-anchor="start" x="1160" y="250">9:32</text></g></svg></div><p class="unit-foot">先回自己的新情境初答。<span data-reveal="2">9:00 車已開走；直接走能準時，下一班車來不及。</span></p><div class="unit-bottom"><span class="unit-clock">課堂進度｜94–96 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section><section class="slide unit-slide unit-focus v11-paper" data-export-reveal="all" data-mode="完整閱讀" data-section="04 保存與下一步" data-slide="18"><div class="unit-inner"><p class="unit-kicker">W6 · 04 保存與下一步</p><h2>保存位置清楚，才能合看兩週</h2><div class="unit-body"><div class="unit-cols"><div><h3>W4–W5 一件作品</h3><p>原意、版本、真人初讀、改留決定與依據。<br/>共同截止本節下課，缺項如實標待取證。</p></div><div><h3>本週兩份資料分開</h3><p>公開練習本 4 頁交回。<br/>正式卷由老師另行保管與評閱。</p></div></div><div class="unit-timer"><button data-timer="240" data-timer-start="manual"></button><button class="reset">重設</button></div></div><p class="unit-foot">不新增作品牆展廳、不另交 SOIL 四格心得。下週：兩個說法看似相反，真的衝突嗎？</p><div class="unit-bottom"><span class="unit-clock">課堂進度｜96–100 分</span><button class="unit-locator" onclick="show(2)">回本週路線</button></div></div></section></main><div id="rotateHint">請將裝置橫放，或改用電腦投影。</div><script type="application/x-rib-deck">const slides=[...document.querySelectorAll('.slide')];let current=0,revealStep=0;const timerStates=new Map();
+<section class="slide semester-cover rib-chrome" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="1" style="background-image:url(./assets/deck-media/034a3df044aa469e7840.webp)!important"><div aria-hidden="true" class="cover-reading"></div><div class="cover-copy"><p class="cover-kicker">閱讀理解與表達 · 第 6 週</p><h1>讀懂、寫清、畫出關係</h1><p class="cover-subtitle">先獨立作答，再回自己的作品，把沒完成的補上。</p></div><div class="cover-meta">兩節各 50 分鐘 · 休息另計</div><small class="cover-art-source">AI 水彩情境模擬・非實際學生紀錄</small></section><section class="slide unit-slide unit-focus v11-paper rib-chrome" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="2"><div class="unit-inner"><h2>先獨立作答，再回作品</h2><div class="unit-body"><div class="w6-roadmap"><div><b>第一節｜獨立能力考</b><p>發卷、作答，最後停筆收齊</p><small>課堂進度｜00–50 分</small></div><div><b>第二節①｜交換批改與檢討</b><p>每個得分點分開給分；有爭議的交給老師決定</p><small>約 30 分鐘</small></div><div><b>第二節②｜回自己的作品</b><p>補上缺少的部分，或把理由改清楚</p><small>約 15 分鐘</small></div><div><b>保留彈性時間</b><p>處理疑問、保存與收件</p><small>約 5 分鐘</small></div></div></div><p class="unit-foot">第一次能力考 10 分；W4–W5 個人作品 20 分，兩者分開計分。考卷另發、另收。</p></div><span class="unit-clock rib-progress">考前總覽／程序內查看</span><p class="unit-kicker rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide unit-focus v11-paper rib-chrome" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="3"><div class="unit-inner"><h2>四大題，自行安排作答順序</h2><div class="unit-body"><div class="w6-exam-parts"><div><span>第一大題｜8分</span><h3>來源與判斷</h3><p>建議 8 分鐘</p></div><div><span>第二大題｜10分</span><h3>短寫與兩格</h3><p>建議 10 分鐘</p></div><div><span>第三大題｜14分</span><h3>關係圖與核對</h3><p>建議 16 分鐘</p></div><div><span>第四大題｜8分</span><h3>回報與改留</h3><p>建議 6 分鐘</p></div></div></div><p class="unit-foot">滿分40分；依得分點計分。四頁一次發放，另留3分鐘回查。</p></div><span class="unit-clock rib-progress">考前公告／施測程序內查看</span><p class="unit-kicker rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide rib-chrome peer-review visual-procedure" data-export-reveal="all" data-mode="逐步講解" data-section="01 獨立能力考" data-slide="4"><div class="unit-inner"><h2>核對 4 頁，寫好姓名</h2><div class="unit-body"><svg aria-label="考前準備：核對四頁、寫姓名，桌面只留核准文具；獨立作答，不用AI、網路或討論；可用短語、必要標籤及簡圖作答。" class="marking-visual" role="img" viewBox="0 0 1360 500" xmlns="http://www.w3.org/2000/svg"><defs><marker id="mark-arrow" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8" refy="5" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10" fill="none" stroke="#52766b" stroke-width="1.6"></path></marker></defs><g>
+<text class="v-bold" text-anchor="middle" x="220" y="48">桌面只留核准文具</text>
+<path d="M45 323H410" fill="none" stroke="#52766b" stroke-width="6"></path>
+<path d="M70 326V363 M385 326V363" stroke="#52766b" stroke-width="6"></path>
+<rect fill="#e4eae1" height="183" rx="4" stroke="#8caa99" stroke-width="2" width="172" x="98" y="126"></rect>
+<rect fill="#f0f2e8" height="183" rx="4" stroke="#8caa99" stroke-width="2" width="172" x="89" y="116"></rect>
+<rect fill="#fffdf8" height="183" rx="4" stroke="#52766b" stroke-width="3" width="172" x="80" y="106"></rect>
+<text class="v-small" x="106" y="153">共 4 頁</text><text class="v-small" x="106" y="202">姓名＿＿</text>
+<path d="M106 232H226 M106 254H209" stroke="#b6c5ba" stroke-width="3"></path>
+<g transform="translate(315 135) rotate(12)"><path d="M0 0H20V132L10 156L0 132Z" fill="#e9d7a7" stroke="#52766b" stroke-width="3"></path><path d="M0 20H20 M0 132H20 M10 30V120" stroke="#52766b" stroke-width="2"></path></g>
+<text class="v-small" text-anchor="middle" x="220" y="411">核對頁數，寫好姓名。</text>
+</g>
+<g data-reveal="1">
+<path d="M450 62V422" stroke="#c6d2ca"></path>
+<text class="v-bold" text-anchor="middle" x="680" y="48">自己讀、自己作答</text>
+<circle cx="680" cy="132" fill="#e1ebe2" r="31" stroke="#52766b" stroke-width="3"></circle>
+<path d="M616 247V216Q616 176 654 175H706Q744 176 744 216V247" fill="#e1ebe2" stroke="#52766b" stroke-width="3"></path>
+<path d="M595 256H765 M650 237L674 210 M663 249H713" fill="none" stroke="#52766b" stroke-width="4"></path>
+<g fill="none" stroke="#9c5342" stroke-width="3">
+<circle cx="535" cy="333" r="35"></circle><path d="M511 309L559 357"></path>
+<circle cx="680" cy="333" r="35"></circle><path d="M656 309L704 357"></path>
+<circle cx="825" cy="333" r="35"></circle><path d="M801 309L849 357"></path>
+</g>
+<text class="v-small" text-anchor="middle" x="535" y="344">AI</text>
+<g fill="none" stroke="#52766b" stroke-width="2"><circle cx="680" cy="333" r="20"></circle><ellipse cx="680" cy="333" rx="8" ry="20"></ellipse><path d="M660 333H700"></path><path d="M807 320H842V341H825L814 350V341H807Z"></path></g>
+<text class="v-small" text-anchor="middle" x="535" y="411">不用 AI</text><text class="v-small" text-anchor="middle" x="680" y="411">不上網</text><text class="v-small" text-anchor="middle" x="825" y="411">不討論</text>
+</g>
+<g data-reveal="2">
+<path d="M902 62V422" stroke="#c6d2ca"></path>
+<text class="v-bold" text-anchor="middle" x="1140" y="48">這些寫法都可以</text>
+<text class="v-small v-green" x="960" y="112">短語</text><text x="960" y="157">先做甲，再做乙。</text>
+<text class="v-small v-green" x="960" y="223">必要標籤</text><text x="960" y="269">甲：起點　乙：終點</text>
+<text class="v-small v-green" x="960" y="334">簡圖</text>
+<rect fill="#e1ebe2" height="60" rx="10" width="127" x="960" y="357"></rect><text text-anchor="middle" x="1023" y="398">甲</text>
+<path class="v-arrow" d="M1102 387H1160"></path><rect fill="#e1ebe2" height="60" rx="10" width="127" x="1177" y="357"></rect><text text-anchor="middle" x="1240" y="398">乙</text>
+</g>
+<text class="v-small" text-anchor="middle" x="680" y="485">有程序上的問題，請舉手問老師</text></svg></div></div><span class="rib-progress">課堂進度｜00–03 分</span><p class="rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide rib-chrome peer-review visual-procedure" data-export-reveal="all" data-mode="逐步講解" data-section="01 獨立能力考" data-slide="5"><div class="unit-inner"><h2>老師看得懂，才能給分</h2><div class="unit-body"><svg aria-label="評分先看答案是否能被辨認；能辨認按內容評，不能辨認由老師確認原答，只處理受影響部分。" class="marking-visual" role="img" viewBox="0 0 1360 500" xmlns="http://www.w3.org/2000/svg"><defs><marker id="mark-arrow" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8" refy="5" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10" fill="none" stroke="#52766b" stroke-width="1.6"></path></marker></defs><g>
+<path d="M40 112H195L235 152V290H40Z M195 112V152H235" fill="#fffdf7" stroke="#52766b" stroke-width="3"></path>
+<path d="M68 182H202 M68 211H186 M68 240H201" stroke="#52766b" stroke-width="5"></path>
+<text class="v-bold" text-anchor="middle" x="138" y="345">寫出、畫出的答案</text>
+<path class="v-arrow" d="M262 205H330"></path>
+<path d="M480 90L627 205L480 320L333 205Z" fill="#e3ede6" stroke="#52766b" stroke-width="3"></path>
+<text class="v-bold" text-anchor="middle" x="480" y="195">老師看得</text><text class="v-bold" text-anchor="middle" x="480" y="237">懂嗎？</text>
+</g>
+<g data-reveal="1">
+<path class="v-arrow" d="M590 174L665 92H737"></path><text class="v-green" x="653" y="62">能</text>
+<rect fill="#e1eddf" height="130" rx="20" width="555" x="758" y="35"></rect>
+<text class="v-bold v-green" x="790" y="85">按內容與依據評分</text><text class="v-small" x="790" y="130">字不好看，仍可表達清楚。</text>
+</g>
+<g data-reveal="2">
+<path class="v-arrow" d="M590 239L665 307H737"></path><text class="v-amber" x="648" y="354">不能</text>
+<rect fill="#f2e6cd" height="130" rx="20" width="555" x="758" y="245"></rect>
+<text class="v-bold v-amber" x="790" y="295">標「？」，請老師確認原本的答案</text><text class="v-small" x="790" y="340">還是看不懂：這部分就不能給分。</text>
+<path d="M1035 375V411" stroke="#9b6923" stroke-width="2"></path>
+<text class="v-small" text-anchor="middle" x="1035" y="445">不事後補答，也不因此整題歸零。</text>
+</g></svg></div></div><span class="rib-progress">課堂進度｜00–03 分</span><p class="rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide unit-focus v11-paper rib-chrome" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="6"><div class="unit-inner"><h2>本節 50 分鐘：發卷、作答、收卷</h2><div class="unit-body"><div class="w6-exam-phases"><div><span>發卷與說明</span><strong>3<span>分</span></strong><p>核對頁數、填姓名</p></div><div><span>獨立作答</span><strong>43<span>分</span></strong><p>最後 3 分鐘回查</p></div><div><span>停筆與收卷</span><strong>4<span>分</span></strong><p>整份 4 頁交回</p></div></div></div></div><div aria-label="含發卷與收卷的50分鐘總計時" class="w6-exam-clock rib-timer-dock"><output aria-live="off">50:00</output><button data-w6-action="start" type="button">開始本節50分鐘</button><button data-w6-action="reset" type="button">重設下一班</button><strong class="w6-exam-phase">尚未開始</strong></div><span class="unit-clock rib-progress">課堂進度｜00–50 分（含全部程序）</span><p class="unit-kicker rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide unit-focus v11-paper rib-chrome" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="7"><div class="unit-inner"><h2>停筆，整份 4 頁交回</h2><div class="unit-body"><p>依老師指示交回題本。</p><p>正式題本由教師保管，不拍照、不上傳。</p></div></div><span class="unit-clock rib-progress">課堂進度｜46–50 分</span><p class="unit-kicker rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide unit-focus v11-paper rib-chrome" data-export-reveal="all" data-mode="完整閱讀" data-section="01 獨立能力考" data-slide="8"><div class="unit-inner"><h2>停筆收齊後，老師重新分卷</h2><div class="unit-body"><p>第二節交換批改；每人拿到別人的考卷。</p><p>原答案保留，用不同顏色做批改記號。</p></div><p class="unit-foot">不拍考卷、不上傳；批改後全數交回老師複核。</p></div><span class="unit-clock rib-progress">收齊正式卷後；休息另計</span><p class="unit-kicker rib-stage-label">W6 · 01 獨立能力考</p></section><section class="slide unit-slide rib-chrome peer-review" data-export-reveal="all" data-mode="先題後答" data-section="02 交換批改與檢討" data-slide="9"><div class="unit-inner"><h2>每個得分點：1、0，或「？」</h2><div class="unit-body"><div class="peer-three"><div><b>1 分｜已做到</b><p>原答案確實寫到這一點。</p></div><div><b>0 分｜未做到</b><p>明確缺漏或錯誤；旁註原因。</p></div><div><b>？｜請老師判</b><p>寫法不同但可能說得通、疑似筆誤，或看不清楚。</p></div></div><p class="peer-answer" data-reveal="1">每個得分點分開給分，不會因為一點錯就整大題 0 分。<br/>有「？」的先記確定的分數，老師看過再加總。</p></div></div><span class="rib-progress">課堂進度｜50–80 分</span><p class="rib-stage-label">W6 · 02 交換批改與檢討</p></section><section class="slide unit-slide rib-chrome peer-review visual-procedure" data-export-reveal="all" data-mode="操作示範" data-section="02 交換批改與檢討" data-slide="10"><div class="unit-inner"><h2>保留原答案，批改留下依據</h2><div class="unit-body"><svg aria-label="考卷示意：保留原姓名與原答案；不同色筆標記並寫理由；首頁空白處填批改者班級座號姓名，整份交回。" class="marking-visual" role="img" viewBox="0 0 1360 500" xmlns="http://www.w3.org/2000/svg"><defs><marker id="mark-arrow" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="8" refy="5" viewBox="0 0 10 10"><path d="M0 0L10 5L0 10" fill="none" stroke="#52766b" stroke-width="1.6"></path></marker></defs><g>
+<rect fill="#fffdf8" height="455" rx="8" stroke="#a6b9b0" stroke-width="2" width="654" x="46" y="18"></rect>
+<text class="v-small" x="82" y="67">原作答者｜姓名：小安</text><path d="M80 92H665" stroke="#b9c7bf"></path>
+<text class="v-bold" x="82" y="143">我保留箭頭，表示先後。</text>
+<text class="v-bold" x="82" y="263">這樣比較清楚。</text>
+<path d="M82 173H550 M82 293H420" stroke="#d2d9d0" stroke-width="2"></path>
+<text class="v-bold" x="785" y="73">① 原答案不要改</text><text class="v-small" x="785" y="116">換不同色筆，寫在答案旁。</text>
+<path class="v-callout" d="M759 110H718L665 135"></path>
+</g>
+<g data-reveal="1">
+<text class="v-blue v-bold" x="580" y="145">1分</text><text class="v-blue v-small" x="102" y="208">已說出箭頭的作用。</text>
+<text class="v-blue v-bold" x="454" y="263">0分</text><text class="v-blue v-small" x="102" y="326">少了：哪個關係更清楚？</text>
+<text class="v-bold v-blue" x="785" y="230">② 給分、寫缺項</text><text class="v-small" x="785" y="273">每點1或0；不確定標「？」。</text>
+<text class="v-small" x="785" y="316">看不清楚就標「？」，交給老師確認。</text>
+<path class="v-callout" d="M759 270H719L665 318"></path>
+</g>
+<g data-reveal="2">
+<rect fill="#e6edf8" height="78" rx="8" width="592" x="76" y="368"></rect>
+<text class="v-blue v-small" x="94" y="400">批改者｜班級＿＿　座號＿＿</text><text class="v-blue v-small" x="94" y="433">　　　　姓名＿＿</text>
+<text class="v-bold" x="785" y="408">③ 簽名，整份交回</text><text class="v-small" x="785" y="452">寫首頁空白處，避開原姓名欄。</text>
+<path class="v-callout" d="M759 419H710L668 409"></path>
+</g></svg></div></div><span class="rib-progress">課堂進度｜50–80 分</span><p class="rib-stage-label">W6 · 02 交換批改與檢討</p></section><section class="slide unit-slide rib-chrome peer-review w6-work-check life-entry" data-export-reveal="all" data-life-transition="20260924" data-life-week="6" data-mode="逐步講解" data-section="03 作品補修" data-slide="11"><div aria-label="回到自己的作品" class="lt-stage"><img alt="把今天練過的方法，用來修改自己的作品；AI水彩情境插圖" class="lt-art" src="./assets/deck-media/24c0101154f9e699c01c.webp"/><div class="lt-copy"><p class="lt-kicker">W6｜考後作品補修</p><h2 class="lt-title">回到自己的作品</h2><p class="lt-subtitle">把今天練過的方法，用來修改自己的作品</p><p class="lt-action">自己的W4–W5作品｜補一處內容或理由</p></div><small class="lt-source">AI 水彩情境模擬・非實際學生紀錄</small></div><div class="unit-inner" data-life-root="" data-reveal="1"><h2>回自己的 W4–W5 作品，補一處</h2><div class="unit-body"><div class="peer-three"><div><b>找缺項</b><p>對照原要求，找未完成的內容。</p></div><div><b>補內容或理由</b><p>回原文或圖卡，把依據說清楚。</p></div><div><b>保存</b><p>記下改了哪裡；已經完整的，自己再看一遍就好。</p></div></div><p class="peer-check">W5：每人自己選一題、畫一張，個別上傳作品牆。</p><div class="timer-box"><button data-timer="900">15:00・開始</button><button class="reset">重設</button></div></div></div><span class="rib-progress" data-life-root="" data-reveal="1">課堂進度｜80–95 分</span><p class="rib-stage-label" data-life-root="" data-reveal="1">W6 · 03 作品補修</p></section><section class="slide unit-slide rib-chrome peer-review" data-export-reveal="all" data-mode="完整閱讀" data-section="03 作品補修" data-slide="12"><div class="unit-inner"><h2>保存作品，考卷交回老師</h2><div class="unit-body"><p>確認 W4–W5 的補修已保存。</p><p>考卷交老師複核；歷程本記下尚待處理的一項。</p><p class="peer-check">剩餘時間留給疑問與收件；已完成者可自行整理。</p></div></div><span class="rib-progress">課堂進度｜95–100 分</span><p class="rib-stage-label">W6 · 03 作品補修</p></section></main><div id="rotateHint">請將裝置橫放，或改用電腦投影。</div><script type="application/x-rib-deck">const slides=[...document.querySelectorAll('.slide')];let current=0,revealStep=0;const timerStates=new Map();
 const revealEls=()=>[...slides[current].querySelectorAll('[data-reveal]')];const revealSteps=()=>[...new Set(revealEls().map(x=>+x.dataset.reveal))].sort((a,b)=>a-b);
 function paintReveal(){revealEls().forEach(x=>{const on=+x.dataset.reveal<=revealStep;x.classList.toggle('revealed',on);x.inert=!on;x.setAttribute('aria-hidden',!on)});const max=revealSteps().at(-1)||0;document.querySelector('#revealInfo').textContent=max?`${revealStep} / ${max} 組`:'完整閱讀';document.querySelector('#allButton').textContent=revealStep===max&&max?'回到初始 P':'當頁全顯 P'}
 function pauseTimers(){for(const s of timerStates.values()){if(s.handle){clearInterval(s.handle);s.handle=null;drawTimer(s)}}}
@@ -583,7 +850,7 @@ function fit(){if(fitResponsiveStage(false))return;const z=Math.min(innerWidth/1
 addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length&&n!==current+1)show(n)});
 const dialog=document.querySelector('#promptDialog');if(dialog){document.querySelector('#openPrompt').onclick=()=>dialog.showModal();document.querySelector('#closePrompt').onclick=()=>dialog.close();document.querySelector('#copyPrompt').onclick=async()=>{const t=document.querySelector('#promptText').textContent;try{await navigator.clipboard.writeText(t);document.querySelector('#copyStatus').textContent='已複製：填入自己的安全場景與兩個必要線索。'}catch{const r=document.createRange();r.selectNodeContents(document.querySelector('#promptText'));getSelection().removeAllRanges();getSelection().addRange(r);document.querySelector('#copyStatus').textContent='已選取文字，請按 Ctrl／⌘＋C。'}}}
 if(location.protocol==='file:'&&!location.pathname.includes('/songshan-rib/'))document.querySelector('.nav a').href='../W3-W6_精修版入口.html';
-</script><script id="semester-runtime" type="application/x-rib-deck">window.semesterConfig={"week": 6, "main": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], "academic": [13, 14, 15, 16, 17], "extra": [], "answer": 17, "closing": 18, "flow": "w6-soil-v10"};
+</script><script id="semester-runtime" type="application/x-rib-deck">window.semesterConfig={"week": 6, "main": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "academic": [], "extra": [], "answer": null, "closing": 12, "flow": "w6-peer-review-20260923"};
 /* 現行投影逐組揭露：當頁全顯、返回、手動計時與主課／選做分流。 */
 (()=>{
  const cfg=window.semesterConfig, all=[...document.querySelectorAll('.slide')];
@@ -667,7 +934,7 @@ if(location.protocol==='file:'&&!location.pathname.includes('/songshan-rib/'))do
  menu.querySelector('[data-sem="main"]').onclick=()=>{go(branchReturn||cfg.main.at(-1));branchReturn=null;};
  menu.querySelector('[data-sem="task"]').onclick=()=>cfg.academic.length?optional(cfg.academic[0]):window.open('../worksheets/#disciplinary','_blank');
  menu.querySelector('[data-sem="answer"]').onclick=()=>cfg.answer?optional(cfg.answer):window.open('../worksheets/#disciplinary','_blank');
- if(!cfg.academic.length){menu.querySelector('[data-sem="task"]').textContent='課後題庫';menu.querySelector('[data-sem="answer"]').hidden=true;}
+ if(!cfg.academic.length){menu.querySelector('[data-sem="task"]').hidden=true;menu.querySelector('[data-sem="answer"]').hidden=true;}
  menu.querySelector('input').onchange=e=>go(Number(e.target.value));
  window.semesterDeck={go,next:advance,prev:back,toggleAll:toggle,get page(){return page()},get step(){return legacy?currentGroup:revealNodes().filter(visible).length},config:cfg};
  addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(n&&n!==page())go(n);});
@@ -771,7 +1038,8 @@ if(location.protocol==='file:'&&!location.pathname.includes('/songshan-rib/'))do
 'use strict';
 const params=new URLSearchParams(location.search),root=document.documentElement;
 const framed=params.get('projection-frame')==='1'&&window.parent!==window;
-const phone=!framed&&params.get('export')!=='1'&&(matchMedia('(max-width:1000px)').matches||matchMedia('(pointer:coarse)').matches);
+// A narrow desktop window (including browser zoom) is still a desktop.
+const phone=!framed&&params.get('export')!=='1'&&matchMedia('(pointer:coarse)').matches;
 const channel='rib-projection-v1';
 function activate(){
  for(const inert of [...document.querySelectorAll('script[type="application/x-rib-deck"]')]){
@@ -781,7 +1049,16 @@ function activate(){
  }
 }
 if(!phone){
+ if(!framed&&params.get('export')!=='1'&&params.get('projection-frame')!=='1')root.classList.add('rib-desktop');
  activate();
+ if(root.classList.contains('rib-desktop')){
+  // Preserve each layout's alignment, but keep oversized centered content reachable.
+  for(const slide of document.querySelectorAll('.slide')){
+   const style=getComputedStyle(slide);
+   if(style.alignItems==='center')slide.style.alignItems='safe center';
+   if(style.justifyContent==='center')slide.style.justifyContent='safe center';
+  }
+ }
  if(!framed)return;
  root.classList.add('rib-framed');
  const deck=window.semesterDeck,slides=[...document.querySelectorAll('.slide')];

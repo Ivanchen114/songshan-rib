@@ -134,7 +134,7 @@ export class Workspace extends Reflection {
       demand(current.revision===ticket.expected_revision,409,'作品已有新版本，請先核對。已上傳圖片暫存保留。');
       demand(!(await one(db,"select student_id from rib.members where work_id=$1 and status='invited'",[w.id])),409,'請先讓同組同學確認加入。');
       const versions=await db.query('select * from rib.versions where work_id=$1 order by ordinal',[w.id]);
-      if(w.kind==='w4'&&versions.length){demand(versions.length<2&&['review','exhibit'].includes(current.phase),409,'這份圖卡已有 V2，或尚未開放改留。');demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
+      if(w.kind==='w4'&&versions.length){demand(versions.length<2&&['review','exhibit'].includes(current.phase),409,'這份圖卡已有 V2，或老師尚未開放修改或保留作品。請先查看作品版本與目前課堂階段。');demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
       demand(versions.length<ACTIVITY[w.kind].maxVersions,409,'本週版本已保存完成。');
       const versionId=uid(),ordinal=versions.length?Math.max(...versions.map(v=>v.ordinal))+1:1;
       await db.query('insert into rib.versions(id,work_id,ordinal,media,metadata,request_id) values($1,$2,$3,$4,$5,$6)',[versionId,w.id,ordinal,json(media),json(ticket.metadata),ticket.request_id]);
