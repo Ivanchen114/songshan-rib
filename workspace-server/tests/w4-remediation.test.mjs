@@ -11,8 +11,14 @@ test('reminders are scoped, private, repeat-safe, resolved by upload and guarded
  const plan=await s.reminderPlan(f.teacher,a);assert.equal(plan.candidates.length,2);assert.equal((await s.sendReminders(f.teacher,plan)).sent,2);
  assert.equal((await s.sendReminders(f.teacher,await s.reminderPlan(f.teacher,a))).sent,0);
  assert.equal((await s.home(f.people[0])).reminders.length,0);const h=await s.home(f.people[1]);assert.equal(h.reminders.length,1);assert.ok(!JSON.stringify(h.reminders).includes('sentBy'));assert.ok(!JSON.stringify(h.reminders).includes(f.people[2].studentId));
+ for(const activityId of ['w4-demo','w5-demo']){
+  assert.deepEqual((await s.board(f.people[1],{activityId})).reminders,h.reminders);
+  assert.equal((await s.board(f.people[0],{activityId})).reminders.length,0);
+  assert.equal((await s.board(f.teacher,{activityId,className:'101'})).reminders.length,0);
+ }
  const unagreed={...f.people[1],student:{...f.people[1].student,sharing_agreement:null}};assert.equal((await s.home(unagreed)).agreementRequired,true);assert.equal((await s.home(unagreed)).reminders.length,1);
  const late=await s.ensureWork(f.people[1],a);await upload(f,s,f.people[1],late,'late');assert.equal((await s.home(f.people[1])).reminders.length,0);
+ for(const activityId of ['w4-demo','w5-demo'])assert.equal((await s.board(f.people[1],{activityId})).reminders.length,0);
  await f.db.query("update rib.activities set archived=true where id='w4-demo'");assert.equal((await s.home(f.people[2])).reminders.length,0);await assert.rejects(s.sendReminders(f.teacher,plan),e=>e.status===403);
 });
 test('teacher drafts stay private; simulation never unlocks author decision; personal confirmation preserves peers and enables keep/V2',async t=>{
