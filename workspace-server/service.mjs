@@ -1,3 +1,4 @@
+import {demoPlan,assignDemos} from './ai-demos.mjs';
 import {readingList,readingDetail} from './ai-readings.mjs';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
 import {submissionMetadata} from './weekly.mjs';
@@ -88,6 +89,8 @@ export class Workspace extends Reflection {
     const related=a.kind==='w8-materials'?await one(this.db,"select id from rib.activities where term=$1 and kind='w8-proposal' and not archived and legacy->>'materialsActivityId'=$2 and coalesce((legacy->>'testOnly')::boolean,false)=$3",[a.term,a.id,a.legacy?.testOnly===true]):null;
     return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,authorsRevealed:a.legacy?.authorsRevealed===true,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
   }
+  async demoPlan(p,input){return demoPlan(this,p,input);}
+  async assignDemos(p,input){return assignDemos(this,p,input);}
   async aiReading(p,input){return readingDetail(this,p,input);}
   async ensureWork(p,input) {
     demand(p.role==='student',403,'請使用學生帳號。');const a=await this.activity(p,input.activityId);demand(supportedKind(a.kind),409,'此歷史活動僅供查閱。');demand(a.accepting&&!a.archived,403,'老師尚未開放交件。');demand(!!p.student.is_test===!!a.legacy?.testOnly,403,'測試帳號請使用測試活動，正式帳號請使用課堂活動。');

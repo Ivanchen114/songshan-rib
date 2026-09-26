@@ -1,3 +1,4 @@
+import {demoDetail} from './ai-demos.mjs';
 import {TopicSelection} from './topic-selection.mjs';
 import {demand,teacherScope,json} from './security.mjs';
 
@@ -26,6 +27,7 @@ export class AiJudgment extends TopicSelection {
    demand(!choices[key]||value===''||choices[key].includes(value),400,'請核對判讀選項。');
    if(input.status==='submitted')demand(answers[key],400,'送出前請完成圖卡編號／版本、判讀及改寫。');
   }
+  if(answers.sourceReference.startsWith('demo-')){const demo=await demoDetail(this,p,answers.sourceReference.split(' / ')[0]);demand(demo.sourceReference===answers.sourceReference&&demo.id.startsWith('demo-'+input.activityId+'-'),403,'請使用本活動分派給你的示範。');}
   return this.db.transaction(async db=>{
    await db.query('select id from rib.activities where id=$1 for update',[input.activityId]);
    const a=await this.activity(p,input.activityId,db);
