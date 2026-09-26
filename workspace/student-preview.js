@@ -34,7 +34,7 @@ export async function selectionPreviewPicker(state,api){
   return picker(rows.flat(),anchor.id,'18');
 }
 document.addEventListener('change',e=>{if(e.target.id==='previewStudentChoice'){const s=e.target;document.querySelector('#previewEnter').href=entryUrl(s.dataset.activity,s.value,s.dataset.week);}});
-const directWrites=new Set(['ensureWork','workPrivacy','invitation','drawTopic','drawW8Topic','drawW7Topic','markCurrent','paperKeep','wallVote','vote','logout']);
+const directWrites=new Set(['ensureWork','w8StartUpload','workPrivacy','invitation','drawTopic','drawW8Topic','drawW7Topic','markCurrent','paperKeep','wallVote','vote','logout']);
 function protectPreview(){
   for(const el of document.querySelectorAll('form input,form textarea,form select,form button:not([type="button"]),#logout')){
     if(!el.disabled)el.disabled=true;

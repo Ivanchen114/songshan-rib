@@ -49,6 +49,9 @@ button.leave-group:hover{background:#f4dfbf}button.leave-group:focus-visible{out
 
 .ai-reading-panel{margin-top:24px}.ai-reading-image img{display:block;width:100%;height:auto;max-height:70vh;object-fit:contain;background:#f6f5f0}.ai-reading-comments{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}.ai-reading-comments section{padding:20px;border:1px solid var(--line,#d6d8cf);border-radius:12px}.ai-reading-comments p{font-size:1.1rem;line-height:1.9;user-select:text}@media(max-width:640px){.ai-reading-comments{grid-template-columns:1fr}.ai-reading-comments section{padding:16px}}
 
+/* W8: one activity, two clearly named steps. */
+.w8-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.w8-steps button{white-space:normal;text-align:left;line-height:1.6;padding:14px 18px}.w8-steps [aria-current="step"]{outline:2px solid currentColor;outline-offset:2px}.w8-reading-steps{padding-left:1.5em}.w8-reading-steps li{margin:12px 0}.w8-steps button:disabled{cursor:not-allowed;opacity:.6}@media(max-width:560px){.w8-steps{grid-template-columns:1fr}.activity-card .card-top{flex-wrap:wrap;gap:8px}.activity-card .tag{white-space:normal}}
+
 /* Private W4 reminders: visible on the student home and agreement page. */
 .w4-reminder-warning{background:#fff2ce;border:2px solid #d98a12;border-left:8px solid #bd5b00;color:#663600;box-shadow:0 4px 16px #bd5b0014}
 .w4-reminder-warning h2{color:#873b00;font-weight:800;line-height:1.4}

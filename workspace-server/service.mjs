@@ -61,7 +61,7 @@ export class Workspace extends Reflection {
   }
   async home(p) {
     const agreementRequired=p.role==='student'&&!hasAgreement(p.student);
-    let activities=await this.db.query("select id,term,week,title,kind,phase,accepting,archived,revision,coalesce((legacy->>'testOnly')::boolean,false) as test_only from rib.activities order by term desc,week");
+    let activities=await this.db.query("select id,term,week,title,kind,phase,accepting,archived,revision,legacy->>'materialsActivityId' as \"materialsActivityId\",coalesce((legacy->>'testOnly')::boolean,false) as test_only from rib.activities order by term desc,week");
     if(p.role==='student')activities=activities.filter(a=>a.term===p.term&&!a.archived&&(!a.test_only||p.student.is_test));
     else if(p.role!=='admin')activities=activities.filter(a=>p.teacher.scopes.some(s=>s.term===a.term));
     return {reminders:await studentReminders(this,p),person:p.role==='student'?{role:p.role,name:p.student.name,className:p.student.class_name,seat:p.student.seat,studentId:p.studentId,isTest:p.student.is_test}:{role:p.role,name:p.teacher.name},activities:agreementRequired?[]:activities,agreementRequired,sharingAgreement:p.role==='student'?SHARING_AGREEMENT:null,currentTerm:await currentTerm(this.db)};
@@ -87,7 +87,7 @@ export class Workspace extends Reflection {
       this.db.query(`select * from rib.assessments where work_id=any($1::text[]) ${p.role==='student'?"and student_id=$2 and status='graded'":''}`,p.role==='student'?[workIds,p.studentId]:[workIds])]);
     const items=works.map(w=>({...w,teacherReadings:publishedReadings(a,w.id),hasHumanFeedback:feedback.some(r=>r.target_work_id===w.id)||teacherCovered(a,w.id),versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
     const invitations=p.role==='student'?await this.db.query(`select w.id from rib.members m join rib.works w on w.id=m.work_id where w.activity_id=$1 and m.student_id=$2 and m.status='invited'`,[a.id,p.studentId]):[];
-    const related=a.kind==='w8-materials'?await one(this.db,"select id from rib.activities where term=$1 and kind='w8-proposal' and not archived and legacy->>'materialsActivityId'=$2 and coalesce((legacy->>'testOnly')::boolean,false)=$3",[a.term,a.id,a.legacy?.testOnly===true]):null;
+    const related=a.kind==='w8-materials'?await one(this.db,"select id from rib.activities where term=$1 and kind='w8-proposal' and archived=$4 and legacy->>'materialsActivityId'=$2 and coalesce((legacy->>'testOnly')::boolean,false)=$3",[a.term,a.id,a.legacy?.testOnly===true,a.archived]):null;
     return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,authorsRevealed:a.legacy?.authorsRevealed===true,testOnly:a.legacy?.testOnly===true},works:items,reviews:reviews.map(r=>({...r,teacherCovered:teacherCovered(a,r.target_work_id)})),invitations,aiReadings:await readingList(this,p,a,input.className)};
   }
   async reminderPlan(p,input){return reminderPlan(this,p,input);}

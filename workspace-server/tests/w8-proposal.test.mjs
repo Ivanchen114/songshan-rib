@@ -49,3 +49,12 @@ test('adding personal submissions preserves an already drawn materials activity'
  await setupW8Materials(f.db,{apply:true});assert.deepEqual(await f.db.query("select * from rib.works where activity_id='existing-w8'"),before);
  const rows=await f.db.query("select * from rib.activities where kind='w8-proposal' and legacy->>'materialsActivityId'='existing-w8'");assert.equal(rows.length,1);assert.equal(rows[0].accepting,false);assert.equal((await setupW8Materials(f.db,{apply:true})).created.length,0);
 });
+
+test('home exposes the explicit W8 pair and archived teacher navigation keeps both stages reachable',async t=>{
+ const f=await setup(t);
+ const home=await f.s.home(f.people[0]);
+ assert.equal(home.activities.find(a=>a.id===f.a.id).materialsActivityId,f.materialsId);
+ await f.db.query('update rib.activities set archived=true where id=any($1::text[])',[[f.a.id,f.materialsId]]);
+ const b=await f.s.board(f.teacher,{activityId:f.materialsId,className:'101'});
+ assert.equal(b.relatedActivityId,f.a.id);
+});

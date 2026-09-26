@@ -1,7 +1,7 @@
 import {ACTIVITY,supportedKind,isGroup} from './activities.js';
 // Presentation only. Authorization and learning transitions remain server-owned.
 const migrationReadOnly = (a,config) => config?.acceptanceOnly && !a.accepting && !(a.testOnly ?? a.test_only);
-export const phaseLabel = (a,config) => a.kind==='w8-materials'?(a.archived?'已封存':a.accepting?'本組題材分配':'題材分配尚未開放'): a.archived ? '已封存' : !a.accepting ? (migrationReadOnly(a,config)?'搬遷資料・僅供查閱':'尚未開放交件') : ({production:'製作與上傳',review:'初讀與修改或保留',exhibit:'課程展示'}[a.phase] || '查閱作品');
+export const phaseLabel = (a,config) => a.kind==='w8-proposal'?(a.archived?'已封存':a.accepting?'個人交件已開放':'個人交件尚未開放'):a.kind==='w8-materials'?(a.archived?'已封存':a.accepting?'組隊與抽題已開放':'組隊與抽題尚未開放'): a.archived ? '已封存' : !a.accepting ? (migrationReadOnly(a,config)?'搬遷資料・僅供查閱':'尚未開放交件') : ({production:'製作與上傳',review:'初讀與修改或保留',exhibit:'課程展示'}[a.phase] || '查閱作品');
 export const supported = a => supportedKind(a.kind);
 export function workFlags(w,b) {
   return {uploaded:!!w.versions.length, feedback:w.hasHumanFeedback??!!w.feedback.length,
