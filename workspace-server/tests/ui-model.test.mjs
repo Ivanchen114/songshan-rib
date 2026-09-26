@@ -28,6 +28,7 @@ test('UI student next action distinguishes closed activities from migration read
  assert.equal(phaseLabel({...closed.activity,testOnly:undefined,test_only:true},{acceptanceOnly:true}),'尚未開放交件');
  assert.equal(phaseLabel({...closed.activity,archived:true},{acceptanceOnly:true}),'已封存');
  assert.match(studentNext({...board,invitations:[{}]})[0],/名單更新/);
- assert.match(studentNext({...board,reviews:[{status:'assigned'}]})[0],/初讀等你/);
- assert.match(studentNext({...board,activity:{...board.activity,phase:'exhibit'},reviews:[{status:'assigned'}]})[0],/初讀等你/);
+ assert.match(studentNext({...board,reviews:[{status:'assigned'}]})[0],/等候真人初讀/);
+ assert.match(studentNext({...board,reviews:[{status:'assigned'}]})[1],/我的初讀任務/);
+ assert.match(studentNext({...board,activity:{...board.activity,phase:'exhibit'},reviews:[{status:'assigned'}]})[0],/等候真人初讀/);
 });
