@@ -42,6 +42,21 @@ if(process.env.RIB_DEMO_EXHIBITION==='true'){
   }
  }
 }
+// Synthetic W5 exercise and same-topic exhibition for local browser verification only.
+if(process.env.RIB_DEMO_W5_AI==='true'){
+ const s=new Workspace(f.db,f.store),bytes=await readFile(demoPath);
+ await f.db.query("update rib.activities set kind='w5-personal',title='W5 個人文字轉圖',phase='exhibit' where id='w5-demo'");
+ for(const [i,p] of f.people.entries()){
+  const topic=i===3?'B06':'A06';await s.chooseTopic(p,{activityId:'w5-demo',topic,expectedRevision:0});
+  const w=(await s.board(p,{activityId:'w5-demo'})).works[0],u=await s.prepare(p,{workId:w.id,expectedRevision:w.revision,requestId:'same-topic-'+i,topic,files:[{bytes:bytes.length,mime:'image/png',sha256:sha(bytes)}]});
+  const [ticket]=await f.db.query('select files from rib.uploads where id=$1',[u.ticketId]);f.store.objects.set(ticket.files[0].key,bytes);await s.finalize(p,{ticketId:u.ticketId});
+  if(i===0||i===4){
+   const own=await s.ensureWork(p,{activityId:'w4-demo'}),upload=await s.prepare(p,{workId:own.id,expectedRevision:0,requestId:'reading-'+i,files:[{bytes:bytes.length,mime:'image/png',sha256:sha(bytes)}]});
+   const [t]=await f.db.query('select files from rib.uploads where id=$1',[upload.ticketId]);f.store.objects.set(t.files[0].key,bytes);const saved=await s.finalize(p,{ticketId:upload.ticketId});
+   await f.db.query("insert into rib.ai_readings(id,version_id,comment_a,comment_b,source_hash,image_key,task_note,teacher_notes,status,created_by,published_at) values($1,$2,$3,$4,$5,$6,$7,$8,'published','synthetic',now())",['synthetic-reading-'+i,saved.versionId,i===0?'畫面中有一片綠色。':'',i===0?'他一定很開心。':'',sha(bytes),t.files[0].key,i===0?'本機虛構圖卡，只用於操作驗證。':'請先補上清楚的圖卡。',JSON.stringify({judgment:'內部測試備註不可進學生作答',studentRecord:{published:true,kind:'joint',disclosure:'虛構測試判讀紀錄',teacherReply:'測試教師回覆：仍不能確定心情',basis:'測試判讀依據：甲有據，乙證據不足'}})]);
+  }
+ }
+}
 http.createServer(async(req,res)=>{try{
   const url=new URL(req.url,origin);
   if(url.pathname==='/__demo/teacher'&&req.method==='GET'){const s=await createSession(f.db,{role:'admin',email:f.teacher.email});res.setHeader('Set-Cookie',`rib_session=${s.token}; HttpOnly; SameSite=Lax; Path=/`);res.writeHead(302,{Location:'/workspace/'});return res.end();}

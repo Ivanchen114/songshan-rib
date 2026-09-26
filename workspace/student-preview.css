@@ -1,0 +1,6 @@
+#studentPreviewBanner{box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin:12px auto;padding:18px 22px;max-width:1200px;border:2px solid #86612d;border-radius:12px;background:#fff5df;color:#382b19;font:16px/1.6 system-ui,sans-serif}
+#studentPreviewBanner p{margin:3px 0;font-weight:600}#studentPreviewBanner small{font-size:14px}#studentPreviewBanner strong{font-size:20px}
+#studentPreviewBanner .preview-controls{display:grid;gap:6px;min-width:240px}#studentPreviewBanner select{width:100%;padding:8px;border:1px solid #86612d;border-radius:6px;background:white;color:#382b19;font:inherit}
+#studentPreviewBanner a{display:inline-block;margin:4px 12px 0 0;color:#59401d;text-decoration:underline;text-underline-offset:3px}#studentPreviewBanner .preview-exit{font-weight:700}
+.preview-picker .row{align-items:end}.preview-picker label{min-width:220px}.preview-picker select{min-height:44px}
+@media(max-width:600px){#studentPreviewBanner{margin:8px;padding:14px;gap:12px}#studentPreviewBanner .preview-controls{width:100%;min-width:0}.preview-picker label{min-width:0;width:100%}}

@@ -1,3 +1,4 @@
+import {previewFetch} from './student-preview.js';
 import {W8_TOPICS,w8Topic} from './w8-topics.js';
 import {W7_TOPICS,w7Topic} from './w7-topics.js';
 import {W5_TOPICS,w5Topic} from './w5-topics.js';
@@ -8,7 +9,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const activityId=params.get('activity');let className=params.get('className')||'',data=null,loading=false,generation=0,observer,viewIndex=0,boxRequest=0,mutating=false;
 let allItems=[],filterValue='';
 const selected=new Map(),pages=new Map(),previews=new Map();let queue=[],running=0;
-async function api(action,args={},write=false){const r=await fetch('/api/workspace'+(write?'':'?'+new URLSearchParams({action,...args})),{method:write?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:write?{'Content-Type':'application/json'}:{},...(write?{body:JSON.stringify({action,...args})}:{})});const p=await r.json();if(!p.ok)throw Error(p.error||'暫時無法讀取，請再試一次。');return p.data;}
+async function api(action,args={},write=false){const r=await previewFetch('/api/workspace'+(write?'':'?'+new URLSearchParams({action,...args})),{method:write?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:write?{'Content-Type':'application/json'}:{},...(write?{body:JSON.stringify({action,...args})}:{})});const p=await r.json();if(!p.ok)throw Error(p.error||'暫時無法讀取，請再試一次。');return p.data;}
 function backLink(){const href='/workspace/?'+new URLSearchParams({activity:activityId||'',...(className?{className}:{})});$('#returnLink').href=href;$('#bottomReturn').href=href;}
 backLink();
 function version(w){return w.versions.find(v=>v.id===selected.get(w.id))||w.versions.find(v=>v.id===w.currentVersionId)||w.versions.at(-1);}

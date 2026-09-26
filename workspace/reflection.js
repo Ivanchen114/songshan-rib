@@ -1,6 +1,7 @@
+import {previewFetch} from './student-preview.js';
 const params=new URLSearchParams(location.search),$=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let model,board,dirty=false,busy=false,requestId=crypto.randomUUID(),teacher=false;
-async function api(action,args={},write=false){const r=await fetch('/api/workspace'+(write?'':'?'+new URLSearchParams({action,...args})),{method:write?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:write?{'Content-Type':'application/json'}:{},...(write?{body:JSON.stringify({action,...args})}:{})}),p=await r.json();if(!p.ok)throw Error(p.error||'暫時無法讀取。');return p.data;}
+async function api(action,args={},write=false){const r=await previewFetch('/api/workspace'+(write?'':'?'+new URLSearchParams({action,...args})),{method:write?'POST':'GET',credentials:'same-origin',cache:'no-store',headers:write?{'Content-Type':'application/json'}:{},...(write?{body:JSON.stringify({action,...args})}:{})}),p=await r.json();if(!p.ok)throw Error(p.error||'暫時無法讀取。');return p.data;}
 function fields(a={}){return [['o','O｜我看到什麼具體做法？','例如：他用兩條不同顏色的線，區分兩種路線。'],['r','R｜我有什麼反應或感受？','驚訝、疑惑、覺得清楚，或沒有特別感受，都可以。'],['id','I＋D｜我學到什麼，想怎麼用？','這個畫法讓我理解什麼？自己的圖想保留或調整什麼，為什麼？']].map(([key,title,hint])=>`<label>${title}<textarea name="${key}" maxlength="800" placeholder="${esc(hint)}">${esc(a[key]||'')}</textarea></label>`).join('');}
 async function start(){try{
  const home=await api('home');teacher=home.person.role!=='student';

@@ -1,3 +1,4 @@
+import {previewPrincipal,previewContext,previewReads} from './student-preview.mjs';
 import {dailySnapshot,maintenanceStatus} from './maintenance.mjs';
 import {hasAgreement} from './agreement.mjs';
 import {createClient} from '@supabase/supabase-js';
@@ -24,6 +25,8 @@ export function handler({db,store,origin,enabled=true,rateSecret,secure=true,aut
       }
       const input=req.method==='POST'?req.body:Object.fromEntries(url.searchParams);
       demand(input&&typeof input==='object',400,'請重新操作。');
+      const preview=Object.hasOwn(input,'previewStudent')||Object.hasOwn(input,'previewActivity')||url.searchParams.has('previewStudent')||url.searchParams.has('previewActivity');
+      if(preview)demand(req.method==='GET'&&(previewReads.has(action)||action==='previewContext'),403,'學生視角只供查看，不能代替學生保存或送出。');
       if(action==='teacher-start'){
         demand(process.env.RIB_GOOGLE_ENABLED==='true',503,'教師 Google 登入尚在設定中，請稍後再試。');
         demand(req.method==='GET',405,'請從登入入口操作。');
@@ -48,7 +51,12 @@ export function handler({db,store,origin,enabled=true,rateSecret,secure=true,aut
       }
       if(action==='login'){demand(req.method==='POST',405,'請從登入表單操作。');const ip=ipKey(req.headers['x-real-ip']||req.socket?.remoteAddress||'unknown',rateSecret);const session=await service.login(input,ip);res.setHeader('Set-Cookie',cookie('rib_session',session.token,session.seconds));return reply(200,{ok:true,data:{saved:true}});}
       if(['gallery','galleryItem'].includes(action)){demand(req.method==='GET',405,'請重新整理。');return reply(200,{ok:true,data:await service[action](input)});}
-      const token=cookies(req).rib_session,p=await authenticate(db,token);
+      const token=cookies(req).rib_session;let p=await authenticate(db,token);
+      if(action==='previewContext'){demand(req.method==='GET',405,'學生視角只供查看。');return reply(200,{ok:true,data:await previewContext(service,p,input)});}
+      if(preview){
+        demand(req.method==='GET'&&previewReads.has(action),403,'學生視角只供查看，不能代替學生保存或送出。');
+        p=await previewPrincipal(service,p,input);
+      }
       if(action==='logout'){demand(req.method==='POST',405,'請按登出。');await db.query('delete from rib.sessions where token_hash=$1',[sha(token)]);res.setHeader('Set-Cookie',cookie('rib_session','',0));return reply(200,{ok:true,data:{saved:true}});}
       demand(p.role!=='student'||hasAgreement(p.student)||['home','agreement'].includes(action)||(action==='consent'&&input.consent===false),403,'請先閱讀並勾選匿名展示與個資保護說明。');
       demand(reads.has(action)||writes.has(action),404,'找不到此操作。');demand(reads.has(action)?req.method==='GET':req.method==='POST',405,'請使用正確的操作方式。');
