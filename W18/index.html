@@ -427,7 +427,14 @@ html[data-rib-week="8"] .slide.rib-chrome:has(> h1){padding-top:130px!important}
 .slide.life-entry:not(:has(>[data-life-root].revealed))>:not(.lt-stage){visibility:hidden!important}
 .slide.life-standalone>.lt-stage{visibility:visible!important;opacity:1!important}
 @media(max-height:760px){.slide.life-entry>.lt-stage h2.lt-title{font-size:54px!important;margin-bottom:20px!important}.slide.life-entry>.lt-stage .lt-subtitle{font-size:28px!important}.slide.life-entry>.lt-stage .lt-action{font-size:22px!important;margin-top:30px!important}.slide.life-entry>.lt-stage .lt-kicker{font-size:20px!important;margin-bottom:18px!important}.slide.life-entry>.lt-stage .lt-copy{top:25%!important}}
-</style></head>
+</style>
+<style id="soil-grid-repair-20260926">
+/* Restore comparison grouping used by the existing grid/card markup. */
+.slide .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; align-items:start; }
+.slide .grid-2 > .card { min-width:0; border-top:2px solid #8aa99c; padding-top:16px; }
+.slide .grid-2 > .card > .label { font-size:30px; font-weight:700; line-height:1.35; margin-bottom:12px; color:var(--ink); }
+</style>
+</head>
 <body>
 <div id="progress-bg"></div>
 <div id="progress"></div>

@@ -514,7 +514,14 @@ html[data-rib-week="8"] .slide.rib-chrome:has(> h1){padding-top:130px!important}
 .slide.life-entry:not(:has(>[data-life-root].revealed))>:not(.lt-stage){visibility:hidden!important}
 .slide.life-standalone>.lt-stage{visibility:visible!important;opacity:1!important}
 @media(max-height:760px){.slide.life-entry>.lt-stage h2.lt-title{font-size:54px!important;margin-bottom:20px!important}.slide.life-entry>.lt-stage .lt-subtitle{font-size:28px!important}.slide.life-entry>.lt-stage .lt-action{font-size:22px!important;margin-top:30px!important}.slide.life-entry>.lt-stage .lt-kicker{font-size:20px!important;margin-bottom:18px!important}.slide.life-entry>.lt-stage .lt-copy{top:25%!important}}
-</style></head>
+</style>
+<style id="soil-grid-repair-20260926">
+/* Restore comparison grouping used by the existing grid/card markup. */
+.slide .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; align-items:start; }
+.slide .grid-2 > .card { min-width:0; border-top:2px solid #8aa99c; padding-top:16px; }
+.slide .grid-2 > .card > .label { font-size:30px; font-weight:700; line-height:1.35; margin-bottom:12px; color:var(--ink); }
+</style>
+</head>
 <body>
 <div id="progress-bg"></div>
 <div id="progress"></div>
@@ -614,7 +621,7 @@ html[data-rib-week="8"] .slide.rib-chrome:has(> h1){padding-top:130px!important}
 <div class="slide-inner"><div style="display:flex;justify-content:space-between;align-items:baseline;"><div><div class="kicker alert">兩條路都做</div><div class="title" style="font-size:clamp(34px,3vw,54px);">看或聽一次，關掉後說出來</div></div></div>
 <div class="grid-2" style="margin-top:22px;grid-template-columns:repeat(3,1fr);">
 <div class="card"><div class="label">核心主張</div><div class="body-sm">我以為你想說＿＿。</div></div>
-<div class="card"><div class="label">關係</div><div class="body-sm">我記得＿＿會讓／限制／改變＿＿。</div></div>
+<div class="card"><div class="label">關係</div><div class="body-sm">我記得＿＿<br>會讓／限制／改變＿＿。</div></div>
 <div class="card"><div class="label">邊界</div><div class="body-sm">資料能說＿＿、不能說＿＿。<br/>有用比喻者，另說它在哪裡失效。</div></div>
 </div><div class="body" style="margin-top:26px;text-align:center;color:var(--ink-2);">作者先不要補講；只記下對方真的收到什麼。</div>
 </div><div class="page-footer">W14 · 請同學說回來</div>
@@ -641,7 +648,7 @@ html[data-rib-week="8"] .slide.rib-chrome:has(> h1){padding-top:130px!important}
 <div class="card"><div class="label">缺席邊界</div><div class="body-sm">不必補交；回來直接準備同一個 W15 入場句。</div></div>
 </div>
 </div><div class="page-footer">W14 · 自我檢查與繳交</div>
-<div class="sem-choice" style="position:absolute;left:95px;bottom:85px">第 96–100 分鐘：①拍下自己寫的頁面 ②上傳原本的 Classroom ③確認已繳交 ④整本交給老師。學科不另上傳；未完成部分依教師交代回家練習。</div><button aria-label="目前：06 遷移與保存；返回本週總覽" class="continuity-locator rib-stage-label" data-continuity-overview="5" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M2 7V4h8l3 3h9v14H2zM2 11h20"></path></svg>W14 · 06 遷移與保存</button></section>
+<div class="sem-choice" style="position:absolute;left:95px;bottom:85px">學科不另上傳；未完成部分依教師交代回家練習。</div><button aria-label="目前：06 遷移與保存；返回本週總覽" class="continuity-locator rib-stage-label" data-continuity-overview="5" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M2 7V4h8l3 3h9v14H2zM2 11h20"></path></svg>W14 · 06 遷移與保存</button></section>
 <div id="hint">←→ 切頁 · F 全螢幕</div>
 <div id="revealInfo" style="position:fixed;bottom:46px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:var(--t-ui);color:var(--accent);letter-spacing:0.12em;z-index:50;"></div>
 <div id="pageInfo"></div>
