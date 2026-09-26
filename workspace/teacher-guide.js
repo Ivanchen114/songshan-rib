@@ -1,0 +1,8 @@
+import {WEEK_HELP,COMMON_BUTTONS,helpTitle,helpBody,buttonRows} from './teacher-help.js';
+const select=document.querySelector('#helpWeek'),search=document.querySelector('#helpSearch'),results=document.querySelector('#helpResults');
+for(const [kind,h] of Object.entries(WEEK_HELP)){const o=document.createElement('option');o.value=kind;o.textContent=helpTitle(kind)+(h.legacy?'（早期活動）':'');select.append(o);}
+const common=document.createElement('option');common.value='common';common.textContent='共用按鈕／帳號／學期管理';select.append(common);
+const requested=new URLSearchParams(location.search).get('kind');if(WEEK_HELP[requested])select.value=requested;
+function render(){const q=search.value.trim().toLowerCase(),kind=select.value;const matched=Object.entries(WEEK_HELP).filter(([k,h])=>(kind==='all'?!h.legacy:kind===k)&&(!q||(helpTitle(k)+JSON.stringify(h)).toLowerCase().includes(q)));const commonRows=(kind==='common'||kind==='all')?COMMON_BUTTONS.filter(r=>!q||JSON.stringify(r).toLowerCase().includes(q)):[];
+ results.innerHTML=matched.map(([k,h])=>`<section class="panel help-week"><p class="eyebrow">每週操作</p><h2>${helpTitle(k)}</h2><p class="help-flow">${h.flow}</p>${helpBody(k)}</section>`).join('')+(commonRows.length?`<section class="panel"><h2>共用按鈕：需要時再用</h2>${buttonRows(commonRows)}<p>「課堂開關」會影響同活動的各班；只切換「查看班級」不會改課堂設定。</p></section>`:'');document.querySelector('#helpCount').textContent=`找到 ${matched.length} 個活動、${commonRows.length} 個共用按鈕。`;if(!matched.length&&!commonRows.length)results.innerHTML='<section class="panel"><p>沒有找到相符項目。可改選「所有現行活動」，或換成「補交」「初讀」「抽題」等用途搜尋。</p></section>';}
+select.addEventListener('change',render);search.addEventListener('input',render);render();

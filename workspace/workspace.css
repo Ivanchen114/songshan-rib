@@ -56,3 +56,17 @@ button.leave-group:hover{background:#f4dfbf}button.leave-group:focus-visible{out
 .w4-reminder-warning button{background:#974000;color:#fff;border:1px solid #974000}
 .w4-reminder-warning button:hover{background:#753000;border-color:#753000}
 .w4-reminder-warning button:focus-visible{outline:3px solid #663600;outline-offset:4px}
+
+.teacher-help{margin:18px 0;border:1px solid #c9d8cf;border-radius:12px;background:#f0f5ef}
+.teacher-help>summary{padding:16px 20px;list-style-position:inside;color:#294c3c}
+.teacher-help>summary>span{font-weight:750;font-size:17px}
+.teacher-help>summary small{display:block;margin-top:6px;font-size:14px;color:#506457;line-height:1.7}
+.teacher-help-body{padding:0 22px 20px}.teacher-help li,.help-week li{margin:10px 0;line-height:1.8}
+.help-button-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.help-button-list article{border:1px solid #dbe2db;border-radius:10px;padding:16px;background:#fff;overflow-wrap:anywhere}
+.help-button-list h4{font-size:16px;margin:0 0 8px;color:#294c3c}.help-button-list p{margin:6px 0;font-size:15px;line-height:1.8}.help-button-list .help-location{font-size:13px;color:#57685e}
+.help-questions dt{font-weight:700;margin-top:16px}.help-questions dd{margin:6px 0 0;line-height:1.8}.help-flow{padding:14px 18px;background:#edf3ec;border-radius:8px;color:#365743;line-height:1.8}
+@media(max-width:650px){.help-button-list{grid-template-columns:1fr}.teacher-help>summary{padding:14px}.teacher-help-body{padding:0 14px 16px}}
+
+.button-help-tooltip{position:fixed;inset:auto;margin:0;box-sizing:border-box;max-width:min(340px,calc(100vw - 20px));padding:12px 15px;border:1px solid #476353;border-radius:10px;background:#223d31;color:#fff;font:14px/1.75 system-ui,-apple-system,"Noto Sans TC",sans-serif;box-shadow:0 5px 20px #10221930;z-index:10000;overflow-wrap:anywhere;text-align:left}
+.button-help-tooltip::backdrop{background:transparent;pointer-events:none}
