@@ -495,6 +495,15 @@ html[data-rib-week="8"] .slide.rib-chrome:has(> h1){padding-top:130px!important}
 .source-bridge { width: 100%; max-width: 1420px; min-width: 0; box-sizing: border-box; padding: 36px 20px; }
 .source-bridge .bridge-pair { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
 .source-bridge .bridge-box { min-width: 0; }
+
+/* Keep the source/interpretation disclaimer visible on shorter desktop projectors. */
+@media (max-height:780px) and (min-width:1000px) {
+  .slide[data-slide="7"] .source-bridge { padding: 16px 20px; font-size: 32px; line-height: 1.4; }
+  .slide[data-slide="7"] .source-bridge h2 { font-size: 48px; margin: 12px 0 18px; }
+  .slide[data-slide="7"] .source-bridge .bridge-pair { margin: 20px 0; gap: 24px; }
+  .slide[data-slide="7"] .source-bridge .bridge-box { padding: 20px; }
+  .slide[data-slide="7"] .source-bridge .bridge-note { margin-top: 18px; padding: 12px 20px; font-size: 28px; }
+}
 </style>
 </head>
 <body>
