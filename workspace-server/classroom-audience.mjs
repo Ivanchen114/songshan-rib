@@ -1,5 +1,6 @@
 // Explicit shared-course boundary; never infer classmates from a shared activity ID.
 const COURSES={'11501':[['108','109']]};
+export const courseGroups=term=>COURSES[term]||[];
 export const namedClassroom=a=>[3,4,5].includes(Number(a.week))||['w8-proposal','w9-check'].includes(a.kind);
 export function classroomClasses(a,className){
  const configured=Array.isArray(a.legacy?.classroomGroups)?a.legacy.classroomGroups:COURSES[a.term]||[];

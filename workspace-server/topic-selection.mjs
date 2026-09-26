@@ -25,7 +25,8 @@ export class TopicSelection extends GroupMembership{
     and current.work_id=$2 and current.status='confirmed' limit 1`,[w.activity_id,w.id,pool.map(t=>t.id)]);
    demand(!prior.length,409,'有組員已在另一組抽過題，請老師先核對分組；重新組隊不會重新抽題。');
    const counts=await db.query(`select topic,count(*)::int as total,count(*) filter(where class_name=$2)::int as class_total
-    from rib.works where activity_id=$1 and topic=any($3::text[]) group by topic`,[w.activity_id,w.class_name,pool.map(t=>t.id)]);
+    from rib.works where activity_id=$1 and topic=any($3::text[]) and not hidden
+    and exists(select 1 from rib.members m where m.work_id=rib.works.id and m.status='confirmed') group by topic`,[w.activity_id,w.class_name,pool.map(t=>t.id)]);
    const all=pool.map(t=>({id:t.id,...counts.find(c=>c.topic===t.id)}));
    const minimum=Math.min(...all.map(t=>t.total||0)),least=all.filter(t=>(t.total||0)===minimum);
    const classMinimum=Math.min(...least.map(t=>t.class_total||0)),choices=least.filter(t=>(t.class_total||0)===classMinimum);

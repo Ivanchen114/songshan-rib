@@ -14,7 +14,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {autoPublish,galleryList,galleryDetail} from './publication.mjs';
 import {planReaders} from './reader-allocation.mjs';
 import {TermManager,activityWrites,guardActivityWrite,currentTerm} from './terms.mjs';
-import {uid,sha,demand,text,json,matches,verifier,rate,createSession,teacherScope} from './security.mjs';
+import {uid,sha,demand,text,json,matches,verifier,rate,refund,createSession,teacherScope} from './security.mjs';
 import {MAX_IMAGE,commitImage} from './storage.mjs';
 const id = value => {demand(typeof value==='string'&&/^[a-zA-Z0-9:_-]{1,160}$/.test(value),400,'項目識別不正確。');return value;};
 const actor = p => p.role==='student'?p.term+':'+p.studentId:p.email;
@@ -25,9 +25,14 @@ export class Workspace extends Reflection {
   async login(input,ip) {
     const {term,studentId,code}=input;
     demand(/^\d{3}0[12]$/.test(term)&&/^\d{8}$/.test(studentId)&&/^\d{6}$/.test(code),400,'請核對學期、八碼學號與六碼。');
-    await rate(this.db,'ip:'+ip,60,900);await rate(this.db,'login:'+term+':'+studentId,8,900);
+    // Count atomically before verifying; parallel guesses cannot skip the limit.
+    // Reserve room for the supported 200-student roster plus retries behind one school IP.
+    // Success is refunded; each student still has the stricter 8-attempt limit.
+    const ipBucket='ip:'+ip,studentKey='login:'+term+':'+studentId;
+    const ipWindow=await rate(this.db,ipBucket,240,900);await rate(this.db,studentKey,8,900);
     const c=await one(this.db,`select c.*,s.is_test from rib.credentials c join rib.students s using(term,student_id) where c.term=$1 and c.student_id=$2 and s.active`,[term,studentId]);
     demand(c&&await matches(code,c),401,'學期、學號或六碼不正確。');
+    await refund(this.db,ipBucket,ipWindow);await this.db.query('delete from rib.rate_limits where id=$1',[studentKey]);
     demand(process.env.RIB_ACCEPTANCE_ONLY!=='true'||c.is_test,403,'驗收站目前只開放測試學生帳號，正式上課請使用原入口。');
     // Upgrade on successful login, retaining the exact same user-facing six digits.
     if(c.algorithm==='gas-sha256') {const v=await verifier(code);await this.db.query(`update rib.credentials set algorithm=$1,salt=$2,digest=$3 where term=$4 and student_id=$5 and revision=$6 and digest=$7`,[v.algorithm,v.salt,v.digest,term,studentId,c.revision,c.digest]);}
@@ -244,10 +249,10 @@ export class Workspace extends Reflection {
     if(input.consent!==true)await db.query("update rib.publications set status='withdrawn' where version_id in(select id from rib.versions where work_id=$1)",[w.id]);
     await this.event(db,p,w.activity_id,'consent',w.id,{consent:input.consent===true});return {saved:true};});}
   async publish(p,input){return this.db.transaction(async db=>{
-    const pub=await one(db,'select p.*,v.work_id,v.media from rib.publications p join rib.versions v on v.id=p.version_id where p.id=$1',[id(input.publicationId)]);demand(pub,404,'找不到展示版本。');
+    const pub=await one(db,'select p.*,v.work_id,v.media,v.metadata as version_metadata from rib.publications p join rib.versions v on v.id=p.version_id where p.id=$1',[id(input.publicationId)]);demand(pub,404,'找不到展示版本。');
     await db.query('select id from rib.works where id=$1 for update',[pub.work_id]);
     const w=await this.work(p,pub.work_id,{db});teacherScope(p,w.term,w.class_name);demand(!w.hidden,409,'此作品已隱藏。');
-    if(input.publish===true){demand(process.env.RIB_ACCEPTANCE_ONLY!=='true',403,'驗收站不向外公開學生作品。');demand(input.reviewed===true,400,'請先逐張檢查作品內容與個資。');demand(pub.media.length&&pub.media.every(m=>m.displayHash&&m.fullKey&&m.thumbKey),409,'舊圖片需先完成去除中繼資料及展示圖轉換。');const m=await db.query("select m.*,s.is_test,s.sharing_agreement from rib.members m join rib.students s using(term,student_id) where work_id=$1 and m.status<>'declined'",[w.id]);demand(m.length&&m.every(x=>x.status==='confirmed'&&!x.sharing_opt_out&&hasAgreement(x)&&!x.is_test),409,'作者尚未完成登入說明、已選擇不公開，或屬測試帳號。');}
+    if(input.publish===true){demand(process.env.RIB_ACCEPTANCE_ONLY!=='true',403,'驗收站不向外公開學生作品。');demand(pub.version_metadata?.publicDisplay!==false,409,'這類作品含作者或提問者姓名，只在登入後的課程展廳呈現，不能公開到匿名展廳。');demand(input.reviewed===true,400,'請先逐張檢查作品內容與個資。');demand(pub.media.length&&pub.media.every(m=>m.displayHash&&m.fullKey&&m.thumbKey),409,'舊圖片需先完成去除中繼資料及展示圖轉換。');const m=await db.query("select m.*,s.is_test,s.sharing_agreement from rib.members m join rib.students s using(term,student_id) where work_id=$1 and m.status<>'declined'",[w.id]);demand(m.length&&m.every(x=>x.status==='confirmed'&&!x.sharing_opt_out&&hasAgreement(x)&&!x.is_test),409,'作者尚未完成登入說明、已選擇不公開，或屬測試帳號。');}
     if(input.publish===true){await db.query('update rib.works set publication_hold=false where id=$1',[w.id]);await db.query("update rib.publications set status='withdrawn' where version_id in(select id from rib.versions where work_id=$1) and id<>$2 and status='published'",[w.id,pub.id]);}
     else{await db.query('update rib.works set publication_hold=true where id=$1',[w.id]);await db.query("update rib.publications set status='withdrawn' where version_id in(select id from rib.versions where work_id=$1)",[w.id]);}
     await db.query('update rib.publications set status=$1,title=$2,reviewed_by=$3,reviewed_at=now() where id=$4',[input.publish===true?'published':'withdrawn',text(input.title||'匿名作品',80),p.email,pub.id]);await this.event(db,p,w.activity_id,'publication',pub.id,{publish:input.publish===true});return {saved:true};});}

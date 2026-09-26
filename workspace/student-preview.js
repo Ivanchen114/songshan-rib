@@ -1,3 +1,4 @@
+import {timedFetch} from './api-fetch.js';
 // The teacher session stays unchanged. Preview context is carried by this tab's URL.
 const params=new URLSearchParams(location.search);
 export const previewActive=params.has('previewStudent')||params.has('previewActivity');
@@ -11,12 +12,12 @@ export function previewUrl(href){
   return url.pathname+url.search+url.hash;
 }
 export async function previewFetch(href,options={}){
-  if(!previewActive)return fetch(href,options);
+  if(!previewActive)return timedFetch(href,options);
   if((options.method||'GET')!=='GET')throw Error(message);
   await ready;
   const url=new URL(href,location.href);
   for(const [k,v] of Object.entries(context))url.searchParams.set(k,v);
-  return fetch(url,options);
+  return timedFetch(url,options);
 }
 function entryUrl(activityId,studentId,week){return '/workspace/?'+new URLSearchParams({...(week==='18'?{week}:{activity:activityId}),previewActivity:activityId,previewStudent:studentId,...(week?{previewWeek:week}:{})});}
 function picker(students,activityId,week=''){
@@ -60,7 +61,7 @@ async function setup(){
   new MutationObserver(protectPreview).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['href','disabled','hidden']});
   protectPreview();
   try{
-    const response=await fetch('/api/workspace?'+new URLSearchParams({action:'previewContext',...context}),{credentials:'same-origin',cache:'no-store'});
+    const response=await timedFetch('/api/workspace?'+new URLSearchParams({action:'previewContext',...context}),{credentials:'same-origin',cache:'no-store'});
     const payload=await response.json();if(!payload.ok)throw Error(payload.error||'無法開啟學生視角。');
     const c=payload.data,index=c.students.findIndex(s=>s.student_id===c.studentId),student=c.students[index];
     if(!student)throw Error('此學生目前不在有效名單中。');

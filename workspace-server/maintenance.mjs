@@ -2,8 +2,9 @@ import {gzipSync} from 'node:zlib';
 import {snapshot} from './backup.mjs';
 import {sha,uid,demand,json} from './security.mjs';
 export async function dailySnapshot(db,store,{force=false,actor='system:daily-backup'}={}){
- const day=new Date().toISOString().slice(0,10);
- const [previous]=await db.query("select detail,created_at from rib.events where kind='database-backup' and resource=$1 order by id desc limit 1",[day]);
+ // Taipei calendar day; only a previous scheduled run may skip the schedule (a daytime manual backup must not).
+ const day=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Taipei'});
+ const [previous]=await db.query("select detail,created_at from rib.events where kind='database-backup' and resource=$1 and actor=$2 order by id desc limit 1",[day,actor]);
  if(previous&&!force)return {saved:true,alreadySaved:true,at:previous.created_at};
  try{const backup=await snapshot(db),bytes=gzipSync(Buffer.from(JSON.stringify(backup))),key=`backups/daily/${day}/${uid()}.json.gz`;await store.put(key,bytes,'application/gzip');
  demand(sha(await store.get(key,64*1024*1024))===sha(bytes),409,'備份讀回不一致。');

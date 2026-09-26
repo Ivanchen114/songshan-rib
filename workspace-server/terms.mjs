@@ -1,5 +1,6 @@
 import {supportedKind} from '../workspace/activities.js';
 import {TABLES} from './backup.mjs';
+import {courseGroups} from './classroom-audience.mjs';
 import {randomInt} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {demand,sha,json,uid,verifier} from './security.mjs';
@@ -28,6 +29,12 @@ export function parseRoster(value){
   demand(!ids.has(studentId)&&!seats.has(className+':'+seat),400,`第 ${i+1} 列學號或班級座號重複。`);ids.add(studentId);seats.add(className+':'+seat);
   return {studentId,name,className,seat};
  });
+}
+function validateTemplateLinks(templates,activities){
+ for(const t of templates.filter(a=>a.kind==='w8-proposal')){
+  const old=activities.find(a=>a.id===t.sourceId),sourceId=old?.legacy?.materialsActivityId;
+  demand(templates.some(a=>a.sourceId===sourceId&&a.kind==='w8-materials'),409,'W8 個人提案缺少可沿用的共讀材料活動，請先確認來源活動未封存且連結正確，再建立新學期。');
+ }
 }
 export class TermManager {
  async terms(p){
@@ -69,6 +76,7 @@ export class TermManager {
    }
    const removed=source.roster.filter(r=>r.active&&!r.is_test&&!students.some(s=>s.studentId===r.student_id)).map(r=>r.student_id);
    const templates=source.activities.filter(a=>!a.archived).map(a=>({sourceId:a.id,week:a.week,title:a.title,kind:a.kind}));demand(templates.length>0,409,'來源學期沒有可沿用的活動設定。');
+   validateTemplateLinks(templates,source.activities);
    const summary={total:students.length,classes:[...new Set(students.map(s=>s.className))].sort(),added,retained,moved,removed,activityCount:templates.length,unavailable:templates.filter(a=>!supportedKind(a.kind)).map(a=>a.title)};
    const payload={students,teachers,templates,summary};
    const [draft]=await db.query("insert into rib.term_drafts(term,source_term,payload,source_digest,actor) values($1,$2,$3,$4,$5) on conflict(term) do update set payload=excluded.payload,source_digest=excluded.source_digest,actor=excluded.actor,revision=rib.term_drafts.revision+1,updated_at=now() returning *",[term,sourceTerm,json(payload),source.digest,p.email]);
@@ -90,6 +98,7 @@ export class TermManager {
    demand(!d.payload.summary.unavailable.length||input.ackUnsupported===true,400,'請確認尚未支援的活動仍需原入口，不能視為全功能替代。');
    const source=await sourceState(db,d.source_term);demand(source.digest===d.source_digest,409,'名單、教師權限、登入碼或活動設定已更新，請重新儲存草稿並核對。');
    demand(!(await db.query('select 1 from rib.students where term=$1 union all select 1 from rib.activities where term=$1 limit 1',[term])).length,409,'新學期已有資料，不能覆蓋。');
+   validateTemplateLinks(d.payload.templates,source.activities);
    // Preserve all non-ephemeral data before any semester mutation. Existing media are immutable.
    const tables={};for(const name of TABLES)tables[name]=(await db.query(`select to_jsonb(t) as row from rib.${name} t`)).map(x=>x.row);
    const backup={format:'rib-backup-v5',created:new Date().toISOString(),tables},snapshotHash=sha(json(backup)),jobId=uid();
@@ -100,7 +109,14 @@ export class TermManager {
    const credentials=d.payload.students.map(s=>{const c=source.credentials.find(c=>c.student_id===s.studentId)||s.credential;demand(c,409,'新生登入資料不完整。');return {term,student_id:s.studentId,algorithm:c.algorithm,salt:c.salt,digest:c.digest,revision:c.revision||1};});
    await db.query('insert into rib.students select * from jsonb_populate_recordset(null::rib.students,$1::jsonb)',[json(students)]);
    await db.query('insert into rib.credentials select * from jsonb_populate_recordset(null::rib.credentials,$1::jsonb)',[json(credentials)]);
-   for(const a of d.payload.templates)await db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting,legacy) values($1,$2,$3,$4,$5,'production',false,$6)",[uid(),term,a.week,a.title,a.kind,json({sourceActivityId:a.sourceId,termJob:jobId})]);
+   // Cross-activity links (W8 proposal -> W8 materials) must point at the new term's copies, never the archived source.
+   const idMap=new Map(d.payload.templates.map(a=>[a.sourceId,uid()])),sourceLegacy=new Map(source.activities.map(a=>[a.id,a.legacy||{}]));
+   const newClasses=new Set(d.payload.summary.classes);
+   for(const a of d.payload.templates){const old=sourceLegacy.get(a.sourceId)||{},legacy={sourceActivityId:a.sourceId,termJob:jobId};
+    if(old.materialsActivityId&&idMap.has(old.materialsActivityId))legacy.materialsActivityId=idMap.get(old.materialsActivityId);
+    const groups=(Array.isArray(old.classroomGroups)?old.classroomGroups:courseGroups(d.source_term)).map(g=>Array.isArray(g)?g.filter(c=>newClasses.has(c)):[]).filter(g=>g.length>1);
+    legacy.classroomGroups=groups;
+    await db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting,legacy) values($1,$2,$3,$4,$5,'production',false,$6)",[idMap.get(a.sourceId),term,a.week,a.title,a.kind,json(legacy)]);}
    for(const email of d.payload.teachers){const t=source.teachers.find(t=>t.email===email),scopes=t.scopes.filter(s=>s.term!==term);for(const className of d.payload.summary.classes)scopes.push({term,className,grading:true});await db.query('update rib.teachers set scopes=$1 where email=$2',[json(scopes),email]);}
    await db.query('update rib.activities set accepting=false,archived=true,revision=revision+1 where term=$1',[d.source_term]);
    await db.query('update rib.workspace_state set current_term=$1,revision=revision+1 where id=1',[term]);

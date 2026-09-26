@@ -33,7 +33,7 @@ export class GroupMembership extends Journey {
    for(const sid of ids){
     demand(/^\d{8}$/.test(sid)&&sid!==p.studentId,400,'請核對組員學號。');const s=await one(db,'select * from rib.students where term=$1 and student_id=$2 and active and is_test=$3 for share',[w.term,sid,w.test_only]);demand(s&&s.class_name===w.class_name,400,'請加入同班有效學生。');
     const occupied=await one(db,`select m.work_id from rib.members m join rib.works x on x.id=m.work_id where x.activity_id=$1 and m.student_id=$2 and m.status in ('confirmed','invited')`,[w.activity_id,sid]);demand(!occupied,409,`${s.seat} 號${occupiedMessage}`);
-    if(w.kind==='w8-materials'){const drawn=await one(db,`select old.id from rib.works old join rib.members m on m.work_id=old.id where old.activity_id=$1 and old.id<>$2 and m.student_id=$3 and old.topic is not null and old.topic<>'' limit 1`,[w.activity_id,w.id,sid]);demand(!drawn,409,'這位同學已在另一組抽過題，請老師核對分組；離組不能換題。');}
+    if(['w7-news','w8-materials'].includes(w.kind)){const drawn=await one(db,`select old.id from rib.works old join rib.members m on m.work_id=old.id where old.activity_id=$1 and old.id<>$2 and m.student_id=$3 and old.topic is not null and old.topic<>'' limit 1`,[w.activity_id,w.id,sid]);demand(!drawn,409,'這位同學已在另一組抽過題，請老師核對分組；離組不能換題。');}
     // Existing privacy preferences remain unchanged when a student rejoins.
     await db.query(`insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'confirmed') on conflict(work_id,student_id) do update set status='confirmed'`,[w.id,w.term,sid]);
    }

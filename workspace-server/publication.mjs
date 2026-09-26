@@ -3,6 +3,7 @@ import {AGREEMENT_VERSION,AGREEMENT_HASH} from './agreement.mjs';
 import {demand} from './security.mjs';
 // Shared by listing and detail: a withdrawn/held/test work must never yield fresh image URLs.
 export const publicWhere=`p.status='published' and not w.hidden and not w.publication_hold
+ and coalesce(v.metadata->>'publicDisplay','')<>'false'
  and not coalesce((a.legacy->>'testOnly')::boolean,false)
  and exists(select 1 from rib.members where work_id=w.id and status='confirmed')
  and not exists(select 1 from rib.members m join rib.students s using(term,student_id)

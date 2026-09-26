@@ -16,9 +16,11 @@ export async function matches(code,record) {
 export async function rate(db,key,limit,seconds) {
   const [row]=await db.query(`insert into rib.rate_limits(id,count,reset_at) values($1,1,now()+$2*interval '1 second')
     on conflict(id) do update set count=case when rib.rate_limits.reset_at<=now() then 1 else rib.rate_limits.count+1 end,
-    reset_at=case when rib.rate_limits.reset_at<=now() then excluded.reset_at else rib.rate_limits.reset_at end returning count`,[key,seconds]);
+    reset_at=case when rib.rate_limits.reset_at<=now() then excluded.reset_at else rib.rate_limits.reset_at end returning count,reset_at::text as reset_at`,[key,seconds]);
   demand(row.count<=limit,429,'嘗試次數較多，請稍後再試。');
+  return row.reset_at;
 }
+export async function refund(db,key,resetAt){await db.query('update rib.rate_limits set count=greatest(count-1,0) where id=$1 and reset_at=$2',[key,resetAt]);}
 export function ipKey(ip,secret) {return createHmac('sha256',secret).update(ip).digest('hex');}
 export async function createSession(db,principal,remember=false) {
   const token=randomBytes(32).toString('base64url'), seconds=remember?30*86400:21600;
