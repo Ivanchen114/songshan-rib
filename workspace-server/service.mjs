@@ -61,7 +61,7 @@ export class Workspace extends Reflection {
     });
   }
   async home(p) {
-    const agreementRequired=p.role==='student'&&!hasAgreement(p.student);
+    const agreementRequired=p.role==='student'&&p.teacherPreview!==true&&!hasAgreement(p.student);
     let activities=await this.db.query("select id,term,week,title,kind,phase,accepting,archived,revision,legacy->>'materialsActivityId' as \"materialsActivityId\",coalesce((legacy->>'testOnly')::boolean,false) as test_only from rib.activities order by term desc,week");
     if(p.role==='student')activities=activities.filter(a=>a.term===p.term&&!a.archived&&(!a.test_only||p.student.is_test));
     else if(p.role!=='admin')activities=activities.filter(a=>p.teacher.scopes.some(s=>s.term===a.term));

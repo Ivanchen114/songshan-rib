@@ -58,7 +58,7 @@ export function handler({db,store,origin,enabled=true,rateSecret,secure=true,aut
         p=await previewPrincipal(service,p,input);
       }
       if(action==='logout'){demand(req.method==='POST',405,'請按登出。');await db.query('delete from rib.sessions where token_hash=$1',[sha(token)]);res.setHeader('Set-Cookie',cookie('rib_session','',0));return reply(200,{ok:true,data:{saved:true}});}
-      demand(p.role!=='student'||hasAgreement(p.student)||['home','agreement'].includes(action)||(action==='consent'&&input.consent===false),403,'請先閱讀並勾選匿名展示與個資保護說明。');
+      demand(p.teacherPreview===true||p.role!=='student'||hasAgreement(p.student)||['home','agreement'].includes(action)||(action==='consent'&&input.consent===false),403,'請先閱讀並勾選匿名展示與個資保護說明。');
       demand(reads.has(action)||writes.has(action),404,'找不到此操作。');demand(reads.has(action)?req.method==='GET':req.method==='POST',405,'請使用正確的操作方式。');
       if(writes.has(action))await rate(db,'write:'+sha(token),180,60);
       let data;

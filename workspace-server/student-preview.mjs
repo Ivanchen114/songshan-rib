@@ -12,7 +12,7 @@ export async function previewPrincipal(service,teacher,input){
   teacherScope(teacher,activity.term,student.class_name);
   demand(!!student.is_test===!!activity.legacy?.testOnly,403,'請在對應的正式或測試活動查看學生。');
   demand(process.env.RIB_ACCEPTANCE_ONLY!=='true'||student.is_test,403,'驗收站只開放測試學生視角。');
-  return {role:'student',term:activity.term,studentId:student.student_id,student};
+  return {role:'student',teacherPreview:true,term:activity.term,studentId:student.student_id,student};
 }
 export async function previewContext(service,teacher,input){
   const p=await previewPrincipal(service,teacher,input);

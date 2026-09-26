@@ -60,7 +60,7 @@ test('every preview request rechecks teacher scope, student status, activity ter
   await f.db.query("update rib.activities set term='11501' where id='w4-demo'");
   await f.db.query('update rib.teachers set active=false');assert.equal((await f.call('home',f.preview)).status,403);
 });
-test('preview honors student agreement and W5 private reading disclosure gates',async t=>{
+test('teacher preview skips agreement without changing consent or student access and preserves W5 disclosure gates',async t=>{
   const f=await setup(t),w=await f.service.ensureWork(f.people[0],{activityId:'w4-demo'});
   await f.db.query("update rib.activities set kind='w5-personal' where id='w5-demo'");
   await f.db.query("insert into rib.versions(id,work_id,ordinal,media,metadata,request_id) values('v1',$1,1,'[]','{}','r1')",[w.id]);
@@ -72,7 +72,14 @@ test('preview honors student agreement and W5 private reading disclosure gates',
   const unlocked=await f.call('aiReading',{...a,readingId:'reading1'});assert.equal(unlocked.body.data.recordLocked,false);assert.equal(unlocked.body.data.studentRecord.basis,'繳交後才能看');assert.ok(!JSON.stringify(unlocked.body).includes('不公開的原始備註'));
   await f.db.query("update rib.ai_readings set status='draft'");assert.equal((await f.call('aiReading',{...a,readingId:'reading1'})).status,403);
   await f.db.query('update rib.students set sharing_agreement=null where student_id=$1',[f.preview.previewStudent]);
-  assert.equal((await f.call('home',a)).body.data.agreementRequired,true);
-  assert.equal((await f.call('board',{...a,activityId:'w5-demo'})).status,403);
+  const studentCookie='rib_session='+(await createSession(f.db,{role:'student',term:'11501',studentId:f.people[0].studentId,revision:1})).token;
+  const before=await snapshot(f.db);
+  const home=await f.call('home',a);assert.equal(home.body.data.agreementRequired,false);assert.ok(home.body.data.activities.some(x=>x.id==='w5-demo'));
+  assert.equal((await f.call('board',{...a,activityId:'w5-demo'})).status,200);
+  assert.equal((await f.call('aiReading',{...a,readingId:'reading1'})).status,403);
+  assert.equal((await f.call('home',{teacherPreview:true},{cookie:studentCookie})).body.data.agreementRequired,true);
+  assert.equal((await f.call('board',{activityId:'w5-demo',teacherPreview:true},{cookie:studentCookie})).status,403);
+  assert.equal((await f.call('board',{...a,activityId:'w5-demo'},{cookie:studentCookie})).status,403);
+  assert.deepEqual((await snapshot(f.db)).tables,before.tables);
   assert.equal((await f.call('agreement',{...a,accepted:true},{method:'POST'})).status,403);
 });
