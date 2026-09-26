@@ -1,3 +1,4 @@
+import {w9Source} from './w9-check.mjs';
 import {reminderPlan,sendReminders,studentReminders,teacherReading,saveTeacherReading,publishedReadings,teacherCovered,humanFeedback} from './w4-remediation.mjs';
 import {demoPlan,assignDemos} from './ai-demos.mjs';
 import {readingList,readingDetail} from './ai-readings.mjs';
@@ -103,7 +104,7 @@ export class Workspace extends Reflection {
       await db.query('select id from rib.activities where id=$1 for update',[a.id]);
       const existing=await one(db,`select w.* from rib.works w join rib.members m on m.work_id=w.id where w.activity_id=$1 and m.student_id=$2 and m.status in ('confirmed','invited')`,[a.id,p.studentId]);
       if(existing)return existing;
-      const source=a.kind==='w8-proposal'?await proposalSource(db,p,a):null;
+      const source=a.kind==='w8-proposal'?await proposalSource(db,p,a):a.kind==='w9-check'?await w9Source(db,p,a):null;
       const workId=uid();await db.query(`insert into rib.works(id,activity_id,class_name,owner_id) values($1,$2,$3,$4)`,[workId,a.id,p.student.class_name,isGroup(a.kind)?null:p.studentId]);
       if(source)await db.query('update rib.works set topic=$2 where id=$1',[workId,source.topic]);
       await db.query(`insert into rib.members(work_id,term,student_id,status) values($1,$2,$3,'confirmed')`,[workId,p.term,p.studentId]);
@@ -114,6 +115,7 @@ export class Workspace extends Reflection {
     demand(p.role==='student',403,'請使用學生交件入口。');const w=await this.work(p,input.workId,{write:true});
     demand(supportedKind(w.kind),409,'此歷史活動目前僅供查閱，請沿用原入口交件。');
     demand(w.kind!=='w8-materials',409,'W8 此處只分配材料；每人完成紙本提案，依課堂安排交回。');
+    if(w.kind==='w9-check'){const a=await this.activity(p,w.activity_id),source=await w9Source(this.db,p,a);input={...input,topic:source?.topic||null,sourceWorkId:source?.id||null,sourceVersionId:source?.current_version_id||null,sourceActivityId:source?.activity_id||null};}
     if(w.kind==='w8-proposal'){
       const a=await this.activity(p,w.activity_id),source=await proposalSource(this.db,p,a);
       demand(source.topic===w.topic,409,'本組題材與個人作品不一致，請老師確認。');

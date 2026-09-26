@@ -7,6 +7,7 @@ export const ACTIVITY = Object.freeze({
  'w5-workshop':{week:5,title:'W5 小組文字轉圖',group:true,maxVersions:8,description:'小組作品 · A、B 題各一張'},
  'w7-news':{week:7,title:'W7 新聞 × 研究',group:true,maxVersions:2,description:'本組抽一份新聞與研究；同題交流後，一次保存最後圖卡與一則ORID交流紀錄。'},
  'w8-materials':{week:8,title:'W8 共讀材料 · 個人提案',group:true,maxVersions:0,description:'核對組員、均衡抽題；先自己讀寫，再組內分享，每人完成紙本提案。'},
+ 'w9-check':{week:9,title:'W9 查核後提案 · 學習反思',group:false,maxVersions:8,description:'保存資料依據、查核後提案與 p.1 思考紀錄照片，再寫自己的 ORID。'},
  'w8-proposal':{week:8,title:'W8 我的提案 · 個人交件',group:false,maxVersions:8,description:'每人上傳交流後的 p.2 提案書；照片保留真實問句、修訂或保留的理由。'},
  'w7':{week:7,title:'W7 同一事件，兩種呈現',group:false,maxVersions:2,description:'保存圖文 V1；有修改再存 V2，同學的回饋與自己修改或保留的理由留在歷程本。'},
  'w15-deck':{week:15,title:'W15–W16 公共說明作品',group:true,maxVersions:8,description:'五張投影片或一張完整 A3 五格照片，保留試讀、發表與修訂版本。'}
@@ -16,6 +17,6 @@ export const isGroup = kind => ACTIVITY[kind]?.group===true;
 export const canUpload = (a,w) => supportedKind(a.kind)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||(w.hasHumanFeedback??w.feedback.length)&&['review','exhibit'].includes(a.phase));
 
 export function activityTitle(a){
- const w3=['w3-rebuild','w3-personal','w5-personal','w7-news','w8-materials','w8-proposal'].includes(a.kind)?ACTIVITY[a.kind].title:null;
+ const w3=['w3-rebuild','w3-personal','w5-personal','w7-news','w8-materials','w8-proposal','w9-check'].includes(a.kind)?ACTIVITY[a.kind].title:null;
  return w3 ? ((a.testOnly||a.test_only||a.title?.includes('【測試】'))?'【測試】 ':'')+w3 : a.title;
 }

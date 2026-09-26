@@ -8,7 +8,8 @@ function answers(input,required){
 export class Reflection extends AiJudgment{
  async reflection(p,input){
   const w=await this.work(p,input.workId);
-  demand(w.kind==='w5-personal'&&(p.role!=='student'||w.own),403,'請回自己的 W5 作品寫反思。');
+  demand(['w5-personal','w9-check'].includes(w.kind)&&(p.role!=='student'||w.own),403,'請回自己的作品寫反思。');
+  if(w.kind==='w9-check')return {kind:w.kind,workId:w.id,versionId:w.current_version_id,reflection:w.reflection,reference:null,editable:p.role==='student'&&w.accepting&&!w.archived};
   const referenceVersionId=input.referenceVersionId||w.reflection?.referenceVersionId;
   let reference=null;
   if(referenceVersionId){
@@ -31,15 +32,18 @@ export class Reflection extends AiJudgment{
   return this.db.transaction(async db=>{
    await db.query('select id from rib.works where id=$1 for update',[String(input.workId)]);
    const w=await this.work(p,input.workId,{write:true,db});
-   demand(w.kind==='w5-personal'&&w.phase==='exhibit'&&!!p.student.is_test===!!w.test_only,403,'請等老師開放 W5 課程展廳。');
+   demand((w.kind==='w9-check'||w.kind==='w5-personal'&&w.phase==='exhibit')&&!!p.student.is_test===!!w.test_only,403,'請等老師開放 W5 課程展廳。');
    if(w.reflection?.requestId===input.requestId){demand(w.reflection.digest===digest,409,'重送內容不同，請重新核對。');return {saved:true,revision:w.reflection.revision};}
    demand((w.reflection?.revision||0)===input.expectedRevision,409,'反思已在另一個視窗更新，請保留文字並重新開啟核對。');
    demand(w.current_version_id&&w.current_version_id===input.versionId,409,'自己的作品版本已更新，請重新開啟反思。');
-   const v=await one(db,'select id,work_id from rib.versions where id=$1',[String(input.referenceVersionId||'')]);
+   let v=null;
+   if(w.kind==='w5-personal'){
+   v=await one(db,'select id,work_id from rib.versions where id=$1',[String(input.referenceVersionId||'')]);
    demand(v&&v.work_id!==w.id,400,'先到同題展廳引用一件同學作品。');
    const target=await this.work(p,v.work_id,{db});
    demand(target.activity_id===w.activity_id&&target.topic===w.topic,400,'請選同一活動、同一題的作品。');
-   const reflection={answers:value,status:input.status,referenceVersionId:v.id,referenceWorkId:v.work_id,versionId:w.current_version_id,allowPublic:input.allowPublic,revision:(w.reflection?.revision||0)+1,requestId:input.requestId,digest,updatedAt:new Date().toISOString()};
+   }
+   const reflection={answers:value,status:input.status,referenceVersionId:v?.id||null,referenceWorkId:v?.work_id||null,versionId:w.current_version_id,allowPublic:w.kind==='w9-check'?false:input.allowPublic,revision:(w.reflection?.revision||0)+1,requestId:input.requestId,digest,updatedAt:new Date().toISOString()};
    await db.query('update rib.works set reflection=$2 where id=$1',[w.id,json(reflection)]);
    // Changing any text withdraws its reviewed public copy, never the original image.
    await db.query('update rib.publications set reflection=null where version_id in(select id from rib.versions where work_id=$1)',[w.id]);
@@ -52,6 +56,7 @@ export class Reflection extends AiJudgment{
   return this.db.transaction(async db=>{
    await db.query('select id from rib.works where id=$1 for update',[String(input.workId)]);
    const w=await this.work(p,input.workId,{db});teacherScope(p,w.term,w.class_name);
+   demand(w.kind==='w5-personal',403,'W9 反思留在登入的課堂作品，不產生公開副本。');
    const r=w.reflection;demand(r&&r.status==='submitted'&&r.allowPublic&&r.revision===input.expectedRevision,409,'反思已更新或作者未同意公開，請重新核對。');
    demand(w.current_version_id===r.versionId&&input.reviewed===true,409,'請檢查目前作品版本及匿名反思。');
    const clean={answers:answers(input.answers,true),referenceLabel:'參考作品 A',reviewedRevision:r.revision};

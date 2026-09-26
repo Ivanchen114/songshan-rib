@@ -9,8 +9,9 @@ async function start(){try{
  const activityId=params.get('activity');$('#back').href='/workspace/?'+new URLSearchParams({activity:activityId,...(params.get('className')?{className:params.get('className')}:{})});
  board=await api('board',{activityId,...(teacher?{className:params.get('className')}:{})});
  const work=board.works.find(w=>w.id===params.get('work'))||(!teacher?board.works[0]:null);
- if(!work||!work.versions.length)throw Error('先回自己的作品上傳一張圖，再欣賞同題作品。');
+ if(!work||!work.versions.length)throw Error('請先回自己的作品完成照片上傳，再寫 ORID。');
  model=await api('reflection',{workId:work.id,...(params.get('reference')?{referenceVersionId:params.get('reference')}:{})});
+ if(board.activity.kind==='w9-check'){const {renderW9}=await import('./w9-reflection.js');renderW9({model,work,teacher,api});return;}
  const r=model.reflection,ref=model.reference,older=!!r&&r.versionId!==model.versionId;
  const gallery='/workspace/class-gallery.html?'+new URLSearchParams({activity:activityId,topic:work.topic});
  $('#content').innerHTML=`<section class="reference-card"><h2>這次欣賞與回應的同題作品</h2>${ref?`<p>${esc(ref.label)}${ref.ordinal?' · V'+ref.ordinal:''}</p><div id="referenceImage"></div>`:'<p>選一件同學的同題圖，再按「選這件作品，寫 ORID」。系統會連結作者與版本，讓你的回應有明確對象。</p>'}<a href="${esc(gallery)}">${ref?'回同題展廳／更換作品':'去欣賞同題作品'} →</a></section><p>寫在自己的作品旁，不需另寫紙本，也不需手打同學姓名。</p>${teacher?'<h2>對外展覽文字</h2><p>下方先帶入學生原文。檢查並將文字中的姓名改為「參考作品 A」；此處只保存匿名展示副本，不改學生原始紀錄。</p>':''}<form id="reflectionForm">${fields(r?.answers)}${teacher?'<label class="check-row"><input type="checkbox" name="reviewed" required>已核對反思文字，可匿名展示。</label>':`<label class="check-row"><input type="checkbox" name="allowPublic" ${r?.allowPublic?'checked':''}>這份反思也可隨作品匿名展覽（經老師檢查後）。</label><p class="muted">草稿只有自己與老師可讀；送出後，共同上課的同學可讀。取消勾選並保存，或作品選「不公開」，對外就不顯示反思。</p>`}<div class="row">${teacher?'<button name="mode" value="review">保存匿名展示副本</button>':'<button name="mode" value="draft" class="secondary">存草稿</button><button name="mode" value="submitted">送出反思</button>'}</div></form>`;
