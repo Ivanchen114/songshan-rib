@@ -1,3 +1,4 @@
+import {reminderPlan,sendReminders,studentReminders,teacherReading,saveTeacherReading,publishedReadings,teacherCovered,humanFeedback} from './w4-remediation.mjs';
 import {demoPlan,assignDemos} from './ai-demos.mjs';
 import {readingList,readingDetail} from './ai-readings.mjs';
 import {ACTIVITY,isGroup,supportedKind} from '../workspace/activities.js';
@@ -63,7 +64,7 @@ export class Workspace extends Reflection {
     let activities=await this.db.query("select id,term,week,title,kind,phase,accepting,archived,revision,coalesce((legacy->>'testOnly')::boolean,false) as test_only from rib.activities order by term desc,week");
     if(p.role==='student')activities=activities.filter(a=>a.term===p.term&&!a.archived&&(!a.test_only||p.student.is_test));
     else if(p.role!=='admin')activities=activities.filter(a=>p.teacher.scopes.some(s=>s.term===a.term));
-    return {person:p.role==='student'?{role:p.role,name:p.student.name,className:p.student.class_name,seat:p.student.seat,studentId:p.studentId,isTest:p.student.is_test}:{role:p.role,name:p.teacher.name},activities:agreementRequired?[]:activities,agreementRequired,sharingAgreement:p.role==='student'?SHARING_AGREEMENT:null,currentTerm:await currentTerm(this.db)};
+    return {reminders:await studentReminders(this,p),person:p.role==='student'?{role:p.role,name:p.student.name,className:p.student.class_name,seat:p.student.seat,studentId:p.studentId,isTest:p.student.is_test}:{role:p.role,name:p.teacher.name},activities:agreementRequired?[]:activities,agreementRequired,sharingAgreement:p.role==='student'?SHARING_AGREEMENT:null,currentTerm:await currentTerm(this.db)};
   }
   async board(p,input) {
     const a=await this.activity(p,input.activityId);let works,reviews;
@@ -84,11 +85,15 @@ export class Workspace extends Reflection {
       this.db.query('select m.work_id,m.student_id,m.status,m.consent,s.name,s.seat,m.sharing_opt_out from rib.members m join rib.students s using(term,student_id) where m.work_id=any($1::text[]) order by s.seat',[workIds]),
       this.db.query('select p.id,p.status,p.version_id,p.reviewed_by,p.reviewed_at,v.work_id from rib.publications p join rib.versions v on v.id=p.version_id where v.work_id=any($1::text[])',[workIds]),
       this.db.query(`select * from rib.assessments where work_id=any($1::text[]) ${p.role==='student'?"and student_id=$2 and status='graded'":''}`,p.role==='student'?[workIds,p.studentId]:[workIds])]);
-    const items=works.map(w=>({...w,versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
+    const items=works.map(w=>({...w,teacherReadings:publishedReadings(a,w.id),hasHumanFeedback:feedback.some(r=>r.target_work_id===w.id)||teacherCovered(a,w.id),versions:versions.filter(v=>v.work_id===w.id),feedback:feedback.filter(r=>r.target_work_id===w.id),decisions:decisions.filter(d=>d.work_id===w.id),members:members.filter(m=>m.work_id===w.id),publications:publications.filter(v=>v.work_id===w.id),grades:grades.filter(g=>g.work_id===w.id)}));
     const invitations=p.role==='student'?await this.db.query(`select w.id from rib.members m join rib.works w on w.id=m.work_id where w.activity_id=$1 and m.student_id=$2 and m.status='invited'`,[a.id,p.studentId]):[];
     const related=a.kind==='w8-materials'?await one(this.db,"select id from rib.activities where term=$1 and kind='w8-proposal' and not archived and legacy->>'materialsActivityId'=$2 and coalesce((legacy->>'testOnly')::boolean,false)=$3",[a.term,a.id,a.legacy?.testOnly===true]):null;
-    return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,authorsRevealed:a.legacy?.authorsRevealed===true,testOnly:a.legacy?.testOnly===true},works:items,reviews,invitations,aiReadings:await readingList(this,p,a,input.className)};
+    return {relatedActivityId:related?.id||(a.kind==='w8-proposal'?a.legacy?.materialsActivityId:null),activity:{id:a.id,title:a.title,kind:a.kind,phase:a.phase,revision:a.revision,accepting:a.accepting,archived:a.archived,week:a.week,authorsRevealed:a.legacy?.authorsRevealed===true,testOnly:a.legacy?.testOnly===true},works:items,reviews:reviews.map(r=>({...r,teacherCovered:teacherCovered(a,r.target_work_id)})),invitations,aiReadings:await readingList(this,p,a,input.className)};
   }
+  async reminderPlan(p,input){return reminderPlan(this,p,input);}
+  async sendReminders(p,input){return sendReminders(this,p,input);}
+  async teacherReading(p,input){return teacherReading(this,p,input);}
+  async saveTeacherReading(p,input){return saveTeacherReading(this,p,input);}
   async demoPlan(p,input){return demoPlan(this,p,input);}
   async assignDemos(p,input){return assignDemos(this,p,input);}
   async aiReading(p,input){return readingDetail(this,p,input);}
@@ -137,7 +142,7 @@ export class Workspace extends Reflection {
       demand(current.revision===ticket.expected_revision,409,'作品已有新版本，請先核對。已上傳圖片暫存保留。');
       demand(!(await one(db,"select student_id from rib.members where work_id=$1 and status='invited'",[w.id])),409,'請先讓同組同學確認加入。');
       const versions=await db.query('select * from rib.versions where work_id=$1 order by ordinal',[w.id]);
-      if(w.kind==='w4'&&versions.length){demand(versions.length<2&&['review','exhibit'].includes(current.phase),409,'這份圖卡已有 V2，或老師尚未開放修改或保留作品。請先查看作品版本與目前課堂階段。');demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
+      if(w.kind==='w4'&&versions.length){demand(versions.length<2&&['review','exhibit'].includes(current.phase),409,'這份圖卡已有 V2，或老師尚未開放修改或保留作品。請先查看作品版本與目前課堂階段。');demand(await humanFeedback(db,w),409,'請先取得真人回饋，再保存 V2。');demand(typeof input.reason==='string'&&input.reason.trim(),400,'請說明修改依據。');}
       demand(versions.length<ACTIVITY[w.kind].maxVersions,409,'本週版本已保存完成。');
       const versionId=uid(),ordinal=versions.length?Math.max(...versions.map(v=>v.ordinal))+1:1;
       await db.query('insert into rib.versions(id,work_id,ordinal,media,metadata,request_id) values($1,$2,$3,$4,$5,$6)',[versionId,w.id,ordinal,json(media),json(ticket.metadata),ticket.request_id]);
@@ -214,7 +219,7 @@ export class Workspace extends Reflection {
   async decision(p,input){return this.db.transaction(async db=>{
     await db.query('select id from rib.works where id=$1 for update',[id(input.workId)]);
     const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w4'&&['review','exhibit'].includes(w.phase),403,'請在初讀或展示階段回應自己的圖卡。');
-    demand(await one(db,"select id from rib.reviews where target_work_id=$1 and status='done'",[w.id]),409,'請先取得真人初讀。');
+    demand(await humanFeedback(db,w),409,'請先取得真人初讀。');
     const v=await one(db,'select * from rib.versions where work_id=$1 order by ordinal desc limit 1',[w.id]);demand(v&&input.versionId===v.id,409,'版本已更新，請先核對。');const reason=text(input.reason);
     const last=await one(db,'select * from rib.decisions where work_id=$1 and student_id=$2 order by created_at desc limit 1',[w.id,p.studentId]);
     if(last?.choice==='keep'&&last.version_id===v.id&&last.reason===reason)return {saved:true};
@@ -245,7 +250,7 @@ export class Workspace extends Reflection {
     await db.query('update rib.publications set status=$1,title=$2,reviewed_by=$3,reviewed_at=now() where id=$4',[input.publish===true?'published':'withdrawn',text(input.title||'匿名作品',80),p.email,pub.id]);await this.event(db,p,w.activity_id,'publication',pub.id,{publish:input.publish===true});return {saved:true};});}
   async gallery(input={}){return galleryList(this.db,this.store,input);}
   async galleryItem(input){return galleryDetail(this.db,this.store,input);}
-  async evidence(workId,db=this.db){const versions=await db.query('select id,media from rib.versions where work_id=$1 order by ordinal',[workId]);const reviews=await db.query("select id,revision from rib.reviews where target_work_id=$1 and status='done' order by id",[workId]);const decisions=await db.query('select id from rib.decisions where work_id=$1 order by created_at',[workId]);const judgments=await this.judgmentsForWork(workId,db);return sha(json({versions,reviews,decisions,judgments}));}
+  async evidence(workId,db=this.db){const versions=await db.query('select id,media from rib.versions where work_id=$1 order by ordinal',[workId]);const reviews=await db.query("select id,revision from rib.reviews where target_work_id=$1 and status='done' order by id",[workId]);const decisions=await db.query('select id from rib.decisions where work_id=$1 order by created_at',[workId]);const judgments=await this.judgmentsForWork(workId,db);const [a]=await db.query('select a.legacy from rib.activities a join rib.works w on w.activity_id=a.id where w.id=$1',[workId]);const teacherReadings=publishedReadings(a,workId);return sha(json({versions,reviews,decisions,judgments,...(teacherReadings.length?{teacherReadings}:{})}));}
   async assess(p,input){const w=await this.work(p,input.workId,{grading:true});demand(p.role!=='student'&&w.kind==='w4',403,'此區不另評分。');const criteria=input.criteria;demand(Array.isArray(criteria)&&criteria.length===4&&criteria.every(x=>x===null||Number.isInteger(x)&&x>=0&&x<=3),400,'四項規準各為 0–3 分或尚未評定。');demand(['draft','needs-evidence','graded'].includes(input.status),400,'評閱狀態不正確。');demand(input.status==='draft'||typeof input.comment==='string'&&input.comment.trim(),400,'請填寫評閱依據或補件說明。');demand(input.status!=='graded'||criteria.every(x=>x!==null)&&input.evidenceReviewed===true,400,'正式判分前，請確認已合看兩週本人證據。');
     const member=await one(this.db,"select student_id from rib.members where work_id=$1 and student_id=$2 and status='confirmed'",[w.id,input.studentId]);demand(member,400,'這位學生不是作品作者。');
     return this.db.transaction(async db=>{await db.query('select id from rib.works where id=$1 for update',[w.id]);demand(input.evidenceKey===await this.evidence(w.id,db),409,'作品或回饋已更新，請先重新核對。');const old=await one(db,"select revision from rib.assessments where work_id=$1 and student_id=$2 and rubric='w45-v104'",[w.id,input.studentId]);demand((old?.revision||0)===input.expectedRevision,409,'另一位老師已更新評閱。');await db.query(`insert into rib.assessments(work_id,student_id,rubric,criteria,comment,status,evidence_key,teacher,revision) values($1,$2,'w45-v104',$3,$4,$5,$6,$7,1) on conflict(work_id,student_id,rubric) do update set legacy_score=null,legacy_max=null,legacy_payload=null,criteria=excluded.criteria,comment=excluded.comment,status=excluded.status,evidence_key=excluded.evidence_key,teacher=excluded.teacher,revision=rib.assessments.revision+1,updated_at=now()`,[w.id,input.studentId,json(criteria),String(input.comment||'').slice(0,2000),input.status,input.evidenceKey,p.email]);await this.event(db,p,w.activity_id,'assessment',w.id,{studentId:input.studentId,status:input.status});return {saved:true};});}

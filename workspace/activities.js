@@ -13,7 +13,7 @@ export const ACTIVITY = Object.freeze({
 });
 export const supportedKind = kind => !!ACTIVITY[kind];
 export const isGroup = kind => ACTIVITY[kind]?.group===true;
-export const canUpload = (a,w) => supportedKind(a.kind)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||w.feedback.length&&['review','exhibit'].includes(a.phase));
+export const canUpload = (a,w) => supportedKind(a.kind)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||(w.hasHumanFeedback??w.feedback.length)&&['review','exhibit'].includes(a.phase));
 
 export function activityTitle(a){
  const w3=['w3-rebuild','w3-personal','w5-personal','w7-news','w8-materials','w8-proposal'].includes(a.kind)?ACTIVITY[a.kind].title:null;

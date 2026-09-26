@@ -4,8 +4,8 @@ const migrationReadOnly = (a,config) => config?.acceptanceOnly && !a.accepting &
 export const phaseLabel = (a,config) => a.kind==='w8-materials'?(a.archived?'已封存':a.accepting?'本組題材分配':'題材分配尚未開放'): a.archived ? '已封存' : !a.accepting ? (migrationReadOnly(a,config)?'搬遷資料・僅供查閱':'尚未開放交件') : ({production:'製作與上傳',review:'初讀與修改或保留',exhibit:'課程展示'}[a.phase] || '查閱作品');
 export const supported = a => supportedKind(a.kind);
 export function workFlags(w,b) {
-  return {uploaded:!!w.versions.length, feedback:!!w.feedback.length,
-    unpaired:b.activity.kind==='w4'&&!b.reviews.some(r=>r.target_work_id===w.id),
+  return {uploaded:!!w.versions.length, feedback:w.hasHumanFeedback??!!w.feedback.length,
+    unpaired:b.activity.kind==='w4'&&!w.hasHumanFeedback&&!b.reviews.some(r=>r.target_work_id===w.id),
     moderation:w.publications.some(p=>p.status==='published'&&!p.reviewed_by),
     ungraded:!!w.versions.length&&!w.grades.some(g=>g.status==='graded')};
 }
@@ -31,10 +31,10 @@ export function studentNext(b,config) {
   if(a.kind==='w5-personal')return !w?.topic?['先選這次要畫的題目','先讀題目與原文，從 A、B 兩區選一題；每人完成自己的一張圖。']:!w.versions.length?['題目已選好，接著完成並上傳一張圖','在歷程本 p.3 的大框完成作品，回原文核對，再拍圖上傳。']:reflectionNeedsReview(w)?['作品已更新，回看原 ORID','原反思保留在先前版本；請對照新圖核對內容，需要沿用到目前版本時再保存。']:w.reflection?.status==='submitted'?['作品與 ORID 已保存','可以回看同學的圖與自己的發現；不需要再寫紙本紀錄。']:['作品已保存，欣賞同題後寫 ORID','到課程展廳選同一題，引用一件同學作品，再回自己的作品寫三問反思。'];
   if(a.kind==='w7-news')return !w?.topic?['先核對本組名單，再抽一份材料','代表建立小組、加入組員後抽題；每組一題，分配結果會保存。']:!w.versions.length?['一起讀新聞與研究，畫一張圖卡','題材已分配。一起選主張、分工核對並畫圖；同題組交流後，由代表上傳最後圖卡與一則ORID交流紀錄。']:['到展廳比較同題作品','篩選本組題材，看看別組選了哪些依據、結論說到哪裡、怎麼畫；本組的ORID交流紀錄已隨作品保存。'];
   if(b.invitations.length)return ['小組名單更新中','請稍後更新作品與回饋，不用逐人確認加入。'];
-  if(b.reviews.some(r=>r.status==='assigned')&&['review','exhibit'].includes(a.phase))return ['有一份初讀等你完成','切換「我的初讀任務」，先看圖，再寫出你的理解與根據。'];
+  if(b.reviews.some(r=>r.status==='assigned'&&!r.teacherCovered)&&['review','exhibit'].includes(a.phase))return ['有一份初讀等你完成','切換「我的初讀任務」，先看圖，再寫出你的理解與根據。'];
   if(a.kind!=='w4'&&a.kind!=='w5-workshop')return [w?.versions.length?'作品與歷程已保存':isGroup(a.kind)?'先核對本組名單，再保存作品':'先保存我的作品',ACTIVITY[a.kind].description];
   if(!w?.versions.length)return [a.kind==='w4'?'先保存我的圖卡':'先保存小組的兩張 A3',a.kind==='w4'?'原意留在歷程本，這裡只上傳圖卡。':'代表加入組員後，同組交一份 A、B 題照片。'];
-  if(w.feedback.length&&!w.decisions.length&&a.kind==='w4'&&['review','exhibit'].includes(a.phase))return ['收到同學的回饋了','比對原意與畫面，再決定修改，或有理由地保留。'];
-  if(!w.feedback.length&&a.kind==='w4')return ['作品已保存，等候同學初讀','你的作品與讀者任務分開進行，可以先查看自己的初讀任務。'];
+  if((w.hasHumanFeedback??w.feedback.length)&&!w.decisions.length&&a.kind==='w4'&&['review','exhibit'].includes(a.phase))return ['收到真人回饋了','比對原意與畫面，再決定修改，或有理由地保留。'];
+  if(!(w.hasHumanFeedback??w.feedback.length)&&a.kind==='w4')return ['作品已保存，等候同學初讀','你的作品與讀者任務分開進行，可以先查看自己的初讀任務。'];
   return ['作品與歷程已保存','可查看版本、回覆同學，或調整這份作品的公開設定。'];
 }
