@@ -1,3 +1,5 @@
+import {DECK_PURPOSES,DECK_FIELDS} from '../workspace/personal-deck.js';
+import {READING_KINDS,READING_FIELDS,READING_PAGES} from '../workspace/reading-evidence.js';
 import {W9_FIELDS} from '../workspace/w9-evidence.js';
 import {namedClassroom,classroomClasses,classroomLabel} from './classroom-audience.mjs';
 import {w7Topic} from '../workspace/w7-topics.js';
@@ -12,6 +14,15 @@ import {MAX_IMAGE,commitImage} from './storage.mjs';
 const one=async(db,q,p=[]) => (await db.query(q,p))[0];
 export function submissionMetadata(kind,input,previous=[]){
  const meta={};
+ if(READING_KINDS.includes(kind)){
+  demand(input.evidenceFormat==='paper-judgment-v1',400,'請重新整理，使用本週紙本與依據表單。');
+  Object.assign(meta,{evidenceFormat:'paper-judgment-v1',readingKind:kind,title:text(input.title,100),publicDisplay:false,pageOrder:READING_PAGES[kind],topic:input.topic||null,sourceWorkId:input.sourceWorkId||null,sourceVersionId:input.sourceVersionId||null,sourceActivityId:input.sourceActivityId||null});
+  for(const [key,label,max] of READING_FIELDS[kind]){meta[key]=input[key]==null||(typeof input[key]==='string'&&!input[key].trim())?'':text(input[key],max);if(['claim','searchPath','sourceNotes'].includes(key))demand(meta[key],400,'請填寫：'+label);}
+  if(!['w10-priority','w11-response'].includes(kind))Object.assign(meta,{topic:null,sourceWorkId:null,sourceVersionId:null,sourceActivityId:null});
+  meta.noSource=['w10-priority','w13-synthesis'].includes(kind)&&input.noSource===true;
+  if(['w10-priority','w13-synthesis'].includes(kind)&&!meta.noSource)demand(meta.references&&meta.passage,400,'請留下來源、相關原段落與位置；找不到時勾選尚未找到並寫搜尋路徑與缺口。');
+ }
+
  if(kind==='w9-check'){meta.title=text(input.title,100);meta.sourceWorkId=input.sourceWorkId||null;meta.sourceVersionId=input.sourceVersionId||null;meta.sourceActivityId=input.sourceActivityId||null;meta.topic=input.topic||null;meta.publicDisplay=false;meta.pageOrder=['p1-thinking'];meta.evidenceFormat='digital-v1';demand(input.evidenceFormat==='digital-v1',400,'請重新整理，使用本週資料依據與提案表單。');for(const [key,label,max] of W9_FIELDS){meta[key]=input[key]==null||(typeof input[key]==='string'&&!input[key].trim())?'':text(input[key],max);if(!['references','passage'].includes(key))demand(meta[key],400,'請填寫：'+label);}meta.noSource=input.noSource===true;meta.searchGap=input.searchGap==null||(typeof input.searchGap==='string'&&!input.searchGap.trim())?'':text(input.searchGap,1400);if(meta.noSource)demand(meta.searchGap,400,'請如實留下搜尋詞與仍缺的證據。');else demand(meta.references&&meta.passage,400,'請留下採用來源的 APA、關鍵原文與位置；找不到資料可勾選尚未找到。');}
  if(kind==='w8-proposal'){
   demand(w8Topic(input.topic),409,'請先確認本組題材。');
@@ -23,11 +34,17 @@ export function submissionMetadata(kind,input,previous=[]){
  if(['w3-rebuild','w3-personal'].includes(kind))meta.text=text(input.text,3000);
  if(kind==='w7-news'){demand(w7Topic(input.topic),409,'請先完成本組抽題。');meta.topic=input.topic;meta.text=text(input.text,1200);}
  if(kind==='w7'){const topic=previous[0]?.metadata.topic||input.topic;demand(['Z','M'].includes(topic),400,'請選動物園或校園手機。');meta.topic=topic;}
+ if(kind==='w15-personal-deck'){
+  demand(input.layout==='slides',400,'個人簡報須依序上傳五頁圖片。');
+  demand(DECK_PURPOSES.includes(input.purpose),400,'請選這一版的用途。');
+  Object.assign(meta,{reportFormat:'personal-five-slides-v1',title:text(input.title,100),layout:'slides',purpose:input.purpose});
+  for(const [key,label,max] of DECK_FIELDS){meta[key]=input[key]==null||(typeof input[key]==='string'&&!input[key].trim())?'':text(input[key],max);if(key!=='aiUse')demand(meta[key],400,'請填寫：'+label);}
+ }
  if(kind==='w15-deck'){
   demand(['slides','paper'].includes(input.layout),400,'請選五張投影片或一張完整 A3。');
   demand(['試讀版','試讀修訂','發表定稿','提問後修訂'].includes(input.purpose),400,'請選這一版的用途。');meta.layout=input.layout;meta.purpose=input.purpose;
  }
- const n=kind==='w5-workshop'?2:kind==='w15-deck'&&input.layout==='slides'?5:1;
+ const n=READING_KINDS.includes(kind)?READING_PAGES[kind].length:kind==='w5-workshop'?2:(kind==='w15-personal-deck'||kind==='w15-deck'&&input.layout==='slides')?5:1;
  demand(Array.isArray(input.files)&&input.files.length===n,400,`本次需要 ${n} 張圖片，請依序選取。`);
  return meta;
 }
@@ -76,12 +93,12 @@ export class Weekly extends Roster {
  async wallVote(p,input){return this.db.transaction(async db=>{const {w,a,own}=await this.wallContext(p,input,db);demand(a.legacy?.authorsRevealed!==true,403,'投票已結束，作者已公布。');demand(a.kind==='w3-rebuild'&&own.id!==w.id,403,'欣賞票只留給其他小組的文字重建作品。');demand(typeof input.active==='boolean',400,'請重新選擇。');await db.query('insert into rib.wall_votes(activity_id,actor_work_id,target_work_id,active) values($1,$2,$3,$4) on conflict(actor_work_id,target_work_id) do update set active=excluded.active',[a.id,own.id,w.id,input.active]);await this.event(db,p,a.id,'wall-vote',w.id);return {saved:true};});}
  async moderateComment(p,input){demand(p.role!=='student',403,'請使用教師帳號。');const c=await one(this.db,'select * from rib.wall_comments where id=$1',[String(input.commentId)]);demand(c,404,'找不到留言。');const w=await this.work(p,c.target_work_id);teacherScope(p,w.term,w.class_name);demand(typeof input.hidden==='boolean',400,'請選擇留言狀態。');await this.db.query('update rib.wall_comments set hidden=$1 where id=$2',[input.hidden,c.id]);await this.event(this.db,p,w.activity_id,'moderate-comment',c.id,{hidden:input.hidden});return {saved:true};}
  async markCurrent(p,input){return this.db.transaction(async db=>{
-  await db.query('select id from rib.works where id=$1 for update',[String(input.workId)]);const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&w.kind==='w15-deck',403,'請在自己的公共說明作品選用版本。');demand(w.revision===input.expectedRevision,409,'組員已更新，請重新核對。');
+  await db.query('select id from rib.works where id=$1 for update',[String(input.workId)]);const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&['w15-deck','w15-personal-deck'].includes(w.kind),403,'請在自己的公共說明作品選用版本。');demand(w.revision===input.expectedRevision,409,'作品已更新，請重新核對。');
   demand(await one(db,'select id from rib.versions where id=$1 and work_id=$2',[String(input.versionId),w.id]),400,'只能沿用本組既有版本。');await db.query('update rib.works set current_version_id=$1,revision=revision+1 where id=$2',[input.versionId,w.id]);await this.event(db,p,w.activity_id,'current-version',w.id,{versionId:input.versionId});return {saved:true};});}
  async paperKeep(p,input){return this.db.transaction(async db=>{const w=await this.work(p,input.workId,{write:true,db});demand(p.role==='student'&&['w7','w7-news'].includes(w.kind),403,'請在本人的 W7 作品操作。');await db.query('select id from rib.works where id=$1 for update',[w.id]);const v=await one(db,'select id from rib.versions where work_id=$1 order by ordinal desc limit 1',[w.id]);demand(v&&v.id===input.versionId,409,'請先保存並核對版本。');const old=await one(db,"select id from rib.decisions where work_id=$1 and version_id=$2 and choice='keep'",[w.id,v.id]);if(!old)await db.query("insert into rib.decisions(id,work_id,student_id,choice,reason,version_id) values($1,$2,$3,'keep','保留依據記在歷程本。',$4)",[uid(),w.id,p.studentId,v.id]);await this.event(db,p,w.activity_id,'paper-keep',w.id);return {saved:true};});}
  async selections(p,input={}){
   demand(p.role==='student',403,'請使用本人帳號。');const rows=await this.db.query(`select v.id,v.ordinal,v.metadata,a.week,a.title,w.id as work_id from rib.versions v join rib.works w on w.id=v.work_id join rib.activities a on a.id=w.activity_id join rib.members m on m.work_id=w.id where m.term=$1 and m.student_id=$2 and m.status='confirmed' and not w.hidden and coalesce((a.legacy->>'testOnly')::boolean,false)=$3 order by a.week,w.id,v.ordinal`,[p.term,p.studentId,!!p.student.is_test]);
-  const s=await one(this.db,'select * from rib.selections where term=$1 and student_id=$2',[p.term,p.studentId]);return {term:p.term,candidates:rows,selected:s?.version_ids||[],revision:s?.revision||0,readOnly:await currentTerm(this.db)!==p.term};
+  const s=await one(this.db,'select * from rib.selections where term=$1 and student_id=$2',[p.term,p.studentId]);return {term:p.term,candidates:rows.filter(v=>v.metadata?.publicDisplay!==false),selected:(s?.version_ids||[]).filter(id=>rows.some(v=>v.id===id&&v.metadata?.publicDisplay!==false)),revision:s?.revision||0,readOnly:await currentTerm(this.db)!==p.term};
  }
  async selectionSave(p,input){return this.db.transaction(async db=>{
   await db.query('select id from rib.workspace_state where id=1 for share');demand(p.role==='student'&&await currentTerm(db)===p.term,403,'請在目前學期選件。');
