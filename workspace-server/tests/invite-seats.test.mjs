@@ -31,7 +31,7 @@ test('seat invitations reject self, duplicates, inactive/test peers, missing or 
  await s.ensureWork(c,{activityId:'w5-demo'});await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[2]}),/已在其他小組/);
  await s.invite(a,{workId:w.id,studentIds:[b.studentId,g.studentId]});
  await f.db.query('update rib.students set active=true,is_test=false where student_id=any($1::text[])',[[d.studentId,e.studentId]]);
- await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[4,5]}),/最多四人/);
+ await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[4,5]}),/最多 4 人/);
  await f.db.query("update rib.activities set accepting=false where id='w5-demo'");await assert.rejects(s.invitePreview(a,{workId:w.id,seats:[4]}),/不能保存/);
 });
 test('seat preview endpoint requires session, same-origin POST, agreement and work membership',async t=>{

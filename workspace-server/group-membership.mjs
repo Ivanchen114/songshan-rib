@@ -11,7 +11,7 @@ export class GroupMembership extends Journey {
   const rows=await db.query('select student_id,name,seat from rib.students where term=$1 and class_name=$2 and seat=any($3::int[]) and active and is_test=$4 for share',[w.term,w.class_name,seats,w.test_only]);
   const students=seats.map(seat=>{const found=rows.filter(s=>s.seat===seat);demand(found.length===1,400,`${seat} 號無法唯一對應到可加入的同班同學，請核對座號或洽老師。`);demand(found[0].student_id!==p.studentId,400,'不用加入自己，請只填其他組員的座號。');return found[0];});
   demand(!(await one(db,'select id from rib.versions where work_id=$1',[w.id])),409,'已有共同作品，請老師核對作者後再調整。');
-  const count=await one(db,"select count(*)::int as n from rib.members where work_id=$1 and status<>'declined'",[w.id]);demand(count.n+students.length<=(ACTIVITY[w.kind]?.maxMembers||4),400,isLate(w.kind)?'每組最多 3 人（含自己）。':'每組最多四人（含自己）。');
+  const count=await one(db,"select count(*)::int as n from rib.members where work_id=$1 and status<>'declined'",[w.id]);demand(count.n+students.length<=(ACTIVITY[w.kind]?.maxMembers||4),400,`每組最多 ${ACTIVITY[w.kind]?.maxMembers||4} 人（含自己）。`);
   const occupied=await one(db,`select m.student_id from rib.members m join rib.works x on x.id=m.work_id where x.activity_id=$1 and m.student_id=any($2::text[]) and m.status in ('confirmed','invited')`,[w.activity_id,students.map(s=>s.student_id)]);
   const who=students.find(s=>s.student_id===occupied?.student_id);demand(!occupied,409,`${who?.seat||''} 號${occupiedMessage}`);
   return students;
@@ -29,7 +29,7 @@ export class GroupMembership extends Journey {
    if(input.seats!==undefined){demand(ids===undefined,400,'請使用同一種加入方式。');const students=await this.inviteSeats(p,w,input.seats,db);ids=students.map(s=>s.student_id);demand(isDeepStrictEqual(ids,input.expectedStudentIds),409,'座號名單已變更，請重新核對姓名後再加入。');}
    else demand(Array.isArray(ids)&&ids.length>0&&ids.length<=3&&new Set(ids).size===ids.length,400,'請填一至三位不重複的同組學號。');
    demand(!(await one(db,'select id from rib.versions where work_id=$1',[w.id])),409,'已有共同作品，請老師核對作者後再調整。');
-   const count=await one(db,"select count(*)::int as n from rib.members where work_id=$1 and status<>'declined'",[w.id]);demand(count.n+ids.length<=(ACTIVITY[w.kind]?.maxMembers||4),400,isLate(w.kind)?'每組最多 3 人。':'每組最多四人。');
+   const count=await one(db,"select count(*)::int as n from rib.members where work_id=$1 and status<>'declined'",[w.id]);demand(count.n+ids.length<=(ACTIVITY[w.kind]?.maxMembers||4),400,`每組最多 ${ACTIVITY[w.kind]?.maxMembers||4} 人。`);
    for(const sid of ids){
     demand(/^\d{8}$/.test(sid)&&sid!==p.studentId,400,'請核對組員學號。');const s=await one(db,'select * from rib.students where term=$1 and student_id=$2 and active and is_test=$3 for share',[w.term,sid,w.test_only]);demand(s&&s.class_name===w.class_name,400,'請加入同班有效學生。');
     const occupied=await one(db,`select m.work_id from rib.members m join rib.works x on x.id=m.work_id where x.activity_id=$1 and m.student_id=$2 and m.status in ('confirmed','invited')`,[w.activity_id,sid]);demand(!occupied,409,`${s.seat} 號${occupiedMessage}`);

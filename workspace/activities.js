@@ -2,7 +2,7 @@
 export const LATE_KINDS=['w14-public-proposal','w15-argument-poster'];
 export const isLate=kind=>LATE_KINDS.includes(kind);
 export const ACTIVITY = Object.freeze({
- 'w14-public-proposal':{week:14,title:'W14 公共提案收件版',group:true,maxMembers:3,maxVersions:8,description:'每組一份；W14 封存內容，W15 只補投遞證據。證據只供教師查看。'},
+ 'w14-public-proposal':{week:14,title:'W14 公共提案收件版',group:true,maxMembers:4,maxVersions:8,description:'每組一份；W14 封存內容，W15 只補投遞證據。證據只供教師查看。'},
  'w15-argument-poster':{week:15,title:'W15–W16 議題論證 A1 海報',group:true,maxMembers:3,maxVersions:8,description:'每組一份；分別保留 W15 送印版與 W16 定稿。教師開放後才進班內展示。'},
  'w15-personal-deck':{week:15,title:'W15–W16 五頁照片備援／舊作品',group:false,maxVersions:8,description:'Canva學生改在W15／W16個人紀錄貼連結；此處保留紙本五頁照片備援及舊作品。'},
 "w12-question":{"week": 12, "title": "W12 問題修訂與檔案索引", "group": false, "maxVersions": 8, "description": "形成可回答的自選問題，依真人回饋完成自己的修訂或保留理由。 線上留來源與入口，紙本判斷附照片。"},
