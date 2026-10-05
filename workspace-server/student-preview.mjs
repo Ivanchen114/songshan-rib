@@ -1,7 +1,7 @@
 import {demand,teacherScope} from './security.mjs';
 
 // Request-local identity only: never create a student session or change credentials.
-export const previewReads=new Set(['home','board','media','updates','aiReading','aiJudgments','conversation','reflection','classWall','original','journey','journeyMedia','selections']);
+export const previewReads=new Set(['notifications','notification','progress','home','board','media','updates','aiReading','aiJudgments','conversation','reflection','classWall','original','journey','journeyMedia','selections']);
 export async function previewPrincipal(service,teacher,input){
   demand(['admin','teacher'].includes(teacher.role),403,'只有授課教師可以查看學生視角。');
   const activity=await service.activity(teacher,input.previewActivity);

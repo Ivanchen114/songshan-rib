@@ -101,7 +101,7 @@ export class TermManager {
    validateTemplateLinks(d.payload.templates,source.activities);
    // Preserve all non-ephemeral data before any semester mutation. Existing media are immutable.
    const tables={};for(const name of TABLES)tables[name]=(await db.query(`select to_jsonb(t) as row from rib.${name} t`)).map(x=>x.row);
-   const backup={format:'rib-backup-v5',created:new Date().toISOString(),tables},snapshotHash=sha(json(backup)),jobId=uid();
+   const backup={format:'rib-backup-v7',created:new Date().toISOString(),tables},snapshotHash=sha(json(backup)),jobId=uid();
    const backupKey='backups/terms/'+jobId+'.json.gz',packed=gzipSync(Buffer.from(json({...backup,sha256:snapshotHash})));
    await this.store.put(backupKey,packed,'application/gzip');
    demand(sha(await this.store.get(backupKey,64*1024*1024))===sha(packed),503,'切換前備份讀回核對失敗，學期尚未切換。');
@@ -127,11 +127,12 @@ export class TermManager {
  }
 }
 
-export const activityWrites=['sendReminders','saveTeacherReading','revealAuthors','saveReflection','reviewReflection','drawTopic','saveAiJudgment','chooseTopic','testFeedback','assignReader','reply','ensureWork','invite','leaveGroup','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize'];
+export const activityWrites=['lateControl','lateStatus','lateExtension','lateEvidencePrepare','lateEvidenceFinalize','sendReminders','saveTeacherReading','revealAuthors','saveReflection','reviewReflection','drawTopic','saveAiJudgment','chooseTopic','testFeedback','assignReader','reply','ensureWork','invite','leaveGroup','invitation','prepare','finalize','dispatch','review','requestReplacement','replace','decision','control','consent','publish','assess','wallComment','wallVote','moderateComment','markCurrent','paperKeep','selectionSave','selectionFeature','referencePrepare','referenceFinalize'];
 export async function guardActivityWrite(db,action,input){
- let activityId=['sendReminders','revealAuthors','saveAiJudgment','chooseTopic','ensureWork','invitation','dispatch','control','referencePrepare'].includes(action)?input.activityId:null;
- if(['saveTeacherReading','saveReflection','reviewReflection','drawTopic','testFeedback','assignReader','invite','leaveGroup','prepare','decision','consent','assess','wallComment','wallVote','markCurrent','paperKeep'].includes(action)&&input.workId)activityId=(await db.query('select activity_id from rib.works where id=$1',[input.workId]))[0]?.activity_id;
+ let activityId=['lateControl','sendReminders','revealAuthors','saveAiJudgment','chooseTopic','ensureWork','invitation','dispatch','control','referencePrepare'].includes(action)?input.activityId:null;
+ if(['lateStatus','lateExtension','lateEvidencePrepare','saveTeacherReading','saveReflection','reviewReflection','drawTopic','testFeedback','assignReader','invite','leaveGroup','prepare','decision','consent','assess','wallComment','wallVote','markCurrent','paperKeep'].includes(action)&&input.workId)activityId=(await db.query('select activity_id from rib.works where id=$1',[input.workId]))[0]?.activity_id;
  if(['review','requestReplacement','replace','reply'].includes(action)&&input.reviewId)activityId=(await db.query('select activity_id from rib.reviews where id=$1',[input.reviewId]))[0]?.activity_id;
+ if(action==='lateEvidenceFinalize'&&input.ticketId)activityId=(await db.query('select w.activity_id from rib.late_deliveries d join rib.works w on w.id=d.work_id where d.id=$1',[input.ticketId]))[0]?.activity_id;
  if(action==='finalize'&&input.ticketId)activityId=(await db.query('select w.activity_id from rib.uploads u join rib.works w on w.id=u.work_id where u.id=$1',[input.ticketId]))[0]?.activity_id;
  if(['publish','selectionFeature'].includes(action)&&input.publicationId)activityId=(await db.query('select w.activity_id from rib.publications p join rib.versions v on v.id=p.version_id join rib.works w on w.id=v.work_id where p.id=$1',[input.publicationId]))[0]?.activity_id;
  if(action==='referenceFinalize'&&input.ticketId)activityId=(await db.query('select activity_id from rib.activity_assets where id=$1',[input.ticketId]))[0]?.activity_id;

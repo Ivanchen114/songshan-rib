@@ -1,3 +1,4 @@
+import {anonymousWorkLabel} from '../classroom-audience.mjs';
 import test from 'node:test';import assert from 'node:assert/strict';import sharp from 'sharp';
 import {fixture} from './support.mjs';import {Workspace} from '../service.mjs';import {sha} from '../security.mjs';
 import {setupW8Materials} from '../w8-materials-setup.mjs';
@@ -38,7 +39,7 @@ test('undrawn, ungrouped, wrong test scope, closed and archived gates; exhibitio
  await assert.rejects(f.s.ensureWork({...tester,student:{...tester.student,is_test:true}},{activityId:f.a.id}),/測試帳號/);
  const {result}=await upload(f,p,w);await f.db.query("update rib.activities set phase='exhibit',legacy=legacy||'{\"classroomGroups\":[[\"101\",\"102\"]]}'::jsonb where id=$1",[f.a.id]);
  for(const [x,cls]of[[q,'102'],[outside,'103']]){x.student.class_name=cls;await f.db.query('update rib.students set class_name=$1 where student_id=$2',[cls,x.studentId]);}
- assert.equal((await f.s.classWall(q,{activityId:f.a.id})).items[0].label,'101 班 示範同學1');assert.equal((await f.s.media(q,{versionId:result.versionId})).images.length,1);
+ assert.equal((await f.s.classWall(q,{activityId:f.a.id})).items[0].label,anonymousWorkLabel(w.id));assert.equal((await f.s.media(q,{versionId:result.versionId})).images.length,1);
  assert.equal((await f.s.classWall(outside,{activityId:f.a.id})).items.length,0);await assert.rejects(f.s.media(outside,{versionId:result.versionId}),/共同上課/);
  await f.db.query('update rib.activities set accepting=false where id=$1',[f.a.id]);await assert.rejects(upload(f,p,{...w,revision:1}),/不能保存/);
  await f.db.query('update rib.activities set archived=true where id=$1',[f.a.id]);await assert.rejects(f.s.media(p,{versionId:result.versionId}),/無法查看/);

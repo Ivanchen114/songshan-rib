@@ -4,6 +4,8 @@ import {demand} from './security.mjs';
 // Shared by listing and detail: a withdrawn/held/test work must never yield fresh image URLs.
 export const publicWhere=`p.status='published' and not w.hidden and not w.publication_hold
  and coalesce(v.metadata->>'publicDisplay','')<>'false'
+ and a.kind<>'w14-public-proposal'
+ and (a.kind<>'w15-argument-poster' or (p.reviewed_by is not null and exists(select 1 from rib.late_controls lc where lc.activity_id=a.id and lc.class_name=w.class_name and lc.classroom_open) and exists(select 1 from rib.late_checkpoints c where c.work_id=w.id and v.id in(c.v1_version_id,c.final_version_id))))
  and not coalesce((a.legacy->>'testOnly')::boolean,false)
  and exists(select 1 from rib.members where work_id=w.id and status='confirmed')
  and not exists(select 1 from rib.members m join rib.students s using(term,student_id)
@@ -11,7 +13,7 @@ export const publicWhere=`p.status='published' and not w.hidden and not w.public
 export const publicFrom='rib.publications p join rib.versions v on v.id=p.version_id join rib.works w on w.id=v.work_id join rib.activities a on a.id=w.activity_id';
 export async function autoPublish(db,workId){
  if(process.env.RIB_ACCEPTANCE_ONLY==='true')return false;
- const [r]=await db.query(`select p.id,v.media from ${publicFrom} where w.id=$1 and not w.hidden and not w.publication_hold and not a.archived
+ const [r]=await db.query(`select p.id,v.media from ${publicFrom} where w.id=$1 and not w.hidden and not w.publication_hold and not a.archived and a.kind not in ('w14-public-proposal','w15-argument-poster')
   and not coalesce((a.legacy->>'testOnly')::boolean,false) and v.metadata->>'publicDisplay'='true'
   and v.ordinal=(select max(ordinal) from rib.versions where work_id=w.id)
   and exists(select 1 from rib.members where work_id=w.id and status='confirmed')

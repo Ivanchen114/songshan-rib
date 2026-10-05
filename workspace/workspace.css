@@ -73,3 +73,11 @@ button.leave-group:hover{background:#f4dfbf}button.leave-group:focus-visible{out
 
 .button-help-tooltip{position:fixed;inset:auto;margin:0;box-sizing:border-box;max-width:min(340px,calc(100vw - 20px));padding:12px 15px;border:1px solid #476353;border-radius:10px;background:#223d31;color:#fff;font:14px/1.75 system-ui,-apple-system,"Noto Sans TC",sans-serif;box-shadow:0 5px 20px #10221930;z-index:10000;overflow-wrap:anywhere;text-align:left}
 .button-help-tooltip::backdrop{background:transparent;pointer-events:none}
+
+/* Clear appreciation entry and in-place save receipts on small screens. */
+a.button.gallery-cta{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:16px 24px;background:#245642;color:#fff;border:2px solid #245642;border-radius:12px;font-size:19px;font-weight:750;line-height:1.5;text-decoration:none;box-shadow:0 4px 10px #173e2920;white-space:normal;text-align:center}
+a.button.gallery-cta:hover{background:#183e2f;border-color:#183e2f}a.button.gallery-cta:focus-visible{outline:3px solid #a56313;outline-offset:4px}
+.save-feedback{margin-top:20px;padding:18px;border:2px solid #567464;border-radius:10px;background:#f0f6ef;scroll-margin:20px}.save-feedback[hidden]{display:none}.save-feedback p{font-weight:700;margin:0 0 12px;line-height:1.7}.save-feedback[data-state="success"]{border-color:#24624b;background:#e7f4eb}.save-feedback[data-state="error"]{border-color:#a23d32;background:#fff1ed;color:#80281f}.save-feedback[data-state="pending"]{background:#fff5d9;border-color:#9e7728}.save-feedback:focus{outline:3px solid #617d6b;outline-offset:3px}
+@media(max-width:600px){.weekly-tools a.gallery-cta,.reference-card a.gallery-cta{width:100%;box-sizing:border-box}.save-feedback .button{display:flex;justify-content:center}}
+
+.late-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.late-compare section{min-width:0}.late-compare img{max-width:100%}@media(max-width:700px){.late-compare{grid-template-columns:1fr}}

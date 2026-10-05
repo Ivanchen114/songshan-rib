@@ -16,12 +16,12 @@ export function storage() {
     remove: key => client.send(new DeleteObjectCommand({Bucket:bucket,Key:key}))
   };
 }
-export async function commitImage(store,file,destination) {
+export async function commitImage(store,file,destination,{maxDimension=2400}={}) {
   const bytes=await store.get(file.key);
   demand(bytes.length===file.bytes&&sha(bytes)===file.sha256,409,'圖片內容與上傳前不同，請重新選圖。');
   const meta=await sharp(bytes,{limitInputPixels:40000000,animated:false}).metadata();
   demand(['jpeg','png','webp'].includes(meta.format)&&(!meta.pages||meta.pages===1),400,'請使用單張 JPG、PNG 或 WebP 圖片。');
-  const full=await sharp(bytes,{limitInputPixels:40000000}).rotate().resize({width:2400,height:2400,fit:'inside',withoutEnlargement:true}).jpeg({quality:86}).toBuffer();
+  const full=await sharp(bytes,{limitInputPixels:40000000}).rotate().resize({width:maxDimension,height:maxDimension,fit:'inside',withoutEnlargement:true}).jpeg({quality:maxDimension>2400?94:86}).toBuffer();
   const thumbnail=await sharp(full).resize({width:480,height:480,fit:'inside',withoutEnlargement:true}).jpeg({quality:76}).toBuffer();
   const originalKey=destination+'/original',fullKey=destination+'/display.jpg',thumbKey=destination+'/thumb.jpg';
   // Original retained privately; display files remove EXIF and cannot be overwritten by a signed PUT.

@@ -5,7 +5,7 @@ export async function readingList(service,p,a,className){
  if(!['w4','w5-personal'].includes(a.kind))return [];
  if(p.role!=='student')teacherScope(p,a.term,className);
  const student=p.role==='student';
- const personal=await service.db.query(`select r.id,r.version_id,v.work_id,v.ordinal,r.status,s.seat,(r.comment_a<>'') as has_pair
+ const personal=await service.db.query(`select r.id,r.version_id,v.work_id,v.ordinal,r.status,s.seat,(btrim(r.comment_a)<>'' and btrim(r.comment_b)<>'') as has_pair
  from rib.ai_readings r join rib.versions v on v.id=r.version_id
  join rib.works w on w.id=v.work_id join rib.activities a on a.id=w.activity_id
  join rib.students s on s.term=a.term and s.student_id=w.owner_id

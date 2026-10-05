@@ -15,3 +15,12 @@
 /* Keep the artwork entry readable beside weekly materials on small screens. */
 @media(max-width:760px){.main-nav{flex-wrap:wrap;justify-content:flex-start;column-gap:18px;row-gap:0}.hero-actions{flex-wrap:wrap}.hero-actions [data-artwork-wall]{white-space:nowrap}}
 @media(max-width:540px){.hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.hero-actions .button{white-space:nowrap}.hero-actions [data-artwork-wall]{grid-column:1/-1}}
+
+/* Optional, ungraded games remain separate from weekly course requirements. */
+.main-nav{flex-wrap:wrap;row-gap:0}
+.fogport-section{background:#edf0e8;border-block:1px solid #ccd5c8;scroll-margin-top:120px}
+.fogport-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;margin-bottom:30px}
+.fogport-intro h2{font-size:clamp(28px,4vw,40px);margin:8px 0}.fogport-tagline{font-size:22px;color:#294b41;margin-bottom:14px}.fogport-intro p{line-height:1.85}.fogport-intro img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:12px}.fogport-boundary{margin-top:16px;font-weight:600}
+.fogport-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.fogport-card{background:#fffdf7;border:1px solid #c9d1c3;border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;gap:14px}.fogport-meta{font-size:13px;color:#52675a}.fogport-card h3{font-size:22px;line-height:1.5}.fogport-card p{font-size:15px;line-height:1.8}.fogport-card strong{display:block;font-size:14px;margin-bottom:3px}.fogport-ability{padding-top:12px;border-top:1px solid #dce1d6}.fogport-card .button{margin-top:auto;align-self:flex-start}.fogport-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px;font-size:14px}.fogport-notes strong{display:block;margin-bottom:5px}
+@media(max-width:1050px){.fogport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.fogport-intro,.fogport-grid,.fogport-notes{grid-template-columns:1fr}.fogport-intro{gap:22px}.fogport-card{padding:22px}.fogport-section{scroll-margin-top:165px}}

@@ -15,6 +15,7 @@ if(process.env.RIB_DEMO_ALL==='true'){for(const [kind,week,title] of [['w3-rebui
 if(process.env.RIB_DEMO_W8_MATERIALS==='true'){await f.db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting) values('w8-materials-demo','11501',8,'W8 共讀材料 · 個人提案','w8-materials','production',true)");await f.db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting,legacy) values('w8-proposal-demo','11501',8,'W8 我的提案 · 個人交件','w8-proposal','exhibit',true,'{\"materialsActivityId\":\"w8-materials-demo\"}')");}
 if(process.env.RIB_DEMO_W7_NEWS==='true')await f.db.query("insert into rib.activities(id,term,week,title,kind,phase,accepting) values('w7-news-demo','11501',7,'W7 新聞 × 研究','w7-news','exhibit',true)");
 if(process.env.RIB_DEMO_READING==='true'){const {setupReadingWeeks}=await import('./reading-weeks.mjs');await setupReadingWeeks(f.db,{apply:true});await f.db.query("update rib.activities set accepting=true where kind in ('w10-priority','w11-response','w12-question','w13-synthesis','w14-expression','w15-decision','w16-response','w15-personal-deck')");}
+if(process.env.RIB_DEMO_CHECKPOINTS==='true'){const {setupLateCheckpoints}=await import('./late-setup.mjs');await setupLateCheckpoints(f.db,{apply:true});await f.db.query("update rib.activities set accepting=true where kind in ('w14-public-proposal','w15-argument-poster')");}
 const tokens=new Map();f.store.signUpload=async key=>{const token=sha('put:'+key);tokens.set(token,{key,put:true});return origin+'/__media/'+token;};f.store.signRead=async key=>{const token=sha('get:'+key);tokens.set(token,{key,put:false});return origin+'/__media/'+token;};
 if(process.env.RIB_DEMO_AGREEMENT==='true')await f.db.query('update rib.students set sharing_agreement=null');
 const run=handler({db:f.db,store:f.store,origin,rateSecret:'fictional-local-only',secure:false});
@@ -57,6 +58,19 @@ if(process.env.RIB_DEMO_W5_AI==='true'){
    await f.db.query("insert into rib.ai_readings(id,version_id,comment_a,comment_b,source_hash,image_key,task_note,teacher_notes,status,created_by,published_at) values($1,$2,$3,$4,$5,$6,$7,$8,'published','synthetic',now())",['synthetic-reading-'+i,saved.versionId,i===0?'畫面中有一片綠色。':'',i===0?'他一定很開心。':'',sha(bytes),t.files[0].key,i===0?'本機虛構圖卡，只用於操作驗證。':'請先補上清楚的圖卡。',JSON.stringify({judgment:'內部測試備註不可進學生作答',studentRecord:{published:true,kind:'joint',disclosure:'虛構測試判讀紀錄',teacherReply:'測試教師回覆：仍不能確定心情',basis:'測試判讀依據：甲有據，乙證據不足'}})]);
   }
  }
+}
+// Fictional progress/notification scenarios; explicitly opt in, never production.
+if(process.env.RIB_DEMO_PROGRESS==='true'){
+ const s=new Workspace(f.db,f.store),p=f.people[0],w=await s.ensureWork(p,{activityId:'w4-demo'}),[v]=await f.db.query('select id from rib.versions where work_id=$1 order by ordinal limit 1',[w.id]);
+ await s.saveTeacherReading(f.teacher,{workId:w.id,versionId:v.id,mode:'human',situation:'【虛構老師初讀】我看到一整片淡綠，暫時找不到人物的位置。',meaning:'【虛構老師初讀】我還無法讀出故事，請想想要增加哪個線索。',expectedRevision:0,status:'published',personallyRead:true});
+ await s.decision(p,{workId:w.id,versionId:v.id,reason:'【虛構學生原文】我想保留淡綠色的背景；下一版會加上椅子和手勢，讓讀者知道有人邀請同學坐下。'});
+ await s.assignReader(f.teacher,{workId:w.id,studentId:f.people[1].studentId});
+ const pending=await s.ensureWork(f.people[3],{activityId:'w4-demo'}),pendingBytes=await readFile(demoPath),pendingUpload=await s.prepare(f.people[3],{workId:pending.id,expectedRevision:0,requestId:'pending-reader-demo',files:[{bytes:pendingBytes.length,mime:'image/png',sha256:sha(pendingBytes)}]});
+ const [pendingTicket]=await f.db.query('select files from rib.uploads where id=$1',[pendingUpload.ticketId]);f.store.objects.set(pendingTicket.files[0].key,pendingBytes);await s.finalize(f.people[3],{ticketId:pendingUpload.ticketId});await s.assignReader(f.teacher,{workId:pending.id,studentId:f.people[2].studentId});
+ const [r]=await f.db.query('select * from rib.reviews where target_work_id=$1',[w.id]);
+ await s.review(f.people[1],{reviewId:r.id,expectedRevision:r.revision,situation:'【虛構同學初讀】我只看到綠色背景，沒有看到人。',meaning:'【虛構同學初讀】像是一個安靜的地方，但還不能確定發生什麼事。'});
+ await s.reply(f.teacher,{reviewId:r.id,body:'【虛構老師回覆】你指出了目前看得到的線索，也保留不確定。作者可以參考這個讀法再做決定。',requestId:'demo-teacher-message'});
+ await s.saveAiJudgment(p,{activityId:'w5-demo',answers:{sourceReference:'synthetic-reading-0 / W4 V1',comment:'乙',quote:'他一定很開心。',color:'yellow',evidence:'【虛構學生原文】圖上沒有清楚的表情，看不出心情，所以我判成證據不足。',rewritten:'【虛構學生原文】畫面只看見淡綠色的背景，目前不能確定人物心情。'},status:'submitted',expectedRevision:0});
 }
 http.createServer(async(req,res)=>{try{
   const url=new URL(req.url,origin);

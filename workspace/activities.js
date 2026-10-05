@@ -1,5 +1,9 @@
 // Shared display contract. Server validates all inputs and owns permissions.
+export const LATE_KINDS=['w14-public-proposal','w15-argument-poster'];
+export const isLate=kind=>LATE_KINDS.includes(kind);
 export const ACTIVITY = Object.freeze({
+ 'w14-public-proposal':{week:14,title:'W14 公共提案收件版',group:true,maxMembers:3,maxVersions:8,description:'每組一份；W14 封存內容，W15 只補投遞證據。證據只供教師查看。'},
+ 'w15-argument-poster':{week:15,title:'W15–W16 議題論證 A1 海報',group:true,maxMembers:3,maxVersions:8,description:'每組一份；分別保留 W15 送印版與 W16 定稿。教師開放後才進班內展示。'},
  'w15-personal-deck':{week:15,title:'W15–W16 五頁照片備援／舊作品',group:false,maxVersions:8,description:'Canva學生改在W15／W16個人紀錄貼連結；此處保留紙本五頁照片備援及舊作品。'},
 "w12-question":{"week": 12, "title": "W12 問題修訂與檔案索引", "group": false, "maxVersions": 8, "description": "形成可回答的自選問題，依真人回饋完成自己的修訂或保留理由。 線上留來源與入口，紙本判斷附照片。"},
 "w13-synthesis":{"week": 13, "title": "W13 資料整合與本人判斷", "group": false, "maxVersions": 8, "description": "比較多份資料的對象、時間、量法與來源關係，整合成有界線的判斷。 線上留來源與入口，紙本判斷附照片。"},
@@ -23,9 +27,9 @@ export const ACTIVITY = Object.freeze({
 });
 export const supportedKind = kind => !!ACTIVITY[kind];
 export const isGroup = kind => ACTIVITY[kind]?.group===true;
-export const canUpload = (a,w) => supportedKind(a.kind)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||(w.hasHumanFeedback??w.feedback.length)&&['review','exhibit'].includes(a.phase));
+export const canUpload = (a,w) => supportedKind(a.kind)&&(!isLate(a.kind)||w.checkpoint?.canContent===true)&&!a.archived&&a.accepting&&w.versions.length<ACTIVITY[a.kind].maxVersions&&(a.kind!=='w4'||!w.versions.length||(w.hasHumanFeedback??w.feedback.length)&&['review','exhibit'].includes(a.phase));
 
 export function activityTitle(a){
- const w3=['w3-rebuild','w3-personal','w5-personal','w7-news','w8-materials','w8-proposal','w9-check','w10-priority','w11-response',"w12-question","w13-synthesis","w14-expression","w15-decision","w16-response","w15-personal-deck","w15-deck"].includes(a.kind)?ACTIVITY[a.kind].title:null;
+ const w3=[...LATE_KINDS,'w3-rebuild','w3-personal','w5-personal','w7-news','w8-materials','w8-proposal','w9-check','w10-priority','w11-response',"w12-question","w13-synthesis","w14-expression","w15-decision","w16-response","w15-personal-deck","w15-deck"].includes(a.kind)?ACTIVITY[a.kind].title:null;
  return w3 ? ((a.testOnly||a.test_only||a.title?.includes('【測試】'))?'【測試】 ':'')+w3 : a.title;
 }

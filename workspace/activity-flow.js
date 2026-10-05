@@ -19,4 +19,4 @@ const FLOWS={
  'w15-personal-deck':['建立自己的作品','依序保存五頁與來源','試讀、個人發表後修訂或沿用'],
  'w15-deck':['核對組員','選用途與作品形式','保存、試讀與修訂']
 };
-export function activityFlow(b){const steps=FLOWS[b.activity.kind];if(!steps||b.activity.archived)return '';const w=b.works[0],k=b.activity.kind;let current=k==='w4'?w4Progress(w).step:['w5-personal','w7-news'].includes(k)?(!w?.topic?0:!w.versions.length?1:2):!w?0:!w.versions.length?(isGroup(k)?1:0):2;return '<ol class="activity-flow" aria-label="本週操作步驟">'+steps.map((label,i)=>`<li ${i===current?'aria-current="step"':''}><span>${i+1}</span><strong>${label}</strong>${i===current?'<small>目前這一步</small>':k==='w4'&&i<current?'<small>已記錄</small>':''}</li>`).join('')+'</ol>';}
+export function activityFlow(b){const steps=FLOWS[b.activity.kind];if(!steps||b.activity.archived||['w4','w5-personal'].includes(b.activity.kind))return '';return '<ol class="activity-flow" aria-label="本週活動導覽">'+steps.map((label,i)=>`<li><span>${i+1}</span><strong>${label}</strong></li>`).join('')+'</ol>';}

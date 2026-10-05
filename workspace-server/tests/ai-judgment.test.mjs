@@ -49,7 +49,7 @@ test('W4 assessment evidence changes with W5 response, while public galleries ne
 });
 test('snapshots preserve private responses and can restore older backups',async t=>{
  const f=await setup(t);await f.s.saveAiJudgment(f.people[0],input());const backup=await snapshot(f.db);
- assert.equal(backup.tables.ai_judgments.length,1);assert.equal(backup.format,'rib-backup-v5');
+ assert.equal(backup.tables.ai_judgments.length,1);assert.equal(backup.format,'rib-backup-v7');
  const {PGlite}=await import('@electric-sql/pglite'),{readFile}=await import('node:fs/promises');
  for(const old of [false,true]){
   const pg=new PGlite();t.after(()=>pg.close());await pg.exec(await readFile(new URL('../schema.sql',import.meta.url),'utf8'));
@@ -64,7 +64,7 @@ test('unified backup restores both published-reading V4 and response-only V4 wit
  const w=await f.s.ensureWork(f.people[0],{activityId:'w4-demo'});
  await f.db.query("insert into rib.versions(id,work_id,ordinal,media,metadata,request_id) values('compat-v1',$1,1,'[]','{}','compat')",[w.id]);
  await f.db.query("insert into rib.ai_readings(id,version_id,comment_a,comment_b,source_hash,image_key,status,created_by,published_at) values('compat-reading','compat-v1','甲','乙','hash','private/image','published','fixture',now())");
- const complete=await snapshot(f.db);assert.equal(complete.format,'rib-backup-v5');
+ const complete=await snapshot(f.db);assert.equal(complete.format,'rib-backup-v7');
  const {PGlite}=await import('@electric-sql/pglite'),{readFile}=await import('node:fs/promises');
  for(const omit of [null,'ai_readings','ai_judgments']){
   const pg=new PGlite();t.after(()=>pg.close());await pg.exec(await readFile(new URL('../schema.sql',import.meta.url),'utf8'));

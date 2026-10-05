@@ -1,6 +1,6 @@
 import {AiJudgment} from './ai-judgment.mjs';
 import {demand,json,sha,teacherScope} from './security.mjs';
-import {classroomLabel} from './classroom-audience.mjs';
+import {anonymousWorkLabel} from './classroom-audience.mjs';
 const one=async(db,q,args)=>(await db.query(q,args))[0];
 function answers(input,required){
  const out={};for(const k of ['o','r','id']){demand(typeof input?.[k]==='string'&&input[k].length<=800,400,'每題請在 800 字內。');out[k]=input[k].trim();if(required)demand(out[k],400,'請完成 O、R、I＋D 三問；沒有特別感受也可以如實寫。');}return out;
@@ -17,8 +17,8 @@ export class Reflection extends AiJudgment{
    demand(v&&v.work_id!==w.id,400,'請引用另一位同學的作品。');
    // Saved reflections remain readable when a cited work is later hidden/closed.
    try{const target=await this.work(p,v.work_id);demand(target.activity_id===w.activity_id&&target.topic===w.topic,400,'請選同一活動、同一題的作品。');
-    const members=await this.db.query("select s.name,s.class_name from rib.members m join rib.students s using(term,student_id) where m.work_id=$1 and m.status='confirmed' order by s.seat",[target.id]);
-    reference={versionId:v.id,workId:v.work_id,ordinal:v.ordinal,label:classroomLabel(members)};
+
+    reference={versionId:v.id,workId:v.work_id,ordinal:v.ordinal,label:anonymousWorkLabel(target.id)};
    }catch(e){if(input.referenceVersionId||!w.reflection)throw e;reference={unavailable:true,label:'參考作品（目前不開放）'};}
   }
   return {workId:w.id,versionId:w.current_version_id,reflection:w.reflection,reference,editable:p.role==='student'&&w.accepting&&!w.archived&&w.phase==='exhibit'};
