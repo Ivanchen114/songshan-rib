@@ -644,7 +644,7 @@ section.integrated[data-r1] p.r1-topics{font-size:24px!important;line-height:1.5
 .r1-ab-strip{left:56px;right:56px;bottom:84px;padding:12px 14px 8px}.r1-ab-strip .ab-strip li{height:36px;font-size:13px}.r1-ab-strip .ab-labels .lab{font-size:13px}.r1-ab-strip .ab-strip li i{font-size:11px;line-height:16px;top:-9px}}
 </style></head>
 <body>
-<nav aria-label="W16 學習單下載" class="download-tools" onclick="event.stopPropagation()"><a download="" href="../worksheets/W16.pdf">學習單 PDF</a><a download="" href="../worksheets/W16.docx">DOCX</a></nav>
+<nav aria-label="W17 題本取用" class="download-tools" onclick="event.stopPropagation()"><a href="../worksheets/#week17">W17 題本由老師另發</a></nav>
 <div id="progress-bg"></div>
 <div id="progress"></div>
 <div id="section-tag"></div>
@@ -760,9 +760,10 @@ section.integrated[data-r1] p.r1-topics{font-size:24px!important;line-height:1.5
   menu.querySelectorAll('button:not([data-sem])').forEach(b=>b.remove());
   const allButton=document.createElement('button');allButton.type='button';allButton.dataset.sem='all';allButton.textContent='當頁全顯／收起 P';allButton.onclick=toggle;menu.append(allButton);
   const downloads=document.createElement('div');downloads.className='semester-downloads';
-  for(const [ext,label] of [['pdf','本週歷程本 PDF'],['docx','本週歷程本 DOCX']]){
+  for(const [ext,label] of (cfg.week===17 ? [] : [['pdf','本週歷程本 PDF'],['docx','本週歷程本 DOCX']])){
    const a=document.createElement('a');a.href='../worksheets/W'+cfg.week+'.'+ext;a.textContent=label;a.setAttribute('download','');downloads.append(a);
   }
+  downloads.textContent='W17 題本由老師另發另收，不放公開下載。';
   menu.append(downloads);
   const shortcuts=document.createElement('p');shortcuts.className='semester-shortcuts';shortcuts.textContent='← → 逐步／換頁\nP 全顯 · F 全螢幕';menu.append(shortcuts);
   const input=menu.querySelector('input');input.required=true;input.parentElement.firstChild.textContent='跳到第 ';input.after(document.createTextNode(' 頁'));
